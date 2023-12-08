@@ -17,10 +17,20 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      # Uses .releaserc.json
+
+      - name: Make a semantic-release (dry-run)
+        id: semantic
+        uses: cycjimmy/semantic-release-action@v4
+        with:
+          tag_format: ${version}
+          dry_run: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SEMANTIC_RELEASE_PACKAGE: ${{ github.repository }}
+        
+      # Uses .releaserc.json; This one creates a release
       - name: Make a semantic-release
         if: steps.semantic.outputs.new_release_published == 'true'
-        id: semantic
         uses: cycjimmy/semantic-release-action@v4
         with:
           tag_format: ${version}
