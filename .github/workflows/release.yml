@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - "main"
-      - "beta"  # If we ever vere to have one
+      - "beta"  # If we ever were to have one
 
 jobs:
   main:
@@ -16,24 +16,21 @@ jobs:
       packages: write
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Make a semantic-release (dry-run)
         id: semantic
         uses: cycjimmy/semantic-release-action@v4
         with:
-          tag_format: ${version}
           dry_run: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SEMANTIC_RELEASE_PACKAGE: ${{ github.repository }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         
       # Uses .releaserc.json; This one creates a release
       - name: Make a semantic-release
         if: steps.semantic.outputs.new_release_published == 'true'
         uses: cycjimmy/semantic-release-action@v4
-        with:
-          tag_format: ${version}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SEMANTIC_RELEASE_PACKAGE: ${{ github.repository }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
