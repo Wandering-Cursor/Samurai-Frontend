@@ -36,8 +36,10 @@ jobs:
           node-version: 20
       - run: npm install -g @angular/cli
       - run: cd samurai
-      - run: ng add angular-cli-ghpages
-      - run: ng deploy --base-href=/Samurai-Frontend/
+      - name: Add Module
+        run: cd samurai && ng add angular-cli-ghpages
+      - name: Deploy
+        run: cd samurai && ng deploy --base-href=/Samurai-Frontend/
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Upload artifact
