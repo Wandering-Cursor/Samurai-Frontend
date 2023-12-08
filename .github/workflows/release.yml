@@ -1,34 +1,41 @@
-name: "Make Release"
+name: Make Release
 
 on:
   push:
     branches:
-      - "main"
-      - "beta"  # If we ever were to have one
+      - master
+      - beta
+
+permissions:
+  contents: read
 
 jobs:
-  main:
+  release:
+    name: Release
     runs-on: ubuntu-latest
     permissions:
-      contents: write
-      issues: write
-      pull-requests: write
-      packages: write
+      contents: write # to be able to publish a GitHub release
+      issues: write # to be able to comment on released issues
+      pull-requests: write # to be able to comment on released pull requests
+      id-token: write # to enable use of OIDC for npm provenance
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Make a semantic-release (dry-run)
-        id: semantic
-        uses: cycjimmy/semantic-release-action@v4
+        uses: actions/checkout@v3
         with:
-          dry_run: true
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "lts/*"
+
+      - name: Install dependencies
+        run: npm clean-install
+
+      - name: Verify the integrity of provenance attestations and registry signatures for installed dependencies
+        run: npm audit signatures
+
+      - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        
-      # Uses .releaserc.json; This one creates a release
-      - name: Make a semantic-release
-        if: steps.semantic.outputs.new_release_published == 'true'
-        uses: cycjimmy/semantic-release-action@v4
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npx semantic-release
