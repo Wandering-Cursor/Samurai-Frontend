@@ -42,7 +42,8 @@ jobs:
         run: cd samurai && ng build --output-path docs --base-href /samurai/
       - name: Setup Pages
         uses: actions/configure-pages@v4
-      - run: echo $(ls -la)
+      - run: echo $(ls samurai -la)
+      - run: echo $(ls samurai/docs -la)
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
