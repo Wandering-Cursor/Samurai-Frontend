@@ -37,7 +37,7 @@ jobs:
       - run: npm install -g @angular/cli
       - run: cd samurai
       - name: Add Module
-        run: cd samurai && ng add angular-cli-ghpages
+        run: cd samurai && ng add angular-cli-ghpages --skip-confirmation
       - name: Deploy
         run: cd samurai && ng deploy --base-href=/Samurai-Frontend/
       - name: Setup Pages
