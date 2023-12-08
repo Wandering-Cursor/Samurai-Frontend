@@ -35,6 +35,7 @@ jobs:
         with:
           node-version: 20
       - run: npm install -g @angular/cli
+      - run: cd samurai
       - run: ng add angular-cli-ghpages
       - run: ng deploy --base-href=/Samurai-Frontend/
       - name: Setup Pages
