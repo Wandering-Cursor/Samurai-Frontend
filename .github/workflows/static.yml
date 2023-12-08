@@ -39,14 +39,15 @@ jobs:
       - name: Add Module
         run: cd samurai && ng add angular-cli-ghpages --skip-confirmation
       - name: Deploy
-        run: cd samurai && ng deploy --base-href=/Samurai-Frontend/
+        run: cd samurai && ng build --output-path docs --base-href /samurai/
       - name: Setup Pages
         uses: actions/configure-pages@v4
+      - run: echo $(ls -la)
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
           # Upload entire repository
-          path: './samurai/src/'
+          path: './samurai/docs/'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v3
