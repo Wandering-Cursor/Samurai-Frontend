@@ -30,25 +30,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Setup Node
-        uses: actions/setup-node@v3
-        with:
-          node-version: 20
-      - run: npm install -g @angular/cli
-      - run: cd samurai
-      - name: Add Module
-        run: cd samurai && ng add angular-cli-ghpages --skip-confirmation
-      - name: Deploy
-        run: cd samurai && ng build --output-path docs --base-href /samurai/
       - name: Setup Pages
         uses: actions/configure-pages@v4
-      - run: echo $(ls samurai -la)
-      - run: echo $(ls samurai/docs -la)
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
           # Upload entire repository
-          path: './samurai/docs/'
+          path: './samurai/src/'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v3
