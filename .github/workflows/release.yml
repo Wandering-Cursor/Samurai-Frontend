@@ -1,0 +1,31 @@
+name: "Make Release"
+
+on:
+  push:
+    branches:
+      - "main"
+      - "beta"  # If we ever vere to have one
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+      packages: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      # Uses .releaserc.json
+      - name: Make a semantic-release
+        id: semantic
+        uses: cycjimmy/semantic-release-action@v4
+        with:
+          extra_plugins: |
+            semantic-release-slack-bot
+            tag_format: ${version}
+            dry_run: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SEMANTIC_RELEASE_PACKAGE: ${{ github.repository }}
