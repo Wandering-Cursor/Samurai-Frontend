@@ -1,4 +1,3 @@
-# Simple workflow for deploying static content to GitHub Pages
 name: Deploy static content to Pages
 
 on:
@@ -58,8 +57,6 @@ jobs:
       # Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: deploy-pages@v3
+        uses: actions/deploy-pages@v3
         with:
-          branch: gh-pages
-          folder: dist/samurai
           token: ${{ secrets.GITHUB_TOKEN }}
