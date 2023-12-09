@@ -48,6 +48,9 @@ jobs:
       - name: Copy files
         run: mv dist/samurai/browser/* dist/samurai/
       
+      - name: Remove browser folder
+        run: rm -rf dist/samurai/browser
+      
       - name: Add 404 page
         run: cp dist/samurai/index.html dist/samurai/404.html
 
@@ -55,7 +58,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
-          path: samurai/dist/samurai
+          path: samurai/dist/samurai/
       
       # Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
