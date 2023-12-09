@@ -55,7 +55,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
-          path: dist/samurai
+          path: samurai/dist/samurai
       
       # Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
