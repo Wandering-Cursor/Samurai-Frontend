@@ -55,17 +55,15 @@ jobs:
 
       # Create an artifact, and upload it to github-pg branch
       - name: Upload artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-pages-artifact@v2
         with:
-          name: dist
           path: dist/samurai
       
       # Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@4.1.1
+        id: deployment
+        uses: deploy-pages@v3
         with:
           branch: gh-pages
           folder: dist/samurai
-          clean: true
           token: ${{ secrets.GITHUB_TOKEN }}
-          enable_jekyll: false
