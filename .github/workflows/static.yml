@@ -43,7 +43,7 @@ jobs:
 
       - name: Build app
         run:
-          ng build --base-href=$PAGE_ABSOLUTE_URL
+          ng build --base-href=${{env.PAGE_ABSOLUTE_URL}}
         env:
           PAGE_ABSOLUTE_URL: ${{ vars.PAGE_ABSOLUTE_URL }}
       
