@@ -45,7 +45,7 @@ jobs:
         run:
           ng build --base-href=$PAGE_ABSOLUTE_URL
         env:
-          PAGE_ABSOLUTE_URL: ${{ env.PAGE_ABSOLUTE_URL }}
+          PAGE_ABSOLUTE_URL: ${{ vars.PAGE_ABSOLUTE_URL }}
       
       - name: Show files
         run: pwd && ls -la
