@@ -40,7 +40,7 @@ jobs:
 
       - name: Build app
         run:
-          npm run build --prod --base-href=/$(echo ${{ github.repository }} | cut -d'/' -f2)/
+          ng deploy --base-href=$(echo ${{ github.repository }} | cut -d'/' -f2)/
       
       - name: Show files
         run: pwd && ls -la
