@@ -57,8 +57,8 @@ export class ApiService {
     return this.httpClient.put(`${this.apiUrl}/api/students/tasks/update`, taskUpdateData);
   }
 
-  public getProjectOverview(projectId?: string): Observable<any> {
-    const params = projectId ? new HttpParams().set('project_id', projectId) : null;
+  public getProjectOverview(projectId: string): Observable<any> {
+    const params = new HttpParams().set('project_id', projectId);
     return this.httpClient.get(`${this.apiUrl}/api/students/tasks/overview`, { params });
   }
 
