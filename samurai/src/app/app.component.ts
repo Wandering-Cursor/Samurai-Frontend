@@ -15,22 +15,8 @@ export class AppComponent {
     private svc: ApiService
   ) {
   }
-  title = 'samurai';
 
   ngOnInit() {
-    this.svc.initGet().subscribe({
-      next: (data: Init) => {
-        console.log('Data received:', data);
-        // Do something with the data
-      },
-      error: (error) => {
-        console.error('Error:', error);
-        // Handle error
-      },
-      complete: () => {
-        console.log('Request completed');
-        // Handle completion
-      }
-    });
+
   }
 }
