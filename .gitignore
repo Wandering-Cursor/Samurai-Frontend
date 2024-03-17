@@ -1,43 +1,63 @@
-# See http://help.github.com/ignore-files/ for more about ignoring files.
-
+# From https://medium.com/knowledge-pills/file-gitignore-in-angular-project-c1d4483a79aa
 # Compiled output
 /dist
 /tmp
 /out-tsc
+# Only exists if Bazel was run
 /bazel-out
 
-# Node
+# Dependencies
 /node_modules
-npm-debug.log
-yarn-error.log
-package-lock.json
+
+# Cordova
+/www
+/plugins
+/platforms
+
+# Electron
+/dist-electron
+/dist-packages
+/electron.main.js
 
 # IDEs and editors
-.idea/
+.idea/*
+!.idea/runConfigurations/
+!.idea/codeStyleSettings.xml
 .project
 .classpath
 .c9/
 *.launch
 .settings/
+xcuserdata/
 *.sublime-workspace
 
-# Visual Studio Code
-.vscode/*
+# IDE - VSCode
+*/.vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
-.history/*
 
-# Miscellaneous
-/.angular/cache
-.sass-cache/
+# Maven
+/target
+/log
+
+# Misc
+/.sass-cache
 /connect.lock
 /coverage
 /libpeerconnection.log
+npm-debug.log
+yarn-error.log
 testem.log
 /typings
+/reports
+/src/translations/template.*
+# /src/environments/.env.*
 
-# System files
+# System Files
 .DS_Store
 Thumbs.db
+
+*/.angular/*
+*/node_modules/

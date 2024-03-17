@@ -1,0 +1,73 @@
+name: Deploy static content to Pages
+
+on:
+  release:
+    types: [created]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  # Single deploy job since we're just deploying
+  deploy:
+    defaults:
+      run:
+        working-directory: samurai
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Install dependencies
+        run: npm install
+      
+      - name: Install Angular CLI
+        run: npm install -g @angular/cli
+
+      - name: Build app
+        run:
+          ng build --base-href=${{env.PAGE_ABSOLUTE_URL}}
+        env:
+          PAGE_ABSOLUTE_URL: ${{ vars.PAGE_ABSOLUTE_URL }}
+      
+      - name: Show files
+        run: pwd && ls -la
+
+      - name: Copy files
+        run: mv dist/samurai/browser/* dist/samurai/
+      
+      - name: Remove browser folder
+        run: rm -rf dist/samurai/browser
+      
+      - name: Add 404 page
+        run: cp dist/samurai/index.html dist/samurai/404.html
+
+      # Create an artifact, and upload it to github-pg branch
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v2
+        with:
+          path: samurai/dist/samurai/
+      
+      # Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
