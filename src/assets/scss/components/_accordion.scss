@@ -1,0 +1,322 @@
+//
+// accordion.scss
+//
+
+.accordion {
+    .accordion-button {
+        font-weight: $font-weight-medium;
+        box-shadow: none;
+    }
+
+    .accordion-body {
+        color: $text-muted;
+    }
+
+    &.accordion-icon-none {
+        .accordion-button {
+            &::after {
+                content: "";
+                background-image: none !important;
+            }
+
+            &:not(.collapsed) {
+                &::after {
+                    content: "";
+                }
+            }
+        }
+    }
+
+    .panel {
+        border: 1px solid var(--#{$prefix}border-color);
+        margin-bottom: 0;
+        border-radius: var(--#{$prefix}border-radius);
+        box-shadow: none;
+        border-top: 0;
+
+    }
+
+    .panel-heading,
+    .panel-body {
+        padding: 0 !important;
+    }
+
+    .accordion-item {
+        border: 0;
+
+        &.panel:first-child {
+            border-top: 1px solid var(--#{$prefix}border-color)
+        }
+    }
+}
+
+.accordion-flush {
+    .panel {
+        border-left: 0;
+        border-right: 0;
+        margin-bottom: 0;
+    }
+}
+
+// Accordion with icon
+.custom-accordionwithicon {
+    .accordion-button {
+        &::after {
+            background-image: none !important;
+            font-family: "Material Design Icons";
+            content: "\F0142";
+            font-size: 1.1rem;
+            vertical-align: middle;
+            line-height: 0.8;
+        }
+
+        &:not(.collapsed) {
+            &::after {
+                background-image: none !important;
+                content: "\F0140";
+                margin-right: -3px;
+            }
+        }
+    }
+}
+
+// Accordion with plus icon
+
+.custom-accordionwithicon-plus {
+    .accordion-button {
+        &::after {
+            background-image: none !important;
+            font-family: "Material Design Icons";
+            content: "\f0415";
+            font-size: 1.1rem;
+            vertical-align: middle;
+            line-height: 0.8;
+        }
+
+        &:not(.collapsed) {
+            &::after {
+                background-image: none !important;
+                font-family: "Material Design Icons";
+                content: "\f0415";
+                margin-right: -3px;
+            }
+        }
+    }
+
+    .accordion-item {
+        &.panel-open {
+            .accordion-toggle {
+                .accordion-button {
+                    &::after {
+                        background-image: none;
+                        content: "\F0374";
+                        margin-right: -3px;
+                        font-family: "Material Design Icons";
+                    }
+                }
+            }
+        }
+    }
+}
+
+// .custom-accordionwithicon-plus {
+//     .accordion-button {
+//         &::after {
+//             background-image: none !important;
+//             content: "\f0415";
+//             font-size: 1.1rem;
+//             vertical-align: middle;
+//             line-height: 0.8;
+//             font-family: "Material Design Icons";
+//         }
+
+//         &:not(.collapsed) {
+//             &::after {
+//                 background-image: none !important;
+//                 content: "\eaf2";
+//                 margin-right: -3px;
+//                 font-family: "Material Design Icons";
+//             }
+//         }
+//     }
+
+//     .accordion-item {
+//         &.panel-open {
+//             .accordion-toggle {
+//                 &[aria-expanded="true"] {
+//                     .accordion-button {
+//                         &::after {
+//                             background-image: none;
+//                             content: "\F0374";
+//                             margin-right: -3px;
+//                             font-family: "Material Design Icons";
+
+//                         }
+//                     }
+//                 }
+//             }
+//         }
+//     }
+// }
+
+
+
+// left Icon accordion
+
+.lefticon-accordion {
+    .accordion-button {
+        padding-left: 2.75rem;
+
+        &::after {
+            position: absolute;
+            left: $accordion-button-padding-x;
+            top: 14px;
+        }
+
+        &:not(.collapsed) {
+            &::after {
+                top: 20px;
+            }
+        }
+    }
+}
+
+// border accordion
+
+.accordion-border-box {
+    .accordion-item {
+        border-top: $accordion-border-width solid $accordion-border-color;
+        border-radius: $accordion-border-radius;
+
+        &:not(:first-of-type) {
+            margin-top: 8px;
+        }
+
+        .accordion-button {
+            border-radius: $accordion-border-radius;
+
+            &:not(.collapsed) {
+                border-bottom-left-radius: 0;
+                border-bottom-right-radius: 0;
+            }
+        }
+    }
+}
+
+.custom-accordion-border {
+    .accordion-item {
+        border-left: 3px solid $accordion-border-color;
+    }
+}
+
+//accordion Color 
+
+@each $color,
+$value in $theme-colors {
+    .accordion-#{$color} {
+        .accordion-item {
+            border-color: rgba($value, 0.6);
+
+            .panel {
+                border-color: rgba($value, 0.6);
+            }
+
+            &.panel-open {
+
+                .accordion-toggle {
+                    &[aria-expanded="true"] {
+                        .accordion-button {
+                            box-shadow: none;
+                            color: $value;
+                            background-color: rgba($value, 0.1) !important;
+
+                            &::after {
+                                color: $value;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .accordion-fill-#{$color} {
+        .accordion-item {
+            &.panel-open {
+                .accordion-toggle {
+                    &[aria-expanded="true"] {
+                        .accordion-button {
+                            box-shadow: none;
+
+                            &:not(.collapsed) {
+                                color: $white;
+                                background-color: $value !important;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+// theme dark
+
+[data-bs-theme="dark"] {
+    .accordion-button {
+        &:not(.collapsed) {
+            color: var(--#{$prefix}accordion-button-active-color);
+
+            &:after {
+                background-image: escape-svg(url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='#{$white}'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>"));
+            }
+        }
+
+        &:after {
+            background-image: escape-svg(url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='#{$gray-500}'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>"));
+        }
+    }
+}
+
+// // rtl
+// [dir="rtl"] {
+//     .custom-accordionwithicon {
+//         .accordion-button::after {
+//             transform: rotate(180deg);
+//         }
+//     }
+// }
+
+
+.accordion-button {
+    &:not(.collapsed) {
+        color: var(--#{$prefix}accordion-btn-color);
+        background-color: var(--#{$prefix}accordion-btn-bg);
+
+        &:after {
+            transform: none;
+        }
+    }
+}
+
+.accordion-item {
+    &.panel-open {
+        .accordion-toggle {
+            &[aria-expanded="true"] {
+                .accordion-button {
+                    color: var(--#{$prefix}accordion-active-color);
+                    background-color: var(--#{$prefix}accordion-active-bg);
+
+                    &:after {
+                        transform: var(--#{$prefix}accordion-btn-icon-transform);
+                    }
+                }
+            }
+        }
+    }
+}
+
+.read-email .panel-heading {
+    padding: 0px;
+}

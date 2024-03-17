@@ -1,0 +1,231 @@
+<!-- Start Breadcrumbs -->
+<app-breadcrumbs title="Agent List" [breadcrumbItems]="breadCrumbItems"></app-breadcrumbs>
+<!-- End Breadcrumbs -->
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card" id="agentList">
+            <div class="card-header">
+                <div class="row align-items-center gy-3">
+                    <div class="col-lg-3 col-md-6 order-last order-md-first me-auto">
+                        <div class="search-box">
+                            <input type="text" class="form-control search" placeholder="Search for agent, email, address or something..." [(ngModel)]="term" (keyup)="filterdata()">
+                            <i class="ri-search-line search-icon"></i>
+                        </div>
+                    </div>
+                    <div class="col-md-auto col-6 text-end">
+                        <div class="d-flex flex-wrap align-items-start gap-2">
+                            <button class="btn btn-subtle-danger d-none" id="remove-actions" (click)="deleteRecordModal.show()"><i class="ri-delete-bin-2-line"></i></button>
+                            <button class="btn btn-secondary" (click)="addAgent.show()"><i class="bi bi-person-plus align-baseline me-1"></i> Add Agent</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-borderless table-centered align-middle table-nowrap mb-0">
+                        <thead class="text-muted table-light">
+                            <tr>
+                                <th>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="option" id="checkAll" [(ngModel)]="masterSelected" (change)="checkUncheckAll($event)">
+                                        <label class="form-check-label" for="checkAll"></label>
+                                    </div>
+                                </th>
+                                <th scope="col" class="sort cursor-pointer" (click)="onSort('')">#
+                                </th>
+                                <th scope="col" class="sort cursor-pointer" (click)="onSort('joiningdate')">Date</th>
+                                <th scope="col" class="sort cursor-pointer" (click)="onSort('name')">Agent Name</th>
+                                <th scope="col" class="sort cursor-pointer" (click)="onSort('location')">Address</th>
+                                <th scope="col" class="sort cursor-pointer" (click)="onSort('email')">Email</th>
+                                <th scope="col" class="sort cursor-pointer" (click)="onSort('contact')">Contacts</th>
+                                <th scope="col" class="sort cursor-pointer" (click)="onSort('status')">Status</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody class="list form-check-all">
+                            @for (data of agents; track $index) {
+                            <tr id="l_{{data._id}}">
+                                <td>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="checkAll" value="{{data._id}}" [(ngModel)]="data.state" (change)="onCheckboxChange($event)" />
+                                        <label class="form-check-label"></label>
+                                    </div>
+                                </td>
+                                <td class="agent_id"><a routerLink="/real-estate/agent/overview" class="fw-medium link-primary">#TBS{{data.id}}</a></td>
+                                <td class="joining_date">{{data.joiningdate}}</td>
+                                <td class="agent_Name">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <img src="{{data.img}}" alt="" class="avatar-xs rounded">
+                                        <a routerLink="/real-estate/agent/overview" class="text-reset text-capitalize">{{data.name}}</a>
+                                    </div>
+                                </td>
+                                <td class="address">{{data.location}}</td>
+                                <td class="email">{{data.email}}</td>
+                                <td class="contact">{{data.contact}}</td>
+                                <td class="status"><span class="badge" [ngClass]="{'bg-success-subtle text-success':data.status === 'Active','bg-danger-subtle text-danger':data.status === 'Unactive'}">{{data.status}}</span>
+                                </td>
+                                <td>
+                                    <ul class="d-flex gap-2 list-unstyled mb-0">
+                                        <li>
+                                            <a routerLink="/real-estate/agent/overview" class="btn btn-subtle-primary btn-icon btn-sm "><i class="ph-eye"></i></a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);" (click)="editList($index)" class="btn btn-subtle-secondary btn-icon btn-sm edit-item-btn"><i class="ph-pencil"></i></a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);" (click)="removeItem(data.id)" class="btn btn-subtle-danger btn-icon btn-sm remove-item-btn"><i class="ph-trash"></i></a>
+                                        </li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        }
+                        </tbody><!-- end tbody -->
+                    </table><!-- end table -->
+
+                    <div id="elmLoader">
+                        <div class="spinner-border text-primary avatar-sm" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+
+                    <div class="noresult" style="display: none;">
+                        <div class="text-center py-4">
+                            <i class="ph-magnifying-glass fs-1 text-primary"></i>
+                            <h5 class="mt-2">Sorry! No Result Found</h5>
+                            <p class="text-muted mb-0">We've searched more than 150+ agent We did not find any agent for
+                                you search.</p>
+                        </div>
+                    </div>
+                </div>
+                <div [ngClass]="(agents?.length == 0)?'d-none':''" class="row mt-3 align-items-center" id="pagination-element">
+                    <div class="col-sm">
+                        <div class="text-muted text-center text-sm-start">
+                            Showing <span class="fw-semibold">{{this.agents?.length}}</span> of <span class="fw-semibold">{{this.agentlist?.length}}</span> Results
+                        </div>
+                    </div><!--end col-->
+                    <div class="col-sm-auto mt-3 mt-sm-0">
+                        <pagination class="pagination-wrap justify-content-center hstack gap-2" [totalItems]="this.agentlist?.length" [itemsPerPage]="10" (pageChanged)="pageChanged($event)"></pagination>
+                    </div><!--end col-->
+                </div><!--end row-->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div bsModal #addAgent="bs-modal" class="modal fade" id="addAgent">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addAgentModalLabel">Add Agent</h5>
+                <button type="button" class="btn-close" (click)="addAgent.hide()"></button>
+            </div>
+
+            <form (ngSubmit)="saveProperty()" [formGroup]="agentForm" class="tablelist-form" novalidate autocomplete="off">
+                <div class="modal-body">
+                    <div id="alert-error-msg" class="d-none alert alert-danger py-2"></div>
+                    <input type="hidden" id="id-field" formControlName="id">
+
+                    <div class="mb-3">
+                        <label class="form-label">Agent Images<span class="text-danger">*</span></label>
+                        <dropzone class="dropzone" [config]="dropzoneConfig" [message]="'Drop files here or click to upload.'" (success)="onUploadSuccess($event)"></dropzone>
+                        @if (uploadedFiles) {
+                        <ul class="list-unstyled mb-0" id="dropzone-preview">
+                            @for (file of uploadedFiles; track $index) {
+                            <li class="mt-2" id="dropzone-preview-list">
+                                <div class="border rounded">
+                                    <div class="d-flex flex-wrap gap-2 p-2">
+                                        <div class="flex-shrink-0 me-3">
+                                            <div class="avatar-sm bg-light rounded p-2">
+                                                @if (file.dataURL) {
+                                                    <img class="img-fluid rounded d-block" [src]="file.dataURL" alt="Dropzone-Image" />
+                                                }@else {
+                                                    <img class="img-fluid rounded d-block" [src]="file" alt="Dropzone-Image" />
+                                                }
+                                            </div>
+                                        </div>
+                                        <div class="flex-grow-1">
+                                            <div class="pt-1">
+                                                @if (file.name) {<h5 class="fs-md mb-1">{{ file.name }}</h5>}
+                                                @if (file.size) {<p class="fs-sm text-muted mb-0">{{ file.size }}</p>}
+                                            </div>
+                                        </div>
+                                        <div class="flex-shrink-0 ms-3">
+                                            <button (click)="removeFile(file)" class="btn btn-sm btn-danger">Delete</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        }
+                        </ul>
+                        <!-- end dropzon-preview -->
+                    }
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="agent-name-input" class="form-label">Agent Name<span class="text-danger">*</span></label>
+                        <input type="text" id="agent-name-input" formControlName="name" class="form-control" placeholder="Enter agent name" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="email-input" class="form-label">Email<span class="text-danger">*</span></label>
+                        <input type="email" class="form-control" formControlName="email" id="email-input" placeholder="Enter email" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="contact-input" class="form-label">Contact Number<span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" formControlName="contact" id="contact-input" placeholder="Enter contact number" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="status-type-input" class="form-label">Status<span class="text-danger">*</span></label>
+                        <select class="form-select" id="status-type-input" formControlName="status">
+                            <option value="Active">Active</option>
+                            <option value="Unactive">Unactive</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="address-input" class="form-label">Address<span class="text-danger">*</span></label>
+                        <textarea class="form-control" id="address-input" rows="3" formControlName="location" placeholder="Enter address" required></textarea>
+                    </div>
+                    <input type="hidden" id="date-input">
+                </div>
+                <div class="modal-footer">
+                    <div class="hstack gap-2 justify-content-end">
+                        <button type="button" class="btn btn-ghost-danger" (click)="addAgent.hide()"><i class="bi bi-x-lg align-baseline me-1"></i> Close</button>
+                        <button type="submit" class="btn btn-primary" id="add-btn">Add</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!-- modal-content -->
+    </div>
+</div><!--end add Property modal-->
+
+<!-- deleteRecordModal -->
+<div bsModal #deleteRecordModal="bs-modal" id="deleteRecordModal" class="modal fade zoomIn" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" id="deleteRecord-close" (click)="deleteRecordModal.hide()"></button>
+            </div>
+            <div class="modal-body p-md-5">
+                <div class="text-center">
+                    <div class="text-danger">
+                        <i class="bi bi-trash display-5"></i>
+                    </div>
+                    <div class="mt-4">
+                        <h4 class="mb-2">Are you sure ?</h4>
+                        <p class="text-muted fs-md mx-3 mb-0">Are you sure you want to remove this record ?</p>
+                    </div>
+                </div>
+                <div class="d-flex gap-2 justify-content-center mt-4 pt-2 mb-2">
+                    <button type="button" class="btn w-sm btn-light btn-hover" (click)="deleteRecordModal.hide()">Close</button>
+                    <button type="button" class="btn w-sm btn-danger btn-hover" id="delete-record" (click)="confirmDelete(deleteID)">Yes, Delete It!</button>
+                </div>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /deleteRecordModal -->

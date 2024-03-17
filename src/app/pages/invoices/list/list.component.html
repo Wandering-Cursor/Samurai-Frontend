@@ -1,0 +1,177 @@
+<!-- Start Breadcrumbs -->
+<app-breadcrumbs title="Invoice List" [breadcrumbItems]="breadCrumbItems"></app-breadcrumbs>
+<!-- End Breadcrumbs -->
+
+<div class="row">
+    <div class="col-xl-7">
+        <div class="card">
+            <div class="card-body">
+                <div class="row g-4">
+                    @for (data of invoiceCard; track $index) {
+                    <div class="col-lg-3 col-sm-6 border-end-sm">
+                        <div>
+                            <div class="d-flex align-items-center gap-2 mb-4">
+                                <div class="avatar-xs flex-shrink-0">
+                                    <div class="avatar-title bg-body-secondary text-{{data.color}} border border-{{data.color}}-subtle rounded-circle">
+                                        <i class="{{data.icon}}"></i>
+                                    </div>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <p class="text-muted mb-0">{{data.title}}</p>
+                                </div>
+                            </div>
+                            <h3 class="mb-0"><span class="counter-value" [countUp]="data.count"></span> <small class="text-{{data.iconColor}} fs-xs fw-normal ms-1"><i class="{{data.statusIcon}} align-baseline"></i> {{data.amout}}%</small></h3>
+                        </div>
+                    </div>
+                }
+                </div>
+            </div>
+        </div><!--end card-->
+    </div><!--end col-->
+    <div class="col-xl-5">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex mb-4 pb-1">
+                    <div class="flex-grow-1">
+                        <h6 class="card-title">Total Receivables <i class="bi bi-exclamation-circle align-baseline ms-1 fs-sm" tooltip="Once you send an invoice (or bill), it becomes part of your accounts receivable – until it's paid."></i>
+                        </h6>
+                        <p class="text-muted mb-0"><b>$985.32k</b> Total unpaid invoices</p>
+                    </div>
+                    <div class="flex-shrink-0">
+                        <a routerLink="/ecommerce/seller-overview" class="link-effect">View Profile <i class="bi bi-arrow-right align-baseline ms-1"></i></a>
+                    </div>
+                </div>
+                <div tooltip="$234.95 Paid Amount">
+                    <progressbar [value]="75" [striped]="true" [animate]="true"></progressbar>
+                </div>
+            </div>
+        </div>
+    </div>
+</div><!--end row-->
+
+<div class="row" id="invoiceList">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="row align-items-center g-2">
+                    <div class="col-lg-3 me-auto">
+                        <h6 class="card-title mb-0">Invoices List</h6>
+                    </div><!--end col-->
+                    <div class="col-xl-2 col-md-3">
+                        <div class="search-box">
+                            <input type="text" class="form-control search" placeholder="Search for invoice, date, client or something..." [(ngModel)]="term" (keyup)="filterdata()">
+                            <i class="ri-search-line search-icon"></i>
+                        </div>
+                    </div><!--end col-->
+                    <div class="col-md-auto">
+                        <div class="hstack gap-2">
+                            <button class="btn btn-subtle-danger d-none" id="remove-actions" (click)="deleteRecordModal.show()"><i class="ri-delete-bin-2-line"></i></button>
+                            <a routerLink="/invoices/create" class="btn btn-secondary"><i class="bi bi-plus-circle align-baseline me-1"></i> Add Invoice</a>
+                        </div>
+                    </div><!--end col-->
+                </div><!--end row-->
+            </div>
+            <div class="card-body mt-3">
+                <div class="table-responsive table-card">
+                    <table class="table table-centered align-middle table-custom-effect table-nowrap mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="checkAll" [(ngModel)]="masterSelected" (change)="checkUncheckAll($event)">
+                                        <label class="form-check-label" for="checkAll"></label>
+                                    </div>
+                                </th>
+                                <th scope="col" class="sort cursor-pointer" (click)="onSort('invoice_no')">ID</th>
+                                <th scope="col" class="sort cursor-pointer" (click)="onSort('customer')">Customer Name</th>
+                                <th scope="col" class="sort cursor-pointer" (click)="onSort('email')">Email</th>
+                                <th scope="col" class="sort cursor-pointer" (click)="onSort('createDate')">Create Date</th>
+                                <th scope="col" class="sort cursor-pointer" (click)="onSort('dueDate')">Due Date</th>
+                                <th scope="col" class="sort cursor-pointer" (click)="onSort('invoice_amount')">Amount</th>
+                                <th scope="col" class="sort cursor-pointer" (click)="onSort('status')">Status</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody class="list form-check-all" id="invoice-list-data">
+                            @for (data of invoices; track $index) {
+                            <tr id="l_{{data._id}}">
+                                <td>
+                                    <div class="form-check"> <input class="form-check-input" type="checkbox" name="checkAll" value="{{data._id}}" [(ngModel)]="data.states" (change)="onCheckboxChange($event)"> <label class="form-check-label"></label> </div>
+                                </td>
+                                <td class="invoice_id"><a routerLink="/invoices/overview">#TBS{{data.invoice_no}}</a>
+                                </td>
+                                <td class="customer_name">{{data.customer}}</td>
+                                <td class="email">{{data.email}}</td>
+                                <td class="create_date">{{data.createDate}}</td>
+                                <td class="due_date">{{data.dueDate}}</td>
+                                <td class="amount">{{data.invoice_amount}}</td>
+                                <td class="status"><span class="badge" [ngClass]="{'bg-success-subtle text-success':data.status == 'Paid','bg-danger-subtle text-danger':data.status === 'Unpaid' || data.status === 'Refund','bg-warning-subtle text-warning':data.status ==='Pending'}">{{data.status}}</span>
+                                </td>
+                                <td>
+                                    <ul class="d-flex gap-2 list-unstyled mb-0">
+                                        <li><a href="javascript:void(0);" class="btn btn-subtle-primary btn-icon btn-sm" routerLink="/invoices/overview" data-view-id="24301901"><i class="ph-eye"></i></a> </li>
+                                        <li><a href="javascript:void(0);" class="btn btn-subtle-secondary btn-icon btn-sm" routerLink="/invoices/create" data-edit-id="24301901"><i class="ph-pencil"></i></a> </li>
+                                        <li><a href="javascript:void(0);" (click)="removeItem(data.id)" class="btn btn-subtle-danger btn-icon btn-sm remove-item-btn"><i class="ph-trash"></i></a> </li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        }
+                        </tbody><!-- end tbody -->
+                    </table><!-- end table -->
+
+                    <div id="elmLoader">
+                        <div class="spinner-border text-primary avatar-sm" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+
+                    <div class="noresult" style="display: none;">
+                        <div class="text-center py-4">
+                            <i class="ph-magnifying-glass fs-1 text-primary"></i>
+                            <h5 class="mt-2">Sorry! No Result Found</h5>
+                            <p class="text-muted mb-0">We've searched more than 6+ invoice We did not find any invoice
+                                for you search.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row align-items-center mt-4 pt-3" id="pagination-element">
+                    <div class="col-sm">
+                        <div class="text-muted text-center text-sm-start">
+                            Showing <span class="fw-semibold">{{invoices?.length}}</span> of <span class="fw-semibold">{{invoiceslist?.length}}</span> Results
+                        </div>
+                    </div><!--end col-->
+                    <div class="col-sm-auto mt-3 mt-sm-0">
+                        <pagination class="pagination-wrap hstack justify-content-center gap-2" [totalItems]="invoiceslist?.legnth" [itemsPerPage]="10" (pagrChanged)="pageChanged($event)"></pagination>
+                    </div><!--end col-->
+                </div><!--end row-->
+            </div>
+        </div>
+    </div><!--end col-->
+</div><!--end row-->
+
+<!-- deleteRecordModal -->
+<div bsModal #deleteRecordModal="bs-modal" id="deleteRecordModal" class="modal fade zoomIn" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" (click)="deleteRecordModal.hide()"></button>
+            </div>
+            <div class="modal-body p-md-5">
+                <div class="text-center">
+                    <div class="text-danger">
+                        <i class="bi bi-trash display-5"></i>
+                    </div>
+                    <div class="mt-4">
+                        <h4 class="mb-2">Are you sure ?</h4>
+                        <p class="text-muted mx-3 mb-0">Are you sure you want to remove this record ?</p>
+                    </div>
+                </div>
+                <div class="d-flex gap-2 justify-content-center mt-4 pt-2 mb-2">
+                    <button type="button" class="btn w-sm btn-light btn-hover" (click)="deleteRecordModal.hide()">Close</button>
+                    <button type="button" class="btn w-sm btn-danger btn-hover" id="delete-record" (click)="deleteData(deleteID)">Yes, Delete
+                        It!</button>
+                </div>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /deleteRecordModal/ -->

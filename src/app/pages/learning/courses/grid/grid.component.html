@@ -1,0 +1,286 @@
+<!-- Start Breadcrumbs -->
+<app-breadcrumbs title="Grid View" [breadcrumbItems]="breadCrumbItems"></app-breadcrumbs>
+<!-- End Breadcrumbs -->
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row align-items-center gy-3">
+                    <div class="col-lg-3 order-last order-md-first me-auto">
+                        <div class="search-box">
+                            <input type="text" class="form-control search" [(ngModel)]="term" (keyup)="filterdata()" placeholder="Search for agent, email, address or something...">
+                            <i class="ri-search-line search-icon"></i>
+                        </div>
+                    </div><!--end col-->
+                    <div class="col-lg-2">
+                        <div>
+                            <select class="form-select" id="status-type-input" data-choices data-choices-search-false>
+                                <option value="Active">Active</option>
+                                <option value="Unactive">Unactive</option>
+                            </select>
+                        </div>
+                    </div><!--end col-->
+                    <div class="col-lg-auto text-end">
+                        <div class="d-flex gap-2">
+                            <button class="btn btn-secondary" (click)="addCourse.show()"><i class="bi bi-person-plus align-baseline me-1"></i> Add Course</button>
+                            <a routerLink="/learning/grid" class="active btn btn-subtle-primary btn-icon ms-auto"><i class="bi bi-grid"></i></a>
+                            <a routerLink="/learning/list" class="btn btn-subtle-primary btn-icon"><i class="bi bi-list-task"></i></a>
+                        </div>
+                    </div><!--end col-->
+                </div><!--end row-->
+            </div>
+        </div>
+    </div><!--end row-->
+</div><!--end col-->
+
+<div class="row row-cols-xl-5 row-cols-sm-2 row-cols-1">
+    @for (data of listData; track $index) {
+    <div class="col">
+        <div class="card overflow-hidden">
+            <div class="card-body bg-{{data.color}}-subtle text-center learning-widgets d-flex align-items-center justify-content-center">
+                <img src="{{data.img}}" alt="" class="avatar-lg">
+                <img src="{{data.img}}" alt="" class="effect">
+            </div>
+            <div class="card-body">
+                <div class="d-flex mb-3 align-items-center">
+                    <div class="flex-grow-1">
+                        <span class="badge" [ngClass]="{'bg-danger-subtle text-danger': data.status === 'Intermediate',
+                        'bg-success-subtle text-success': data.status === 'Beginner',
+                        'bg-info-subtle text-info': data.status === 'Advance'}">{{data.status}}</span>
+                    </div>
+                    <div class="flex-shrink-0">
+                        <button type="button" class="btn btn-subtle-warning custom-toggle active btn-icon btn-sm" data-bs-toggle="button">
+                            <span class="icon-on"><i class="bi bi-star"></i></span>
+                            <span class="icon-off"><i class="bi bi-star-fill"></i></span>
+                        </button>
+                    </div>
+                </div>
+                <h6 class="text-truncate fs-md text-capitalize"><a routerLink="/learning/overview" class="text-reset">{{data.name}}</a></h6>
+                <p class="text-muted">{{data.category}}</p>
+                <ul class="d-flex align-items-center gap-2 flex-wrap list-unstyled mb-0">
+                    <li>
+                        <p class="text-muted mb-0"><i class="bi bi-clock align-baseline text-secondary me-1"></i>
+                            {{data.duration}}</p>
+                    </li>
+                    <li>
+                        <p class="text-muted mb-0"><i class="ph ph-student align-middle text-secondary me-1"></i>
+                            {{data.students}}
+                        </p>
+                    </li>
+                    <li>
+                        <p class="text-muted mb-0"><i class="ph ph-graduation-cap align-middle text-secondary me-1"></i>
+                            {{data.lessons}} Lessons</p>
+                    </li>
+                </ul>
+            </div>
+            <div class="card-body border-top hstack align-items-center gap-2">
+                <div class="d-flex align-items-center gap-2 flex-grow-1 position-relative">
+                    <div class="flex-shrink-0">
+                        <img src="{{data.profile}}" alt="" class="avatar-xs rounded-circle">
+                    </div>
+                    <h6 class="flex-grow-1 mb-0"><a routerLink="/pages/profile" class="text-reset stretched-link">{{data.instructor}}</a></h6>
+                </div>
+                <div dropdown [dropup]="true" container="body" class="dropdown flex-shrink-0">
+                    <button dropdownToggle class="btn btn-secondary btn-icon btn-sm">
+                        <i class="bi bi-three-dots"></i>
+                    </button>
+                    <ul *dropdownMenu class="dropdown-menu">
+                        <li><a class="dropdown-item" routerLink="/learning/overview"><i class="bi bi-eye align-baseline me-1"></i> Overview</a></li>
+                        <li><a class="dropdown-item" href="javascript:void(0);" (click)="editList($index)"><i class="bi bi-pencil-square align-baseline me-1"></i> Edit</a></li>
+                        <li><a class="dropdown-item" href="javascript:void(0);" (click)="removeItem(data.id)"><i class="bi bi-trash3 align-baseline me-1"></i> Delete</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div><!--end card-->
+    </div><!--end col-->
+}
+
+</div><!--end row-->
+<div class="noresult"  style="display: none;">
+    <div class="text-center py-4">
+        <i class="ph-magnifying-glass fs-1 text-primary"></i>
+        <h5 class="mt-2">Sorry! No Result Found</h5>
+        <p class="text-muted mb-0">We've searched more than 150+ Courses We did not find any Courses
+            for you search.</p>
+    </div>
+</div>
+
+<div id="elmLoader">
+    <div class="spinner-border text-primary avatar-sm" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+</div>
+<div class="row align-items-center mb-3" id="pagination-element">
+    <div class="col-sm">
+        <div class="text-muted text-center text-sm-start">
+            Showing <span class="fw-semibold">{{listData?.length}}</span> of <span class="fw-semibold">{{gridlist?.length}}</span> Results
+        </div>
+    </div><!--end col-->
+    <div class="col-sm-auto mt-3 mt-sm-0">
+        <pagination class="pagination-wrap hstack gap-2 justify-content-center" [totalItems]="gridlist?.length" [itemsPerPage]="10" (pageChanged)="pageChanged($event)"></pagination>
+    </div><!--end col-->
+</div><!--end row-->
+
+<!-- Modal -->
+<div bsModal #addCourse="bs-modal" class="modal fade" id="addCourse">
+    <div class="modal-dialog">
+        <div class="modal-content border-0">
+            <div class="modal-header bg-danger p-3">
+                <h5 class="modal-title text-white" id="addCourseModalLabel">Add Course</h5>
+                <button type="button" class="btn-close btn-close-white" (click)="addCourse.hide()"></button>
+            </div>
+
+            <form (ngSubmit)="saveProduct()" [formGroup]="listForm" class="tablelist-form" novalidate autocomplete="off">
+                <div class="modal-body">
+                    <div id="alert-error-msg" class="d-none alert alert-danger py-2"></div>
+                    <input type="hidden" id="id-field">
+
+                    <input type="hidden" id="rating-field">
+                    <div class="mb-3">
+                        <label class="form-label">Course Image<span class="text-danger">*</span></label>
+
+                        <dropzone class="dropzone" [config]="dropzoneConfig" [message]="'Drop files here or click to upload.'" (success)="onUploadSuccess($event)"></dropzone>
+                        @if (uploadedFiles) {
+                        <ul class="list-unstyled mb-0" id="dropzone-preview">
+                            @for (file of uploadedFiles; track $index) {
+                            <li class="mt-2" id="dropzone-preview-list">
+                                <div class="border rounded">
+                                    <div class="d-flex flex-wrap gap-2 p-2">
+                                        <div class="flex-shrink-0 me-3">
+                                            <div class="avatar-sm bg-light rounded p-2">
+                                                @if (file.dataURL) {
+                                                <img class="img-fluid rounded d-block" [src]="file.dataURL" alt="Dropzone-Image" />
+                                                }@else {
+                                                <img class="img-fluid rounded d-block" [src]="file" alt="Dropzone-Image" />
+                                                }
+                                            </div>
+                                        </div>
+                                        <div class="flex-grow-1">
+                                            <div class="pt-1">
+                                                @if (file.name) {<h5 class="fs-md mb-1">{{ file.name }}</h5>}
+                                                @if (file.size) {<p class="fs-sm text-muted mb-0">{{ file.size }}</p>}
+                                            </div>
+                                        </div>
+                                        <div class="flex-shrink-0 ms-3">
+                                            <button (click)="removeFile(file)" class="btn btn-sm btn-danger">Delete</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        }
+                        </ul>
+                        <!-- end dropzon-preview -->
+                        }
+                       
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="course-title-input" class="form-label">Course title<span class="text-danger">*</span></label>
+                        <input type="text" id="course-title-input" formControlName="name" class="form-control" placeholder="Enter course title" required>
+                    </div>
+
+
+                    <div class="mb-3">
+                        <label for="course-category-input" class="form-label">Course Category<span class="text-danger">*</span></label>
+
+                        <select class="form-select" id="course-category-input" formControlName="category">
+                            <option value="">Select Course Category</option>
+                            <option value="Marketing & Management">Marketing & Management</option>
+                            <option value="React Development">React Development</option>
+                            <option value="Shopify Development">Shopify Development</option>
+                            <option value="Graphic Design">Graphic Design</option>
+                            <option value="Laravel Development">Laravel Development</option>
+                            <option value="Flask Development">Flask Development</option>
+                            <option value="Web Design">Web Design</option>
+                            <option value="Asp.Net Development">Asp.Net Development</option>
+                            <option value="PHP Development">PHP Development</option>
+                            <option value="Graphic Design">Graphic Design</option>
+                            <option value="Digital Marketing">Digital Marketing</option>
+                            <option value="Data Science">Data Science</option>
+                        </select>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="mb-3">
+                                <label for="instructor-input" class="form-label">Instructor<span class="text-danger">*</span></label>
+                                <input type="text" id="instructor-input" class="form-control" formControlName="instructor" placeholder="Enter instructor name" required>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="mb-3">
+                                <label for="lessons-input" class="form-label">Lessons<span class="text-danger">*</span></label>
+                                <input type="number" id="lessons-input" class="form-control" formControlName="lessons" placeholder="Lessons" required>
+                            </div>
+                        </div><!--end col-->
+                        <div class="col-lg-6">
+                            <div class="mb-3">
+                                <label for="students-input" class="form-label">Students</label>
+                                <input type="number" id="students-input" class="form-control" formControlName="students" placeholder="Students" required>
+                            </div>
+                        </div><!--end col-->
+                        <div class="col-lg-6">
+                            <div class="mb-3">
+                                <label for="duration-input" class="form-label">Duration Time<span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="duration-input" mwlFlatpickr [altInput]="true" [convertModelValue]="true" formControlName="duration" placeholder="Select duration" required>
+                            </div>
+                        </div><!--end col-->
+                        <div class="col-lg-6">
+                            <div class="mb-3">
+                                <label for="fees-input" class="form-label">Fees<span class="text-danger">*</span></label>
+                                <div class="input-group">
+                                    <span class="input-group-text">$</span>
+                                    <input type="number" class="form-control" [ngClass]="{'is-invalid': submitted && form['fees'].errors}" formControlName="fees" id="fees-input" placeholder="0.00" required>
+                                </div>
+                            </div>
+                        </div><!--end col-->
+                        <div class="col-lg-6">
+                            <div class="mb-3">
+                                <label for="status-input" class="form-label">Status<span class="text-danger">*</span></label>
+                                <select class="form-select" id="status-input" [ngClass]="{'is-invalid': submitted && form['coursestatus'].errors}" formControlName="coursestatus">
+                                    <option value="">Select Status</option>
+                                    <option value="Open">Open</option>
+                                    <option value="Close">Close</option>
+                                </select>
+                            </div>
+                        </div><!--end col-->
+                    </div><!--end row-->
+                </div>
+                <div class="modal-footer">
+                    <div class="hstack gap-2 justify-content-end">
+                        <button type="button" class="btn btn-ghost-danger" (click)="addCourse.hide()"><i class="bi bi-x-lg align-baseline me-1"></i> Close</button>
+                        <button type="submit" class="btn btn-primary" id="add-btn">Add Course</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!-- modal-content -->
+    </div>
+</div><!--end add Property modal-->
+
+<!-- deleteRecordModal -->
+<div bsModal #deleteRecordModal="bs-modal" id="deleteRecordModal" class="modal fade zoomIn">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" id="deleteRecord-close" (click)="deleteRecordModal.hide()"></button>
+            </div>
+            <div class="modal-body p-md-5">
+                <div class="text-center">
+                    <div class="text-danger">
+                        <i class="bi bi-trash display-5"></i>
+                    </div>
+                    <div class="mt-4">
+                        <h4 class="mb-2">Are you sure ?</h4>
+                        <p class="text-muted mx-3 mb-0">Are you sure you want to remove this record ?</p>
+                    </div>
+                </div>
+                <div class="d-flex gap-2 justify-content-center mt-4 pt-2 mb-2">
+                    <button type="button" class="btn w-sm btn-light btn-hover" (click)="deleteRecordModal.hide()">Close</button>
+                    <button type="button" class="btn w-sm btn-danger btn-hover" id="delete-record" (click)="confirmDelete()">Yes, Delete It!</button>
+                </div>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /deleteRecordModal -->

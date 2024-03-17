@@ -1,0 +1,108 @@
+// 
+// _dashboard.scss
+// 
+
+.courses-calendar-dashboard {
+    .date-calendar {
+        .week {
+            width: 35px;
+            text-align: center;
+
+            @media (max-width: 575.98px) {
+                width: 28px;
+            }
+
+            .avatar-title {
+                color: var(--#{$prefix}body-color);
+                background-color: var(--#{$prefix}light);
+                height: 35px;
+            }
+
+            &:hover {
+                .avatar-title {
+                    color: var(--#{$prefix}primary);
+                }
+            }
+
+            &:is(.active, .active:hover) {
+                .avatar-title {
+                    height: 35px;
+                    color: $white;
+                    background-color: var(--#{$prefix}primary);
+                }
+            }
+        }
+    }
+}
+
+.sales-report-chart {
+    @media (min-width: 1200px) and (max-width: 1650.98px) {
+        margin-top: 0 !important;
+    }
+}
+
+aw-wizard-navigation-bar.horizontal.small ul.steps-indicator li.current .step-indicator {
+    background-color: transparent !important;
+}
+
+aw-wizard-navigation-bar.horizontal.small ul.steps-indicator li:not(:last-child):after {
+    top: 0;
+    background-color: var(--#{$prefix}light);
+}
+
+aw-wizard-navigation-bar.horizontal.small ul.steps-indicator li .step-indicator {
+    z-index: 1;
+    background-color: transparent !important;
+}
+
+
+// revenue-tab-widget
+.revenue-tab-widget{
+    > .nav-tabs{
+        flex: 0 0 auto;
+        width: 25%;
+        gap: 1rem;
+        .nav-item{
+            > .nav-link{
+                padding: 0;
+            }
+            .nav-link{
+                border-color: transparent;
+            }
+        }
+    }
+    > .nav-tabs, > .tab-content{
+        width: 100%;
+    }
+
+    @media (min-width: 992px){
+        > .nav-tabs{
+            flex: 0 0 auto;
+            width: 25%;
+        }
+        > .tab-content{
+            flex: 0 0 auto;
+            width: 75%;
+        }
+    }
+}
+
+.popularProperty-navs-widget{
+    .nav-tabs{
+        border: 0;
+        .nav-item{
+            a.nav-link{
+                padding: 0;
+            }
+            .nav-link{
+                
+                &::after{
+                    display: none;
+                }
+            }
+        }
+    }
+    .tab-content{
+        width: 100%;
+    }
+}

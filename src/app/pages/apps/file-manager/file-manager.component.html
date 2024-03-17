@@ -1,0 +1,585 @@
+<div class="m-n2">
+    <div class="d-flex">
+        <div class="card file-manager-wrapper rounded-end-0 shadow-none">
+            <ngx-simplebar class="h-100">
+                <div class="card-body d-flex flex-column h-100">
+                    <div class="position-relative mb-4 d-flex align-items-center gap-2">
+                        <div class="flex-shrink-0 position-relative">
+                            <img src="assets/images/users/48/avatar-1.jpg" alt="" class="avatar-sm rounded">
+                            <span class="position-absolute top-0 start-100 translate-middle badge border border-2 border-white rounded-circle bg-success p-1"><span class="visually-hidden">unread messages</span></span>
+                        </div>
+                        <div class="flex-grow-1">
+                            <p class="text-muted mb-2">Welcom to file manager</p>
+                            <a href="javascript:void(0);" class="stretched-link">
+                                <h6 class="fs-md mb-0">Silene Oliveira</h6>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <dropzone class="dropzone" [config]="dropzoneConfig" [message]="'Drop files here or click to upload.'" (success)="onUploadSuccess($event)"></dropzone>
+                        @if (uploadedFiles) {
+                        <ul class="list-unstyled mb-0" id="dropzone-preview">
+                            @for (file of uploadedFiles; track $index) {
+                            <li class="mt-2" id="dropzone-preview-list">
+                                <div class="border rounded">
+                                    <div class="d-flex flex-wrap gap-2 p-2">
+                                        <div class="flex-shrink-0 me-3">
+                                            <div class="avatar-sm bg-light rounded p-2">
+                                                @if (file.dataURL) {
+                                                <img class="img-fluid rounded d-block" [src]="file.dataURL" alt="Dropzone-Image" />
+                                                }@else{
+                                                <img class="img-fluid rounded d-block" [src]="file" alt="Dropzone-Image" />
+                                                }
+                                            </div>
+                                        </div>
+                                        <div class="flex-grow-1">
+                                            <div class="pt-1">
+                                                @if (file.name) {
+                                                <h5 class="fs-md mb-1">{{ file.name }}</h5>
+                                                }
+                                                @if (file.size) {
+                                                <p class="fs-sm text-muted mb-0">{{ file.size }}</p>
+                                                }
+                                            </div>
+                                        </div>
+                                        <div class="flex-shrink-0 ms-3">
+                                            <button (click)="removeFile(file)" class="btn btn-sm btn-danger">Delete</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            }
+                        </ul>
+                        }
+                        <!-- end dropzon-preview -->
+                    </div>
+                    <div class="mb-4">
+                        <h6>File Manager</h6>
+                        <ul class="file-manager-menu list-unstyled">
+                            <li>
+                                <a href="javascript:void(0);"><i class="bi bi-folder align-baseline me-1"></i> All
+                                    Folders</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);"><i class="bi bi-file-text align-baseline me-1"></i>
+                                    Documents</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);"><i class="bi bi-images align-baseline me-1"></i> Media</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);"><i class="bi bi-clock-history align-baseline me-1"></i>
+                                    Recent File</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);"><i class="bi bi-star align-baseline me-1"></i>
+                                    Important</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card mt-auto mb-0">
+                        <div class="card-body pt-2">
+                            <div class="text-center mt-n5">
+                                <img src="assets/images/techny-rocket.png" alt="" height="90">
+                                <p class="text-md mt-4">Upgrade to Pro for unlimited storage</p>
+                                <a href="javascript:void(0);" class="link-effect">Upgrade Now <i class="bi bi-arrow-right align-baseline ms-1"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ngx-simplebar>
+        </div><!--end file-manager-wrapper-->
+        <div class="card file-manager-content-wrapper w-100 rounded-0 border border-1 border-top-0 border-bottom-0 shadow-none">
+            <div class="card-body">
+                <div class="d-flex gap-3 align-items-center mb-3">
+                    <div class="flex-shrink-0 d-block d-lg-none">
+                        <button type="button" class="btn btn-icon btn-subtle-success file-menu-btn">
+                            <i class="ri-menu-2-fill align-bottom"></i>
+                        </button>
+                    </div>
+                    <div class="search-box flex-grow-1">
+                        <input type="text" class="form-control search" placeholder="Search products, price etc...">
+                        <i class="ri-search-line search-icon"></i>
+                    </div>
+                    <div class="flex-shrink-0">
+                        <button type="button" class="btn btn-primary" (click)="createFolder.show()"><i class="bi bi-plus-lg align-baseline"></i> <span class="ms-1 d-none d-sm-inline-block">Create Folders</span></button>
+                    </div>
+                </div>
+                <div class="row row-cols-xxl-5">
+                    @for (data of file; track $index) {
+                    <div class="col">
+                        <a href="javascript:void(0);" class="card">
+                            <div class="card-body d-flex align-items-center gap-3 p-2">
+                                <div class="avatar-xs flex-shrink-0">
+                                    <div class="avatar-title bg-{{data.color}}-subtle text-{{data.color}}-emphasis fs-md rounded">
+                                        <i class="{{data.icon}}"></i>
+                                    </div>
+                                </div>
+                                <div class="flex-grow-1  overflow-hidden">
+                                    <div class="d-flex flex-wrap text-muted">
+                                        <div class="flex-shrink-0"><b>{{data.num}} </b></div>
+                                        <div class="flex-grow-1 text-truncate ms-1"> {{data.type}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div><!--end col-->
+                }
+                </div><!--end row-->
+
+                <div class="row">
+                    @for (data of fliefolders; track $index) {
+                    <div class="col-lg-4">
+                        <div class="card border shadow-none">
+                            <div class="card-body">
+                                <div class="d-flex gap-3 align-items-center mb-4">
+                                    <div class="avatar-sm flex-shrink-0">
+                                        <div class="avatar-title bg-light rounded">
+                                            <img src="{{data.img}}" alt="" class="avatar-xs">
+                                        </div>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <h6 class="fs-md">{{data.title}}</h6>
+                                        <p class="mb-0"><a href="javascript:void(0);">Open Folders</a></p>
+                                    </div>
+                                </div>
+
+                                <!-- Progress sm -->
+                                <progressbar class="progress-sm" [value]="data.valuenow" [type]="data.color">
+                                </progressbar>
+                                <div class="d-flex mt-2">
+                                    <p class="flex-grow-1 mb-0">{{data.files}} Files</p>
+                                    <div class="fw-semibold flex-shrink-0">{{data.gb}}GB</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!--end col-->
+                }
+                </div><!--end row-->
+
+                <div class="d-flex align-items-center gap-2 mb-3">
+                    <h6 class="card-title flex-grow-1 mb-0">Folders</h6>
+                    <div dropdown class="flex-shrink-0 dropdown">
+                        <button dropdownToggle class="btn btn-subtle-secondary btn-sm" type="button">
+                            <i class="bi bi-three-dots-vertical"></i>
+                        </button>
+                        <ul *bsDropdownMenu class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="bi bi-folder-plus me-1 align-baseline"></i> Add Folder</a></li>
+                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="bi bi-cloud-arrow-down me-1 align-baseline"></i> Import</a></li>
+                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="bi bi-cloud-arrow-up me-1 align-baseline"></i> Export</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="row">
+                    @for (data of folderData; track $index) {
+                    <div class="col-lg-4">
+                        <div class="card border shadow-none">
+                            <div class="card-body">
+                                <div class="d-flex gap-3 mb-4">
+                                    <div class="flex-grow-1">
+                                        <div class="avatar-xs">
+                                            <div class="avatar-title bg-transparent rounded text-primary fs-3">
+                                                <i class="bi bi-folder2-open"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div dropdown class="flex-shrink-0 dropdown">
+                                        <a dropdownToggle href="javascript:void(0);" class="text-reset d-inline-block">
+                                            <i class="bi bi-three-dots-vertical"></i>
+                                        </a>
+                                        <ul *bsDropdownMenu class="dropdown-menu dropdown-menu-end">
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="bi bi-folder2-open me-1 align-baseline"></i> Open
+                                                    Folder</a></li>
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="bi bi-pencil-square me-1 align-baseline"></i> Edit</a>
+                                            </li>
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="bi bi-trash3 me-1 align-baseline"></i> Delete</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <a href="javascript:void(0);">
+                                    <h6 class="fs-md text-truncate">{{data.title}}</h6>
+                                </a>
+                                <ul class="list-unstyled hstack gap-2 text-muted mb-0">
+                                    <li>
+                                        <b>{{data.feb}}</b> Feb
+                                    </li>
+                                    <li>
+                                        <b>{{data.files}}</b> Files
+                                    </li>
+                                    <li>
+                                        <b>{{data.gb}}</b> GB
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div><!--end col-->
+                }
+                </div><!--end row-->
+
+                <div id="contactList" class="mt-2">
+                    <div class="d-flex align-items-center gap-2 mb-3">
+                        <h6 class="card-title flex-grow-1 mb-0">File Recent</h6>
+                        <div dropdown class="dropdown card-header-dropdown sortble-dropdown flex-shrink-0">
+                            <a dropdownToggle class="text-reset dropdown-btn" href="javascript:void(0);">
+                                <span class="fw-semibold text-uppercase fs-xs">Sort by:
+                                </span><span class="text-muted dropdown-title">{{sortValue}}</span> <i class="mdi mdi-chevron-down ms-1"></i>
+                            </a>
+                            <div *bsDropdownMenu class="dropdown-menu dropdown-menu-end">
+                                <button class="dropdown-item sort" filesortable="icon" (click)="sortBy('icon','Docs Type')">Docs Type</button>
+                                <button class="dropdown-item sort" filesortable="mb" (click)="sortBy('mb','Size')">Size</button>
+                                <button class="dropdown-item sort" filesortable="date" (click)="sortBy('date','Date')">Date</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-borderless table-centered align-middle table-nowrap mb-0">
+                            <thead class="text-muted table-light">
+                                <tr>
+                                    <th>
+                                        <div class="form-check checkbox-product-list">
+                                            <input class="form-check-input" type="checkbox" value="1" id="checkbox-1">
+                                            <label class="form-check-label" for="checkbox-1"></label>
+                                        </div>
+                                    </th>
+                                    <th scope="col" class="sort cursor-pointer" filesortable="icon" (click)="onSort('icon')">Type</th>
+                                    <th scope="col" class="sort cursor-pointer" filesortable="title" (click)="onSort('title')">Document Name
+                                    </th>
+                                    <th scope="col" class="sort cursor-pointer" filesortable="item" (click)="onSort('item')">File Item</th>
+                                    <th scope="col" class="sort cursor-pointer" filesortable="mb" (click)="onSort('mb')">Size</th>
+                                    <th scope="col" class="sort cursor-pointer" filesortable="date" (click)="onSort('date')">Last Modified</th>
+                                    <th scope="col" class="sort cursor-pointer">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody class="list" id="file-list">
+                                @for (data of recentDatas; track $index) {
+                                <tr>
+                                    <th>
+                                        <div class="form-check checkbox-product-list">
+                                            <input class="form-check-input" type="checkbox" value="2" id="checkbox-2">
+                                            <label class="form-check-label" for="checkbox-2"></label>
+                                        </div>
+                                    </th>
+                                    <td class="docs_type">
+                                        <i class="{{data.icon}} text-{{data.color}}-emphasis fs-4"></i>
+                                    </td>
+                                    <td>
+                                        <a href="javascript:void(0);" class="text-reset document_name">{{data.title}}</a>
+                                    </td>
+                                    <td class="file_item">{{data.item}}</td>
+                                    <td class="size">
+                                        {{data.mb}}
+                                    </td>
+                                    <td class="date">
+                                        {{data.date}}
+                                    </td>
+                                    <td>
+                                        <div dropdown class="dropdown">
+                                            <button dropdownToggle class="btn btn-subtle-secondary btn-sm dropdown" type="button">
+                                                <i class="ri-more-fill align-middle"></i>
+                                            </button>
+                                            <ul *bsDropdownMenu class="dropdown-menu dropdown-menu-end">
+                                                <li><a class="dropdown-item view-item-btn" href="javascript:void(0);" (click)="openDetail($index)"><i class="ri-eye-fill align-bottom me-2 text-muted"></i>View</a>
+                                                </li>
+                                                <li><a class="dropdown-item edit-item-btn" href="javascript:void(0);" data-bs-toggle="modal"><i class="ri-pencil-fill align-bottom me-2 text-muted"></i>
+                                                        Edit</a></li>
+                                                <li><a class="dropdown-item remove-item-btn" data-bs-toggle="modal" href="javascript:void(0);"><i class="ri-delete-bin-fill align-bottom me-2 text-muted"></i>
+                                                        Delete</a></li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr><!-- end tr -->
+                            }
+                            </tbody><!-- end tbody -->
+                        </table><!-- end table -->
+                        <div class="noresult" style="display: none">
+                            <div class="text-center">
+                                <!-- <lord-icon src="https://cdn.lordicon.com/msoeawqm.json" trigger="loop" colors="primary:#405189,secondary:#0ab39c" style="width:75px;height:75px"></lord-icon> -->
+                                <h5 class="mt-2">Sorry! No Result Found</h5>
+                                <p class="text-muted mb-0">We've searched more than 150+ transactions We did not find
+                                    any transactions for you search.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row align-items-center text-center text-sm-start mt-3">
+                        <div class="col-sm">
+                            <div class="text-muted">
+                                Showing <span class="fw-semibold">{{recentDatas?.length}}</span> of <span class="fw-semibold">{{recentDatas?.length}}</span>
+                                Results
+                            </div>
+                        </div>
+                        <div class="col-sm-auto  mt-3 mt-sm-0">
+                            <pagination class="pagination-wrap hstack justify-content-center gap-2" [totalItems]="recentDatas?.length" (pageChanged)="pageChanged($event)" [itemsPerPage]="7"></pagination>
+                        </div>
+                    </div>
+                </div><!--end file tables-->
+            </div><!--end card-body-->
+        </div><!--end file-manager-content-wrapper-->
+        <div class="card file-manager-right-wrapper rounded-start-0 shadow-none">
+            <ngx-simplebar class="h-100">
+                <div class="card-header d-flex gap-2 align-items-center">
+                    <div>
+                        <button type="button" class="btn btn-sm btn-icon btn-subtle-danger close-btn-overview" (click)="closeDetail()">
+                            <i class="ri-close-fill align-bottom"></i>
+                        </button>
+                    </div>
+                    <h6 class="card-title flex-grow-1 mb-0">Storage Details</h6>
+                    <div class="flex-shrink-0">
+                        <p class="text-danger mb-0">Used 57%</p>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div id="storageChart" class="e-charts shadow-none mt-n4">
+                        <div echarts [options]="storageChart" id="property_type" style="height: 336px;"></div>
+                    </div>
+                    <div class="mt-4 mb-3">
+                        <h6 class="card-title mb-0">Pined Items</h6>
+                    </div>
+                    <ul class="vstack gap-2 list-unstyled">
+                        <li>
+                            <a href="javascript:void(0);" class="d-block p-2 bg-light bg-opacity-50 rounded">
+                                <div class="d-flex align-items-center gap-2">
+                                    <div class="avatar-xs flex-shrink-0 ronded">
+                                        <div class="avatar-title bg-body-secondary text-body">
+                                            <i class="bi bi-pin"></i>
+                                        </div>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <h6 class="mb-0">Skote Design file.psd</h6>
+                                    </div>
+                                    <div class="flex-shrink-0 text-muted">
+                                        2.5 MB
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" class="d-block p-2 bg-light bg-opacity-50 rounded">
+                                <div class="d-flex align-items-center gap-2">
+                                    <div class="avatar-xs flex-shrink-0 ronded">
+                                        <div class="avatar-title bg-body-secondary text-body">
+                                            <i class="bi bi-pin"></i>
+                                        </div>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <h6 class="mb-0">Trip Photography</h6>
+                                    </div>
+                                    <div class="flex-shrink-0 text-muted">
+                                        276 MB
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" class="d-block p-2 bg-light bg-opacity-50 rounded">
+                                <div class="d-flex align-items-center gap-2">
+                                    <div class="avatar-xs flex-shrink-0 ronded">
+                                        <div class="avatar-title bg-body-secondary text-body">
+                                            <i class="bi bi-pin"></i>
+                                        </div>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <h6 class="mb-0">Steex Admin</h6>
+                                    </div>
+                                    <div class="flex-shrink-0 text-muted">
+                                        631 MB
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" class="d-block p-2 bg-light bg-opacity-50 rounded">
+                                <div class="d-flex align-items-center gap-2">
+                                    <div class="avatar-xs flex-shrink-0 ronded">
+                                        <div class="avatar-title bg-body-secondary text-body">
+                                            <i class="bi bi-pin"></i>
+                                        </div>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <h6 class="mb-0">Velzon Design file</h6>
+                                    </div>
+                                    <div class="flex-shrink-0 text-muted">
+                                        1.3 GB
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" class="d-block p-2 bg-light bg-opacity-50 rounded">
+                                <div class="d-flex align-items-center gap-2">
+                                    <div class="avatar-xs flex-shrink-0 ronded">
+                                        <div class="avatar-title bg-body-secondary text-body">
+                                            <i class="bi bi-pin"></i>
+                                        </div>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <h6 class="mb-0">Velzon React</h6>
+                                    </div>
+                                    <div class="flex-shrink-0 text-muted">
+                                        698 MB
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" class="d-block p-2 bg-light bg-opacity-50 rounded">
+                                <div class="d-flex align-items-center gap-2">
+                                    <div class="avatar-xs flex-shrink-0 ronded">
+                                        <div class="avatar-title bg-body-secondary text-body">
+                                            <i class="bi bi-pin"></i>
+                                        </div>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <h6 class="mb-0">Steex Docs</h6>
+                                    </div>
+                                    <div class="flex-shrink-0 text-muted">
+                                        32.19 MB
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" class="d-block p-2 bg-light bg-opacity-50 rounded">
+                                <div class="d-flex align-items-center gap-2">
+                                    <div class="avatar-xs flex-shrink-0 ronded">
+                                        <div class="avatar-title bg-body-secondary text-body">
+                                            <i class="bi bi-pin"></i>
+                                        </div>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <h6 class="mb-0">Skote Design file.psd</h6>
+                                    </div>
+                                    <div class="flex-shrink-0 text-muted">
+                                        2.5 MB
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="card card-primary file-manager-widgets mb-0">
+                        <div class="card-body">
+                            <p class="fs-md text-white text-opacity-75">Invite 2 friends and get 5 GB extra space.</p>
+                            <a href="javascript:void(0);" class="stretched-link text-decoration-underline text-reset">Invite Friends <i class="bi bi-arrow-right align-baseline ms-1"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </ngx-simplebar>
+        </div><!--end file-manager-right-wrapper-->
+    </div>
+</div>
+
+<!-- Modal -->
+<div bsModal #createFolder="bs-modal" class="modal fade" id="createFolder">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createFolderLabel">Product</h5>
+                <button type="button" class="btn-close" (click)="createFolder.hide()"></button>
+            </div>
+
+            <form class="tablelist-form" novalidate autocomplete="off">
+                <div class="modal-body">
+                    <div id="alert-error-msg" class="d-none alert alert-danger py-2"></div>
+                    <input type="hidden" id="id-field">
+
+                    <input type="hidden" id="order-field">
+                    <input type="hidden" id="rating-field">
+                    <input type="hidden" id="discount-field">
+
+                    <div class="mb-3">
+                        <label for="product-title-input" class="form-label">Product title</label>
+                        <input type="text" id="product-title-input" class="form-control" placeholder="Enter product title" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Product Images</label>
+                        <dropzone class="dropzone" [config]="dropzoneConfig" [message]="'Drop files here or click to upload.'" (success)="onUploadSuccess($event)"></dropzone>
+
+                        @if (uploadedFiles) {
+                        <ul class="list-unstyled mb-0" id="dropzone-preview">
+                            @for (file of uploadedFiles; track $index) {
+                            <li class="mt-2" id="dropzone-preview-list">
+                                <div class="border rounded">
+                                    <div class="d-flex p-2">
+                                        <div class="flex-shrink-0 me-3">
+                                            <div class="avatar-sm bg-light rounded p-2">
+                                                @if (file.dataURL) {
+                                                <img class="img-fluid rounded d-block" [src]="file.dataURL" alt="Dropzone-Image" />
+                                                }@else {
+                                                <img class="img-fluid rounded d-block" [src]="file" alt="Dropzone-Image" />
+                                                }
+
+                                            </div>
+                                        </div>
+                                        <div class="flex-grow-1">
+                                            <div class="pt-1">
+                                                @if (file.name) {
+                                                <h5 class="fs-md mb-1">{{ file.name }}</h5>
+                                                }
+                                                @if (file.size) {
+                                                <p class="fs-sm text-muted mb-0">{{ file.size }}</p>
+                                                }
+                                            </div>
+                                        </div>
+                                        <div class="flex-shrink-0 ms-3">
+                                            <button (click)="removeFile(file)" class="btn btn-sm btn-danger">Delete</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        }
+                        </ul>
+                        }
+                        <!-- end dropzon-preview -->
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="product-category-input" class="form-label">Product category</label>
+
+                        <select class="form-select" id="product-category-input">
+                            <option value="" selected>Select product category</option>
+                            <option value="Appliances">Appliances</option>
+                            <option value="Automotive Accessories">Automotive Accessories</option>
+                            <option value="Electronics">Electronics</option>
+                            <option value="Fashion">Fashion</option>
+                            <option value="Furniture">Furniture</option>
+                            <option value="Grocery">Grocery</option>
+                            <option value="Headphones">Headphones</option>
+                            <option value="Kids">Kids</option>
+                            <option value="Luggage">Luggage</option>
+                            <option value="Sports">Sports</option>
+                            <option value="Watches">Watches</option>
+                        </select>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="mb-3">
+                                <label for="product-stock-input" class="form-label">Stocks</label>
+                                <input type="number" id="product-stock-input" class="form-control" placeholder="Enter product stocks" required>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="mb-3">
+                                <label for="product-price-input" class="form-label">Price</label>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text">$</span>
+                                    <input type="number" class="form-control" id="product-price-input" placeholder="Enter product price" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="hstack gap-2 justify-content-end">
+                        <button type="button" class="btn btn-ghost-danger" (click)="createFolder.hide()"><i class="bi bi-x-lg align-baseline me-1"></i> Close</button>
+                        <button type="submit" class="btn btn-primary" id="add-btn">Add User</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!-- modal-content -->
+    </div>
+</div>

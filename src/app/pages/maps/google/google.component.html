@@ -1,0 +1,52 @@
+<!-- Start Breadcrumbs -->
+<app-breadcrumbs title="Google Maps" [breadcrumbItems]="breadCrumbItems"></app-breadcrumbs>
+<!-- End Breadcrumbs -->
+
+<div class="row">
+  <div class="col-lg-6">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title mb-0">Markers</h4>
+      </div><!-- end card header -->
+
+      <div class="card-body">
+        <google-map [latitude]="latitude" [longitude]="longitude" [zoom]="15" width="100%" height="300px"></google-map>
+      </div><!-- end card-body -->
+    </div><!-- end card -->
+  </div>
+  <!-- end col -->
+
+  <div class="col-lg-6">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title mb-0">Overlays</h4>
+      </div><!-- end card header -->
+
+      <div class="card-body">
+        <google-map height="300px" width="100%" [options]="mapOptions">
+          @for (marker of markers; track $index) {
+          <map-marker [position]="marker.position"></map-marker>
+          }
+        </google-map>
+      </div><!-- end card -->
+    </div>
+    <!-- end col -->
+  </div>
+  <!-- end row -->
+
+  <div class="row">
+
+    <div class="col-lg-6">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title mb-0">Location</h4>
+        </div><!-- end card header -->
+
+        <div class="card-body">
+          <google-map [latitude]="latitude" [longitude]="longitude" [zoom]="5" width="100%" height="300px"></google-map>
+        </div><!-- end card-body -->
+      </div><!-- end card -->
+    </div>
+    <!-- end col -->
+  </div>
+  <!-- end row -->

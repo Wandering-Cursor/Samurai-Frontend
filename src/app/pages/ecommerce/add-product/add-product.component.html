@@ -1,0 +1,271 @@
+<!-- Start Breadcrumbs -->
+<app-breadcrumbs title="Add Product" [breadcrumbItems]="breadCrumbItems"></app-breadcrumbs>
+<!-- End Breadcrumbs -->
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-xxl-4">
+                        <h5 class="card-title mb-3">Product Information</h5>
+                        <p class="text-muted">Product Information refers to any information held by an organisation
+                            about the products it produces, buys, sells or distributes.</p>
+                    </div>
+                    <div class="col-xxl-8">
+                        <form action="#!">
+                            <div class="mb-3">
+                                <label for="productTitle" class="form-label">Product Title <span
+                                        class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="productTitle"
+                                    placeholder="Enter product title" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="productCategories" class="form-label">Categories <span
+                                        class="text-danger">*</span></label>
+                                <select class="form-control" data-choices name="productCategories"
+                                    id="productCategories">
+                                    <option value="">Select categories</option>
+                                    <option value="Appliances">Appliances</option>
+                                    <option value="Automotive Accessories">Automotive Accessories</option>
+                                    <option value="Electronics">Electronics</option>
+                                    <option value="Fashion">Fashion</option>
+                                    <option value="Furniture">Furniture</option>
+                                    <option value="Footwear">Footwear</option>
+                                    <option value="Sportswear">Sportswear</option>
+                                    <option value="Watches">Watches</option>
+                                    <option value="Headphones">Headphones</option>
+                                    <option value="Other Accessories">Other Accessories</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="productType" class="form-label">Product Type <span
+                                        class="text-danger">*</span></label>
+                                <select class="form-control" data-choices name="productType" id="productType">
+                                    <option value="">Select Type</option>
+                                    <option value="Simple">Simple</option>
+                                    <option value="Classified">Classified</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="shortDecs" class="form-label">Short Description <span
+                                        class="text-danger">*</span></label>
+                                <textarea class="form-control" id="shortDecs"
+                                    placeholder="Must enter minimum of a 100 characters" rows="3"></textarea>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="mb-3">
+                                        <label for="productBrand" class="form-label">Brand <span
+                                                class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="productBrand"
+                                            placeholder="Enter brand" required>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="mb-3">
+                                        <label for="productUnit" class="form-label">Unit <span
+                                                class="text-danger">*</span></label>
+                                        <select class="form-control" data-choices name="productUnit" id="productUnit">
+                                            <option value="">Select Unit</option>
+                                            <option value="Kilogram">Kilogram</option>
+                                            <option value="Pieces">Pieces</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Tags</label>
+                                <ng-select [items]="items" [multiple]="true" bindLabel="name"></ng-select>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-check form-switch mb-3">
+                                        <input class="form-check-input" type="checkbox" role="switch"
+                                            id="exchangeableInput">
+                                        <label class="form-check-label" for="exchangeableInput">Exchangeable</label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-check form-switch mb-3">
+                                        <input class="form-check-input" type="checkbox" role="switch"
+                                            id="refundableInput">
+                                        <label class="form-check-label" for="refundableInput">Refundable</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div><!--end col-->
+                </div><!--end row-->
+            </div>
+        </div>
+    </div><!--end col-->
+</div><!--end row-->
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-xxl-4">
+                        <h5 class="card-title mb-3">Description</h5>
+                        <p class="text-muted">Product Information refers to any information held by an organization
+                            about the products it produces, buys, sells or distributes.</p>
+                    </div><!--end col-->
+                    <div class="col-xxl-8">
+                        <div>
+                            <label class="form-label">Product Description <span class="text-danger">*</span></label>
+                            <ckeditor [editor]="Editor" data=""></ckeditor>
+                        </div>
+                    </div>
+                </div><!--end row-->
+            </div>
+        </div>
+    </div><!--end col-->
+</div><!--end row-->
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-xxl-4">
+                        <h5 class="card-title mb-3">Images</h5>
+                        <p class="text-muted">Product Information refers to any information held by an organization
+                            about the products it produces, buys, sells or distributes.</p>
+                    </div><!--end col-->
+                    <div class="col-xxl-8">
+                        <div class="mb-3">
+                            <label class="form-label">Product Images <span class="text-danger">*</span></label>
+                            <dropzone class="dropzone" [config]="dropzoneConfig" [message]="'Drop files here or click to upload.'" (success)="onUploadSuccess($event)"></dropzone>
+                            @if (uploadedFiles) {
+                            <ul class="list-unstyled mb-0" id="dropzone-preview">
+                                @for (file of uploadedFiles; track $index) {
+                                <li class="mt-2" id="dropzone-preview-list">
+                                    <div class="border rounded">
+                                        <div class="d-flex p-2">
+                                            <div class="flex-shrink-0 me-3">
+                                                <div class="avatar-sm bg-light rounded p-2">
+                                                    @if (file.dataURL) {
+                                                        <img class="img-fluid rounded d-block" [src]="file.dataURL" alt="Dropzone-Image" />
+                                                    }@else{
+                                                        <img class="img-fluid rounded d-block" [src]="file" alt="Dropzone-Image" />
+                                                    }                                              
+                                                </div>
+                                            </div>
+                                            <div class="flex-grow-1">
+                                                <div class="pt-1">
+                                                    @if (file.name) { <h5 class="fs-md mb-1">{{ file.name }}</h5>}
+                                                    @if (file.size) { <p class="fs-sm text-muted mb-0">{{ file.size }}</p>}
+                                                </div>
+                                            </div>
+                                            <div class="flex-shrink-0 ms-3">
+                                                <button (click)="removeFile(file)" class="btn btn-sm btn-danger">Delete</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            }
+                            </ul>
+                        }
+                            <!-- end dropzon-preview -->
+                        </div>
+                    </div>
+                </div><!--end row-->
+            </div>
+        </div>
+    </div><!--end col-->
+</div><!--end row-->
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-xxl-4">
+                        <h5 class="card-title mb-3">General Info</h5>
+                        <p class="text-muted mb-0">An informational product can be a digital book (or e-book), a digital
+                            report, a white paper, a piece of software, audio or video files, a website, an e-zine or a
+                            newsletter.</p>
+                    </div><!--end col-->
+                    <div class="col-xxl-8">
+                        <div class="row gy-3">
+                            <div class="col-lg-6">
+                                <div>
+                                    <label for="manufacturer-name-input" class="form-label">Manufacturer Name</label>
+                                    <input type="text" class="form-control" id="manufacturer-name-input"
+                                        placeholder="Enter manufacturer name" required>
+                                </div>
+                            </div><!--end col-->
+                            <div class="col-lg-6">
+                                <div>
+                                    <label class="form-label" for="manufacturer-brand-input">Manufacturer Brand</label>
+                                    <input type="text" class="form-control" id="manufacturer-brand-input"
+                                        placeholder="Enter manufacturer brand">
+                                </div>
+                            </div><!--end col-->
+                            <div class="col-lg-4">
+                                <div>
+                                    <label for="productStocks" class="form-label">Stocks <span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="productStocks" placeholder="Stocks"
+                                        required>
+                                </div>
+                            </div><!--end col-->
+                            <div class="col-lg-4">
+                                <div>
+                                    <label class="form-label" for="product-price-input">Price</label>
+                                    <div class="input-group has-validation">
+                                        <span class="input-group-text" id="product-price-addon">$</span>
+                                        <input type="text" class="form-control" id="product-price-input"
+                                            placeholder="Enter price" aria-label="Price"
+                                            aria-describedby="product-price-addon" required="">
+                                        <div class="invalid-feedback">Please Enter a product price.</div>
+                                    </div>
+                                </div>
+                            </div><!--end col-->
+                            <div class="col-lg-4">
+                                <div>
+                                    <label class="form-label" for="product-discount-input">Discount</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text" id="product-discount-addon">%</span>
+                                        <input type="text" class="form-control" id="product-discount-input"
+                                            placeholder="Enter discount" aria-label="discount"
+                                            aria-describedby="product-discount-addon">
+                                    </div>
+                                </div>
+                            </div><!--end col-->
+                            <div class="col-lg-6">
+                                <div>
+                                    <label for="choices-publish-status-input" class="form-label">Status</label>
+                                    <select class="form-select" id="choices-publish-status-input" data-choices
+                                        data-choices-search-false>
+                                        <option value="Published" selected>Published</option>
+                                        <option value="Scheduled">Scheduled</option>
+                                        <option value="Draft">Draft</option>
+                                    </select>
+                                </div>
+                            </div><!--end col-->
+                            <div class="col-lg-6">
+                                <div>
+                                    <label for="choices-publish-visibility-input" class="form-label">Visibility</label>
+                                    <select class="form-select" id="choices-publish-visibility-input" data-choices
+                                        data-choices-search-false>
+                                        <option value="Public" selected>Public</option>
+                                        <option value="Hidden">Hidden</option>
+                                    </select>
+                                </div>
+                            </div><!--end col-->
+                        </div><!--end row-->
+                    </div>
+                </div><!--end row-->
+            </div>
+        </div>
+    </div><!--end col-->
+</div><!--end row-->
+
+<div class="hstack gap-2 justify-content-end mb-3">
+    <button class="btn btn-danger"><i class="ph-x align-middle"></i> Cancel</button>
+    <button class="btn btn-primary">Submit</button>
+</div>

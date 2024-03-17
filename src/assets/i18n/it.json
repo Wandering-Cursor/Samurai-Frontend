@@ -1,0 +1,239 @@
+{
+  "MENUITEMS": {
+    "MENU": {
+      "TEXT": "MENÙ"
+    },
+    "DASHBOARD": {
+      "TEXT": "Cruscotti",
+      "LIST": {
+        "ANALYTICS": "Analitica",
+        "CRM": "CRM",
+        "ECOMMERCE": "E-commerce",
+        "LEARNING": "Apprendimento",
+        "REALESTATE": "Immobiliare"
+      }
+    },
+    "APPS": {
+      "TEXT": "App",
+      "LIST": {
+        "CALENDAR": "Calendario",
+        "CHAT": "Chiacchierata",
+        "EMAIL": "E-mail",
+        "ECOMMERCE": "E-commerce",
+        "PRODUCTS": "Prodotti",
+        "PRODUCTGRID": "Griglia prodotti",
+        "PRODUCTDETAILS": "Dettagli del prodotto",
+        "CREATEPRODUCT": "Crea prodotto",
+        "ORDERS": "Ordini",
+        "ORDEROVERVIEW": "Panoramica dell'ordine",
+        "CUSTOMERS": "Clienti",
+        "SHOPPINGCART": "Carrello della spesa",
+        "CHECKOUT": "Guardare",
+        "SELLERS": "Venditrici",
+        "SELLEROVERVIEW": "Panoramica del venditore",
+        "FILEMANAGER": "Gestore file",
+        "LEARNING": "Apprendimento",
+        "COURSES": "Corsi",
+        "LISTVIEW": "Visualizzazione elenco",
+        "GRIDVIEW": "Vista a griglia",
+        "CATEGORY": "Categoria",
+        "OVERVIEW": "Panoramica",
+        "CREATECOURSE": "Crea corso",
+        "STUDENTS": "Studentesse",
+        "MYSUBSCRIPTIONS": "le mie sottoscrizioni",
+        "MYCOURSES": "I miei corsi",
+        "INSTRUCTORS": "Istruttori",
+        "CREATEINSTRUCTOR": "Crea istruttore",
+        "INVOICES": "Fatture",
+        "CREATEINVOICE": "Crea fattura",
+        "SUPPORTTICKETS": "Ticket di supporto",
+        "REALESTATE": "Immobiliare",
+        "LISTINGGRID": "Griglia di elenco",
+        "LISTINGLIST": "Elenco degli elenchi",
+        "LISTINGMAP": "Mappa dell'elenco",
+        "PROPERTYOVERVIEW": "Panoramica della proprietà",
+        "AGENT": "Agente",
+        "AGENCIES": "Agenzie",
+        "ADDPROPERTY": "Aggiungi proprietà",
+        "EARNINGS": "GUADAGNI"
+      }
+    },
+    "PAGES": {
+      "TEXT": "Pagine"
+    },
+    "AUTHENTICATION": {
+      "TEXT": "Autenticazione",
+      "LIST": {
+        "SIGNIN": "Registrazione",
+        "SIGNUP": "Iscrizione",
+        "PASSWORDRESET": "Reimpostazione della password",
+        "PASSWORDCREATE": "Password Crea",
+        "LOCKSCREEN": "Blocca schermo",
+        "LOGOUT": "Disconnettersi",
+        "SUCCESSMESSAGE": "Messaggio di successo",
+        "TWOSTEPVERIFICATION": "Verifica in due fasi",
+        "ERRORS": "Errori",
+        "404ERROR": "Errore 404",
+        "500": "cinque­cento",
+        "503": "cinque­cento­tré",
+        "OFFLINE": "Pagina non in linea"
+      }
+    },
+    "EXTRAPAGES": {
+      "TEXT": "Pagine",
+      "LIST": {
+        "STARTER": "Antipasto",
+        "PROFILE": "Profilo",
+        "PROFILESETTINGS": "Impostazioni del profilo",
+        "CONTACTS": "Contatti",
+        "TIMELINE": "Sequenza temporale",
+        "FAQS": "Domande frequenti",
+        "PRICING": "Prezzi",
+        "MAINTENANCE": "Manutenzione",
+        "COMINGSOON": "Prossimamente",
+        "PRIVACYPOLICY": "politica sulla riservatezza",
+        "TERMS&CONDITIONS": "Termini e condizioni"
+      }
+    },
+    "COMPONENTS": {
+      "TEXT": "Componenti"
+    },
+    "BOOTSTRAPUI": {
+      "TEXT": "Interfaccia utente Bootstrap",
+      "LIST": {
+        "ALERTS": "Avvisi",
+        "BADGES": "Distintivi",
+        "BUTTONS": "Bottoni",
+        "COLORS": "Colori",
+        "CARDS": "Carte",
+        "CAROUSEL": "Giostra",
+        "DROPDOWNS": "menu a discesa",
+        "GRID": "Griglia",
+        "IMAGES": "immagini",
+        "TABS": "Schede",
+        "ACCORDION&COLLAPSE": "Fisarmonica e collasso",
+        "MODALS": "Modali",
+        "OFFCANVAS": "Fuori tela",
+        "PLACEHOLDERS": "Segnaposto",
+        "PROGRESS": "Progresso",
+        "NOTIFICATIONS": "Notifiche",
+        "MEDIAOBJECT": "Oggetto multimediale",
+        "EMBEDVIDEO": "Incorpora video",
+        "TYPOGRAPHY": "Tipografia",
+        "LISTS": "Liste",
+        "LINKS": "Collegamenti",
+        "GENERAL": "Generale",
+        "UTILITIES": "Utilità"
+      }
+    },
+    "ADVANCEUI": {
+      "TEXT": "Interfaccia utente avanzata",
+      "LIST": {
+        "SWEETALERTS": "Dolci avvisi",
+        "NESTABLELIST": "Elenco annidabile",
+        "SCROLLBAR": "Barra di scorrimento",
+        "SWIPERSLIDER": "Cursore a scorrimento",
+        "RATTINGS": "Giudizi",
+        "HIGHLIGHT": "Evidenziare",
+        "SCROLLSPY": "ScrollSpy"
+      }
+    },
+    "CUSTOMUI": {
+      "TEXT": "Interfaccia utente personalizzata",
+      "BADGE": "Costume",
+      "LIST": {
+        "RIBBONS": "Nastri",
+        "PROFILE": "Profilo",
+        "COUNTER": "Contatrice"
+      }
+    },
+    "WIDGETS": {
+      "TEXT": "Widget"
+    },
+    "FORMS": {
+      "TEXT": "Forme",
+      "LIST": {
+        "BASICELEMENTS": "Elementi basici",
+        "FORMSELECT": "Seleziona modulo",
+        "CHECKBOXS&RADIOS": "Caselle di controllo e radio",
+        "PICKERS": "Raccoglitrici",
+        "INPUTMASKS": "Maschere di input",
+        "ADVANCED": "Avanzate",
+        "RANGESLIDER": "Dispositivo di scorrimento dell'intervallo",
+        "VALIDATION": "Convalida",
+        "WIZARD": "Procedura guidata",
+        "EDITORS": "Editrici",
+        "FILEUPLOADS": "Caricamenti di file",
+        "FORMLAYOUTS": "Layout del modulo"
+      }
+    },
+    "TABLES": {
+      "TEXT": "Tabelle",
+      "LIST": {
+        "BASICTABLES": "Tabelle di base",
+        "GRIDJS": "Griglia J",
+        "LISTJS": "Elenco J",
+        "DATATABLES": "Datatables"
+      }
+    },
+    "CHARTS": {
+      "TEXT": "Grafici",
+      "LIST": {
+        "APEXCHARTS": "Apexcharts",
+        "LINE": "Linea",
+        "AREA": "La zona",
+        "COLUMN": "Colonna",
+        "BAR": "Sbarra",
+        "MIXED": "Mista",
+        "TIMELINE": "Sequenza temporale",
+        "RANGEAREA": "Area di portata",
+        "FUNNEL": "Imbuto",
+        "CANDLSTICK": "Candeliere",
+        "BOXPLOT": "Grafico a scatola",
+        "BUBBLE": "Bolla",
+        "SCATTER": "Disperdere",
+        "HEATMAP": "Mappa di calore",
+        "TREEMAP": "Mappa ad albero",
+        "PIE": "Torta",
+        "RADIALBAR": "Barra radiale",
+        "RADAR": "Radar",
+        "POLARAREA": "Zona Polare"
+      }
+    },
+    "ICONS": {
+      "TEXT": "Icone",
+      "LIST": {
+        "REMIX": "Remixa",
+        "BOXICONS": "Icone della scatola",
+        "MATERIALDESIGN": "Progettazione materiale",
+        "BOOTSTRAP": "Bootstrap",
+        "PHOSPHOR": "Fosforo"
+      }
+    },
+    "MAPS": {
+      "TEXT": "Mappe",
+      "LIST": {
+        "GOOGLE": "Google",
+        "VECTOR": "AmCharts",
+        "LEAFLET": "Volantino"
+      }
+    },
+    "MULTILEVEL": {
+      "TEXT": "Multilivello",
+      "LIST": {
+        "LEVEL1": {
+          "1": "Livello 1.1",
+          "2": "Livello 1.2",
+          "LEVEL2": {
+            "1": "Livello 2.1",
+            "2": "Livello 2.2",
+            "LEVEL3": {
+              "1": "Livello 3.1",
+              "2": "Livello 3.2"
+            }
+          }
+        }
+      }
+    }
+  }
+}

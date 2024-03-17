@@ -1,0 +1,500 @@
+<!-- Start Breadcrumbs -->
+<app-breadcrumbs title="ANALYTICS" [breadcrumbItems]="breadCrumbItems"></app-breadcrumbs>
+<!-- End Breadcrumbs -->
+
+<div class="row">
+    @for (data of statlist; track $index) {
+    <div class="col-xl-3 col-sm-6">
+        <div class="card">
+            <div class="card-body">
+                <div dropdown class="dropdown float-end">
+                    <a dropdownToggle class="text-reset dropdown-btn" href="javascript:void(0);">
+                        <span class="text-muted fs-lg"><i class="mdi mdi-dots-vertical align-middle"></i></span>
+                    </a>
+                    <div *dropdownMenu class="dropdown-menu dropdown-menu-end">
+                        <a class="dropdown-item" href="javascript:void(0);">Today</a>
+                        <a class="dropdown-item" href="javascript:void(0);">Last Week</a>
+                        <a class="dropdown-item" href="javascript:void(0);">Last Month</a>
+                        <a class="dropdown-item" href="javascript:void(0);">Current Year</a>
+                    </div>
+                </div>
+                <p class="fs-md text-muted mb-0">{{data.title}}</p>
+
+                <div class="row mt-4 align-items-end">
+                    <div class="col-lg-6">
+                        <h3 class="mb-4"><span class="counter-value" [countUp]="data.count" [options]="data.option"></span>{{data.counttyyp}}</h3>
+                        <p class="text-{{data.color}} mb-0"><i class="bi {{data.icon}} me-1"></i> {{data.avg}}</p>
+                    </div>
+                    <div class="col-lg-6">
+                        <div id="session_chart" class="apex-charts m-n3 mt-n4" dir="ltr">
+                            <apx-chart [series]="data.chart.series" [chart]="data.chart.chart" [dataLabels]="data.chart.dataLabels" [stroke]="data.chart.stroke" [labels]="data.chart.labels" [grid]="data.chart.grid" [colors]="data.chart.colors" [xaxis]="data.chart.xaxis" [yaxis]="data.chart.yaxis" dir="ltr"></apx-chart>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+    <!--end col-->
+</div>
+<!--end row-->
+
+<div class="row">
+    <div class="col-xl-8">
+        <div class="card">
+            <div class="card-header d-flex align-items-center flex-wrap gap-3">
+                <h5 class="card-title mb-0 flex-grow-1">Performance Overview</h5>
+                <ul class="nav nav-pills flex-shrink-0" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link active" data-bs-toggle="tab" href="javascript:void(0);" [class.active]="currentTab === 'pageViews'" (click)="changeTab('pageViews','1')" role="tab" aria-selected="true">
+                            Pageviews
+                        </a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" data-bs-toggle="tab" href="javascript:void(0);" [class.active]="currentTab === 'Clicks'" (click)="changeTab('Clicks','2')" role="tab" aria-selected="false" tabindex="-1">
+                            Clicks
+                        </a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" data-bs-toggle="tab" href="javascript:void(0);" [class.active]="currentTab === 'conversations'" (click)="changeTab('conversations','3')" role="tab" aria-selected="false" tabindex="-1">
+                            Conversations
+                        </a>
+                    </li>
+                </ul>
+            </div> <!--end card-header-->
+            <div class="card-body ps-0">
+                <div class="tab-content text-muted">
+                    <div [hidden]="currentTab !== 'pageViews'" class="tab-pane active" id="pageViews" role="tabpanel">
+                        <div id="pageviews_overview" class="apex-charts" dir="ltr">
+                            <apx-chart [series]="pageoverviewChart.series" [chart]="pageoverviewChart.chart" [plotOptions]="pageoverviewChart.plotOptions" [stroke]="pageoverviewChart.stroke" [fill]="pageoverviewChart.fill" [dataLabels]="pageoverviewChart.dataLabels" [colors]="pageoverviewChart.colors" [legend]="pageoverviewChart.legend" [xaxis]="pageoverviewChart.xaxis" [responsive]="pageoverviewChart.responsive" dir="ltr"></apx-chart>
+                        </div>
+                    </div>
+                    <!--end tab-->
+                    <div [hidden]="currentTab !== 'Clicks'" class="tab-pane active" role="tabpanel">
+                        <div id="clicks_Chart" class="apex-charts" dir="ltr">
+                            <apx-chart [series]="clicksChart.series" [chart]="clicksChart.chart" [stroke]="clicksChart.stroke" [responsive]="clicksChart.responsive" [xaxis]="clicksChart.xaxis" [colors]="clicksChart.colors" [legend]="clicksChart.legend" [fill]="clicksChart.fill" dir="ltr"></apx-chart>
+                        </div>
+                    </div>
+                    <!--end tab-->
+                    <div [hidden]="currentTab !== 'conversations'" class="tab-pane active" role="tabpanel">
+                        <div id="column_distributed" class="apex-charts" dir="ltr">
+                            <apx-chart [series]="columnChart.series" [chart]="columnChart.chart" [plotOptions]="columnChart.plotOptions" [dataLabels]="columnChart.dataLabels" [colors]="columnChart.colors" [legend]="columnChart.legend" [xaxis]="columnChart.xaxis" dir="ltr"></apx-chart>
+                        </div>
+                    </div>
+                    <!--end tab-->
+                </div>
+            </div>
+            <!--end card-header-->
+        </div>
+    </div>
+    <!--end col-->
+    <div class="col-xl-4">
+        <div class="card card-height-100" id="networks">
+            <div class="card-header d-flex">
+                <h5 class="card-title mb-0 flex-grow-1">Browser Usage</h5>
+                <div class="flex-shrink-0">
+                    <div dropdown class="dropdown card-header-dropdown sortble-dropdown">
+                        <a dropdownToggle class="text-reset dropdown-btn" href="javascript:void(0);">
+                            <span class="text-muted dropdown-title">{{sortValue}}</span> <i class="mdi mdi-chevron-down ms-1"></i> </a>
+                        <div *dropdownMenu class="dropdown-menu dropdown-menu-end">
+                            <button class="dropdown-item sort" sortable="browsers" (click)="sortBy('browsers','Browsers')">Browsers</button>
+                            <button class="dropdown-item sort" sortable="click" (click)="sortBy('click','Click')">Click</button>
+                            <button class="dropdown-item sort" sortable="rate" (click)="sortBy('rate','Bounce Rate')">Bounce Rate</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table align-middle table-nowrap mb-0">
+                        <thead class="table-active">
+                            <tr>
+                                <th class="sort cursor-pointer" (click)="onSort('browsers')">
+                                    Browsers
+                                </th>
+                                <th class="sort cursor-pointer text-center" (click)="onSort('click')">
+                                    Click
+                                </th>
+                                <th class="sort cursor-pointer text-center" (click)="onSort('rate')">
+                                    Bounce Rate
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="list">
+                            @for (data of browsers; track $index) {
+                            <tr>
+                                <td>
+                                    <img src="{{data.img}}" alt="" class="avatar-xxs" />
+                                    <span class="ms-1 browsers">{{data.browsers}}</span>
+                                </td>
+                                <td class="click text-center">
+                                    {{data.click}}
+                                </td>
+                                <td class="pageviews text-center">
+                                    {{data.rate}}
+                                </td>
+                            </tr>
+                        }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--end col-->
+</div>
+<!--end row-->
+
+<div class="row">
+    <div class="col-xl-9">
+        <div class="card card-height-100">
+            <div class="card-header d-flex align-items-center">
+                <h5 class="card-title mb-0 flex-grow-1">Active Users Right Now</h5>
+                <div class="flex-shrink-0">
+                    <button type="button" class="btn btn-subtle-primary btn-sm"><i class="bi bi-file-earmark-text me-1 align-baseline"></i> Reports</button>
+                </div>
+            </div>
+            <!--end card-header-->
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div id="chartdiv" style="height: 360px"></div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="mb-4">
+                            <h6 class="text-muted mb-3 fw-medium fs-xs text-uppercase">Comparechartdiv to last month</h6>
+                            <h3><span class="counter-value" [countUp]="53736"></span> <small class="text-muted fw-normal fs-sm ms-1">Users</small></h3>
+                        </div>
+                        <div>
+                            <div echarts [options]="mainChart" id="main" style="height: 265px;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /col-->
+    <div class="col-xl-3">
+        <div class="card card-height-100" id="top-Pages">
+            <div class="card-header d-flex align-items-center">
+                <h5 class="card-title mb-0 flex-grow-1">Top Pages</h5>
+                <div class="flex-shrink-0">
+                    <div dropdown class="dropdown card-header-dropdown">
+                        <a dropdownToggle class="text-reset dropdown-btn" href="javascript:void(0);">
+                            <span class="text-muted fs-lg"><i class="mdi mdi-dots-vertical align-middle"></i></span>
+                        </a>
+                        <div *dropdownMenu class="dropdown-menu dropdown-menu-end">
+                            <a class="dropdown-item sort" href="javascript:void(0);" (click)="topSort('activepage')">Active Page</a>
+                            <a class="dropdown-item sort" href="javascript:void(0);" (click)="topSort('users')">Users</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--end card-header-->
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table align-middle table-borderless table-centered table-nowrap mb-0">
+                        <thead class="text-muted table-light">
+                            <tr>
+                                <th scope="col" class="sort cursor-pointer" style="width: 62;" (click)="topSort('activepage')">
+                                    Active Page
+                                </th>
+                                <th scope="col" class="sort cursor-pointer" (click)="topSort('active')">Active</th>
+                                <th scope="col" class="sort cursor-pointer" (click)="topSort('users')">
+                                    Users</th>
+                            </tr>
+                        </thead>
+                        <tbody class="list">
+                            @for (data of pagesData; track $index) {
+                            <tr>
+                                <td>
+                                    <a href="javascript:void(0);" class="activePage text-reset">{{data.activepage}}</a>
+                                </td>
+                                <td class="activePageNo">{{data.active}}</td>
+                                <td class="pageUsers">{{data.users}}</td>
+                            </tr>
+                        }
+                            <!-- end -->
+                        </tbody>
+                        <!-- end tbody -->
+                    </table>
+                    <!-- end table -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end col-->
+</div>
+<!-- end row-->
+
+<div class="row">
+    <div class="col-xl-4">
+        <div class="card card-height-100 border-0 overflow-hidden">
+            <div class="card-body p-0">
+                <div class="row g-0">
+                    <div class="col-md-6">
+                        <!-- card -->
+                        <div class="card shadow-none border-end-md border-bottom rounded-0 mb-0">
+                            <div class="card-body">
+                                <div dropdown class="dropdown float-end">
+                                    <a dropdownToggle class="text-reset dropdown-btn" href="javascript:void(0);">
+                                        <span class="text-muted fs-lg"><i class="mdi mdi-dots-vertical align-middle"></i></span>
+                                    </a>
+                                    <div *dropdownMenu class="dropdown-menu dropdown-menu-end">
+                                        <a class="dropdown-item" href="javascript:void(0);">Today</a>
+                                        <a class="dropdown-item" href="javascript:void(0);">Last Week</a>
+                                        <a class="dropdown-item" href="javascript:void(0);">Last Month</a>
+                                        <a class="dropdown-item" href="javascript:void(0);">Current Year</a>
+                                    </div>
+                                </div>
+                                <div id="time_On_Sale" dir="ltr">
+                                    <apx-chart [series]="timeChart.series" [chart]="timeChart.chart" [plotOptions]="timeChart.plotOptions" [colors]="timeChart.colors" dir="ltr"></apx-chart>
+                                </div>
+                                <div class="mt-2">
+                                    <p class="text-uppercase fw-medium text-muted text-truncate fs-sm">Time on Sale</p>
+                                    <h4 class="fw-semibold mb-3"><span class="counter-value" [countUp]="32"></span>M
+                                        <span class="counter-value" [countUp]="12">0</span>s
+                                    </h4>
+                                    <div class="d-flex align-items-center gap-2">
+                                        <h5 class="text-success flex-shrink-0 fs-xs mb-0"><i class="ri-arrow-right-up-line fs-sm align-middle"></i> +21.36 %</h5>
+                                        <div class="flex-grow-1 overflow-hidden">
+                                            <p class="text-muted text-truncate mb-0">Analytics for last week</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end card body -->
+                        </div>
+                        <!-- end card -->
+                    </div>
+                    <!-- end col -->
+                    <div class="col-md-6">
+                        <!-- card -->
+                        <div class="card shadow-none border-bottom rounded-0 mb-0">
+                            <div class="card-body">
+                                <div dropdown class="dropdown float-end">
+                                    <a dropdownToggle class="text-reset dropdown-btn" href="javascript:void(0);">
+                                        <span class="text-muted fs-lg"><i class="mdi mdi-dots-vertical align-middle"></i></span>
+                                    </a>
+                                    <div *dropdownMenu class="dropdown-menu dropdown-menu-end">
+                                        <a class="dropdown-item" href="javascript:void(0);">Today</a>
+                                        <a class="dropdown-item" href="javascript:void(0);">Last Week</a>
+                                        <a class="dropdown-item" href="javascript:void(0);">Last Month</a>
+                                        <a class="dropdown-item" href="javascript:void(0);">Current Year</a>
+                                    </div>
+                                </div>
+                                <div id="goal_Completions" dir="ltr">
+                                    <apx-chart [series]="goalChart.series" [chart]="goalChart.chart" [plotOptions]="goalChart.plotOptions" [colors]="goalChart.colors" dir="ltr"></apx-chart>
+                                </div>
+                                <div class="mt-2">
+                                    <p class="text-uppercase fw-medium text-muted text-truncate fs-sm">Goal Completions
+                                    </p>
+                                    <h4 class="fw-semibold mb-3"><span class="counter-value" [countUp]="254157">0</span>
+                                    </h4>
+                                    <div class="d-flex align-items-center gap-2">
+                                        <h5 class="text-success flex-shrink-0 fs-xs mb-0"><i class="ri-arrow-right-up-line fs-sm align-middle"></i> +6.30 %</h5>
+                                        <div class="flex-grow-1 overflow-hidden">
+                                            <p class="text-muted text-truncate mb-0">Analytics for last week</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end card body -->
+                        </div>
+                        <!-- end card -->
+                    </div>
+                    <!-- end col -->
+                    <div class="col-md-6">
+                        <!-- card -->
+                        <div class="card shadow-none border-end-md rounded-0 mb-0">
+                            <div class="card-body">
+                                <div dropdown class="dropdown float-end">
+                                    <a dropdownToggle class="text-reset dropdown-btn" href="javascript:void(0);">
+                                        <span class="text-muted fs-lg"><i class="mdi mdi-dots-vertical align-middle"></i></span>
+                                    </a>
+                                    <div *dropdownMenu class="dropdown-menu dropdown-menu-end">
+                                        <a class="dropdown-item" href="javascript:void(0);">Today</a>
+                                        <a class="dropdown-item" href="javascript:void(0);">Last Week</a>
+                                        <a class="dropdown-item" href="javascript:void(0);">Last Month</a>
+                                        <a class="dropdown-item" href="javascript:void(0);">Current Year</a>
+                                    </div>
+                                </div>
+                                <div id="bounce_rate" dir="ltr">
+                                    <apx-chart [series]="bounceChart.series" [chart]="bounceChart.chart" [plotOptions]="bounceChart.plotOptions" [colors]="bounceChart.colors" dir="ltr"></apx-chart>
+                                </div>
+                                <div class="mt-2">
+                                    <p class="text-uppercase fw-medium text-muted text-truncate fs-sm">Bounce Rate</p>
+                                    <h4 class="fw-semibold mb-3"><span class="counter-value" [countUp]="68"></span>%
+                                    </h4>
+                                    <div class="d-flex align-items-center gap-2">
+                                        <h5 class="text-danger flex-shrink-0 fs-xs mb-0"><i class="ri-arrow-right-down-line fs-sm align-middle"></i> +2.01 %</h5>
+                                        <div class="flex-grow-1 overflow-hidden">
+                                            <p class="text-muted text-truncate mb-0">Analytics for last week</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end card body -->
+                        </div>
+                        <!-- end card -->
+                    </div>
+                    <!-- end col -->
+                    <div class="col-md-6">
+                        <!-- card -->
+                        <div class="card shadow-none border-top border-top-md-0 rounded-0 mb-0">
+                            <div class="card-body">
+                                <div dropdown class="dropdown float-end">
+                                    <a dropdownToggle class="text-reset dropdown-btn" href="javascript:void(0);">
+                                        <span class="text-muted fs-lg"><i class="mdi mdi-dots-vertical align-middle"></i></span>
+                                    </a>
+                                    <div *dropdownMenu class="dropdown-menu dropdown-menu-end">
+                                        <a class="dropdown-item" href="javascript:void(0);">Today</a>
+                                        <a class="dropdown-item" href="javascript:void(0);">Last Week</a>
+                                        <a class="dropdown-item" href="javascript:void(0);">Last Month</a>
+                                        <a class="dropdown-item" href="javascript:void(0);">Current Year</a>
+                                    </div>
+                                </div>
+                                <div id="new_Sessions" dir="ltr">
+                                    <apx-chart [series]="newSessionsChart.series" [chart]="newSessionsChart.chart" [plotOptions]="newSessionsChart.plotOptions" [colors]="newSessionsChart.colors" dir="ltr"></apx-chart>
+                                </div>
+                                <div class="mt-2">
+                                    <p class="text-uppercase fw-medium text-muted text-truncate fs-sm">New Sessions</p>
+                                    <h4 class="fw-semibold mb-3"><span class="counter-value" [countUp]="32548"></span>
+                                    </h4>
+                                    <div class="d-flex align-items-center gap-2">
+                                        <h5 class="text-success flex-shrink-0 fs-xs mb-0"><i class="ri-arrow-right-up-line fs-sm align-middle"></i> +10.42 %</h5>
+                                        <div class="flex-grow-1 overflow-hidden">
+                                            <p class="text-muted text-truncate mb-0">than last week</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end card body -->
+                        </div>
+                        <!-- end card -->
+                    </div>
+                    <!-- end col -->
+                </div>
+                <!-- end row-->
+            </div>
+        </div>
+    </div>
+    <!--end col-->
+    <div class="col-xl-4">
+        <div class="card card-height-100">
+            <div class="card-header d-flex align-items-center">
+                <h5 class="card-title mb-0 flex-grow-1">Sales Report</h5>
+                <div class="flex-shrink-0">
+                    <button type="button" class="btn btn-subtle-info btn-sm"><i class="bi bi-file-earmark-text me-1 align-baseline"></i> Generate Reports</button>
+                </div>
+            </div>
+            <div class="card-body pb-0">
+                <h4>
+                    $<span class="counter-value" [countUp]="452.32"></span>M <span class="text-success fw-normal fs-sm"><i class="bi bi-arrow-up"></i> +23.57%</span>
+                </h4>
+                <p class="text-muted mb-0">($215.32 Avg. revenue monthly)</p>
+            </div>
+            <div class="card-body pt-0 pb-2 ps-0 mt-2 mt-lg-n3 sales-report-chart">
+                <div id="sales_Report" class="apex-charts" dir="ltr">
+                    <apx-chart [series]="salesReportChart.series" [chart]="salesReportChart.chart" [grid]="salesReportChart.grid" [legend]="salesReportChart.legend" [fill]="salesReportChart.fill" [dataLabels]="salesReportChart.dataLabels" [stroke]="salesReportChart.stroke" [colors]="salesReportChart.colors" [xaxis]="salesReportChart.xaxis" [yaxis]="salesReportChart.yaxis" dir="ltr"></apx-chart>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--end col-->
+    <div class="col-xl-4">
+        <div class="card card-height-100">
+            <div class="card-header d-flex align-items-center">
+                <h5 class="card-title mb-0 flex-grow-1">Earning</h5>
+                <div dropdown class="dropdown card-header-dropdown">
+                    <a dropdownToggle class="text-reset dropdown-btn" href="javascript:void(0);">
+                        <span class="text-muted fs-lg"><i class="mdi mdi-dots-vertical align-middle"></i></span>
+                    </a>
+                    <div *dropdownMenu class="dropdown-menu dropdown-menu-end">
+                        <a class="dropdown-item" href="javascript:void(0);">Current Years</a>
+                        <a class="dropdown-item" href="javascript:void(0);">Last Years</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="p-3 text-center bg-light-subtle mb-4 rounded">
+                    <h4 class="mb-0">
+                        $<span class="counter-value" [countUp]="314.57"></span>M
+                        <span class="text-muted fw-normal fs-sm">
+                            <span class="text-success fw-medium"><i class="bi bi-arrow-up"></i> +23.57%</span> Last
+                            Month
+                        </span>
+                    </h4>
+                </div>
+                <div class="progress progress-bar-animated">
+                    <div class="progress-bar" tooltip="Product Development (28%)" style="width: 28%;"></div>
+                    <div class="progress-bar bg-secondary" tooltip="Startup Business (15%)" style="width: 15%;"></div>
+                    <div class="progress-bar bg-info" tooltip="Corporate Design (20%)" style="width: 20%;"></div>
+                    <div class="progress-bar bg-light" tooltip="Develop Project (18%)" style="width: 18%;"></div>
+                    <div class="progress-bar bg-success" tooltip="Prototype (13%)" style="width: 13%;"></div>
+                    <div class="progress-bar bg-warning" tooltip="Design (8%)" style="width: 8%;"></div>
+                </div>
+                <ul class="list-unstyled mt-4 pt-2 vstack gap-3">
+                    <li>
+                        <div class="d-flex align-items-center">
+                            <div class="flex-grow-1"><i class="bi bi-circle-square text-primary me-2"></i> Product
+                                Development</div>
+                            <div class="flex-shrink-0">
+                                28%
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="d-flex align-items-center">
+                            <div class="flex-grow-1"><i class="bi bi-circle-square text-secondary me-2"></i> Startup
+                                Business</div>
+                            <div class="flex-shrink-0">
+                                15%
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="d-flex align-items-center">
+                            <div class="flex-grow-1"><i class="bi bi-circle-square text-info me-2"></i> Corporate Design
+                            </div>
+                            <div class="flex-shrink-0">
+                                20%
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="d-flex align-items-center">
+                            <div class="flex-grow-1"><i class="bi bi-circle-square text-light me-2"></i> Develop Project
+                            </div>
+                            <div class="flex-shrink-0">
+                                18%
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="d-flex align-items-center">
+                            <div class="flex-grow-1"><i class="bi bi-circle-square text-success me-2"></i> Prototype
+                            </div>
+                            <div class="flex-shrink-0">
+                                13%
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="d-flex align-items-center">
+                            <div class="flex-grow-1"><i class="bi bi-circle-square text-warning me-2"></i> Design</div>
+                            <div class="flex-shrink-0">
+                                8%
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <div class="text-center">
+                    <a href="javascript:void(0);" class="link-secondary fw-medium link-effect">View All Earning <i class="bi bi-arrow-right align-baseline ms-1"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--end col-->
+</div>
+<!--end row-->

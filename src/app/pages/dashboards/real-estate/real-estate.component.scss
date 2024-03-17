@@ -1,0 +1,14 @@
+
+
+
+.real-estate-widgets {
+    .dashboard-nav{
+        flex-wrap: inherit;
+        .nav-item{
+            .nav-link{
+                display: flex;
+                align-items: center;
+            }
+        }
+    }
+}

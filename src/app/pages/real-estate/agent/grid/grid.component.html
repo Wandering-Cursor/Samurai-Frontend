@@ -1,0 +1,220 @@
+<!-- Start Breadcrumbs -->
+<app-breadcrumbs title="Agent Grid" [breadcrumbItems]="breadCrumbItems"></app-breadcrumbs>
+<!-- End Breadcrumbs -->
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row align-items-center gy-3">
+                    <div class="col-lg-3 col-md-6 order-last order-md-first me-auto">
+                        <div class="search-box">
+                            <input type="text" class="form-control" autocomplete="off" id="searchResultList" placeholder="Search for agent, address or something..." [(ngModel)]="searchTerm" (ngModelChange)="performSearch()">
+                            <i class=" ri-search-line search-icon"></i>
+                        </div>
+                    </div><!--end col-->
+                    <div class="col-xl-2 col-lg-3 col-12">
+                        <div>
+                            <select class="form-select" id="status-input" (change)="selectstatus()">
+                                <option value="" selected>Select status</option>
+                                <option value="Active">Active</option>
+                                <option value="Unactive">Unactive</option>
+                            </select>
+                        </div>
+                    </div><!--end col-->
+                    <div class="col-auto text-end">
+                        <button class="btn btn-secondary" (click)="addAgent.show()"><i class="bi bi-person-plus align-baseline me-1"></i> Add Agent</button>
+                    </div><!--end col-->
+                </div><!--end row-->
+            </div>
+        </div>
+    </div><!--end row-->
+</div><!--end col-->
+
+<div class="row row-cols-xxl-5 row-cols-md-2 row-cols-1" id="agent-list">
+    @for (data of agents; track $index) {
+    <div class="col">
+        <div class="card ribbon-box ribbon-fill">
+            <div class="card-body">
+                @if (data.new == true) {<div class="ribbon ribbon-secondary">New</div>}
+                <div class="d-flex justify-content-end">
+                    <div class="flex-shrink-0">
+                        <div dropdown class="dropdown">
+                            <a dropdownToggle class="btn btn-ghost-secondary btn-icon btn-sm" href="javascript:void(0);" role="button"> <i class="bi bi-three-dots"></i> </a>
+                            <ul *bsDropdownMenu class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" routerLink="/real-estate/agent/overview"><i class="bi bi-eye align-baseline me-1"></i> Overview</a></li>
+                                <li>
+                                    <a class="dropdown-item edit-list" href="javascript:void(0);" (click)="editList($index)">
+                                        <i class="bi bi-pencil-square align-baseline me-1"></i>
+                                        Edit
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item remove-list" href="javascript:void(0);" (click)="removeItem(data.id)">
+                                        <i class="bi bi-trash3 align-baseline me-1"></i>
+                                        Delete
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-3 text-center">
+                    <div class="position-relative d-inline-block"> <img src="{{data.img}}" alt="avatar-6.jpg" class="avatar-md rounded mx-auto d-inline-block"> <span class="position-absolute top-0 start-100 translate-middle badge border border-2 border-white rounded-circle p-1" [ngClass]="{'bg-success': data.status == 'Active','bg-danger':data.status == 'Unactive'}"><span class="visually-hidden">unread messages</span></span> </div>
+                    <h5 class="mt-4 mb-1"><a routerLink="/real-estate/agent/overview" class="text-reset">{{data.name}}</a></h5>
+                    <p class="text-muted"><b>#TBS{{data.id}}</b></p>
+                    <p class="text-muted"><i class="bi bi-geo-alt align-baseline me-1 text-body"></i> {{data.location}}
+                    </p>
+                    <h6 class="fs-md text-secondary-emphasis mb-4">{{data.property}} Property</h6>
+                    <div class="hstack gap-2"> <button class="btn btn-subtle-primary w-100"><i class="bi bi-chat-text align-baseline me-1"></i> Message</button> <a href="tel:(11) 3885-1022" class="btn btn-info btn-icon flex-shrink-0"><i class="bi bi-telephone"></i></a> </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+    <div id="elmLoader">
+        <div class="spinner-border text-primary avatar-xs" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+
+</div>
+
+
+<div class="row align-items-center justify-content-between text-center text-sm-start mb-3" id="pagination-element">
+    <div class="col-sm">
+        <div class="text-muted">
+            Showing <span class="fw-semibold">{{agents?.length}}</span> of <span class="fw-semibold">{{agentlist?.length}}</span> Results
+        </div>
+    </div><!--end col-->
+    <div class="col-sm-auto mt-3 mt-sm-0">
+        <pagination class="pagination-wrap justify-content-center hstack gap-2" [totalItems]="agentlist?.length" [itemsPerPage]="10" (pageChanged)="pageChanged($event)"></pagination>
+    </div>
+</div>
+<div id="noresult" style="display: none;">
+    <div class="text-center py-4">
+        <div class="avatar-md mx-auto mb-4">
+            <div class="avatar-title bg-light text-primary rounded-circle fs-4xl">
+                <i class="bi bi-search"></i>
+            </div>
+        </div>
+        <h5 class="mt-2">Sorry! No Result Found</h5>
+    </div>
+</div>
+
+<!-- Modal -->
+<div bsModal #addAgent="bs-modal" class="modal fade" id="addAgent">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addAgentModalLabel">Add Agent</h5>
+                <button type="button" class="btn-close" (click)="addAgent.hide()"></button>
+            </div>
+
+            <form (ngSubmit)="saveProperty()" [formGroup]="agentForm" class="tablelist-form" novalidate autocomplete="off">
+                <div class="modal-body">
+                    <div id="alert-error-msg" class="d-none alert alert-danger py-2"></div>
+                    <input type="hidden" id="id-field" formControlName="id">
+
+                    <div class="mb-3">
+                        <label class="form-label">Agent Images<span class="text-danger">*</span></label>
+                        <dropzone class="dropzone" [config]="dropzoneConfig" [message]="'Drop files here or click to upload.'" (success)="onUploadSuccess($event)"></dropzone>
+                        @if (uploadedFiles) {
+                        <ul class="list-unstyled mb-0" id="dropzone-preview">
+                            @for (file of uploadedFiles; track $index) {
+                            <li class="mt-2" id="dropzone-preview-list">
+                                <div class="border rounded">
+                                    <div class="d-flex flex-wrap gap-2 p-2">
+                                        <div class="flex-shrink-0 me-3">
+                                            <div class="avatar-sm bg-light rounded p-2">
+                                                @if (file.dataURL) {
+                                                <img class="img-fluid rounded d-block" [src]="file.dataURL" alt="Dropzone-Image" />
+                                                }@else {
+                                                <img class="img-fluid rounded d-block" [src]="file" alt="Dropzone-Image" />
+                                                }
+                                            </div>
+                                        </div>
+                                        <div class="flex-grow-1">
+                                            <div class="pt-1">
+                                                @if (file.name) {<h5 class="fs-md mb-1">{{ file.name }}</h5>}
+                                                @if (file.size) {<p class="fs-sm text-muted mb-0">{{ file.size }}</p>}
+                                            </div>
+                                        </div>
+                                        <div class="flex-shrink-0 ms-3">
+                                            <button (click)="removeFile(file)" class="btn btn-sm btn-danger">Delete</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        }
+                        </ul>
+                        }
+                        <!-- end dropzon-preview -->
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="agent-name-input" class="form-label">Agent Name<span class="text-danger">*</span></label>
+                        <input type="text" id="agent-name-input" formControlName="name" class="form-control" placeholder="Enter agent name" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="email-input" class="form-label">Email<span class="text-danger">*</span></label>
+                        <input type="email" class="form-control" formControlName="email" id="email-input" placeholder="Enter email" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="contact-input" class="form-label">Contact Number<span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" formControlName="contact" id="contact-input" placeholder="Enter contact number" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="status-type-input" class="form-label">Status<span class="text-danger">*</span></label>
+                        <select class="form-select" id="status-type-input" formControlName="status">
+                            <option value="Active">Active</option>
+                            <option value="Unactive">Unactive</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="address-input" class="form-label">Address<span class="text-danger">*</span></label>
+                        <textarea class="form-control" id="address-input" rows="3" formControlName="location" placeholder="Enter address" required></textarea>
+                    </div>
+                    <input type="hidden" id="date-input">
+                </div>
+                <div class="modal-footer">
+                    <div class="hstack gap-2 justify-content-end">
+                        <button type="button" class="btn btn-ghost-danger" (click)="addAgent.hide()"><i class="bi bi-x-lg align-baseline me-1"></i> Close</button>
+                        <button type="submit" class="btn btn-primary" id="add-btn">Add</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!-- modal-content -->
+    </div>
+</div><!--end add Property modal-->
+
+<!-- deleteRecordModal -->
+<div bsModal #deleteRecordModal="bs-modal" id="deleteRecordModal" class="modal fade zoomIn" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" id="deleteRecord-close" (click)="deleteRecordModal.hide()"></button>
+            </div>
+            <div class="modal-body p-md-5">
+                <div class="text-center">
+                    <div class="text-danger">
+                        <i class="bi bi-trash display-5"></i>
+                    </div>
+                    <div class="mt-4">
+                        <h4 class="mb-2">Are you sure ?</h4>
+                        <p class="text-muted fs-md mx-3 mb-0">Are you sure you want to remove this record ?</p>
+                    </div>
+                </div>
+                <div class="d-flex gap-2 justify-content-center mt-4 pt-2 mb-2">
+                    <button type="button" class="btn w-sm btn-light btn-hover" (click)="deleteRecordModal.hide()">Close</button>
+                    <button type="button" class="btn w-sm btn-danger btn-hover" id="delete-record" (click)="confirmDelete()">Yes, Delete It!</button>
+                </div>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /deleteRecordModal -->

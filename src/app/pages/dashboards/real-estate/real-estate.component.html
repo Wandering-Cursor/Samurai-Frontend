@@ -1,0 +1,660 @@
+<!-- Start Breadcrumbs -->
+<app-breadcrumbs title="Real Estate" [breadcrumbItems]="breadCrumbItems"></app-breadcrumbs>
+<!-- End Breadcrumbs -->
+
+
+<div class="row">
+    <div class="col-xxl-3 col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex">
+                    <div class="flex-grow-1">
+                        <div class="d-flex flex-column h-100">
+                            <p class="fs-md text-muted mb-4">Properties for sale</p>
+                            <h3 class="mb-0 mt-auto"><span class="counter-value" [countUp]="3652"></span> <small class="text-success fs-xs mb-0 ms-1"><i class="bi bi-arrow-up me-1"></i> 06.19%</small></h3>
+                        </div>
+                    </div>
+                    <div class="flex-shrink-0">
+                        <div id="property_sale" class="apex-charts" dir="ltr">
+                            <apx-chart [series]="saleChart.series" [chart]="saleChart.chart" [plotOptions]="saleChart.plotOptions" [grid]="saleChart.grid" [stroke]="saleChart.stroke" [labels]="saleChart.labels" [colors]="saleChart.colors" dir="ltr"></apx-chart>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!--end col-->
+    <div class="col-xxl-3 col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex">
+                    <div class="flex-grow-1">
+                        <div class="d-flex flex-column h-100">
+                            <p class="fs-md text-muted mb-4">Properties for rent</p>
+                            <h3 class="mb-0 mt-auto"><span class="counter-value" [countUp]="1524"></span> <small class="text-success fs-xs mb-0 ms-1"><i class="bi bi-arrow-up me-1"></i> 02.33%</small></h3>
+                        </div>
+                    </div>
+                    <div class="flex-shrink-0">
+                        <div id="property_rent" class="apex-charts" dir="ltr">
+                            <apx-chart [series]="rentChart.series" [chart]="rentChart.chart" [plotOptions]="rentChart.plotOptions" [grid]="rentChart.grid" [stroke]="rentChart.stroke" [labels]="rentChart.labels" [colors]="rentChart.colors"></apx-chart>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!--end col-->
+    <div class="col-xxl-3 col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex">
+                    <div class="flex-grow-1">
+                        <div class="d-flex flex-column h-100">
+                            <p class="fs-md text-muted mb-4">Visitors</p>
+                            <h3 class="mb-0 mt-auto"><span class="counter-value" [countUp]="149.36"></span>k <small class="text-success fs-xs mb-0 ms-1"><i class="bi bi-arrow-up me-1"></i> 12.33%</small></h3>
+                        </div>
+                    </div>
+                    <div class="flex-shrink-0">
+                        <div id="visitors_chart" class="apex-charts" dir="ltr">
+                            <apx-chart [series]="visitorsChart.series" [chart]="visitorsChart.chart" [plotOptions]="visitorsChart.plotOptions" [grid]="visitorsChart.grid" [stroke]="visitorsChart.stroke" [labels]="visitorsChart.labels" [colors]="visitorsChart.colors" dir="ltr"></apx-chart>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!--end col-->
+    <div class="col-xxl-3 col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex">
+                    <div class="flex-grow-1">
+                        <div class="d-flex flex-column h-100">
+                            <p class="fs-md text-muted mb-4">Residency Property</p>
+                            <h3 class="mb-0 mt-auto"><span class="counter-value" [countUp]="2376"></span> <small class="text-danger fs-xs mb-0 ms-1"><i class="bi bi-arrow-down me-1"></i> 09.57%</small></h3>
+                        </div>
+                    </div>
+                    <div class="flex-shrink-0">
+                        <div id="residency_property" class="apex-charts" dir="ltr">
+                            <apx-chart [series]="residencypropertyChart.series" [chart]="residencypropertyChart.chart" [plotOptions]="residencypropertyChart.plotOptions" [grid]="residencypropertyChart.grid" [stroke]="residencypropertyChart.stroke" [labels]="residencypropertyChart.labels" [colors]="residencypropertyChart.colors" dir="ltr"></apx-chart>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!--end col-->
+</div><!--end row-->
+
+<div class="row">
+    <div class="col-xxl-4 order-last order-xxl-first">
+        <div class="card">
+            <div class="card-header d-flex">
+                <h4 class="card-title mb-0 flex-grow-1">Properties Type</h4>
+                <div dropdown class="dropdown card-header-dropdown float-end">
+                    <a dropdownToggle class="text-reset dropdown-btn" href="javascript:void(0);">
+                        <i class="bi bi-three-dots-vertical"></i>
+                    </a>
+                    <div *bsDropdownMenu class="dropdown-menu dropdown-menu-end">
+                        <a class="dropdown-item" href="javascript:void(0);">Today</a>
+                        <a class="dropdown-item" href="javascript:void(0);">Last Week</a>
+                        <a class="dropdown-item" href="javascript:void(0);">Last Month</a>
+                        <a class="dropdown-item" href="javascript:void(0);">Current Year</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div echarts [options]="propertytypeChart" id="property_type" style="height: 336px;"></div>
+            </div>
+        </div>
+    </div><!--end col-->
+    <div class="col-xxl-8">
+        <div class="card">
+            <div class="card-header d-flex align-items-center">
+                <h5 class="card-title flex-grow-1 mb-0">Revenue Overview</h5>
+                <div class="flex-shrink-0">
+                    <input type="text" class="form-control form-control-sm" id="exampleInputPassword1" mwlFlatpickr [(ngModel)]="currentDate" altFormat="d M, Y" dateFormat="d M, Y" mode="range" [altInput]="true" [convertModelValue]="true">
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row align-items-center">
+                    <div class="col-lg-12">
+                        <div class="real-estate-widgets">
+                            <tabset [vertical]="true" class="nav nav-light dashboard-nav nav-pills gap-3  d-block d-md-flex" id="v-pills-tab">
+                                <tab (selectTab)="renderCharts('1')">
+                                    <ng-template tabHeading>
+                                        <a class="nav-link d-flex p-2 gap-3" id="revenue-tab" href="javascript:void(0);">
+                                            <div class="avatar-sm flex-shrink-0">
+                                                <div class="avatar-title rounded bg-warning-subtle text-warning fs-2xl">
+                                                    <i class="bi bi-coin"></i>
+                                                </div>
+                                            </div>
+                                            <div class="flex-grow-1">
+                                                <h5 class="text-reset">$<span class="counter-value" [countUp]="2478"></span>M</h5>
+                                                <p class="mb-0">Total Revenue</p>
+                                            </div>
+                                        </a>
+                                    </ng-template>
+                                    <div class="tab-content text-muted">
+                                        <div id="total_revenue" class="apex-charts effect-chart" dir="ltr">
+                                            <apx-chart [series]="totalrevenueChart.series" [chart]="totalrevenueChart.chart" [plotOptions]="totalrevenueChart.plotOptions" [grid]="totalrevenueChart.grid" [colors]="totalrevenueChart.colors" [fill]="totalrevenueChart.fill" [dataLabels]="totalrevenueChart.dataLabels" [yaxis]="totalrevenueChart.yaxis" [legend]="totalrevenueChart.legend" [xaxis]="totalrevenueChart.xaxis" dir="ltr"></apx-chart>
+                                        </div>
+                                        <!--end tab-->
+                                    </div>
+                                </tab>
+                                <tab (selectTab)="renderCharts('2')">
+                                    <ng-template tabHeading>
+                                        <a class="nav-link d-flex p-2 gap-3" id="income-tab" href="javascript:void(0);">
+                                            <div class="avatar-sm flex-shrink-0">
+                                                <div class="avatar-title rounded bg-success-subtle text-success fs-2xl">
+                                                    <i class="bi bi-coin"></i>
+                                                </div>
+                                            </div>
+                                            <div class="flex-grow-1">
+                                                <h5 class="text-reset">$<span class="counter-value" [countUp]="14587.37"></span></h5>
+                                                <p class="mb-0">Total Income</p>
+                                            </div>
+                                        </a>
+                                    </ng-template>
+                                    <div class="tab-content text-muted">
+                                        <div id="total_income" class="apex-charts" dir="ltr">
+                                            <apx-chart [series]="totalincomeChart.series" [chart]="totalincomeChart.chart" [plotOptions]="totalincomeChart.plotOptions" [grid]="totalincomeChart.grid" [colors]="totalincomeChart.colors" [fill]="totalincomeChart.fill" [dataLabels]="totalincomeChart.dataLabels" [yaxis]="totalincomeChart.yaxis" [legend]="totalincomeChart.legend" [xaxis]="totalincomeChart.xaxis" dir="ltr"></apx-chart>
+                                        </div>
+                                    </div>
+                                </tab>
+                                <tab (selectTab)="renderCharts('3')">
+                                    <ng-template tabHeading>
+                                        <a class="nav-link d-flex p-2 gap-3" id="property-sale-tab" href="javascript:void(0);">
+                                            <div class="avatar-sm flex-shrink-0">
+                                                <div class="avatar-title rounded bg-danger-subtle text-danger fs-2xl">
+                                                    <i class="bi bi-coin"></i>
+                                                </div>
+                                            </div>
+                                            <div class="flex-grow-1">
+                                                <h5 class="text-reset"><span class="counter-value" [countUp]="2365"></span></h5>
+                                                <p class="mb-0">Property Sell</p>
+                                            </div>
+                                        </a>
+                                    </ng-template>
+                                    <div id="total_income" class="apex-charts" dir="ltr">
+                                        <apx-chart [series]="propertysaleChart.series" [chart]="propertysaleChart.chart" [plotOptions]="propertysaleChart.plotOptions" [grid]="propertysaleChart.grid" [colors]="propertysaleChart.colors" [fill]="propertysaleChart.fill" [dataLabels]="propertysaleChart.dataLabels" [yaxis]="propertysaleChart.yaxis" [legend]="propertysaleChart.legend" [xaxis]="propertysaleChart.xaxis" dir="ltr"></apx-chart>
+                                    </div>
+                                </tab>
+                                <tab (selectTab)="renderCharts('4')">
+                                    <ng-template tabHeading>
+                                        <a class="nav-link d-flex p-2 gap-3" id="_-tab" href="javascript:void(0);">
+                                            <div class="avatar-sm flex-shrink-0">
+                                                <div class="avatar-title rounded bg-primary-subtle text-primary fs-2xl">
+                                                    <i class="bi bi-coin"></i>
+                                                </div>
+                                            </div>
+                                            <div class="flex-grow-1">
+                                                <h5 class="text-reset"><span class="counter-value" [countUp]="3456"></span></h5>
+                                                <p class="mb-0">Property Rent</p>
+                                            </div>
+                                        </a>
+                                    </ng-template>
+                                    <div class="tab-pane" id="income" role="tabpanel">
+                                        <div id="total_income" class="apex-charts" dir="ltr">
+                                            <apx-chart [series]="propetryrentChart.series" [chart]="propetryrentChart.chart" [plotOptions]="propetryrentChart.plotOptions" [grid]="propetryrentChart.grid" [colors]="propetryrentChart.colors" [fill]="propetryrentChart.fill" [dataLabels]="propetryrentChart.dataLabels" [yaxis]="propetryrentChart.yaxis" [legend]="propetryrentChart.legend" [xaxis]="propetryrentChart.xaxis" dir="ltr"></apx-chart>
+                                        </div>
+                                    </div>
+                                </tab>
+                            </tabset>
+                        </div>
+
+                    </div><!--end col-->
+                </div><!--end row-->
+            </div>
+        </div>
+    </div><!--end col-->
+</div><!--end row-->
+
+<div class="row">
+    <div class="col-xxl-9">
+        <div class="card" id="propertyList">
+            <div class="card-header align-items-center d-flex">
+                <h4 class="card-title mb-0 flex-grow-1">Recently Added Property</h4>
+                <div class="flex-shrink-0">
+                    <div dropdown class="dropdown card-header-dropdown sortble-dropdown">
+                        <a dropdownToggle class="text-reset dropdown-btn" href="javascript:void(0);">
+                            <span class="fw-semibold text-uppercase fs-xs">Sort by:
+                            </span><span class="text-muted dropdown-title">{{sortValue}}</span> <i class="mdi mdi-chevron-down ms-1"></i>
+                        </a>
+                        <div *bsDropdownMenu class="dropdown-menu dropdown-menu-end">
+                            <button class="dropdown-item sort" (click)="sortBy('name','Property Name')">Property Name</button>
+                            <button class="dropdown-item sort" (click)="sortBy('price','Price')">Price</button>
+                            <button class="dropdown-item sort" (click)="sortBy('agentname','Agent Name')">Agent Name</button>
+                            <button class="dropdown-item sort" (click)="sortBy('status','Status')">Status</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-borderless table-centered align-middle table-nowrap mb-0">
+                        <thead class="text-muted table-light">
+                            <tr>
+                                <th scope="col" class="sort cursor-pointer" (click)="onSort('id')">#</th>
+                                <th scope="col" class="sort cursor-pointer" (click)="onSort('type')">Property Type</th>
+                                <th scope="col" class="sort cursor-pointer" (click)="onSort('name')">Property Name</th>
+                                <th scope="col" class="sort cursor-pointer" (click)="onSort('address')">Address</th>
+                                <th scope="col" class="sort cursor-pointer" (click)="onSort('agentname')">Agent Name</th>
+                                <th scope="col" class="sort cursor-pointer" (click)="onSort('price')">Price</th>
+                                <th scope="col" class="sort cursor-pointer" (click)="onSort('status')">Status</th>
+                                <th scope="col" class="sort cursor-pointer">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody class="list">
+                            @for (data of propertylist; track $index) {
+                            <tr>
+                                <td class="propert_id">
+                                    <a routerLink="/ecommerce/order-overview" class="fw-medium link-primary">{{data.id}}</a>
+                                </td>
+                                <td class="propert_type">
+                                    {{data.type}}
+                                </td>
+                                <td>
+                                    <div class="d-flex align-items-center gap-2 position-relative">
+                                        <img src="{{data.img}}" alt="" height="35" class="rounded">
+                                        <a routerLink="/real-estate/property-overview" class="propert_name text-reset stretched-link">{{data.name}}</a>
+                                    </div>
+                                </td>
+                                <td class="address">
+                                    {{data.address}}
+                                </td>
+                                <td class="agent_name">{{data.agentname}}</td>
+                                <td class="price">
+                                    <span class="fw-medium">{{data.price}}</span>
+                                </td>
+                                <td>
+                                    <span class="badge status" [ngClass]="{'bg-danger-subtle text-danger': data.status === 'Sale', 'bg-info-subtle text-info': data.status === 'Rent'}">{{data.status}}</span>
+                                </td>
+                                <td>
+                                    <ul class="d-flex gap-2 list-unstyled mb-0">
+                                        <li>
+                                            <a routerLink="/real-estate/property-overview" class="btn btn-subtle-primary btn-icon btn-sm "><i class="ph-eye"></i></a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);" class="btn btn-subtle-secondary btn-icon btn-sm edit-item-btn"><i class="ph-pencil"></i></a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);" class="btn btn-subtle-danger btn-icon btn-sm remove-item-btn"><i class="ph-trash"></i></a>
+                                        </li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        }
+                        </tbody><!-- end tbody -->
+                    </table><!-- end table -->
+                    <div class="noresult" style="display: none">
+                        <div class="text-center">
+                            <lord-icon src="https://cdn.lordicon.com/msoeawqm.json" trigger="loop" colors="primary:#405189,secondary:#0ab39c" style="width:75px;height:75px"></lord-icon>
+                            <h5 class="mt-2">Sorry! No Result Found</h5>
+                            <p class="text-muted mb-0">We've searched more than 150+ transactions We did not find any
+                                transactions for you search.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!--end col-->
+    <div class="col-xxl-3 col-lg-6">
+        <div class="card">
+            <div class="card-header d-flex align-items-center">
+                <h4 class="card-title mb-0 flex-grow-1">Customer Feedback</h4>
+                <div class="flex-shrink-0">
+                    <a href="javascript:void(0);" class="text-muted">View All <i class="bi bi-chevron-right align-baseline"></i></a>
+                </div>
+            </div>
+            <div class="card-body px-0">
+                <ngx-simplebar style="max-height: 395px;">
+                    @for (data of feedbackData; track $index) {
+                    <div class="card border-bottom rounded-0 border-0 shadow-none mb-0">
+                        <div class="card-body">
+                            <div class="d-flex gap-2">
+                                <div class="flex-shrink-0">
+                                    <img src="{{data.img}}" alt="" class="avatar-sm rounded">
+                                </div>
+                                <div class="flex-grow-1">
+                                    <span class="text-muted clearfix float-end">{{data.time}}</span>
+                                    <h6 class="fs-md mb-1"><a href="javascript:void(0);" class="text-reset">{{data.name}}</a></h6>
+                                    <div class="text-warning mb-2 fs-xs">
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                    </div>
+                                    <p class="text-muted mb-0">{{data.content}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+                </ngx-simplebar>
+            </div>
+        </div><!--end card-->
+    </div><!--end col-->
+    <div class="col-xxl-4 col-lg-6">
+        <div class="card">
+            <div class="card-header d-flex align-items-center">
+                <h4 class="card-title mb-0 flex-grow-1">Popular Property</h4>
+                <div class="flex-shrink-0">
+                    <div class="nav nav-pills gap-1" id="popularProperty" role="tablist" aria-orientation="vertical">
+                        <button class="btn btn-ghost-danger btn-sm" [class.active]="currentTab === 'sale'" id="saleProperty" data-bs-toggle="pill" (click)="changeTab('sale')" type="button" role="tab" aria-controls="salePropertyTabs" aria-selected="true">Sale</button>
+                        <button class="btn btn-ghost-info btn-sm" [class.active]="currentTab === 'rent'" id="rentProperty" data-bs-toggle="pill" (click)="changeTab('rent')" type="button" role="tab" aria-controls="rentPropertyTabs" aria-selected="false" tabindex="-1">Rent</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <ngx-simplebar class="mb-2 mx-n3 px-3" style="height: 406px;">
+                    <div class="tab-content" id="popularPropertyContent">
+                        <div [hidden]="currentTab !== 'sale'" class="tab-pane show active" id="salePropertyTabs">
+                            @for (data of salepropertyData; track $index) {
+                            <div class="d-flex gap-2 align-items-center position-relative mb-3">
+                                <div class="flex-shrink-0">
+                                    <img src="{{data.img}}" alt="" height="44" class="object-fit-cover rounded">
+                                </div>
+                                <div class="flex-grow-1">
+                                    <a routerLink="/real-estate/property-overview" class="stretched-link">
+                                        <h6>{{data.name}}</h6>
+                                    </a>
+                                    <ul class="d-flex align-items-center gap-2 flex-wrap list-unstyled mb-0">
+                                        <li>
+                                            <p class="text-muted mb-0"><i class="bi bi-house align-baseline text-primary me-1"></i>
+                                                {{data.bedroom}} Bedroom</p>
+                                        </li>
+                                        <li>
+                                            <p class="text-muted mb-0"><i class="ph ph-bathtub align-middle text-primary me-1"></i>
+                                                {{data.bathroom}} Bathroom</p>
+                                        </li>
+                                        <li>
+                                            <p class="text-muted mb-0"><i class="bi bi-columns align-baseline text-primary me-1"></i>
+                                                {{data.sqft}} sqft
+                                            </p>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="flex-shrink-0">
+                                    <span class="badge bg-warning-subtle text-warning"><i class="bi bi-star-fill text-warning"></i> {{data.rate}}</span>
+                                </div>
+                            </div>
+                        }
+                        </div>
+                        <div [hidden]="currentTab !== 'rent'" class="tab-pane show active" id="salePropertyTabs">
+                            @for (data of rentpropertyData; track $index) {
+                            <div class="d-flex gap-2 align-items-center position-relative mb-3">
+                                <div class="flex-shrink-0">
+                                    <img src="{{data.img}}" alt="" height="44" class="object-fit-cover rounded">
+                                </div>
+                                <div class="flex-grow-1">
+                                    <a routerLink="/real-estate/property-overview" class="stretched-link">
+                                        <h6>{{data.name}}</h6>
+                                    </a>
+                                    <ul class="d-flex align-items-center gap-2 flex-wrap list-unstyled mb-0">
+                                        <li>
+                                            <p class="text-muted mb-0"><i class="bi bi-house align-baseline text-primary me-1"></i>
+                                                {{data.bedrrom}} Bedroom</p>
+                                        </li>
+                                        <li>
+                                            <p class="text-muted mb-0"><i class="ph ph-bathtub align-middle text-primary me-1"></i>
+                                                {{data.bathroom}} Bathroom</p>
+                                        </li>
+                                        <li>
+                                            <p class="text-muted mb-0"><i class="bi bi-columns align-baseline text-primary me-1"></i>
+                                                {{data.sqft}} sqft</p>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="flex-shrink-0">
+                                    <span class="badge bg-warning-subtle text-warning"><i class="bi bi-star-fill text-warning"></i> {{data.rate}}</span>
+                                </div>
+                            </div>
+                        }
+                        </div>
+                    </div>
+                </ngx-simplebar>
+                <div class="text-center">
+                    <a href="apps-real-estate-list.html" class="icon-link">View All <i class="bi bi-arrow-right"></i></a>
+                </div>
+            </div>
+        </div><!--end card-->
+    </div><!--end col-->
+    <div class="col-xxl-8">
+        <div class="d-flex flex-column h-100">
+            <div class="row h-100 justify-content-between">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row g-4">
+                                <div class="col-xxl-3 col-md-6 border-end-md border-dashed">
+                                    <div class="text-center">
+                                        <p class="text-muted">Project On Hold</p>
+                                        <div class="mx-3 mb-3 pb-1">
+                                            <div id="mini-chart-6" class="apex-charts" dir="ltr">
+                                                <apx-chart [series]="miniChart6.series" [chart]="miniChart6.chart" [colors]="miniChart6.colors" [stroke]="miniChart6.stroke" dir="ltr"></apx-chart>
+                                            </div>
+                                        </div>
+                                        <h5 class="mb-0">2451 <small class="badge fs-2xs bg-danger-subtle text-danger ms-1"><i class="ph-arrow-down align-baseline"></i> 1.02%</small></h5>
+                                    </div>
+                                </div><!--end col-->
+                                <div class="col-xxl-3 col-md-6 border-end-xxl border-dashed">
+                                    <div class="text-center">
+                                        <p class="text-muted">Ongoing Properties</p>
+                                        <div class="mx-3 mb-3 pb-1">
+                                            <div id="mini-chart-7" class="apex-charts" dir="ltr">
+                                                <apx-chart [series]="miniChart7.series" [chart]="miniChart7.chart" [colors]="miniChart7.colors" [stroke]="miniChart7.stroke" dir="ltr"></apx-chart>
+                                            </div>
+                                        </div>
+                                        <h5 class="mb-0">$750.36M <small class="badge fs-2xs bg-success-subtle text-success ms-1"><i class="ph-arrow-up align-baseline"></i> 2.17%</small></h5>
+                                    </div>
+                                </div><!--end col-->
+                                <div class="col-xxl-3 col-md-6 border-end-md border-dashed">
+                                    <div class="text-center">
+                                        <p class="text-muted">Pending Properties</p>
+                                        <div class="mx-3 mb-3 pb-1">
+                                            <div id="mini-chart-8" class="apex-charts" dir="ltr">
+                                                <apx-chart [series]="miniChart8.series" [chart]="miniChart8.chart" [colors]="miniChart8.colors" [stroke]="miniChart8.stroke" dir="ltr"></apx-chart>
+                                            </div>
+                                        </div>
+                                        <h5 class="mb-0">$750.36M <small class="badge fs-2xs bg-success-subtle text-success ms-1"><i class="ph-arrow-up align-baseline"></i> 07.26%</small></h5>
+                                    </div>
+                                </div><!--end col-->
+                                <div class="col-xxl-3 col-md-6">
+                                    <div class="text-center">
+                                        <p class="text-muted">Completed Project</p>
+                                        <div class="mx-3 mb-3 pb-1">
+                                            <div id="mini-chart-9" class="apex-charts" dir="ltr">
+                                                <apx-chart [series]="miniChart9.series" [chart]="miniChart9.chart" [colors]="miniChart9.colors" [stroke]="miniChart9.stroke" dir="ltr"></apx-chart>
+                                            </div>
+                                        </div>
+                                        <h5 class="mb-0">4689 <small class="badge fs-2xs bg-success-subtle text-success ms-1"><i class="ph-arrow-up align-baseline"></i> 3.62%</small></h5>
+                                    </div>
+                                </div><!--end col-->
+                            </div><!--end row-->
+                        </div>
+                    </div><!--end card-->
+                </div>
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-header d-flex align-items-center">
+                            <h4 class="card-title mb-0 flex-grow-1">Recent Activity</h4>
+                            <div class="flex-shrink-0">
+                                <a routerLink="/pages/timeline" class="text-muted">View All <i class="bi bi-chevron-right align-baseline"></i></a>
+                            </div>
+                        </div>
+                        <div class="card-body px-0">
+                            <ngx-simplebar class="px-3" style="height: 255px">
+                                <div class="acitivity-timeline acitivity-main">
+                                    <div class="acitivity-item d-flex">
+                                        <div class="flex-shrink-0">
+                                            <img src="assets/images/users/48/avatar-2.jpg" alt="" class="avatar-xs rounded-circle acitivity-avatar">
+                                        </div>
+                                        <div class="flex-grow-1 ms-3">
+                                            <h6 class="mb-1 lh-base">Purchased by James Price</h6>
+                                            <p class="text-muted mb-2">Product noise evolve smartwatch </p>
+                                            <small class="mb-0 text-muted">05:57 AM Today</small>
+                                        </div>
+                                    </div>
+                                    <div class="acitivity-item py-3 d-flex">
+                                        <div class="flex-shrink-0">
+                                            <img src="assets/images/users/32/avatar-1.jpg" alt="" class="avatar-xs rounded-circle acitivity-avatar">
+                                        </div>
+                                        <div class="flex-grow-1 ms-3">
+                                            <h6 class="mb-1 lh-base">Natasha Carey have liked the products</h6>
+                                            <p class="text-muted mb-2">Allow users to like products in your WooCommerce
+                                                store.</p>
+                                            <small class="mb-0 text-muted">25 Dec, 2022</small>
+                                        </div>
+                                    </div>
+                                    <div class="acitivity-item py-3 d-flex">
+                                        <div class="flex-shrink-0">
+                                            <img src="assets/images/users/48/avatar-3.jpg" alt="" class="avatar-xs rounded-circle acitivity-avatar">
+                                        </div>
+                                        <div class="flex-grow-1 ms-3">
+                                            <h6 class="mb-1 lh-base">Today offers by <a href="javascript:void(0);" class="link-secondary">Digitech Galaxy</a></h6>
+                                            <p class="text-muted mb-2">Offer is valid on orders of $230 Or above for
+                                                selected products only.</p>
+                                            <small class="mb-0 text-muted">12 Dec, 2022</small>
+                                        </div>
+                                    </div>
+                                    <div class="acitivity-item py-3 d-flex">
+                                        <div class="flex-shrink-0">
+                                            <img src="assets/images/users/48/avatar-2.jpg" alt="" class="avatar-xs rounded-circle acitivity-avatar">
+                                        </div>
+                                        <div class="flex-grow-1 ms-3">
+                                            <h6 class="mb-1 lh-base">Favorites Product</h6>
+                                            <p class="text-muted mb-2">Esther James have favorites product.</p>
+                                            <small class="mb-0 text-muted">25 Nov, 2022</small>
+                                        </div>
+                                    </div>
+                                    <div class="acitivity-item py-3 d-flex">
+                                        <div class="flex-shrink-0">
+                                            <img src="assets/images/users/48/avatar-2.jpg" alt="" class="avatar-xs rounded-circle acitivity-avatar">
+                                        </div>
+                                        <div class="flex-grow-1 ms-3">
+                                            <h6 class="mb-1 lh-base">Flash sale starting <span class="text-primary">Tomorrow.</span></h6>
+                                            <p class="text-muted mb-2">Flash sale by <a href="javascript:void(0);" class="link-secondary fw-medium">Zoetic Fashion</a></p>
+                                            <small class="mb-0 text-muted">22 Oct, 2022</small>
+                                        </div>
+                                    </div>
+                                    <div class="acitivity-item d-flex">
+                                        <div class="flex-shrink-0">
+                                            <img src="assets/images/users/48/avatar-5.jpg" alt="" class="avatar-xs rounded-circle acitivity-avatar">
+                                        </div>
+                                        <div class="flex-grow-1 ms-3">
+                                            <h6 class="mb-1 lh-base">Monthly sales report</h6>
+                                            <p class="text-muted mb-2"><span class="text-danger">2 days left</span>
+                                                notification to submit the monthly sales report. <a href="javascript:void(0);" class="link-warning text-decoration-underline">Reports Builder</a>
+                                            </p>
+                                            <small class="mb-0 text-muted">15 Oct, 2022</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ngx-simplebar>
+                        </div>
+                    </div><!--end card-->
+                </div><!--end col-->
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-header d-flex align-items-center">
+                            <h4 class="card-title mb-0 flex-grow-1">Agent List</h4>
+                            <div class="flex-shrink-0">
+                                <a routerLink="/real-estate/agent/list" class="text-muted">View All <i class="bi bi-chevron-right align-baseline"></i></a>
+                            </div>
+                        </div>
+                        <div class="card-body pt-4">
+                            <div class="table-responsive table-card">
+                                <table class="table table-borderless table-centered align-middle table-nowrap mb-0">
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="flex-shrink-0 me-2">
+                                                        <img src="assets/images/users/32/avatar-1.jpg" alt="" class="avatar-xxs rounded-circle">
+                                                    </div>
+                                                    <div class="flex-grow-1">Dianna Bogan</div>
+                                                </div>
+                                            </td>
+                                            <td>United Kingdom</td>
+                                            <td>
+                                                +(86) 9985-9220
+                                            </td>
+                                        </tr><!-- end tr -->
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="flex-shrink-0 me-2">
+                                                        <img src="assets/images/users/48/avatar-2.jpg" alt="" class="avatar-xxs rounded-circle">
+                                                    </div>
+                                                    <div class="flex-grow-1">Jansh Brown</div>
+                                                </div>
+                                            </td>
+                                            <td>Germany</td>
+                                            <td>
+                                                +(27) 3041-1766
+                                            </td>
+                                        </tr><!-- end tr -->
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="flex-shrink-0 me-2">
+                                                        <img src="assets/images/users/48/avatar-3.jpg" alt="" class="avatar-xxs rounded-circle">
+                                                    </div>
+                                                    <div class="flex-grow-1">Ayaan Bowen</div>
+                                                </div>
+                                            </td>
+                                            <td>Brazil</td>
+                                            <td>
+                                                +(51) 3233-7909
+                                            </td>
+                                        </tr><!-- end tr -->
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="flex-shrink-0 me-2">
+                                                        <img src="assets/images/users/48/avatar-4.jpg" alt="" class="avatar-xxs rounded-circle">
+                                                    </div>
+                                                    <div class="flex-grow-1">Prezy Mark</div>
+                                                </div>
+                                            </td>
+                                            <td>Spain</td>
+                                            <td>
+                                                +(48) 3877-9000
+                                            </td>
+                                        </tr><!-- end tr -->
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="flex-shrink-0 me-2">
+                                                        <img src="assets/images/users/48/avatar-6.jpg" alt="" class="avatar-xxs rounded-circle">
+                                                    </div>
+                                                    <div class="flex-grow-1">Vihan Hudda</div>
+                                                </div>
+                                            </td>
+                                            <td>Brazil</td>
+                                            <td>
+                                                +(11) 3885-1022
+                                            </td>
+                                        </tr><!-- end tr -->
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="flex-shrink-0 me-2">
+                                                        <img src="assets/images/users/avatar-8.jpg" alt="" class="avatar-xxs rounded-circle">
+                                                    </div>
+                                                    <div class="flex-grow-1">Uriel King</div>
+                                                </div>
+                                            </td>
+                                            <td>USA</td>
+                                            <td>
+                                                +(21) 2345-6789
+                                            </td>
+                                        </tr><!-- end tr -->
+                                    </tbody><!-- end tbody -->
+                                </table><!-- end table -->
+                            </div>
+                        </div>
+                    </div><!--end card-->
+                </div><!--end col-->
+            </div>
+        </div>
+    </div><!--end col-->
+</div><!--end row-->

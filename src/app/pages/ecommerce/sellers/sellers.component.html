@@ -1,0 +1,207 @@
+<!-- Start Breadcrumbs -->
+<app-breadcrumbs title="Sellers" [breadcrumbItems]="breadCrumbItems"></app-breadcrumbs>
+<!-- End Breadcrumbs -->
+
+<div class="row g-3 mb-4">
+    <div class="col-xxl-auto me-auto">
+        <button class="btn btn-primary" (click)="addSellerModal.show()"><i class="bi bi-plus-circle align-baseline me-1"></i> Add Sellers</button>
+    </div><!--end col-->
+    <div class="col-xxl-2">
+        <div class="search-box">
+            <input type="text" class="form-control" id="searchResultList" [(ngModel)]="term" (keyup)="filterdata()" placeholder="Search for sellers & owner name or something..."> <i class="ri-search-line search-icon"></i>
+        </div>
+    </div><!--end col-->
+    <div class="col-xxl-2">
+        <select class="form-control" id="select-category" data-choices data-choices-search-false>
+            <option value="">Select Categories</option>
+            <option value="All">All</option>
+            <option value="Retailer">Retailer</option>
+            <option value="Health & Medicine">Health & Medicine</option>
+            <option value="Manufacturer">Manufacturer</option>
+            <option value="Food Service">Food Service</option>
+            <option value="Computers & Electronics">Computers & Electronics</option>
+        </select>
+    </div><!--end col-->
+</div><!--end row-->
+
+<div class="row" id="seller-list">
+    @for (data of sellers; track $index) {
+    <div class="col-lg-3 col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <div class="text-end mb-3">
+                    <button type="button" class="btn-close text-end" (click)="removeSeller(data.id)"></button>
+                </div>
+                <div class="avatar-md mx-auto">
+                    <div class="avatar-title bg-light rounded">
+                        <img src="{{data.img}}" alt="" class="avatar-sm p-1">
+                    </div>
+                </div>
+                <div class="text-center mt-4">
+                    <a routerLink="/ecommerce/seller-overview">
+                        <h5>{{data.name}}</h5>
+                    </a>
+                    <p class="text-muted mb-0">{{data.seller}}</p>
+                </div>
+            </div>
+            <div class="row g-0 text-center">
+                <div class="col-xxl-4 col-lg-6 col-md-4">
+                    <div class="card-body px-3 border-top border-bottom border-end border-dashed">
+                        <h5 class="mb-1">{{data.stock}}</h5>
+                        <p class="text-muted text-truncate mb-0">Item Stock</p>
+                    </div>
+                </div>
+                <div class="col-xxl-4 col-lg-6 col-md-4">
+                    <div class="card-body h-100 px-3 border-top border-bottom border-end border-dashed">
+                        <div id="chart-seller1" dir="ltr">
+                            <apx-chart [series]="data.chart.series" [chart]="data.chart.chart" [stroke]="data.chart.stroke" [fill]="data.chart.fill" [colors]="data.chart.colors" dir="ltr"></apx-chart>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xxl-4 col-lg-6 col-md-4">
+                    <div class="card-body px-3 border-top border-bottom border-dashed">
+                        <h5 class="mb-1">{{data.revenue}}</h5>
+                        <p class="text-muted text-truncate mb-0">Revenue</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body hstack gap-2">
+                <a routerLink="/ecommerce/seller-overview" class="btn btn-subtle-secondary w-100">View Details</a>
+                <button type="button" class="btn btn-subtle-primary w-100" (click)="editSeller($index)">Edit</button>
+            </div>
+        </div>
+    </div><!--end col-->
+}
+</div><!--end row-->
+<div id="elmLoader">
+    <div class="spinner-border text-primary avatar-sm" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+</div>
+<div class="row align-items-center mb-4 justify-content-between text-center text-sm-start" id="pagination-element">
+    <div class="col-sm">
+        <div class="text-muted">
+            Showing <span class="fw-semibold">{{sellers?.length}}</span> of <span class="fw-semibold">{{sellersList?.length}}</span> Results
+        </div>
+    </div>
+    <div class="col-sm-auto  mt-3 mt-sm-0">
+        <pagination class="pagination-wrap hstack gap-2" [totalItems]="sellersList?.length" [itemsPerPage]="10" (pageChanged)="pageChanged($event)"></pagination>
+    </div>
+</div>
+
+<div id="noresult">
+    <div class="text-center py-4">
+        <div class="avatar-md mx-auto mb-4">
+            <div class="avatar-title bg-light text-primary rounded-circle fs-4xl">
+                <i class="bi bi-search"></i>
+            </div>
+        </div>
+        <h5 class="mt-2">Sorry! No Result Found</h5>
+        <p class="text-muted mb-0">We've searched more than 150+ sellers We did not find any sellers for you search.</p>
+    </div>
+</div>
+
+<!-- removeItemModal -->
+<div bsModal #removeItemModal="bs-modal" id="removeItemModal" class="modal fade zoomIn">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" id="close-removemodal" (click)="removeItemModal.hide()"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mt-2 text-center">
+                    <i class="ph-trash display-5 text-danger"></i>
+                    <div class="mt-4 pt-2 mx-4 mx-sm-5">
+                        <h4>Are you sure ?</h4>
+                        <p class="text-muted mx-4 mb-0">Are you sure you want to remove this seller ?</p>
+                    </div>
+                </div>
+                <div class="d-flex gap-2 justify-content-center mt-4 mb-2">
+                    <button type="button" class="btn w-sm btn-light" (click)="removeItemModal.hide()">Close</button>
+                    <button type="button" class="btn w-sm btn-danger" id="remove-element" (click)="deleteSeller()">Yes,
+                        Delete It!</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- editItemModal -->
+<div id="addSellerModal" bsModal #addSellerModal="bs-modal" class="modal fade zoomIn" tabindex="-1" aria-labelledby="addSellerModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addSellerModalLabel">Add Seller</h5>
+                <button type="button" class="btn-close" id="close-addSellerModal" (click)="addSellerModal.hide()"></button>
+            </div>
+            <form (ngSubmit)="saveSeller()" [formGroup]="sellerForm" class="tablelist-form" novalidate autocomplete="off">
+                <div class="modal-body">
+                    <div id="alert-error-msg" class="d-none alert alert-danger py-2"></div>
+                    <input type="hidden" id="id-field">
+                    <div>
+                        <div class="mb-3">
+                            <label class="form-label">Seller Logo <span class="text-danger">*</span></label>
+                            <dropzone class="dropzone" [config]="dropzoneConfig" [message]="'Drop files here or click to upload.'" (success)="onUploadSuccess($event)"></dropzone>
+
+                            @if (uploadedFiles) {
+                            <ul class="list-unstyled mb-0" id="dropzone-preview">
+                                @for (file of uploadedFiles; track $index) {
+                                <li class="mt-2" id="dropzone-preview-list">
+                                    <div class="border rounded">
+                                        <div class="d-flex p-2">
+                                            <div class="flex-shrink-0 me-3">
+                                                <div class="avatar-sm bg-light rounded p-2">
+                                                    @if (file.dataURL) {
+                                                    <img class="img-fluid rounded d-block" [src]="file.dataURL" alt="Dropzone-Image" />
+                                                    }@else{
+                                                    <img class="img-fluid rounded d-block" [src]="file" alt="Dropzone-Image" />
+                                                    }
+                                                </div>
+                                            </div>
+                                            <div class="flex-grow-1">
+                                                <div class="pt-1">
+                                                    @if (file.name) {<h5 class="fs-md mb-1">{{ file.name }}</h5>}
+                                                    @if (file.size) {<p class="fs-sm text-muted mb-0">{{ file.size }}</p>}
+                                                </div>
+                                            </div>
+                                            <div class="flex-shrink-0 ms-3">
+                                                <button (click)="removeFile(file)" class="btn btn-sm btn-danger">Delete</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            }
+                            </ul>
+                            }
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="seller-Name" class="form-label">Seller Name <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="seller-Name" formControlName="name" placeholder="Seller name" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="owner-Name" class="form-label">Owner Name <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="owner-Name" formControlName="seller" placeholder="Owner name" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" formControlName="email" placeholder="Email" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="seller-phone" class="form-label">Phone</label>
+                            <input type="text" class="form-control" id="seller-phone" formControlName="phone" placeholder="Enter phone no." required>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-ghost-danger" (click)="addSellerModal.hide()"><i class="bi bi-x-lg align-baseline me-1"></i> Close</button>
+                    <button type="submit" class="btn btn-primary submit-btn" id="add-btn">Add</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

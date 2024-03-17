@@ -1,0 +1,298 @@
+<!-- Start Breadcrumbs -->
+<app-breadcrumbs title="Listing Map" [breadcrumbItems]="breadCrumbItems"></app-breadcrumbs>
+<!-- End Breadcrumbs -->
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row g-3">
+                    <div class="col-xl-3 col-sm-6">
+                        <div class="search-box">
+                            <input type="text" class="form-control search" placeholder="Search products, price etc..." [(ngModel)]="term" (keyup)="searchList()">
+                            <i class="ri-search-line search-icon"></i>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-sm-6">
+                        <select class="form-control" id="idType" (change)="selectstatus()">
+                            <option value="all">Select All Type</option>
+                            <option value="Villa">Villa</option>
+                            <option value="Apartment">Apartment</option>
+                            <option value="Residency">Residency</option>
+                            <option value="Others">Others</option>
+                        </select>
+                    </div>
+                    <div class="col-xl-2 col-sm-6">
+                        <select class="form-control" id="idBedroom" data-choices data-choices-search-false>
+                            <option value="all">Select All</option>
+                            <option value="1">1 Bedroom</option>
+                            <option value="2">2 Bedroom</option>
+                            <option value="3">3 Bedroom</option>
+                            <option value="4">4 Bedroom</option>
+                            <option value="5">5 Bedroom</option>
+                        </select>
+                    </div>
+                    <div class="col-xl-2 col-sm-6">
+                        <select class="form-control" data-choices data-choices-search-false>
+                            <option value="all">Select All</option>
+                            <option value="0-$2000">0-$1000</option>
+                            <option value="$1000-$2000">$1000-$2000</option>
+                            <option value="$2000-$3000">$2000-$3000</option>
+                            <option value="$3000-$4000">$3000-$4000</option>
+                            <option value="$4000-$5000">$4000-$5000</option>
+                        </select>
+                    </div>
+                    <div class="col-xl-2 col-sm-6">
+                        <div>
+                            <input type="text" class="form-control" mwlFlatpickr [altInput]="true" [convertModelValue]="true" dateFormat="d M,Y" altFormat="d M,Y" mode="range" id="demo-datepicker" placeholder="Select date">
+                        </div>
+                    </div>
+                    <div class="col-xl col-sm-6">
+                        <button class="btn btn-primary w-100" (click)="addProperty.show()">Add Property</button>
+                    </div>
+                </div><!--end row-->
+            </div><!--end card-body-->
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body p-0">
+        <div class="row g-0">
+            <div class="col-xl-5">
+                <div class="card-header">
+                    <div class="d-flex align-items-center flex-wrap gap-2 text-muted">
+                        <b>249</b> items in
+                        <span class="badge bg-danger-subtle text-danger">Villa</span>
+                        <div class="vr"></div>
+                        <a href="javascript:void(0);" class="badge border text-reset">$2000-$3000</a>
+                        <div class="vr"></div>
+                        <a href="javascript:void(0);" class="badge border text-reset">4 Bedroom</a>
+                    </div>
+                </div>
+
+                @for (data of maps; track $index) {
+                <div class="card-body border-bottom">
+                    <div class="row gy-3">
+                        <div class="col-lg-5">
+                            <div class="position-relative">
+                                <img src="{{data.img}}" alt="" class="img-fluid rounded d-block mx-auto">
+                                <div class="position-absolute bottom-0 start-0 m-2">
+                                    <span class="badge bg-white text-{{data.color}} fs-xxs"><i class="bi bi-house-door align-baseline me-1"></i> {{data.type}}</span>
+                                </div>
+                            </div>
+                        </div><!--end col-->
+                        <div class="col-lg-7">
+                            <div class="d-flex flex-column h-100">
+                                <div>
+                                    <div dropdown class="dropdown float-end">
+                                        <button dropdownToggle class="btn btn-light btn-icon btn-sm" type="button">
+                                            <i class="bi bi-three-dots-vertical"></i>
+                                        </button>
+                                        <ul *bsDropdownMenu class="dropdown-menu dropdown-menu-end">
+                                            <li><a class="dropdown-item" href="javascript:void(0);" (click)="editList($index)"><i class="bi bi-pencil-square me-1 align-baseline"></i> Edit</a>
+                                            </li>
+                                            <li><a class="dropdown-item" href="javascript:void(0);" (click)="removeItem(data.id)"><i class="bi bi-trash3 me-1 align-baseline"></i> Delete</a></li>
+                                        </ul>
+                                    </div>
+                                    <h6 class="fs-lg text-capitalize text-truncate"><a routerLink="/real-estate/property-overview" class="text-reset">{{data.title}}</a></h6>
+                                    <p class="text-muted"><i class="bi bi-geo-alt align-baseline me-1"></i>
+                                        {{data.location}}</p>
+                                </div>
+                                <ul class="d-flex align-items-center gap-2 flex-wrap list-unstyled">
+                                    <li>
+                                        <p class="text-muted mb-0"><i class="bi bi-house align-baseline text-primary me-1"></i>
+                                            {{data.bedroom}} Bedroom</p>
+                                    </li>
+                                    <li>
+                                        <p class="text-muted mb-0"><i class="ph ph-bathtub align-middle text-primary me-1"></i>
+                                            {{data.bathroom}} Bathroom</p>
+                                    </li>
+                                    <li>
+                                        <p class="text-muted mb-0"><i class="bi bi-columns align-baseline text-primary me-1"></i>
+                                            {{data.area}} sqft
+                                        </p>
+                                    </li>
+                                </ul>
+                                <div class="border-top border-dashed mt-auto pt-3 d-flex align-items-center justify-content-between gap-3">
+                                    <h5 class="mb-0">${{data.price}}</h5>
+                                    <a routerLink="/real-estate/property-overview" class="link-effect">Read More <i class="bi bi-chevron-right align-baseline ms-1"></i></a>
+                                </div>
+                            </div>
+                        </div><!--end col-->
+                    </div><!--end row-->
+                </div>
+            }
+
+                <div id="elmLoader">
+                    <div class="spinner-border text-primary avatar-sm" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <div class="row align-items-center" id="pagination-element">
+                        <div class=" col-sm">
+                            <div class="text-muted text-center text-sm-start">
+                                Showing <span class="fw-semibold">{{maps?.length}}</span> of <span class="fw-semibold">{{maplist?.length}}</span> Results
+                            </div>
+                        </div><!--end col-->
+                        <div class="col-sm-auto mt-3 mt-sm-0">
+                            <pagination class="pagination-wrap hstack justify-content-center gap-2" [totalItems]="maplist?.length" [itemsPerPage]="3" (pageChanged)="pageChanged($event)"></pagination>
+                        </div><!--end col-->
+                    </div><!--end row-->
+                </div><!--end card-body-->
+            </div><!--end col-->
+            <div class="col-xl-7">
+                <div id="leaflet-map-group-control" leaflet [leafletOptions]="options" [leafletLayers]="GroupsLayers" class="leaflet-map leaflet-gray rounded" style="height: 750px !important;">
+                </div>
+            </div><!--end col-->
+        </div><!--end row-->
+    </div>
+</div>
+
+<!-- Modal -->
+<div bsModal #addProperty="bs-modal" class="modal fade" id="addProperty" tabindex="-1" aria-labelledby="addPropertyLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addPropertyLabel">Add Property</h5>
+                <button type="button" class="btn-close" (click)="addProperty.hide()"></button>
+            </div>
+
+            <form (ngSubmit)="saveProperty()" [formGroup]="propertyForm" class="tablelist-form" novalidate autocomplete="off">
+                <div class="modal-body">
+                    <div id="alert-error-msg" class="d-none alert alert-danger py-2"></div>
+                    <input type="hidden" id="id-field">
+
+                    <input type="hidden" id="order-field">
+                    <input type="hidden" id="rating-field">
+                    <input type="hidden" id="discount-field">
+
+                    <div class="mb-3">
+                        <label class="form-label">Property Images<span class="text-danger">*</span></label>
+                        <dropzone class="dropzone" [config]="dropzoneConfig" [message]="'Drop files here or click to upload.'" (success)="onUploadSuccess($event)"></dropzone>
+                        @if (uploadedFiles) {
+                        <ul class="list-unstyled mb-0" id="dropzone-preview">
+                            @for (file of uploadedFiles; track $index) {
+                            <li class="mt-2" id="dropzone-preview-list">
+                                <div class="border rounded">
+                                    <div class="d-flex flex-wrap gap-2 p-2">
+                                        <div class="flex-shrink-0 me-3">
+                                            <div class="avatar-sm bg-light rounded p-2">
+                                                @if (file.dataURL) {
+                                                <img class="img-fluid rounded d-block" [src]="file.dataURL" alt="Dropzone-Image" />
+                                                }@else {
+                                                <img class="img-fluid rounded d-block" [src]="file" alt="Dropzone-Image" />
+                                                }
+                                            </div>
+                                        </div>
+                                        <div class="flex-grow-1">
+                                            <div class="pt-1">
+                                                @if (file.name) {<h5 class="fs-md mb-1">{{ file.name }}</h5>}
+                                                @if (file.size) {<p class="fs-sm text-muted mb-0">{{ file.size }}</p>}
+                                            </div>
+                                        </div>
+                                        <div class="flex-shrink-0 ms-3">
+                                            <button (click)="removeFile(file)" class="btn btn-sm btn-danger">Delete</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        }
+                        </ul>
+                        <!-- end dropzon-preview -->
+                        }
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="Property-title-input" class="form-label">Property title<span class="text-danger">*</span></label>
+                        <input type="text" id="Property-title-input" class="form-control" formControlName="title" placeholder="Enter Property title" required>
+                    </div>
+
+
+                    <div class="mb-3">
+                        <label for="Property-type-input" class="form-label">Property Type<span class="text-danger">*</span></label>
+
+                        <select class="form-select" id="Property-type-input" formControlName="type" data-choices data-choices-search-false data-choices-removeItem>
+                            <option value="">Select Property Type</option>
+                            <option value="Villa">Villa</option>
+                            <option value="Residency">Residency</option>
+                            <option value="Apartment">Apartment</option>
+                            <option value="Others">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="mb-3">
+                                <label for="bedroom-input" class="form-label">Bedroom<span class="text-danger">*</span></label>
+                                <input type="number" id="bedroom-input" formControlName="bedroom" class="form-control" placeholder="Enter Bedroom" required>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="mb-3">
+                                <label for="bathroom-input" class="form-label">Bathroom<span class="text-danger">*</span></label>
+                                <input type="number" class="form-control" formControlName="bathroom" id="bathroom-input" placeholder="Enter Bathroom" required>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="mb-3">
+                                <label for="sqft-input" class="form-label">SQFT<span class="text-danger">*</span></label>
+                                <input type="number" class="form-control" formControlName="area" id="sqft-input" placeholder="Enter sqft" required>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="mb-3">
+                                <label for="Property-price-input" class="form-label">Price<span class="text-danger">*</span></label>
+                                <div class="input-group">
+                                    <span class="input-group-text">$</span>
+                                    <input type="number" class="form-control" formControlName="price" id="Property-price-input" placeholder="Enter price" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="mb-3">
+                                <label for="addressLine" class="form-label">Sort Address<span class="text-danger">*</span></label>
+                                <textarea class="form-control" id="addressLine" formControlName="location" rows="3" placeholder="Enter sort address" required></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="hstack gap-2 justify-content-end">
+                        <button type="button" class="btn btn-ghost-danger" (click)="addProperty.hide()"><i class="bi bi-x-lg align-baseline me-1"></i> Close</button>
+                        <button type="submit" class="btn btn-primary" id="add-btn">Add Property</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!-- modal-content -->
+    </div>
+</div><!--end add Property modal-->
+
+<!-- deleteRecordModal -->
+<div bsModal #deleteRecordModal="bs-modal" id="deleteRecordModal" class="modal fade zoomIn" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" id="deleteRecord-close" (click)="deleteRecordModal.hide()"></button>
+            </div>
+            <div class="modal-body p-md-5">
+                <div class="text-center">
+                    <div class="text-danger">
+                        <i class="bi bi-trash display-5"></i>
+                    </div>
+                    <div class="mt-4">
+                        <h4 class="mb-2">Are you sure ?</h4>
+                        <p class="text-muted mx-3 mb-0">Are you sure you want to remove this record ?</p>
+                    </div>
+                </div>
+                <div class="d-flex gap-2 justify-content-center mt-4 pt-2 mb-2">
+                    <button type="button" class="btn w-sm btn-light btn-hover" (click)="deleteRecordModal.hide()">Close</button>
+                    <button type="button" class="btn w-sm btn-danger btn-hover" id="delete-record" (click)="confirmDelete()">Yes, Delete It!</button>
+                </div>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /deleteRecordModal -->

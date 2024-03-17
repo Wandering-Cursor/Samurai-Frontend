@@ -1,0 +1,388 @@
+<!-- Start Breadcrumbs -->
+<app-breadcrumb title="Grid Js" [breadcrumbItems]="breadCrumbItems"></app-breadcrumb>
+<!-- End Breadcrumbs -->
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title mb-0 flex-grow-1">Base Example</h4>
+            </div><!-- end card header -->
+
+            <div class="card-body">
+                <div class="search-box d-inline-block mb-2">
+                    <input type="text" class="form-control search" placeholder="Search..." [(ngModel)]="service.searchTerm">
+                    <i class="ri-search-line search-icon"></i>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-gridjs">
+                        <thead>
+                            <tr>
+                                <th class="gridjs-th sort" sortable="id" (sort)="onSort($event)">ID</th>
+                                <th class="gridjs-th sort" sortable="name" (sort)="onSort($event)">Name</th>
+                                <th class="gridjs-th sort" sortable="email" (sort)="onSort($event)">Email</th>
+                                <th class="gridjs-th sort" sortable="position" (sort)="onSort($event)">Position</th>
+                                <th class="gridjs-th sort" sortable="company" (sort)="onSort($event)">Company</th>
+                                <th class="gridjs-th sort" sortable="country" (sort)="onSort($event)">Country</th>
+                                <th class="gridjs-th sort">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (data of gridjsList$ | async; track $index) {
+                            <tr class="gridjs-tr">
+                                <td data-column-id="id" class="gridjs-td"><span><span class="fw-semibold">{{data.id}}</span></span></td>
+                                <td data-column-id="name" class="gridjs-td">{{data.name}}</td>
+                                <td data-column-id="email" class="gridjs-td"><span><a href="">{{data.email}}</a></span>
+                                </td>
+                                <td data-column-id="position" class="gridjs-td">{{data.position}}
+                                </td>
+                                <td data-column-id="company" class="gridjs-td">{{data.company}}</td>
+                                <td data-column-id="country" class="gridjs-td">{{data.country}}</td>
+                                <td data-column-id="actions" class="gridjs-td"><span><a href="javascript:void(0);" class="text-reset text-decoration-underline">Details</a></span></td>
+                            </tr>
+                        }
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row justify-content-md-between align-items-md-center">
+                    <div class="col-sm-12 col-md-5">
+                        <div class="dataTables_info mb-2" id="tickets-table_info" role="status" aria-live="polite">
+                            Showing
+                            {{service.startIndex}} to
+                            {{service.endIndex}} of {{service.totalRecords}}
+                            entries
+                        </div>
+                    </div>
+                    <!-- Pagination -->
+                    @if (gridjsList$ | async) {
+                    <div class="col-sm-12 col-md-5">
+                        <div class="text-md-right float-md-end gridjs-pagination">
+                            <pagination [totalItems]="(total$ | async)!" [(ngModel)]="service.page" [itemsPerPage]="service.pageSize"></pagination>
+                        </div>
+                    </div>
+                    }
+                    <!-- End Pagination -->
+                </div>
+            </div><!-- end card-body -->
+        </div><!-- end card -->
+    </div>
+    <!-- end col -->
+</div>
+<!-- end row -->
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title mb-0">Card Table</h4>
+            </div><!-- end card header -->
+
+            <div class="card-body">
+                <div id="table-card" class="table-card p-4">
+                    <div class="table-responsive">
+                        <table class="table table-gridjs">
+                            <thead>
+                                <tr>
+                                    <th class="gridjs-th sort" sortable="name" (sort)="onSort($event)">Name</th>
+                                    <th class="gridjs-th sort" sortable="email" (sort)="onSort($event)">Email</th>
+                                    <th class="gridjs-th sort" sortable="position" (sort)="onSort($event)">Position</th>
+                                    <th class="gridjs-th sort" sortable="company" (sort)="onSort($event)">Company</th>
+                                    <th class="gridjs-th sort" sortable="country" (sort)="onSort($event)">Country</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for (data of gridjsList$ | async; track $index) {
+                                <tr class="gridjs-tr">
+                                    <td data-column-id="name" class="gridjs-td">{{data.name}}</td>
+                                    <td data-column-id="email" class="gridjs-td"><span><a href="">{{data.email}}</a></span>
+                                    </td>
+                                    <td data-column-id="position" class="gridjs-td">{{data.position}}
+                                    </td>
+                                    <td data-column-id="company" class="gridjs-td">{{data.company}}</td>
+                                    <td data-column-id="country" class="gridjs-td">{{data.country}}</td>
+                                </tr>
+                            }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row justify-content-md-between align-items-md-center mt-3">
+                    <div class="col-sm-12 col-md-5">
+                        <div class="dataTables_info mb-2" id="tickets-table_info" role="status" aria-live="polite">
+                            Showing
+                            {{service.startIndex}} to
+                            {{service.endIndex}} of {{service.totalRecords}}
+                            entries
+                        </div>
+                    </div>
+                    <!-- Pagination -->
+                    <div class="col-sm-12 col-md-5">
+                        <div class="text-md-right float-md-end gridjs-pagination">
+                            <pagination [totalItems]="(total$ | async)!" [(ngModel)]="service.page" [itemsPerPage]="service.pageSize"></pagination>
+                        </div>
+                    </div>
+                    <!-- End Pagination -->
+                </div>
+            </div><!-- end card-body -->
+        </div><!-- end card -->
+    </div>
+    <!-- end col -->
+</div>
+<!-- end row -->
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title mb-0">Pagination</h4>
+            </div><!-- end card header -->
+
+            <div class="card-body">
+                <div id="table-pagination">
+                    <div role="complementary" class="gridjs gridjs-container" style="width: 100%;">
+                        <div class="gridjs-wrapper table-responsive" style="height: auto;">
+                            <table class="table table-gridjs">
+                                <thead>
+                                    <tr>
+                                        <th class="gridjs-th" sortable="cid" (sort)="onSort($event)">Id</th>
+                                        <th class="gridjs-th" sortable="name" (sort)="onSort($event)">Name</th>
+                                        <th class="gridjs-th" sortable="date" (sort)="onSort($event)">Date</th>
+                                        <th class="gridjs-th" sortable="total" (sort)="onSort($event)">Total</th>
+                                        <th class="gridjs-th" sortable="status" (sort)="onSort($event)">Status</th>
+                                        <th class="gridjs-th">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @for (data of gridjsList$ | async; track $index) {
+                                    <tr class="gridjs-tr">
+                                        <td class="gridjs-td"><span><a href="javascript:void(0);" class="fw-medium">{{data.cid}}</a></span></td>
+                                        <td class="gridjs-td">{{data.name}}</td>
+                                        <td class="gridjs-td">{{data.date}}</td>
+                                        <td class="gridjs-td">{{data.total}}</td>
+                                        <td class="gridjs-td">{{data.status}}</td>
+                                        <td data-column-id="actions" class="gridjs-td"><span><button type="button" class="btn btn-sm btn-light">Details</button></span></td>
+                                    </tr>
+                                }
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="row justify-content-md-between align-items-md-center mt-3">
+                            <div class="col-sm-12 col-md-5">
+                                <div class="dataTables_info mb-2" id="tickets-table_info" role="status" aria-live="polite">
+                                    Showing
+                                    {{service.startIndex}} to
+                                    {{service.endIndex}} of {{service.totalRecords}}
+                                    entries
+                                </div>
+                            </div>
+                            <!-- Pagination -->
+                            <div class="col-sm-12 col-md-5">
+                                <div class="text-md-right float-md-end gridjs-pagination">
+                                    <pagination [totalItems]="(total$ | async)!" [(ngModel)]="service.page" [itemsPerPage]="service.pageSize"></pagination>
+                                </div>
+                            </div>
+                            <!-- End Pagination -->
+                        </div>
+                    </div>
+                </div>
+            </div><!-- end card-body -->
+        </div><!-- end card -->
+    </div>
+    <!-- end col -->
+</div>
+<!-- end row -->
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title mb-0">Search</h4>
+            </div><!-- end card header -->
+
+            <div class="card-body">
+
+                <div class="search-box d-inline-block mb-2">
+                    <input type="text" class="form-control search" placeholder="Search..." [(ngModel)]="service.searchTerm">
+                    <i class="ri-search-line search-icon"></i>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-gridjs">
+                        <thead>
+                            <tr class="gridjs-tr">
+                                <th class="gridjs-th" style="width: 150px;">
+                                    <div class="gridjs-th-content">Name</div>
+                                </th>
+                                <th class="gridjs-th" style="width: 250px;">
+                                    <div class="gridjs-th-content">Email</div>
+                                </th>
+                                <th class="gridjs-th" style="width: 250px;">
+                                    <div class="gridjs-th-content">Position</div>
+                                </th>
+                                <th class="gridjs-th" style="width: 250px;">
+                                    <div class="gridjs-th-content">Company</div>
+                                </th>
+                                <th class="gridjs-th" style="width: 150px;">
+                                    <div class="gridjs-th-content">Country</div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (data of gridjsList$ | async; track $index) {
+                            <tr class="gridjs-tr">
+                                <td data-column-id="name" class="gridjs-td">{{data.name}}</td>
+                                <td data-column-id="email" class="gridjs-td">{{data.email}}</td>
+                                <td data-column-id="position" class="gridjs-td">{{data.position}}</td>
+                                <td data-column-id="company" class="gridjs-td">{{data.company}}</td>
+                                <td data-column-id="country" class="gridjs-td">{{data.country}}</td>
+                            </tr>
+                        }
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row justify-content-md-between align-items-md-center">
+                    <div class="col-sm-12 col-md-5">
+                        <div class="dataTables_info mb-2" id="tickets-table_info" role="status" aria-live="polite">
+                            Showing
+                            {{service.startIndex}} to
+                            {{service.endIndex}} of {{service.totalRecords}}
+                            entries
+                        </div>
+                    </div>
+                    <!-- Pagination -->
+                    <div class="col-sm-12 col-md-5">
+                        <div class="text-md-right float-md-end gridjs-pagination">
+                            <pagination [totalItems]="(total$ | async)!" [(ngModel)]="service.page" [itemsPerPage]="service.pageSize"></pagination>
+                        </div>
+                    </div>
+                    <!-- End Pagination -->
+                </div>
+            </div><!-- end card-body -->
+        </div><!-- end card -->
+    </div>
+    <!-- end col -->
+</div>
+<!-- end row -->
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title mb-0">Sorting</h4>
+            </div><!-- end card header -->
+
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-gridjs">
+                        <thead>
+                            <tr>
+                                <th class="gridjs-th sort" data-sort="name" sortable="name" (sort)="onSort($event)">Name
+                                </th>
+                                <th class="gridjs-th sort" data-sort="email" sortable="email" (sort)="onSort($event)">
+                                    Email</th>
+                                <th class="gridjs-th sort" data-sort="position" sortable="position" (sort)="onSort($event)">Position</th>
+                                <th class="gridjs-th sort" data-sort="company" sortable="company" (sort)="onSort($event)">Company</th>
+                                <th class="gridjs-th sort" data-sort="country" sortable="country" (sort)="onSort($event)">Country</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (data of gridjsList$ | async; track $index) {
+                            <tr class="gridjs-tr">
+                                <td class="gridjs-td">{{data.name}}</td>
+                                <td class="gridjs-td">{{data.email}}</td>
+                                <td class="gridjs-td">{{data.position}}
+                                </td>
+                                <td class="gridjs-td">{{data.company}}</td>
+                                <td class="gridjs-td">{{data.country}}</td>
+                            </tr>
+                        }
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row justify-content-md-between align-items-md-center">
+                    <div class="col-sm-12 col-md-5">
+                        <div class="dataTables_info mb-2" id="tickets-table_info" role="status" aria-live="polite">
+                            Showing
+                            {{service.startIndex}} to
+                            {{service.endIndex}} of {{service.totalRecords}}
+                            entries
+                        </div>
+                    </div>
+                    <!-- Pagination -->
+                    <div class="col-sm-12 col-md-5">
+                        <div class="text-md-right float-md-end gridjs-pagination">
+                            <pagination [totalItems]="(total$ | async)!" [(ngModel)]="service.page" [itemsPerPage]="service.pageSize"></pagination>
+                        </div>
+                    </div>
+                    <!-- End Pagination -->
+                </div>
+
+            </div><!-- end card-body -->
+        </div><!-- end card -->
+    </div>
+    <!-- end col -->
+</div>
+<!-- end row -->
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title mb-0">Loading State</h4>
+            </div><!-- end card header -->
+
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-gridjs">
+                        <thead>
+                            <tr>
+                                <th class="gridjs-th sort" data-sort="name" sortable="name" (sort)="onSort($event)">Name
+                                </th>
+                                <th class="gridjs-th sort" data-sort="email" sortable="email" (sort)="onSort($event)">
+                                    Email</th>
+                                <th class="gridjs-th sort" data-sort="position" sortable="position" (sort)="onSort($event)">
+                                    Position</th>
+                                <th class="gridjs-th sort" data-sort="company" sortable="company" (sort)="onSort($event)">Company
+                                </th>
+                                <th class="gridjs-th sort" data-sort="country" sortable="country" (sort)="onSort($event)">Country
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (data of gridjsList$ | async; track $index) {
+                            <tr>
+                                <td data-column-id="name" class="gridjs-td">{{data.name}}</td>
+                                <td data-column-id="email" class="gridjs-td">{{data.email}}</td>
+                                <td data-column-id="position" class="gridjs-td">{{data.position}}
+                                </td>
+                                <td data-column-id="company" class="gridjs-td">{{data.company}}</td>
+                                <td data-column-id="country" class="gridjs-td">{{data.country}}</td>
+                            </tr>
+                        }
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row justify-content-md-between align-items-md-center">
+                    <div class="col-sm-12 col-md-5">
+                        <div class="dataTables_info mb-2" id="tickets-table_info" role="status" aria-live="polite">
+                            Showing
+                            {{service.startIndex}} to
+                            {{service.endIndex}} of {{service.totalRecords}}
+                            entries
+                        </div>
+                    </div>
+                    <!-- Pagination -->
+                    <div class="col-sm-12 col-md-5">
+                        <div class="text-md-right float-md-end gridjs-pagination">
+                            <pagination [totalItems]="(total$ | async)!" [(ngModel)]="service.page" [itemsPerPage]="service.pageSize"></pagination>
+                        </div>
+                    </div>
+                    <!-- End Pagination -->
+                </div>
+            </div><!-- end card-body -->
+        </div><!-- end card -->
+    </div>
+    <!-- end col -->
+</div>
+<!-- end row -->

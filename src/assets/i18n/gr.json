@@ -1,0 +1,239 @@
+{
+  "MENUITEMS": {
+    "MENU": {
+      "TEXT": "SPEISEKARTE"
+    },
+    "DASHBOARD": {
+      "TEXT": "Dashboards",
+      "LIST": {
+        "ANALYTICS": "Analytik",
+        "CRM": "CRM",
+        "ECOMMERCE": "E-Commerce",
+        "LEARNING": "Lernen",
+        "REALESTATE": "Immobilie"
+      }
+    },
+    "APPS": {
+      "TEXT": "Anwendungen",
+      "LIST": {
+        "CALENDAR": "Kalender",
+        "CHAT": "Plaudern",
+        "EMAIL": "Email",
+        "ECOMMERCE": "E-Commerce",
+        "PRODUCTS": "Produkte",
+        "PRODUCTGRID": "Produktraster",
+        "PRODUCTDETAILS": "Produktdetails",
+        "CREATEPRODUCT": "Produkt erstellen",
+        "ORDERS": "Aufträge",
+        "ORDEROVERVIEW": "Bestellübersicht",
+        "CUSTOMERS": "Kunden",
+        "SHOPPINGCART": "Einkaufswagen",
+        "CHECKOUT": "Kasse",
+        "SELLERS": "Verkäufer",
+        "SELLEROVERVIEW": "Verkäuferübersicht",
+        "FILEMANAGER": "Dateimanager",
+        "LEARNING": "Lernen",
+        "COURSES": "Kurse",
+        "LISTVIEW": "Listenansicht",
+        "GRIDVIEW": "Rasteransicht",
+        "CATEGORY": "Kategorie",
+        "OVERVIEW": "Überblick",
+        "CREATECOURSE": "Kurs erstellen",
+        "STUDENTS": "Studentinnen",
+        "MYSUBSCRIPTIONS": "Meine Abonnements",
+        "MYCOURSES": "Meine Kurse",
+        "INSTRUCTORS": "Ausbilder",
+        "CREATEINSTRUCTOR": "Lehrer erstellen",
+        "INVOICES": "Rechnungen",
+        "CREATEINVOICE": "Rechnung erstellen",
+        "SUPPORTTICKETS": "Support-Tickets",
+        "REALESTATE": "Immobilie",
+        "LISTINGGRID": "Auflistungsraster",
+        "LISTINGLIST": "Auflistungsliste",
+        "LISTINGMAP": "Auflistung Karte",
+        "PROPERTYOVERVIEW": "Immobilienübersicht",
+        "AGENT": "Agentin",
+        "AGENCIES": "Agenturen",
+        "ADDPROPERTY": "Eigenschaft hinzufügen",
+        "EARNINGS": "VERDIENSTE"
+      }
+    },
+    "PAGES": {
+      "TEXT": "Seiten"
+    },
+    "AUTHENTICATION": {
+      "TEXT": "Authentifizierung",
+      "LIST": {
+        "SIGNIN": "Anmelden",
+        "SIGNUP": "Anmeldung",
+        "PASSWORDRESET": "Passwort zurücksetzen",
+        "PASSWORDCREATE": "Passwort erstellen",
+        "LOCKSCREEN": "Bildschirm sperren",
+        "LOGOUT": "Ausloggen",
+        "SUCCESSMESSAGE": "Erfolgsmeldung",
+        "TWOSTEPVERIFICATION": "Verifizierung in zwei Schritten",
+        "ERRORS": "Fehler",
+        "404ERROR": "404 Fehler",
+        "500": "fünf­hundert",
+        "503": "fünf­hundert­drei",
+        "OFFLINE": "Offline-Seite"
+      }
+    },
+    "EXTRAPAGES": {
+      "TEXT": "Seiten",
+      "LIST": {
+        "STARTER": "Anlasser",
+        "PROFILE": "Profil",
+        "PROFILESETTINGS": "Profileinstellungen",
+        "CONTACTS": "Kontakte",
+        "TIMELINE": "Zeitleiste",
+        "FAQS": "Häufig gestellte Fragen",
+        "PRICING": "Preisgestaltung",
+        "MAINTENANCE": "Wartung",
+        "COMINGSOON": "Demnächst",
+        "PRIVACYPOLICY": "Datenschutz-Bestimmungen",
+        "TERMS&CONDITIONS": "Allgemeine Geschäftsbedingungen"
+      }
+    },
+    "COMPONENTS": {
+      "TEXT": "Komponenten"
+    },
+    "BOOTSTRAPUI": {
+      "TEXT": "Bootstrap-Benutzeroberfläche",
+      "LIST": {
+        "ALERTS": "Warnungen",
+        "BADGES": "Abzeichen",
+        "BUTTONS": "Tasten",
+        "COLORS": "Farben",
+        "CARDS": "Karten",
+        "CAROUSEL": "Karussell",
+        "DROPDOWNS": "Dropdowns",
+        "GRID": "Netz",
+        "IMAGES": "Bilder",
+        "TABS": "Registerkarten",
+        "ACCORDION&COLLAPSE": "Akkordeon & Zusammenbruch",
+        "MODALS": "Modale",
+        "OFFCANVAS": "Leinwand",
+        "PLACEHOLDERS": "Platzhalter",
+        "PROGRESS": "Fortschritt",
+        "NOTIFICATIONS": "Benachrichtigungen",
+        "MEDIAOBJECT": "Medienobjekt",
+        "EMBEDVIDEO": "Video einbetten",
+        "TYPOGRAPHY": "Typografie",
+        "LISTS": "Listen",
+        "LINKS": "Verknüpfungen",
+        "GENERAL": "Allgemein",
+        "UTILITIES": "Dienstprogramme"
+      }
+    },
+    "ADVANCEUI": {
+      "TEXT": "Erweiterte Benutzeroberfläche",
+      "LIST": {
+        "SWEETALERTS": "Süße Warnungen",
+        "NESTABLELIST": "Verschachtelbare Liste",
+        "SCROLLBAR": "Scrollleiste",
+        "SWIPERSLIDER": "Swiper-Schieberegler",
+        "RATTINGS": "Bewertungen",
+        "HIGHLIGHT": "Markieren",
+        "SCROLLSPY": "ScrollSpy"
+      }
+    },
+    "CUSTOMUI": {
+      "TEXT": "Benutzerdefinierte Benutzeroberfläche",
+      "BADGE": "Brauch",
+      "LIST": {
+        "RIBBONS": "Bänder",
+        "PROFILE": "Profil",
+        "COUNTER": "Schalter"
+      }
+    },
+    "WIDGETS": {
+      "TEXT": "Widgets"
+    },
+    "FORMS": {
+      "TEXT": "Formen",
+      "LIST": {
+        "BASICELEMENTS": "Grundelemente",
+        "FORMSELECT": "Formular auswählen",
+        "CHECKBOXS&RADIOS": "Kontrollkästchen & Radios",
+        "PICKERS": "Pflücker",
+        "INPUTMASKS": "Eingabemasken",
+        "ADVANCED": "Fortschrittlich",
+        "RANGESLIDER": "Range-Schieberegler",
+        "VALIDATION": "Validierung",
+        "WIZARD": "Magier",
+        "EDITORS": "Redakteurinnen",
+        "FILEUPLOADS": "Datei-Uploads",
+        "FORMLAYOUTS": "Formularlayouts"
+      }
+    },
+    "TABLES": {
+      "TEXT": "Tische",
+      "LIST": {
+        "BASICTABLES": "Grundlegende Tabellen",
+        "GRIDJS": "Gitter Js",
+        "LISTJS": "Liste Js",
+        "DATATABLES": "Datentabellen"
+      }
+    },
+    "CHARTS": {
+      "TEXT": "Diagramme",
+      "LIST": {
+        "APEXCHARTS": "Apexcharts",
+        "LINE": "Linie",
+        "AREA": "Bereich",
+        "COLUMN": "Spalte",
+        "BAR": "Bar",
+        "MIXED": "Gemischt",
+        "TIMELINE": "Zeitleiste",
+        "RANGEAREA": "Reichweitenbereich",
+        "FUNNEL": "Trichter",
+        "CANDLSTICK": "Leuchter",
+        "BOXPLOT": "Box-Plot",
+        "BUBBLE": "Blase",
+        "SCATTER": "Streuen",
+        "HEATMAP": "Heatmap",
+        "TREEMAP": "Baumkarte",
+        "PIE": "Kuchen",
+        "RADIALBAR": "Radialbar",
+        "RADAR": "Radar",
+        "POLARAREA": "Polargebiet"
+      }
+    },
+    "ICONS": {
+      "TEXT": "Symbole",
+      "LIST": {
+        "REMIX": "Remix",
+        "BOXICONS": "Boxicons",
+        "MATERIALDESIGN": "Material Design",
+        "BOOTSTRAP": "Bootstrap",
+        "PHOSPHOR": "Phosphor"
+      }
+    },
+    "MAPS": {
+      "TEXT": "Karten",
+      "LIST": {
+        "GOOGLE": "Google",
+        "VECTOR": "AmCharts",
+        "LEAFLET": "Flugblatt"
+      }
+    },
+    "MULTILEVEL": {
+      "TEXT": "Mehrstufig",
+      "LIST": {
+        "LEVEL1": {
+          "1": "Stufe 1.1",
+          "2": "Stufe 1.2",
+          "LEVEL2": {
+            "1": "Stufe 2.1",
+            "2": "Stufe 2.2",
+            "LEVEL3": {
+              "1": "Stufe 3.1",
+              "2": "Stufe 3.2"
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,239 @@
+{
+  "MENUITEMS": {
+    "MENU": {
+      "TEXT": "菜单"
+    },
+    "DASHBOARD": {
+      "TEXT": "仪表板",
+      "LIST": {
+        "ANALYTICS": "分析",
+        "CRM": "客户关系管理系统",
+        "ECOMMERCE": "电子商务",
+        "LEARNING": "学习",
+        "REALESTATE": "房地产"
+      }
+    },
+    "APPS": {
+      "TEXT": "应用",
+      "LIST": {
+        "CALENDAR": "日历",
+        "CHAT": "聊天",
+        "EMAIL": "电子邮件",
+        "ECOMMERCE": "电子商务",
+        "PRODUCTS": "产品",
+        "PRODUCTGRID": "产品网格",
+        "PRODUCTDETAILS": "产品详情",
+        "CREATEPRODUCT": "创建产品",
+        "ORDERS": "命令",
+        "ORDEROVERVIEW": "订单概览",
+        "CUSTOMERS": "顾客",
+        "SHOPPINGCART": "购物车",
+        "CHECKOUT": "查看",
+        "SELLERS": "卖家",
+        "SELLEROVERVIEW": "卖家概览",
+        "FILEMANAGER": "文件管理器",
+        "LEARNING": "学习",
+        "COURSES": "培训班",
+        "LISTVIEW": "列表显示",
+        "GRIDVIEW": "网格视图",
+        "CATEGORY": "类别",
+        "OVERVIEW": "概述",
+        "CREATECOURSE": "创建课程",
+        "STUDENTS": "学生",
+        "MYSUBSCRIPTIONS": "我的订阅",
+        "MYCOURSES": "我的课程",
+        "INSTRUCTORS": "导师",
+        "CREATEINSTRUCTOR": "创建讲师",
+        "INVOICES": "发票",
+        "CREATEINVOICE": "创建发票",
+        "SUPPORTTICKETS": "支持工单",
+        "REALESTATE": "房地产",
+        "LISTINGGRID": "列表网格",
+        "LISTINGLIST": "房源清单",
+        "LISTINGMAP": "房源图",
+        "PROPERTYOVERVIEW": "楼盘概况",
+        "AGENT": "代理人",
+        "AGENCIES": "机构",
+        "ADDPROPERTY": "添加属性",
+        "EARNINGS": "收益"
+      }
+    },
+    "PAGES": {
+      "TEXT": "页数"
+    },
+    "AUTHENTICATION": {
+      "TEXT": "验证",
+      "LIST": {
+        "SIGNIN": "登入",
+        "SIGNUP": "报名",
+        "PASSWORDRESET": "重设密码",
+        "PASSWORDCREATE": "密码创建",
+        "LOCKSCREEN": "锁屏",
+        "LOGOUT": "登出",
+        "SUCCESSMESSAGE": "成功讯息",
+        "TWOSTEPVERIFICATION": "两步验证",
+        "ERRORS": "错误",
+        "404ERROR": "404错误",
+        "500": "五百",
+        "503": "五百〇三",
+        "OFFLINE": "离线页面"
+      }
+    },
+    "EXTRAPAGES": {
+      "TEXT": "页数",
+      "LIST": {
+        "STARTER": "Starter",
+        "PROFILE": "轮廓",
+        "PROFILESETTINGS": "配置文件设置",
+        "CONTACTS": "联系人",
+        "TIMELINE": "时间线",
+        "FAQS": "常见问题",
+        "PRICING": "价钱",
+        "MAINTENANCE": "维护",
+        "COMINGSOON": "即将推出",
+        "PRIVACYPOLICY": "隐私政策",
+        "TERMS&CONDITIONS": "条款和条件"
+      }
+    },
+    "COMPONENTS": {
+      "TEXT": "成分"
+    },
+    "BOOTSTRAPUI": {
+      "TEXT": "引导用户界面",
+      "LIST": {
+        "ALERTS": "警报",
+        "BADGES": "徽章",
+        "BUTTONS": "纽扣",
+        "COLORS": "颜色",
+        "CARDS": "牌",
+        "CAROUSEL": "旋转木马",
+        "DROPDOWNS": "下拉菜单",
+        "GRID": "网格",
+        "IMAGES": "图片",
+        "TABS": "选项卡",
+        "ACCORDION&COLLAPSE": "手风琴与崩溃",
+        "MODALS": "模态",
+        "OFFCANVAS": "帆布",
+        "PLACEHOLDERS": "占位符",
+        "PROGRESS": "进步",
+        "NOTIFICATIONS": "Notifications",
+        "MEDIAOBJECT": "媒体对象",
+        "EMBEDVIDEO": "嵌入视频",
+        "TYPOGRAPHY": "排版",
+        "LISTS": "列表",
+        "LINKS": "链接",
+        "GENERAL": "一般的",
+        "UTILITIES": "公用事业"
+      }
+    },
+    "ADVANCEUI": {
+      "TEXT": "高级用户界面",
+      "LIST": {
+        "SWEETALERTS": "甜蜜警报",
+        "NESTABLELIST": "可嵌套列表",
+        "SCROLLBAR": "滚动条",
+        "SWIPERSLIDER": "滑动条",
+        "RATTINGS": "收视率",
+        "HIGHLIGHT": "强调",
+        "SCROLLSPY": "滚动间谍"
+      }
+    },
+    "CUSTOMUI": {
+      "TEXT": "自定义界面",
+      "BADGE": "风俗",
+      "LIST": {
+        "RIBBONS": "丝带",
+        "PROFILE": "轮廓",
+        "COUNTER": "柜台"
+      }
+    },
+    "WIDGETS": {
+      "TEXT": "小部件"
+    },
+    "FORMS": {
+      "TEXT": "形式",
+      "LIST": {
+        "BASICELEMENTS": "基本要素",
+        "FORMSELECT": "表单选择",
+        "CHECKBOXS&RADIOS": "复选框和收音机",
+        "PICKERS": "采摘机",
+        "INPUTMASKS": "输入掩码",
+        "ADVANCED": "先进的",
+        "RANGESLIDER": "范围滑块",
+        "VALIDATION": "验证",
+        "WIZARD": "向导",
+        "EDITORS": "编辑部",
+        "FILEUPLOADS": "文件上传",
+        "FORMLAYOUTS": "表单布局"
+      }
+    },
+    "TABLES": {
+      "TEXT": "表",
+      "LIST": {
+        "BASICTABLES": "基本表",
+        "GRIDJS": "网格JS",
+        "LISTJS": "清单Js",
+        "DATATABLES": "数据表"
+      }
+    },
+    "CHARTS": {
+      "TEXT": "图表",
+      "LIST": {
+        "APEXCHARTS": "顶点图表",
+        "LINE": "线",
+        "AREA": "区域",
+        "COLUMN": "柱子",
+        "BAR": "酒吧",
+        "MIXED": "混合的",
+        "TIMELINE": "时间线",
+        "RANGEAREA": "范围面积",
+        "FUNNEL": "漏斗",
+        "CANDLSTICK": "烛台",
+        "BOXPLOT": "箱形图",
+        "BUBBLE": "气泡",
+        "SCATTER": "分散",
+        "HEATMAP": "热图",
+        "TREEMAP": "树形图",
+        "PIE": "馅饼",
+        "RADIALBAR": "径向杆",
+        "RADAR": "雷达",
+        "POLARAREA": "极地地区"
+      }
+    },
+    "ICONS": {
+      "TEXT": "图标",
+      "LIST": {
+        "REMIX": "混音",
+        "BOXICONS": "方框图标",
+        "MATERIALDESIGN": "材料设计",
+        "BOOTSTRAP": "引导程序",
+        "PHOSPHOR": "磷"
+      }
+    },
+    "MAPS": {
+      "TEXT": "地图",
+      "LIST": {
+        "GOOGLE": "谷歌",
+        "VECTOR": "美国图表公司",
+        "LEAFLET": "传单"
+      }
+    },
+    "MULTILEVEL": {
+      "TEXT": "多层次",
+      "LIST": {
+        "LEVEL1": {
+          "1": "1.1级",
+          "2": "1.2级",
+          "LEVEL2": {
+            "1": "2.1级",
+            "2": "2.2级",
+            "LEVEL3": {
+              "1": "3.1级",
+              "2": "3.2级"
+            }
+          }
+        }
+      }
+    }
+  }
+}

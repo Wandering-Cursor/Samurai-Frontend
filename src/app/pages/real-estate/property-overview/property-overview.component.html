@@ -1,0 +1,521 @@
+<!-- Start Breadcrumbs -->
+<app-breadcrumbs title="Property Overview" [breadcrumbItems]="breadCrumbItems"></app-breadcrumbs>
+<!-- End Breadcrumbs -->
+
+<div class="row">
+    <div class="col-xl-9 col-lg-8">
+        <div class="card">
+            <div class="card-body">
+                <!-- Swiper -->
+                <ngx-slick-carousel class="carousel" [config]="slidesConfig" #slickModal class="swiper property-slider mb-3">
+                    <div ngxSlickItem class="swiper-slide">
+                        <div class="position-relative ribbon-box">
+                            <div class="ribbon ribbon-danger fw-medium rounded-end mt-2"> For Sale</div>
+                            <div dropdown class="dropdown position-absolute top-0 end-0 m-3">
+                                <button dropdownToggle class="btn bg-white avatar-xs p-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="bi bi-share"></i>
+                                </button>
+                                <ul *bsDropdownMenu class="dropdown-menu dropdown-menu-end">
+                                    <li><a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal"><i class="bi bi-pencil-square me-1 align-baseline"></i> Edit</a></li>
+                                    <li><a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal"><i class="bi bi-trash3 me-1 align-baseline"></i> Delete</a></li>
+                                </ul>
+                            </div>
+                            <img src="assets/images/real-estate/overview-02.jpg" alt="" class="img-fluid">
+                        </div>
+                    </div>
+                    <div ngxSlickItem class="swiper-slide">
+                        <div class="position-relative ribbon-box">
+                            <div class="ribbon ribbon-primary fw-medium rounded-end mt-2"> Front View</div>
+                            <div dropdown class="dropdown position-absolute top-0 end-0 m-3">
+                                <button dropdownToggle class="btn bg-white avatar-xs p-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="bi bi-share"></i>
+                                </button>
+                                <ul *bsDropdownMenu class="dropdown-menu dropdown-menu-end">
+                                    <li><a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal"><i class="bi bi-pencil-square me-1 align-baseline"></i> Edit</a></li>
+                                    <li><a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal"><i class="bi bi-trash3 me-1 align-baseline"></i> Delete</a></li>
+                                </ul>
+                            </div>
+                            <img src="assets/images/real-estate/overview-01.jpg" alt="" class="img-fluid">
+                        </div>
+                    </div>
+                    <div ngxSlickItem class="swiper-slide">
+                        <div class="position-relative ribbon-box">
+                            <div class="ribbon ribbon-primary fw-medium rounded-end mt-2"> Front View</div>
+                            <div dropdown class="dropdown position-absolute top-0 end-0 m-3">
+                                <button dropdownToggle class="btn bg-white avatar-xs p-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="bi bi-share"></i>
+                                </button>
+                                <ul *bsDropdownMenu class="dropdown-menu dropdown-menu-end">
+                                    <li><a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal"><i class="bi bi-pencil-square me-1 align-baseline"></i> Edit</a></li>
+                                    <li><a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal"><i class="bi bi-trash3 me-1 align-baseline"></i> Delete</a></li>
+                                </ul>
+                            </div>
+                            <img src="assets/images/real-estate/overview-03.jpg" alt="" class="img-fluid">
+                        </div>
+                    </div>
+                </ngx-slick-carousel><!--end slider-->
+
+                <div class="pt-1">
+                    <button type="button" class="btn btn-subtle-warning custom-toggle float-end btn-icon btn-sm" data-bs-toggle="button">
+                        <span class="icon-on"><i class="bi bi-star"></i></span>
+                        <span class="icon-off"><i class="bi bi-star-fill"></i></span>
+                    </button>
+                    <h6 class="card-title">Swimming Pool Side Of The Residential Ascot Home</h6>
+                    <div class="text-muted hstack gap-2 flex-wrap list-unstyled mb-3">
+                        <div>
+                            <i class="bi bi-geo-alt align-baseline me-1"></i> Birmingham, West Midlands, United Kingdom
+                        </div>
+                        <div class="vr"></div>
+                        <div>
+                            <i class="bi bi-calendar-event align-baseline me-1"></i> Update 2 days ago
+                        </div>
+                    </div>
+                    <p class="text-muted mb-2">Property is <b>any item that a person or a business has legal title
+                            over</b>. Property can be tangible items, such as houses, cars, or appliances, or it can
+                        refer to intangible items that carry the promise of future worth, such as stock and bond
+                        certificates. There are two types of property. In legal terms, all property will be classified
+                        as either <b>personal property or real property</b>. This distinction between types of property
+                        comes from English common law, but our modern laws continue to distinguish between the two.</p>
+                    <p class="text-muted">Basic Property Unit. Definition. The basic unit of ownership that is recorded
+                        in the land books, land registers or equivalent. It is defined by unique ownership and
+                        homogeneous real property rights, and may consist of one or more adjacent or geographically
+                        separate parcels.</p>
+                </div>
+
+                <div class="mb-3">
+                    <h6 class="card-title mb-3">Property Overview</h6>
+                    <div class="row g-3">
+                        <div class="col-xl-3 col-sm-6">
+                            <div class="p-3 border border-dashed rounded">
+                                <div class="d-flex align-items-center gap-2">
+                                    <div class="avatar-xs flex-shrink-0">
+                                        <div class="avatar-title bg-dark-subtle text-dark fs-lg rounded">
+                                            <i class="bi bi-tag"></i>
+                                        </div>
+                                    </div>
+                                    <p class="fs-md mb-0">$7000 - $8000</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-sm-6">
+                            <div class="p-3 border border-dashed rounded">
+                                <div class="d-flex align-items-center gap-2">
+                                    <div class="avatar-xs flex-shrink-0">
+                                        <div class="avatar-title bg-warning-subtle text-warning fs-lg rounded">
+                                            <i class="bi bi-house"></i>
+                                        </div>
+                                    </div>
+                                    <p class="fs-md mb-0">4 Bedroom</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-sm-6">
+                            <div class="p-3 border border-dashed rounded">
+                                <div class="d-flex align-items-center gap-2">
+                                    <div class="avatar-xs flex-shrink-0">
+                                        <div class="avatar-title bg-danger-subtle text-danger fs-lg rounded">
+                                            <i class="ph ph-bathtub"></i>
+                                        </div>
+                                    </div>
+                                    <p class="fs-md mb-0">3 Bathroom</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-sm-6">
+                            <div class="p-3 border border-dashed rounded">
+                                <div class="d-flex align-items-center gap-2">
+                                    <div class="avatar-xs flex-shrink-0">
+                                        <div class="avatar-title bg-info-subtle text-info fs-lg rounded">
+                                            <i class="bi bi-p-circle"></i>
+                                        </div>
+                                    </div>
+                                    <p class="fs-md mb-0">Parking Available</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-sm-6">
+                            <div class="p-3 border border-dashed rounded">
+                                <div class="d-flex align-items-center gap-2">
+                                    <div class="avatar-xs flex-shrink-0">
+                                        <div class="avatar-title bg-success-subtle text-success fs-lg rounded">
+                                            <i class="bi bi-columns"></i>
+                                        </div>
+                                    </div>
+                                    <p class="fs-md mb-0">1324 SQFT</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-sm-6">
+                            <div class="p-3 border border-dashed rounded">
+                                <div class="d-flex align-items-center gap-2">
+                                    <div class="avatar-xs flex-shrink-0">
+                                        <div class="avatar-title bg-secondary-subtle text-secondary fs-lg rounded">
+                                            <i class="bi bi-map"></i>
+                                        </div>
+                                    </div>
+                                    <p class="fs-md mb-0">United Kingdom</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-sm-6">
+                            <div class="p-3 border border-dashed rounded">
+                                <div class="d-flex align-items-center gap-2">
+                                    <div class="avatar-xs flex-shrink-0">
+                                        <div class="avatar-title bg-primary-subtle text-primary fs-lg rounded">
+                                            <i class="bi bi-buildings"></i>
+                                        </div>
+                                    </div>
+                                    <p class="fs-md mb-0">Residency</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <h6 class="card-title mb-3">Property Features</h6>
+                    <ul class="list-unstyled hstack flex-wrap gap-3">
+                        <li class="w-lg">
+                            Swimming pool
+                        </li>
+                        <li class="w-lg">
+                            Air conditioning
+                        </li>
+                        <li class="w-lg">
+                            Electricity
+                        </li>
+                        <li class="w-lg">
+                            Balcony
+                        </li>
+                        <li class="w-lg">
+                            Near Green Zone
+                        </li>
+                        <li class="w-lg">
+                            Near School
+                        </li>
+                        <li class="w-lg">
+                            Cable TV
+                        </li>
+                        <li class="w-lg">
+                            Near Shop
+                        </li>
+                        <li class="w-lg">
+                            Internet
+                        </li>
+                        <li class="w-lg">
+                            Near Shop
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <h6 class="card-title mb-0">Property Location</h6>
+            </div>
+            <div class="card-body">
+                <div id="leaflet-map-group-control" leaflet [leafletOptions]="options" [leafletLayers]="GroupsLayers" class="leaflet-map leaflet-gray" style="min-height: 100%;"></div>
+            </div>
+        </div>
+    </div><!--end col-->
+    <div class="col-xl-3 col-lg-4">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card card-primary text-center">
+                    <div class="card-body">
+                        <h4 class="text-reset fw-normal">$7000 - $8000</h4>
+                        <p class="text-white-75 fs-md mb-0">Sale Price</p>
+                    </div>
+                </div>
+            </div><!--end col-->
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="text-center">
+                            <img src="assets/images/users/avatar-1.jpg" alt="" class="avatar-md rounded mx-auto d-block">
+                            <h5 class="mt-3">Jerry Emard</h5>
+                            <p class="text-muted">OWNER</p>
+                            <p class="text-muted mb-4">73 Alum Rock Rd, Birmingham, West Midland, United Kingdom - s B8
+                                1LY</p>
+                        </div>
+                        <ul class="list-unstyled hstack justify-content-center gap-2 mb-0">
+                            <li>
+                                <a href="javascript:void(0);" class="avatar-xs d-inline-block">
+                                    <div class="avatar-title rounded bg-primary-subtle text-primary">
+                                        <i class="bi bi-facebook"></i>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" class="avatar-xs d-inline-block">
+                                    <div class="avatar-title bg-success-subtle text-success rounded">
+                                        <i class="bi bi-whatsapp"></i>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" class="avatar-xs d-inline-block">
+                                    <div class="avatar-title bg-info-subtle text-info rounded">
+                                        <i class="bi bi-twitter"></i>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" class="avatar-xs d-inline-block">
+                                    <div class="avatar-title bg-danger-subtle text-danger rounded">
+                                        <i class="bi bi-instagram"></i>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div><!--end col-->
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <a href="javascript:void(0);" class="float-end link-effect">View More <i class="bi bi-arrow-right align-baseline ms-1"></i></a>
+                        <h6 class="card-title mb-0">Agent Details</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex gap-2 align-items-center mb-3">
+                            <div class="flex-shrink-0">
+                                <img src="assets/images/users/48/avatar-2.jpg" alt="" class="avatar-sm rounded">
+                            </div>
+                            <div class="flex-grow-1">
+                                <h6 class="fs-md">Morton Satterfield</h6>
+                                <p class="text-muted mb-0">Agent</p>
+                            </div>
+                        </div>
+                        <button class="btn btn-secondary w-100" id="agent-chat" (click)="openChatbox()"><i class="bi bi-chat-text align-baseline me-1"></i> Get In Touch</button>
+                    </div>
+                </div>
+            </div><!--end col-->
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title mb-0">Owner History</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive table-card pt-2">
+                            <table class="table mb-0">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center gap-1">
+                                                <div class="flex-shrink-0">
+                                                    <img src="assets/images/users/avatar-1.jpg" alt="" class="avatar-sm rounded-circle p-1">
+                                                </div>
+                                                <div class="flex-grow-1">
+                                                    <h6 class="fs-md mb-1">Jerry Emard</h6>
+                                                    <p class="text-muted mb-0">03 Nav, 2022 - Present</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="text-end">
+                                            <p class="fs-md mb-0 text-muted"><i class="bi bi-star-half text-warning align-baseline me-1"></i> 4.9
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center gap-1">
+                                                <div class="flex-shrink-0">
+                                                    <img src="assets/images/users/avatar-7.jpg" alt="" class="avatar-sm rounded-circle p-1">
+                                                </div>
+                                                <div class="flex-grow-1">
+                                                    <h6 class="fs-md mb-1">Sonia Conn</h6>
+                                                    <p class="text-muted mb-0">24 March, 2022 - 03 Nav, 2022</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="text-end">
+                                            <p class="fs-md mb-0 text-muted"><i class="bi bi-star-half text-warning align-baseline me-1"></i> 4.8
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center gap-1">
+                                                <div class="flex-shrink-0">
+                                                    <img src="assets/images/users/avatar-4.jpg" alt="" class="avatar-sm rounded-circle p-1">
+                                                </div>
+                                                <div class="flex-grow-1">
+                                                    <h6 class="fs-md mb-1">Talon Bradtke</h6>
+                                                    <p class="text-muted mb-0">27 Aug, 2021 - 24 March, 2022</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="text-end">
+                                            <p class="fs-md mb-0 text-muted"><i class="bi bi-star-half text-warning align-baseline me-1"></i> 4.4
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center gap-1">
+                                                <div class="flex-shrink-0">
+                                                    <img src="assets/images/users/avatar-5.jpg" alt="" class="avatar-sm rounded-circle p-1">
+                                                </div>
+                                                <div class="flex-grow-1">
+                                                    <h6 class="fs-md mb-1">Tyrell Kerluke</h6>
+                                                    <p class="text-muted mb-0">09 June, 2019 - 27 Aug, 2021</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="text-end">
+                                            <p class="fs-md mb-0 text-muted"><i class="bi bi-star-half text-warning align-baseline me-1"></i> 4.6
+                                            </p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div><!--end col-->
+        </div><!--end row-->
+    </div><!--end col-->
+</div><!--end row-->
+
+<div class="email-chat-detail" id="emailchat-detailElem">
+    <div class="card mb-0 overflow-hidden">
+        <div class="card-header align-items-center d-flex bg-primary-subtle text-primary p-3">
+            <div class="flex-grow-1">
+                <h5 class="fs-md text-primary-emphasis profile-username">Morton Satterfield</h5>
+                <p class="mb-0 fs-sm lh-1">Active</p>
+            </div>
+            <div class="flex-shrink-0">
+                <div class="mt-n1">
+                    <button type="button" class="btn btn-link btn-icon btn-sm text-primary fs-lg text-decoration-none rounded-circle bg-primary-subtle bg-opacity-10" (click)="openChatbox()" id="emailchat-btn-close"><i class="ri-close-fill"></i></button>
+                </div>
+            </div>
+        </div><!-- end card header -->
+
+        <div class="card-body p-0">
+            <div id="users-chat">
+                <ngx-simplebar class="chat-conversation p-3" id="chat-conversation" style="height: 250px;">
+                    <ul class="list-unstyled chat-conversation-list chat-sm" id="users-conversation">
+                        <li class="chat-list left">
+                            <div class="conversation-list">
+                                <div class="chat-avatar">
+                                    <img src="assets/images/users/48/avatar-2.jpg" alt="">
+                                </div>
+                                <div class="user-chat-content">
+                                    <div class="ctext-wrap">
+                                        <div class="ctext-wrap-content">
+                                            <p class="mb-0 ctext-content">Good morning 😊</p>
+                                        </div>
+                                        <div dropdown [container]="'body'" class="dropdown align-self-start message-box-drop">
+                                            <a dropdownToggle class="dropdown-toggle" href="javascript:void(0);" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i class="ri-more-2-fill"></i>
+                                            </a>
+                                            <div *bsDropdownMenu class="dropdown-menu">
+                                                <a class="dropdown-item" href="javascript:void(0);"><i class="ri-reply-line me-2 text-muted align-bottom"></i>Reply</a>
+                                                <a class="dropdown-item" href="javascript:void(0);"><i class="ri-file-copy-line me-2 text-muted align-bottom"></i>Copy</a>
+                                                <a class="dropdown-item delete-item" href="javascript:void(0);"><i class="ri-delete-bin-5-line me-2 text-muted align-bottom"></i>Delete</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="conversation-name"><small class="text-muted time">09:07 am</small> <span class="text-success check-message-icon"><i class="ri-check-double-line align-bottom"></i></span></div>
+                                </div>
+                            </div>
+                        </li>
+                        <!-- chat-list -->
+
+                        <li class="chat-list right">
+                            <div class="conversation-list">
+                                <div class="user-chat-content">
+                                    <div class="ctext-wrap">
+                                        <div class="ctext-wrap-content">
+                                            <p class="mb-0 ctext-content">Good morning, How are you? What about our next
+                                                meeting?</p>
+                                        </div>
+                                        <div dropdown [container]="'body'" [dropup]="true" class="dropdown align-self-start message-box-drop">
+                                            <a dropdownToggle class="dropdown-toggle" href="javascript:void(0);" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i class="ri-more-2-fill"></i>
+                                            </a>
+                                            <div *bsDropdownMenu class="dropdown-menu">
+                                                <a class="dropdown-item" href="javascript:void(0);"><i class="ri-reply-line me-2 text-muted align-bottom"></i>Reply</a>
+                                                <a class="dropdown-item" href="javascript:void(0);"><i class="ri-file-copy-line me-2 text-muted align-bottom"></i>Copy</a>
+                                                <a class="dropdown-item delete-item" href="javascript:void(0);"><i class="ri-delete-bin-5-line me-2 text-muted align-bottom"></i>Delete</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="conversation-name"><small class="text-muted time">09:08 am</small> <span class="text-success check-message-icon"><i class="ri-check-double-line align-bottom"></i></span></div>
+                                </div>
+                            </div>
+                        </li>
+                        <!-- chat-list -->
+
+                        <li class="chat-list left">
+                            <div class="conversation-list">
+                                <div class="chat-avatar">
+                                    <img src="assets/images/users/48/avatar-2.jpg" alt="">
+                                </div>
+                                <div class="user-chat-content">
+                                    <div class="ctext-wrap">
+                                        <div class="ctext-wrap-content">
+                                            <p class="mb-0 ctext-content">Yeah everything is fine. Our next meeting
+                                                tomorrow at 10.00 AM</p>
+                                        </div>
+                                        <div dropdown [container]="'body'" class="dropdown align-self-start message-box-drop">
+                                            <a dropdownToggle class="dropdown-toggle" href="javascript:void(0);" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i class="ri-more-2-fill"></i>
+                                            </a>
+                                            <div *bsDropdownMenu class="dropdown-menu">
+                                                <a class="dropdown-item" href="javascript:void(0);"><i class="ri-reply-line me-2 text-muted align-bottom"></i>Reply</a>
+                                                <a class="dropdown-item" href="javascript:void(0);"><i class="ri-file-copy-line me-2 text-muted align-bottom"></i>Copy</a>
+                                                <a class="dropdown-item delete-item" href="javascript:void(0);"><i class="ri-delete-bin-5-line me-2 text-muted align-bottom"></i>Delete</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="conversation-name"><small class="text-muted time">09:10 am</small> <span class="text-success check-message-icon"><i class="ri-check-double-line align-bottom"></i></span></div>
+                                </div>
+                            </div>
+                        </li>
+                        <!-- chat-list -->
+
+                        <li class="chat-list right">
+                            <div class="conversation-list">
+                                <div class="user-chat-content">
+                                    <div class="ctext-wrap">
+                                        <div class="ctext-wrap-content">
+                                            <p class="mb-0 ctext-content">Wow that's great</p>
+                                        </div>
+                                        <div dropdown [container]="'body'" [dropup]="true" class="dropdown align-self-start message-box-drop">
+                                            <a dropdownToggle class="dropdown-toggle" href="javascript:void(0);" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i class="ri-more-2-fill"></i>
+                                            </a>
+                                            <div *bsDropdownMenu class="dropdown-menu">
+                                                <a class="dropdown-item" href="javascript:void(0);"><i class="ri-reply-line me-2 text-muted align-bottom"></i>Reply</a>
+                                                <a class="dropdown-item" href="javascript:void(0);"><i class="ri-file-copy-line me-2 text-muted align-bottom"></i>Copy</a>
+                                                <a class="dropdown-item delete-item" href="javascript:void(0);"><i class="ri-delete-bin-5-line me-2 text-muted align-bottom"></i>Delete</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="conversation-name"><small class="text-muted time">09:12 am</small> <span class="text-success check-message-icon"><i class="ri-check-double-line align-bottom"></i></span></div>
+                                </div>
+                            </div>
+                        </li>
+                        <!-- chat-list -->
+                    </ul>
+                </ngx-simplebar>
+            </div>
+
+            <div class="border-top border-top-dashed">
+                <div class="row g-2 mx-3 mt-2 mb-3">
+                    <div class="col">
+                        <div class="position-relative">
+                            <input type="text" class="form-control border-light bg-light" placeholder="Enter Message...">
+                        </div>
+                    </div><!-- end col -->
+                    <div class="col-auto">
+                        <button type="submit" class="btn btn-secondary"><i class="mdi mdi-send"></i></button>
+                    </div><!-- end col -->
+                </div><!-- end row -->
+            </div>
+        </div><!-- end cardbody -->
+    </div>
+</div>
+<!-- end email chat detail -->

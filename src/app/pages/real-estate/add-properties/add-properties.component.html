@@ -1,0 +1,232 @@
+<!-- Start Breadcrumbs -->
+<app-breadcrumbs title="Add Properties" [breadcrumbItems]="breadCrumbItems"></app-breadcrumbs>
+<!-- End Breadcrumbs -->
+
+<div class="row">
+    <div class="col-lg-9">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Information Properties</h5>
+            </div>
+            <div class="card-body">
+                <form action="#!">
+                    <div class="mb-3">
+                        <label class="form-label">Property Images<span class="text-danger">*</span></label>
+                        <dropzone class="dropzone" [config]="dropzoneConfig" [message]="'Drop files here or click to upload.'" (success)="onUploadSuccess($event)"></dropzone>
+                        @if (uploadedFiles) {
+                        <ul class="list-unstyled mb-0" id="dropzone-preview">
+                            @for (file of uploadedFiles; track $index) {
+                            <li class="mt-2" id="dropzone-preview-list">
+                                <div class="border rounded">
+                                    <div class="d-flex flex-wrap gap-2 p-2">
+                                        <div class="flex-shrink-0 me-3">
+                                            <div class="avatar-sm bg-light rounded p-2">
+                                                @if (file.dataURL) {
+                                                <img class="img-fluid rounded d-block" [src]="file.dataURL" alt="Dropzone-Image" />
+                                                }@else {
+                                                <img class="img-fluid rounded d-block" [src]="file" alt="Dropzone-Image" />
+                                                }
+                                            </div>
+                                        </div>
+                                        <div class="flex-grow-1">
+                                            <div class="pt-1">
+                                                @if (file.name) {<h5 class="fs-md mb-1">{{ file.name }}</h5>}
+                                                @if (file.size) {<p class="fs-sm text-muted mb-0">{{ file.size }}</p>}
+                                            </div>
+                                        </div>
+                                        <div class="flex-shrink-0 ms-3">
+                                            <button (click)="removeFile(file)" class="btn btn-sm btn-danger">Delete</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        }
+                        </ul>
+                        }
+                        <!-- end dropzon-preview -->
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="mb-3">
+                                <label for="Property-title-input" class="form-label">Property title<span class="text-danger">*</span></label>
+                                <input type="text" id="Property-title-input" class="form-control" placeholder="Enter property title" required>
+                            </div>
+                        </div><!--end col-->
+                        <div class="col-lg-12">
+                            <div class="mb-3">
+                                <label for="Property-type-input" class="form-label">Property Type<span class="text-danger">*</span></label>
+
+                                <select class="form-select" id="Property-type-input" data-choices data-choices-search-false>
+                                    <option value="">Select Property Type</option>
+                                    <option value="Villa">Villa</option>
+                                    <option value="Residency">Residency</option>
+                                    <option value="Apartment">Apartment</option>
+                                    <option value="Others">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="mb-3">
+                                <label for="bedroom-input" class="form-label">Bedroom<span class="text-danger">*</span></label>
+                                <input type="number" id="bedroom-input" class="form-control" placeholder="Enter Bedroom" required>
+                            </div>
+                        </div><!--end col-->
+                        <div class="col-lg-6">
+                            <div class="mb-3">
+                                <label for="bathroom-input" class="form-label">Bathroom<span class="text-danger">*</span></label>
+                                <input type="number" class="form-control" id="bathroom-input" placeholder="Enter Bathroom" required>
+                            </div>
+                        </div><!--end col-->
+                        <div class="col-lg-6">
+                            <div class="mb-3">
+                                <label for="sqft-input" class="form-label">SQFT<span class="text-danger">*</span></label>
+                                <input type="number" class="form-control" id="sqft-input" placeholder="Enter sqft" required>
+                            </div>
+                        </div><!--end col-->
+                        <div class="col-lg-6">
+                            <div class="mb-3">
+                                <label for="Property-price-input" class="form-label">Price<span class="text-danger">*</span></label>
+                                <div class="input-group">
+                                    <span class="input-group-text">$</span>
+                                    <input type="number" class="form-control" id="Property-price-input" placeholder="Enter price" required>
+                                </div>
+                            </div>
+                        </div><!--end col-->
+                        <div class="col-lg-12">
+                            <div class="mb-3">
+                                <label for="street-address" class="form-label">Street Address<span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="street-address" placeholder="Enter street address" required>
+                            </div>
+                        </div><!--end col-->
+                        <div class="col-lg-4">
+                            <div class="mb-3">
+                                <label for="state-input" class="form-label">State<span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="state-input" placeholder="Enter state" required>
+                            </div>
+                        </div><!--end col-->
+                        <div class="col-lg-4">
+                            <div class="mb-3">
+                                <label for="country-input" class="form-label">Country<span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="country-input" placeholder="Enter country" required>
+                            </div>
+                        </div><!--end col-->
+                        <div class="col-lg-4">
+                            <div class="mb-3">
+                                <label for="zipcode-input" class="form-label">Zipcode<span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="zipcode-input" placeholder="254 325" required>
+                            </div>
+                        </div><!--end col-->
+                        <div class="col-lg-4">
+                            <div class="mb-3 form-check">
+                                <input type="checkbox" class="form-check-input" id="additionalFeatures">
+                                <label class="form-check-label" for="additionalFeatures">Swimming pool</label>
+                            </div>
+                        </div><!--end col-->
+                        <div class="col-lg-4">
+                            <div class="mb-3 form-check">
+                                <input type="checkbox" class="form-check-input" id="additionalFeatures2">
+                                <label class="form-check-label" for="additionalFeatures2">Air conditioning</label>
+                            </div>
+                        </div><!--end col-->
+                        <div class="col-lg-4">
+                            <div class="mb-3 form-check">
+                                <input type="checkbox" class="form-check-input" id="additionalFeatures3">
+                                <label class="form-check-label" for="additionalFeatures3">Electricity</label>
+                            </div>
+                        </div><!--end col-->
+                        <div class="col-lg-4">
+                            <div class="mb-3 form-check">
+                                <input type="checkbox" class="form-check-input" id="additionalFeatures4">
+                                <label class="form-check-label" for="additionalFeatures4">Near Green Zone</label>
+                            </div>
+                        </div><!--end col-->
+                        <div class="col-lg-4">
+                            <div class="mb-3 form-check">
+                                <input type="checkbox" class="form-check-input" id="additionalFeatures5">
+                                <label class="form-check-label" for="additionalFeatures5">Near Shop</label>
+                            </div>
+                        </div><!--end col-->
+                        <div class="col-lg-4">
+                            <div class="mb-3 form-check">
+                                <input type="checkbox" class="form-check-input" id="additionalFeatures6">
+                                <label class="form-check-label" for="additionalFeatures6">Near School</label>
+                            </div>
+                        </div><!--end col-->
+                        <div class="col-lg-4">
+                            <div class="mb-3 form-check">
+                                <input type="checkbox" class="form-check-input" id="additionalFeatures7">
+                                <label class="form-check-label" for="additionalFeatures7">Parking Available</label>
+                            </div>
+                        </div><!--end col-->
+                        <div class="col-lg-4">
+                            <div class="mb-3 form-check">
+                                <input type="checkbox" class="form-check-input" id="additionalFeatures8">
+                                <label class="form-check-label" for="additionalFeatures8">Internet</label>
+                            </div>
+                        </div><!--end col-->
+                        <div class="col-lg-4">
+                            <div class="mb-3 form-check">
+                                <input type="checkbox" class="form-check-input" id="additionalFeatures9">
+                                <label class="form-check-label" for="additionalFeatures9">Balcony</label>
+                            </div>
+                        </div><!--end col-->
+                        <div class="col-lg-12">
+                            <div class="hstack gap-2 justify-content-end">
+                                <button type="button" class="btn btn-secondary"><i class="bi bi-repeat align-baseline me-1"></i> Reset</button>
+                                <button type="button" class="btn btn-primary"><i class="bi bi-clipboard2-check align-baseline me-1"></i> Save</button>
+                            </div>
+                        </div>
+                    </div><!--end row-->
+                </form>
+            </div>
+        </div><!--end card-->
+    </div><!--end col-->
+    <div class="col-lg-3">
+        <div class="card real-estate-grid-widgets card-animate">
+            <div class="card-body p-2">
+                <img src="assets/images/real-estate/img-01.jpg" alt="" class="img-fluid rounded mx-auto d-block">
+                <button type="button" class="btn btn-subtle-warning custom-toggle btn-icon btn-sm active" data-bs-toggle="button">
+                    <span class="icon-on"><i class="bi bi-star"></i></span>
+                    <span class="icon-off"><i class="bi bi-star-fill"></i></span>
+                </button>
+                <div dropdown class="dropdown dropdown-real-estate">
+                    <button dropdownToggle class="btn btn-light btn-icon btn-sm" type="button">
+                        <i class="bi bi-three-dots-vertical"></i>
+                    </button>
+                    <ul *bsDropdownMenu class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal"><i class="bi bi-pencil-square me-1 align-baseline"></i> Edit</a></li>
+                        <li><a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal"><i class="bi bi-trash3 me-1 align-baseline"></i> Delete</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card-body p-3">
+                <p class="text-muted float-end mb-0"><i class="bi bi-star text-warning align-baseline me-1"></i> 4.5</p>
+                <span class="badge bg-danger-subtle text-danger fs-xxs mb-3"><i class="bi bi-house-door align-baseline me-1"></i> Villa</span>
+                <a href="javascript:void(0);">
+                    <h6 class="fs-lg text-capitalize text-truncate">the Country House</h6>
+                </a>
+                <p class="text-muted"><i class="bi bi-geo-alt align-baseline me-1"></i> West Midlands, United Kingdom
+                </p>
+                <ul class="d-flex align-items-center gap-2 flex-wrap list-unstyled">
+                    <li>
+                        <p class="text-muted mb-0"><i class="bi bi-house align-baseline text-primary me-1"></i> 2
+                            Bedroom</p>
+                    </li>
+                    <li>
+                        <p class="text-muted mb-0"><i class="ph ph-bathtub align-middle text-primary me-1"></i> 1
+                            Bathroom</p>
+                    </li>
+                    <li>
+                        <p class="text-muted mb-0"><i class="bi bi-columns align-baseline text-primary me-1"></i> 1458
+                            sqft</p>
+                    </li>
+                </ul>
+                <div class="border-top border-dashed mt-3 pt-3 d-flex align-items-center justify-content-between gap-3">
+                    <h5 class="mb-0">$2451.39</h5>
+                    <a routerLink="/real-estate/property-overview" class="link-effect">Read More <i class="bi bi-chevron-right align-baseline ms-1"></i></a>
+                </div>
+            </div>
+        </div><!--end card-->
+    </div><!--end col-->
+</div><!--end row-->

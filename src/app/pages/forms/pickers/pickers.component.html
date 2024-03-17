@@ -1,0 +1,193 @@
+<!-- Start Breadcrumbs -->
+<app-breadcrumbs title="Pickers" [breadcrumbItems]="breadCrumbItems"></app-breadcrumbs>
+<!-- End Breadcrumbs -->
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title mb-0">Datepicker</h4>
+            </div><!-- end card header -->
+
+            <div class="card-body">
+                <form action="#" [formGroup]="form">
+                    <div class="row gy-3">
+                        <div class="col-lg-6">
+                            <div>
+                                <label class="form-label mb-0">Basic</label>
+                                <p class="text-muted">Set <code>mwlFlatpickr [altInput]="true" [convertModelValue]="true"</code> attribute.</p>
+                                <input type="text" class="form-control" mwlFlatpickr [altInput]="true" [convertModelValue]="true">
+                            </div>
+                        </div>
+                        <!-- end col -->
+                        <div class="col-lg-6">
+                            <div>
+                                <label class="form-label mb-0">DateTime</label>
+                                <p class="text-muted">Set <code>mwlFlatpickr [altInput]="true" [enableTime]="true" [convertModelValue]="true" altFormat="d.m.y H:i" [dateFormat]="'d.m.y H:i'"</code> attribute.</p>
+                                <input type="text" class="form-control" mwlFlatpickr [altInput]="true" [enableTime]="true" [convertModelValue]="true" altFormat="d.m.y H:i" [dateFormat]="'d.m.y H:i'">
+                            </div>
+                        </div>
+                        <!-- end col -->
+                    </div>
+                    <!-- end row -->
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="mt-3">
+                                <label class="form-label mb-0">Human-Friendly Dates</label>
+                                <p class="text-muted">Set <code>mwlFlatpickr [altInput]="true" [convertModelValue]="true" altFormat="F j, Y" dateFormat="Y-m-d"</code> attribute.</p>
+                                <input type="text" class="form-control flatpickr-input" mwlFlatpickr [altInput]="true" [convertModelValue]="true" altFormat="F j, Y" dateFormat="Y-m-d">
+                            </div>
+                        </div>
+                        <!-- end col -->
+                        <div class="col-lg-6">
+                            <div class="mt-3">
+                                <label class="form-label mb-0">MinDate and MaxDate</label>
+                                <p class="text-muted">Set <code>mwlFlatpickr [altInput]="true" minDate="25-01-2023" maxDate="29-01-2023" [convertModelValue]="true" altFormat="d M, Y" dateFormat="d M, Y"</code> attribute.</p>
+                                <input type="text" class="form-control" mwlFlatpickr [altInput]="true" minDate="25-01-2023" maxDate="29-01-2023" [convertModelValue]="true" altFormat="d M, Y" dateFormat="d M, Y">
+                            </div>
+                        </div>
+                        <!-- end col -->
+                    </div>
+                    <!-- end row -->
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="mt-3">
+                                <label class="form-label mb-0">Default Date</label>
+                                <p class="text-muted">Set <code>mwlFlatpickr [altInput]="true" [defaultValue]="'25-01-2023'" altFormat="d M, Y" dateFormat="d M, Y"</code> attribute.</p>
+                                <input type="text" class="form-control" mwlFlatpickr [altInput]="true" [defaultValue]="'25-01-2023'" altFormat="d M, Y" dateFormat="d M, Y">
+                            </div>
+                        </div>
+                        <!-- end col -->
+                        <div class="col-lg-6">
+                            <div class="mt-3">
+                                <label class="form-label mb-0">Disabling Dates</label>
+                                <p class="text-muted">Set <code>mwlFlatpickr [altInput]="true" [convertModelValue]="true" altFormat="d M, Y" dateFormat="d M, Y"</code> attribute.</p>
+                                <input type="text" class="form-control" mwlFlatpickr [altInput]="true" [convertModelValue]="true" altFormat="d M, Y" dateFormat="d M, Y">
+                            </div>
+                        </div>
+                        <!-- end col -->
+                    </div>
+                    <!-- end row -->
+
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="mt-3">
+                                <label class="form-label mb-0">Selecting Multiple Dates</label>
+                                <p class="text-muted">Set <code>mwlFlatpickr [altInput]="true" [convertModelValue]="true" mode="multiple" altFormat="d M, Y" dateFormat="d M, Y"</code> attribute.</p>
+                                <input type="text" class="form-control" mwlFlatpickr [altInput]="true" [convertModelValue]="true" mode="multiple" altFormat="d M, Y" dateFormat="d M, Y">
+                            </div>
+                        </div>
+                        <!-- end col -->
+                        <div class="col-lg-6">
+                            <div class="mt-3">
+                                <label class="form-label mb-0">Range</label>
+                                <p class="text-muted">Set <code>mwlFlatpickr [altInput]="true" [convertModelValue]="true" mode="range" altFormat="d M, Y" dateFormat="d M, Y"</code> attribute.</p>
+                                <input type="text" class="form-control" mwlFlatpickr [altInput]="true" [convertModelValue]="true" mode="range" altFormat="d M, Y" dateFormat="d M, Y">
+                            </div>
+                        </div>
+                        <!-- end col -->
+                    </div>
+                    <!-- end row -->
+
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="mt-3">
+                                <label class="form-label mb-0">Inline</label>
+                                <p class="text-muted">Set <code>mwlFlatpickr [altInput]="true" [convertModelValue]="true" [inline]="true"</code> attribute.</p>
+                                <input class="form-control flatpickr-input" type="text" mwlFlatpickr [altInput]="true" [convertModelValue]="true" [inline]="true">
+                            </div>
+                        </div>
+                        <!-- end col -->
+                    </div>
+                    <!-- end row -->
+
+                </form><!-- end form -->
+            </div><!-- end card-body -->
+        </div><!-- end card -->
+    </div>
+    <!-- end col -->
+</div>
+<!-- end row -->
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title mb-0">Timepicker</h4>
+            </div><!-- end card header -->
+
+            <div class="card-body">
+                <form action="#">
+                    <div class="row gy-3">
+                        <div class="col-lg-6">
+                            <div>
+                                <label class="form-label mb-0">Timepicker</label>
+                                <p class="text-muted">Set <code> mwlFlatpickr [noCalendar]="true" [enableTime]="true" [dateFormat]="'H:i'"</code> attribute.</p>
+                                <input class="form-control flatpickr-input" type="text" mwlFlatpickr [noCalendar]="true" [enableTime]="true" [dateFormat]="'H:i'">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end row -->
+                </form>
+                <!-- end form -->
+            </div><!-- end card-body -->
+        </div><!-- end card -->
+    </div>
+    <!-- end col -->
+</div>
+<!-- end row -->
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title mb-0">Colorpicker</h4>
+            </div><!-- end card header -->
+
+            <div class="card-body">
+                <div>
+
+                    <div>
+                        <h5 class="fs-md mb-3">Themes</h5>
+                        <div class="row g-4">
+                            <div class="col-lg-4 col-md-6">
+                                <div>
+                                    <h5 class="fs-sm text-muted mb-2">Classic Demo</h5>
+                                    <p class="text-muted">Use <code> [(colorPicker)]="componentcolor" [style.background]="componentcolor" </code> class to set classic
+                                        colorpicker.</p>
+                                    <div class="classic-colorpicker colorpicker-element">
+                                        <input [(colorPicker)]="componentcolor" [style.background]="componentcolor" />
+                                    </div>
+                                </div>
+                            </div><!-- end col -->
+                            <div class="col-lg-4 col-md-6">
+                                <div>
+                                    <h5 class="fs-sm text-muted mb-2">Monolith Demo</h5>
+                                    <p class="text-muted">Use <code>[(colorPicker)]="monolith" [style.background]="monolith"</code> class to set monolith
+                                        colorpicker.</p>
+                                    <div class="monolith-colorpicker colorpicker-element">
+                                        <input [(colorPicker)]="monolith" [style.background]="monolith" [cpPresetColors]="['#fff','#000','#2889e9','#e920e9','#fff500','rgb(236,64,64)']" />
+                                    </div>
+                                </div>
+                            </div><!-- end col -->
+                            <div class="col-lg-4 col-md-6">
+                                <div>
+                                    <h5 class="fs-sm text-muted mb-2">Nano Demo</h5>
+                                    <p class="text-muted">Use <code> [(colorPicker)]="nano" [style.background]="nano" [cpDisableInput]="true"</code> class to set nano
+                                        colorpicker.</p>
+                                    <div class="nano-colorpicker colorpicker-element">
+                                        <input [(colorPicker)]="nano" [style.background]="nano" [cpDisableInput]="true" />
+                                    </div>
+                                </div>
+                            </div><!-- end col -->
+                        </div><!-- end row -->
+                    </div>
+
+                </div>
+                <!-- end preview -->
+            </div><!-- end card-body -->
+        </div><!-- end card -->
+    </div>
+    <!-- end col -->
+</div>
+<!-- end row -->

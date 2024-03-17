@@ -1,0 +1,155 @@
+<!-- Start Breadcrumbs -->
+<app-breadcrumbs title="Category" [breadcrumbItems]="breadCrumbItems"></app-breadcrumbs>
+<!-- End Breadcrumbs -->
+
+<div class="row align-items-center mb-4 g-2">
+    <div class="col-lg-3 col-md-4 me-auto">
+        <div class="search-box">
+            <input type="text" class="form-control search" placeholder="Search for category or something..." [(ngModel)]="term" (keyup)="filterdata()">
+            <i class="ri-search-line search-icon"></i>
+        </div>
+    </div><!--end col-->
+    <div class="col-md-auto">
+        <a href="javascript:void(0);" class="btn btn-secondary" (click)="addCategory.show()"><i class="bi bi-plus-circle align-baseline me-1"></i> Add Category</a>
+    </div><!--end col-->
+</div>
+
+<div class="row row-cols-xl-5 row-cols-sm-2 row-cols-1">
+    @for (data of categories; track $index) {
+    <div class="col">
+        <div class="card card-animate text-center bg-{{data.color}}-subtle border border-{{data.color}}-subtle">
+            <div class="card-body p-4">
+                <div class="avatar-md mx-auto mb-4">
+                    <div class="avatar-title bg-white rounded">
+                        <img src="{{data.img}}" alt="" class="avatar-sm">
+                    </div>
+                </div>
+                <a routerLink="/learning/grid" class="stretched-link">
+                    <h5 class="text-truncate">{{data.name}}</h5>
+                </a>
+                <p class="text-muted mb-0">{{data.course}}+ Courses Available</p>
+            </div>
+        </div><!--end card-->
+    </div><!--end col-->
+}
+</div><!--end row-->
+
+<div class="noresult"  style="display: none;">
+    <div class="text-center py-4">
+        <i class="ph-magnifying-glass fs-1 text-primary"></i>
+        <h5 class="mt-2">Sorry! No Result Found</h5>
+        <p class="text-muted mb-0">We've searched more than 150+ Courses We did not find any Courses
+            for you search.</p>
+    </div>
+</div>
+
+<div id="elmLoader">
+    <div class="spinner-border text-primary avatar-sm" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+</div>
+
+<div class="row align-items-center mb-3" id="pagination-element">
+    <div class="col-sm">
+        <div class="text-muted text-center text-sm-start">
+            Showing <span class="fw-semibold">{{categories?.length}}</span> of <span class="fw-semibold">{{categorieslist?.length}}</span> Results
+        </div>
+    </div><!--end col-->
+    <div class="col-sm-auto mt-3 mt-sm-0">
+        <pagination class="pagination-wrap hstack justify-content-center gap-2" [totalItems]="categorieslist?.legnth" [itemsPerPage]="15" (pagrChanged)="pageChanged($event)"></pagination>
+    </div><!--end col-->
+</div><!--end row-->
+
+<div bsModal #addCategory="bs-modal" class="modal fade" id="addCategory">
+    <div class="modal-dialog">
+        <div class="modal-content border-0">
+            <div class="modal-header bg-secondary p-3">
+                <h5 class="modal-title text-white" id="addCategoryLabel">Add Category</h5>
+                <button type="button" class="btn-close btn-close-white" (click)="addCategory.hide()"></button>
+            </div>
+
+            <form (ngSubmit)="saveCategory()" [formGroup]="categoryForm" class="tablelist-form" novalidate autocomplete="off">
+                <div class="modal-body">
+                    <div id="alert-error-msg" class="d-none alert alert-danger py-2"></div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Category Image<span class="text-danger">*</span></label>
+                        <dropzone class="dropzone" [config]="dropzoneConfig" [message]="'Drop files here or click to upload.'" (success)="onUploadSuccess($event)"></dropzone>
+
+                        @if (uploadedFiles) {
+                        <ul class="list-unstyled mb-0" id="dropzone-preview">
+                            @for (file of uploadedFiles; track $index) {
+                            <li class="mt-2" id="dropzone-preview-list">
+                                <div class="border rounded">
+                                    <div class="d-flex flex-wrap gap-2 p-2">
+                                        <div class="flex-shrink-0 me-3">
+                                            <div class="avatar-sm bg-light rounded p-2">
+                                                @if (file.dataURL) {
+                                                <img class="img-fluid rounded d-block" [src]="file.dataURL" alt="Dropzone-Image" />
+                                                }@else {
+                                                <img class="img-fluid rounded d-block" [src]="file" alt="Dropzone-Image" />
+                                                }
+                                            </div>
+                                        </div>
+                                        <div class="flex-grow-1">
+                                            <div class="pt-1">
+                                                @if (file.name) {<h5 class="fs-md mb-1">{{ file.name }}</h5>}
+                                                
+                                                @if (file.size) {<p class="fs-sm text-muted mb-0">{{ file.size }}</p>}
+                                            </div>
+                                        </div>
+                                        <div class="flex-shrink-0 ms-3">
+                                            <button (click)="removeFile(file)" class="btn btn-sm btn-danger">Delete</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        }
+                        </ul>
+                        }
+                        <!-- end dropzon-preview -->
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="category-title-input" class="form-label">Category title<span class="text-danger">*</span></label>
+                        <input type="text" id="category-title-input" formControlName="name" class="form-control" placeholder="Enter category title" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="hstack gap-2 justify-content-end">
+                        <button type="button" class="btn btn-ghost-danger" (click)="addCategory.hide()"><i class="bi bi-x-lg align-baseline me-1"></i> Close</button>
+                        <button type="submit" class="btn btn-primary" id="add-btn">Add Category</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!-- modal-content -->
+    </div>
+</div><!--end add Property modal-->
+
+<!-- deleteRecordModal -->
+<div bsModal #deleteRecordModal="bs-modal" id="deleteRecordModal" class="modal fade zoomIn">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" id="deleteRecord-close" (click)="deleteRecordModal.hide()"></button>
+            </div>
+            <div class="modal-body p-md-5">
+                <div class="text-center">
+                    <div class="text-danger">
+                        <i class="bi bi-trash display-5"></i>
+                    </div>
+                    <div class="mt-4">
+                        <h4 class="mb-2">Are you sure ?</h4>
+                        <p class="text-muted mx-3 mb-0">Are you sure you want to remove this record ?</p>
+                    </div>
+                </div>
+                <div class="d-flex gap-2 justify-content-center mt-4 pt-2 mb-2">
+                    <button type="button" class="btn w-sm btn-light btn-hover" (click)="deleteRecordModal.hide()">Close</button>
+                    <button type="button" class="btn w-sm btn-danger btn-hover" id="delete-record">Yes, Delete
+                        It!</button>
+                </div>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /deleteRecordModal -->

@@ -1,0 +1,143 @@
+<section class="auth-page-wrapper py-5 position-relative d-flex align-items-center justify-content-center min-vh-100">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-11">
+                <div class="card mb-0">
+                    <div class="row g-0 align-items-center">
+                        <div class="col-xxl-5">
+                            <div class="card auth-card bg-secondary h-100 border-0 shadow-none d-none d-sm-block mb-0">
+                                <div class="card-body py-5 d-flex justify-content-between flex-column h-100">
+                                    <div class="text-center">
+                                        <h3 class="text-white">Start your journey with us.</h3>
+                                        <p class="text-white opacity-75 fs-base">It brings together your tasks, projects, timelines, files and more</p>
+                                    </div>
+
+                                    <div class="auth-effect-main my-5 position-relative rounded-circle d-flex align-items-center justify-content-center mx-auto">
+                                        <div class="effect-circle-1 position-relative mx-auto rounded-circle d-flex align-items-center justify-content-center">
+                                            <div class="effect-circle-2 position-relative mx-auto rounded-circle d-flex align-items-center justify-content-center">
+                                                <div class="effect-circle-3 mx-auto rounded-circle position-relative text-white fs-4xl d-flex align-items-center justify-content-center">
+                                                    Welcome to <span class="text-primary ms-1">Steex</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <ul class="auth-user-list list-unstyled">
+                                            <li>
+                                                <div class="avatar-sm d-inline-block">
+                                                    <div class="avatar-title bg-white shadow-lg overflow-hidden rounded-circle">
+                                                        <img src="assets/images/users/avatar-1.jpg" alt="" class="img-fluid">
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="avatar-sm d-inline-block">
+                                                    <div class="avatar-title bg-white shadow-lg overflow-hidden rounded-circle">
+                                                        <img src="assets/images/users/48/avatar-2.jpg" alt="" class="img-fluid">
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="avatar-sm d-inline-block">
+                                                    <div class="avatar-title bg-white shadow-lg overflow-hidden rounded-circle">
+                                                        <img src="assets/images/users/avatar-3.jpg" alt="" class="img-fluid">
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="avatar-sm d-inline-block">
+                                                    <div class="avatar-title bg-white shadow-lg overflow-hidden rounded-circle">
+                                                        <img src="assets/images/users/avatar-4.jpg" alt="" class="img-fluid">
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="avatar-sm d-inline-block">
+                                                    <div class="avatar-title bg-white shadow-lg overflow-hidden rounded-circle">
+                                                        <img src="assets/images/users/avatar-5.jpg" alt="" class="img-fluid">
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="text-center">
+                                        <p class="text-white opacity-75 mb-0 mt-3">
+                                            &copy;
+                                            {{year}} Steex. Crafted with <i class="mdi mdi-heart text-danger"></i> by Themesbrand
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--end col-->
+                        <div class="col-xxl-6 mx-auto">
+                            <div class="card mb-0 border-0 shadow-none mb-0">
+                                <div class="card-body p-sm-5 m-lg-4">
+                                    @if (!secondsToShow) {
+                                    <div id="countDownText">
+                                        <div class="mb-sm-5 pb-sm-0 pb-5 text-center">
+                                            <img src="assets/images/comingsoon.png" alt="" height="110" class="move-animation">
+                                        </div>
+                                        <div class="mb-5 text-center">
+                                            <h1>Coming Soon</h1>
+                                        </div>
+                                        <div class="row justify-content-center mt-5">
+                                            <div class="col-lg-10">
+                                                <div data-countdown="Oct 30, 2023" class="countdownlist">
+                                                    <div class="countdownlist-item">
+                                                        <div class="count-title">Days</div>
+                                                        <div class="count-num">{{_days}}</div>
+                                                    </div>
+                                                    <div class="countdownlist-item">
+                                                        <div class="count-title">Hours</div>
+                                                        <div class="count-num">{{_hours}}</div>
+                                                    </div>
+                                                    <div class="countdownlist-item">
+                                                        <div class="count-title">Minutes</div>
+                                                        <div class="count-num">{{_minutes}}</div>
+                                                    </div>
+                                                    <div class="countdownlist-item">
+                                                        <div class="count-title">Seconds</div>
+                                                        <div class="count-num">{{_seconds}}</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    
+                                        <div class="mt-5">
+                                            <h4>Get notified when we launch</h4>
+                                            <p class="text-muted">Don't worry we will not spam you 😊</p>
+                                        </div>
+                                    
+                                        <form action="#!">
+                                            <div class="countdown-input-subscribe mx-auto my-4">
+                                                <input type="email" class="form-control" placeholder="Enter your email address" required />
+                                                <button class="btn btn-primary" type="submit" id="button-email">Send<i class="ri-send-plane-2-fill align-bottom ms-2"></i></button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                } @else{
+                                    <div id="countDownText">
+                                        <div class="text-center">
+                                            <img src="https://img.themesbrand.com/judia/success-img.png" alt="" height="120">
+                                            <div class="mt-5">
+                                                <h4>We've Launched our new website</h4>
+                                                <p class="text-muted">Click the below button to visit our website.</p>
+                                            </div>
+                                            <a routerLink="/" class="btn btn-primary icon-link">Back to Home <i class="bi bi-arrow-right"></i></a>
+                                        </div>
+                                    </div>
+                                }
+                                </div><!-- end card body -->
+                            </div><!-- end card -->
+                        </div>
+                        <!--end col-->
+                    </div>
+                    <!--end row-->
+                </div>
+            </div>
+            <!--end col-->
+        </div>
+        <!--end row-->
+    </div>
+    <!--end container-->
+</section>

@@ -1,0 +1,267 @@
+<!-- Start Breadcrumbs -->
+<app-breadcrumbs title="Form Advanced" [breadcrumbItems]="breadCrumbItems"></app-breadcrumbs>
+<!-- End Breadcrumbs -->
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title mb-0">Custom country select input</h4>
+            </div>
+            <div class="card-body">
+                <div class="row g-3">
+                    <div class="col-lg-6">
+                        <div>
+                            <label class="form-label">Simple select example</label>
+                            <ng-select [items]="Default" bindLabel="countryName" [(ngModel)]="selectedAccount"></ng-select>
+                        </div>
+
+                        <div class="mt-3">
+                            <label class="form-label">Select input flag with img & name</label>
+                            <ng-select [items]="Default" appearance="outline" bindValue="countryName" bindLabel="countryName" [clearable]="false" labelForId="countryName">
+                                @for(data of Default; track $index){
+                                <ng-option value="{{data.countryName}}">
+                                    <img src="{{data.flagImg}}" alt="country flag" class="options-flagimg" height="20">
+                                    {{data.countryName}}
+                                    <span class="countrylist-codeno text-muted">{{data.countryCode}}</span>
+                                </ng-option>
+                                }
+
+                            </ng-select>
+                        </div>
+
+                        <div class="mt-3">
+                            <label class="form-label">Search input false in dropdown menu</label>
+                            <ng-select [items]="Default" bindValue="countryName" bindLabel="countryName" [searchable]="false" [clearable]="false">
+                                @for(data of Default; track $index){
+                                <ng-option>
+                                    <img src="{{data.flagImg}}" alt="country flag" class="options-flagimg" height="20">
+                                    {{data.countryName}}
+                                    <span class="countrylist-codeno text-muted">{{data.countryCode}}</span>
+                                </ng-option>
+                                }
+                            </ng-select>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div>
+                            <label class="form-label">Select input with buttons & Flag with number</label>
+                            <div dropdown class="input-group">
+                                <button dropdownToggle class="btn btn-light border" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <img src="{{selectedCountry.flagImg}}" alt="flag img" height="20" class="country-flagimg rounded">
+                                    <span class="ms-2 country-codeno">{{selectedCountry.countryCode}}</span></button>
+                                <input type="text" class="form-control rounded-end flag-input" value="" placeholder="Enter number" />
+                                <div *bsDropdownMenu class="dropdown-menu w-100">
+                                    <div class="p-2 px-3 pt-1 searchlist-input">
+                                        <input type="text" class="form-control form-control-sm border search-countryList" placeholder="Search country name or country code..." />
+                                    </div>
+                                    <ul class="list-unstyled dropdown-menu-list mb-0">
+                                        @for(data of Default; track $index){
+                                        <li class="dropdown-item d-flex cursor-pointer" (click)="selectValue(data)">
+                                            <div class="flex-shrink-0 me-2"><img src="{{data.flagImg}}" alt="country flag" class="options-flagimg" height="20"></div>
+                                            <div class="flex-grow-1">
+                                                <div class="d-flex">
+                                                    <div class="country-name me-1">{{data.countryName}}</div><span class="countrylist-codeno text-muted">{{data.countryCode}}</span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        }
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-3">
+                            <label class="form-label">Select input with buttons & Flag</label>
+                            <div dropdown class="input-group">
+                                <button dropdownToggle class="btn btn-light border" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <img src="{{selectedFlag.flagImg}}" alt="flag img" height="20" class="country-flagimg rounded">
+                                </button>
+                                <input type="text" class="form-control rounded-end flag-input" value="" placeholder="Enter number" />
+                                <div *bsDropdownMenu class="dropdown-menu w-100">
+                                    <div class="p-2 px-3 pt-1 searchlist-input">
+                                        <input type="text" class="form-control form-control-sm border search-countryList" placeholder="Search country name or country code..." />
+                                    </div>
+                                    <ul class="list-unstyled dropdown-menu-list mb-0">
+                                        @for(data of Default; track $index){
+                                        <li class="dropdown-item d-flex cursor-pointer" (click)="selectCode(data)">
+                                            <div class="flex-shrink-0 me-2"><img src="{{data.flagImg}}" alt="country flag" class="options-flagimg" height="20"></div>
+                                            <div class="flex-grow-1">
+                                                <div class="d-flex">
+                                                    <div class="country-name me-1">{{data.countryName}}</div><span class="countrylist-codeno text-muted">{{data.countryCode}}</span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        }
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end card body -->
+        </div>
+        <!-- end card -->
+    </div>
+    <!-- end col -->
+</div>
+<!-- end row -->
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title mb-0">Form Input Spin</h4>
+            </div><!-- end card header -->
+            <div class="card-body">
+                <div>
+                    <div class="row gy-4">
+                        <div class="col-sm-6">
+                            <div>
+                                <h5 class="fs-sm fw-medium text-muted">Default</h5>
+
+                                <div class="input-step">
+                                    <button type="button" class="minus" (click)="defaultincrese('0','1')">–</button>
+                                    <input type="number" class="product-quantity" id="quantity1" value="2" min="0" max="100" readonly>
+                                    <button type="button" class="plus" (click)="defaultincrese('1','1')">+</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div>
+                                <h5 class="fs-sm fw-medium text-muted">Light</h5>
+                                <div class="input-step light">
+                                    <button type="button" class="minus" (click)="defaultincrese('0','2')">–</button>
+                                    <input type="number" class="product-quantity" id="quantity2" value="5" min="0" max="100" readonly>
+                                    <button type="button" class="plus" (click)="defaultincrese('1','2')">+</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end row -->
+
+                    <div class="mt-4 pt-2">
+                        <div class="row gy-4">
+                            <div class="col-sm-6">
+                                <div>
+                                    <h5 class="fs-sm fw-medium text-muted">Default (Full width)</h5>
+                                    <div class="input-step full-width">
+                                        <button type="button" class="minus" (click)="defaultincrese('0','3')">–</button>
+                                        <input type="number" class="product-quantity" id="quantity3" value="4" min="0" max="100" readonly>
+                                        <button type="button" class="plus" (click)="defaultincrese('1','3')">+</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <div>
+                                    <h5 class="fs-sm Progress Nav Steps fw-medium text-muted">Light (Full width)</h5>
+                                    <div class="input-step full-width light">
+                                        <button type="button" class="minus" (click)="defaultincrese('0','4')">–</button>
+                                        <input type="number" class="product-quantity" id="quantity4" value="6" min="0" max="100" readonly>
+                                        <button type="button" class="plus" (click)="defaultincrese('1','4')">+</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end row -->
+                    </div>
+
+                    <div class="row mt-4 pt-2">
+                        <h5 class="fs-sm  fw-medium text-muted">Colored</h5>
+                        <div class="d-flex flex-wrap align-items-start gap-2">
+                            <div class="input-step step-primary">
+                                <button type="button" class="minus" (click)="defaultincrese('0','5')">–</button>
+                                <input type="number" class="product-quantity" id="quantity5" value="6" min="0" max="100" readonly>
+                                <button type="button" class="plus" (click)="defaultincrese('1','5')">+</button>
+                            </div>
+                            <div class="input-step step-secondary">
+                                <button type="button" class="minus" (click)="defaultincrese('0','6')">–</button>
+                                <input type="number" class="product-quantity" id="quantity6" value="1" min="0" max="100" readonly>
+                                <button type="button" class="plus" (click)="defaultincrese('1','6')">+</button>
+                            </div>
+                            <div class="input-step step-success">
+                                <button type="button" class="minus" (click)="defaultincrese('0','7')">–</button>
+                                <input type="number" class="product-quantity" id="quantity7" value="3" min="0" max="100" readonly>
+                                <button type="button" class="plus" (click)="defaultincrese('1','7')">+</button>
+                            </div>
+                            <div class="input-step step-info">
+                                <button type="button" class="minus" (click)="defaultincrese('0','8')">–</button>
+                                <input type="number" class="product-quantity" id="quantity8" value="1" min="0" max="100" readonly>
+                                <button type="button" class="plus" (click)="defaultincrese('1','8')">+</button>
+                            </div>
+                            <div class="input-step step-warning">
+                                <button type="button" class="minus" (click)="defaultincrese('0','9')">–</button>
+                                <input type="number" class="product-quantity" id="quantity9" value="4" min="0" max="100" readonly>
+                                <button type="button" class="plus" (click)="defaultincrese('1','9')">+</button>
+                            </div>
+                            <div class="input-step step-danger">
+                                <button type="button" class="minus" (click)="defaultincrese('0','10')">–</button>
+                                <input type="number" class="product-quantity" id="quantity10" value="5" min="0" max="100" readonly>
+                                <button type="button" class="plus" (click)="defaultincrese('1','10')">+</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div><!-- end card-body -->
+        </div><!-- end card -->
+    </div>
+    <!-- end col -->
+</div>
+<!-- end row -->
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title mb-0">Auto Complete</h4>
+            </div><!-- end card header -->
+
+            <div class="card-body">
+                <div>
+                    <div class="row g-3">
+                        <div class="col-lg-6">
+                            <div>
+                                <label for="autoCompleteFruit" class="text-muted">Search Result of Fruit Names</label>
+                                <ng-autocomplete [data]="Fruit" [searchKeyword]="keyword" placeholder="search the Fruit Name" (selected)='selectEvent($event)' (inputChanged)='onChangeSearch($event)' (inputFocused)='onFocused($event)' historyIdentifier="Fruit" [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate">
+                                </ng-autocomplete>
+
+                                <ng-template #itemTemplate let-item>
+                                    <a [innerHTML]="item.name"></a>
+                                </ng-template>
+
+                                <ng-template #notFoundTemplate let-notFound>
+                                    <div [innerHTML]="notFound"></div>
+                                </ng-template>
+
+                            </div>
+                        </div>
+                        <!-- end col -->
+                        <div class="col-lg-6">
+                            <div>
+                                <label for="autoCompleteCars" class="text-muted">Search Result of Car Names</label>
+                                <ng-autocomplete [data]="Cars" [searchKeyword]="keyword" placeholder="search the Cars Name" (selected)='selectEvent($event)' (inputChanged)='onChangeSearch($event)' (inputFocused)='onFocused($event)' historyIdentifier="Cars" [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate">
+                                </ng-autocomplete>
+
+                                <ng-template #itemTemplate let-item>
+                                    <a [innerHTML]="item.name"></a>
+                                </ng-template>
+
+                                <ng-template #notFoundTemplate let-notFound>
+                                    <div [innerHTML]="notFound"></div>
+                                </ng-template>
+                            </div>
+                        </div>
+                        <!-- end col -->
+                    </div>
+                    <!-- end row -->
+                </div>
+            </div><!-- end card-body -->
+        </div><!-- end card -->
+    </div>
+    <!-- end col -->
+</div>
+<!-- end row -->

@@ -1,0 +1,1565 @@
+<!-- Start Breadcrumbs -->
+<app-breadcrumbs title="Alerts" [breadcrumbItems]="breadCrumbItems"></app-breadcrumbs>
+<!-- End Breadcrumbs -->
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title mb-0">Default Alerts</h4>
+            </div><!-- end card header -->
+
+            <div class="card-body">
+                <p class="text-muted">Use the <code>alert </code>class to show a default alert.</p>
+                <div class="row">
+                    <div class="col-xl-6">
+                        <h6>Primary Alert</h6>
+                        <alert type="primary">
+                            <strong> Hi! </strong> A simple <b>Dismissible primary Alert </b> — check it out!
+                        </alert>
+                        <h6>Secondary Alert</h6>
+                        <alert type="secondary">
+                            <strong> How are you! </strong> A simple <b>secondary alert</b> —check it out!
+                        </alert>
+
+                        <h6>Success Alert</h6>
+                        <alert type="success">
+                            <strong> Yey! Everything worked! </strong> A simple <b>success alert</b> —check it out!
+                        </alert>
+
+                        <h6>Danger Alert</h6>
+                        <alert type="danger">
+                            <strong> Something is very wrong! </strong> A simple <b>danger alert</b> —check it out!
+                        </alert>
+                    </div>
+
+                    <div class="col-xl-6">
+                        <h6>Warning Alert</h6>
+                        <alert type="warning">
+                            <strong> Uh oh, something went wrong </strong> A simple <b>warning alert</b> —check it out!
+                        </alert>
+
+                        <h6>Info Alert</h6>
+                        <alert type="info">
+                            <strong>Don't forget' it !</strong> A simple <b>info alert</b> —check it out!
+                        </alert>
+
+                        <h6>Light Alert</h6>
+                        <alert type="light">
+                            <strong>Mind Your Step!</strong> A simple <b>light alert</b> —check it out!
+                        </alert>
+
+                        <h6>Dark Alert</h6>
+                        <alert type="dark">
+                            <strong>Did you know?</strong> A simple <b>dark alert</b> —check it out!
+                        </alert>
+                    </div>
+                </div>
+            </div><!-- end card-body -->
+
+            <div class="card-body bg-light border-bottom border-top bg-opacity-25">
+                <h5 class="fs-xs text-muted mb-0">HTML Preview</h5>
+            </div>
+            <div class="card-body">
+                <pre class="language-markup" style="height: 310px">
+
+
+&lt;alert type=&quot;primary&quot;&gt;
+&lt;strong&gt; Hi! &lt;/strong&gt; A simple &lt;b&gt;Dismissible primary Alert &lt;/b&gt; &mdash; check it out!
+&lt;/alert&gt;
+    
+&lt;alert type=&quot;secondary&quot;&gt;
+&lt;strong&gt; How are you! &lt;/strong&gt; A simple &lt;b&gt;secondary alert&lt;/b&gt; &mdash;check it out!
+&lt;/alert&gt;
+
+&lt;alert type=&quot;success&quot;&gt;
+&lt;strong&gt; Yey! Everything worked! &lt;/strong&gt; A simple &lt;b&gt;success alert&lt;/b&gt; &mdash;check it out!
+&lt;/alert&gt;
+    
+&lt;alert type=&quot;danger&quot;&gt;
+&lt;strong&gt; Something is very wrong! &lt;/strong&gt; A simple &lt;b&gt;danger alert&lt;/b&gt; &mdash;check it out!
+&lt;/alert&gt;
+    
+&lt;alert type=&quot;warning&quot;&gt;
+&lt;strong&gt; Uh oh, something went wrong &lt;/strong&gt; A simple &lt;b&gt;warning alert&lt;/b&gt; &mdash;check it out!
+&lt;/alert&gt;
+
+&lt;alert type=&quot;info&quot;&gt;
+&lt;strong&gt;Don't forget' it !&lt;/strong&gt; A simple &lt;b&gt;info alert&lt;/b&gt; &mdash;check it out!
+&lt;/alert&gt;
+    
+&lt;alert type=&quot;light&quot;&gt;
+&lt;strong&gt;Mind Your Step!&lt;/strong&gt; A simple &lt;b&gt;light alert&lt;/b&gt; &mdash;check it out!
+&lt;/alert&gt;
+    
+&lt;alert type=&quot;dark&quot;&gt;
+&lt;strong&gt;Did you know?&lt;/strong&gt; A simple &lt;b&gt;dark alert&lt;/b&gt; &mdash;check it out!
+&lt;/alert&gt;
+</pre>
+
+            </div>
+        </div><!-- end card -->
+    </div><!--end col-->
+</div><!--end row-->
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title mb-0">Borderless Alerts</h4>
+            </div><!-- end card header -->
+
+            <div class="card-body">
+                <p class="text-muted">Use the <code>border-0</code> class to set alert without border.</p>
+                <div class="row">
+                    <div class="col-xl-6">
+                        <h6>Primary Alert</h6>
+                        <alert type="primary border-0">
+                            <strong> Hi! </strong> A simple <b>Primary alert</b> —check it out!
+                        </alert>
+
+                        <h6>Secondary Alert</h6>
+                        <alert type="secondary border-0">
+                            <strong> How are you! </strong> A simple <b>secondary alert</b> —check it out!
+                        </alert>
+
+                        <h6>Success Alert</h6>
+                        <alert type="success border-0">
+                            <strong> Yey! Everything worked! </strong> A simple <b>success alert</b> —check it out!
+                        </alert>
+
+                        <h6>Danger Alert</h6>
+                        <alert type="danger border-0">
+                            <strong> Something is very wrong! </strong> A simple danger alert—check it out!
+                        </alert>
+                    </div>
+
+                    <div class="col-xl-6">
+                        <h6>Warning Alert</h6>
+                        <alert type="warning border-0">
+                            <strong> Uh oh, something went wrong </strong> A simple <b>warning alert</b> —check it out!
+                        </alert>
+
+                        <h6>Info Alert</h6>
+                        <alert type="info border-0">
+                            <strong>Don't forget' it !</strong> A simple <b>info alert</b> —check it out!
+                        </alert>
+
+                        <h6>Light Alert</h6>
+                        <alert type="light border-0">
+                            <strong>Mind Your Step!</strong> A simple <b>light alert</b> —check it out!
+                        </alert>
+
+                        <h6>Dark Alert</h6>
+                        <alert type="dark border-0">
+                            <strong>Did you know?</strong> A simple <b>dark alert</b> —check it out!
+                        </alert>
+                    </div>
+                </div>
+            </div><!-- end card-body -->
+
+            <div class="card-body bg-light border-bottom border-top bg-opacity-25">
+                <h5 class="fs-xs text-muted mb-0">HTML Preview</h5>
+            </div>
+            <div class="card-body">
+                <pre class="language-markup" style="height: 310px">
+<code>&lt;!-- Primary Alert --&gt;
+&lt;alert type=&quot;primary border-0&quot;&gt;
+&lt;strong&gt; Hi! &lt;/strong&gt; A simple &lt;b&gt;Primary alert&lt;/b&gt; &mdash;check it out!
+&lt;/alert&gt;
+</code>
+<code>&lt;!-- Secondary Alert --&gt;
+&lt;alert type=&quot;secondary border-0&quot;&gt;
+&lt;strong&gt; How are you! &lt;/strong&gt; A simple &lt;b&gt;secondary alert&lt;/b&gt; &mdash;check it out!
+&lt;/alert&gt;
+</code>
+<code>&lt;!-- Success Alert --&gt;
+&lt;alert type=&quot;success border-0&quot;&gt;
+&lt;strong&gt; Yey! Everything worked! &lt;/strong&gt; A simple &lt;b&gt;success alert&lt;/b&gt; &mdash;check it out!
+&lt;/alert&gt;
+</code>
+<code>&lt;!-- Danger Alert --&gt;
+&lt;alert type=&quot;danger border-0&quot;&gt;
+&lt;strong&gt; Something is very wrong! &lt;/strong&gt; A simple danger alert&mdash;check it out!
+&lt;/alert&gt;
+</code>
+<code>&lt;!-- Warning Alert --&gt;
+&lt;alert type=&quot;warning border-0&quot;&gt;
+&lt;strong&gt; Uh oh, something went wrong &lt;/strong&gt; A simple &lt;b&gt;warning alert&lt;/b&gt; &mdash;check it out!
+&lt;/alert&gt;
+</code>
+<code>&lt;!-- Info Alert --&gt;
+&lt;alert type=&quot;info border-0&quot;&gt;
+&lt;strong&gt;Don't forget' it !&lt;/strong&gt; A simple &lt;b&gt;info alert&lt;/b&gt; &mdash;check it out!
+&lt;/alert&gt;
+</code>
+<code>&lt;!-- Light Alert --&gt;
+&lt;alert type=&quot;light border-0&quot;&gt;
+&lt;strong&gt;Mind Your Step!&lt;/strong&gt; A simple &lt;b&gt;light alert&lt;/b&gt; &mdash;check it out!
+&lt;/alert&gt;
+</code>
+<code>&lt;!-- Dark Alert --&gt;
+&lt;alert type=&quot;dark border-0&quot;&gt;
+&lt;strong&gt;Did you know?&lt;/strong&gt; A simple &lt;b&gt;dark alert&lt;/b&gt; &mdash;check it out!
+&lt;/alert&gt;
+</code></pre>
+            </div>
+        </div><!-- end card -->
+    </div><!--end col-->
+</div><!--end row-->
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title mb-0">Dismissing Alerts</h4>
+            </div><!-- end card header -->
+
+            <div class="card-body">
+                <p class="text-muted">Use the <code>alert-dismissible</code> class to add dismissing button to the
+                    alert.</p>
+                <div class="row">
+                    <div class="col-xl-6">
+                        <h6>Primary Alert</h6>
+                        <alert type="primary" [dismissible]="true">
+                            <strong> Hi! </strong> A simple <b>Dismissible primary Alert </b> — check it out!
+                        </alert>
+
+                        <h6>Secondary Alert</h6>
+                        <alert type="secondary" [dismissible]="true">
+                            <strong> How are you! </strong> A simple <b>Dismissible secondary alert</b>
+                            —check it out!
+                        </alert>
+
+                        <h6>Success Alert</h6>
+                        <alert type="success" [dismissible]="true">
+                            <strong>Right Way !</strong> A simple <b>Dismissible success alert</b> —check
+                            it out!
+                        </alert>
+
+                        <h6>Danger Alert</h6>
+                        <alert type="danger" [dismissible]="true">
+                            <strong> Something is very wrong! </strong> A simple <b>Dismissible danger alert</b> —check
+                            it out!
+                        </alert>
+                    </div>
+
+                    <div class="col-xl-6">
+                        <h6>Warning Alert</h6>
+                        <alert type="warning" [dismissible]="true">
+                            <strong>Welcome Back!</strong> A simple <b>Dismissible warning alert</b> —check it out!
+                        </alert>
+
+                        <h6>Info Alert</h6>
+                        <alert type="info" [dismissible]="true">
+                            <strong>Don't forget' it !</strong> A simple <b>Dismissible info alert</b>
+                            —check it out!
+                        </alert>
+
+                        <h6>Light Alert</h6>
+                        <alert type="light" [dismissible]="true">
+                            <strong>Mind Your Step!</strong> A simple <b>Dismissible light alert</b>
+                            —check it out!
+                        </alert>
+
+                        <h6>Dark Alert</h6>
+                        <alert type="dark" [dismissible]="true">
+                            <strong>Did you know?</strong> A simple <b>Dismissible dark alert</b>
+                            —check it out!
+                        </alert>
+                    </div>
+                </div>
+            </div><!-- end card-body -->
+            <div class="card-body bg-light border-bottom border-top bg-opacity-25">
+                <h5 class="fs-xs text-muted mb-0">HTML Preview</h5>
+            </div>
+            <div class="card-body">
+                <pre class="language-markup" style="height: 310px">
+
+&lt;alert type=&quot;primary&quot; [dismissible]=&quot;true&quot;&gt;
+&lt;strong&gt; Hi! &lt;/strong&gt; A simple &lt;b&gt;Dismissible primary Alert &lt;/b&gt; &mdash; check it out!
+&lt;/alert&gt;
+ 
+&lt;alert type=&quot;secondary&quot; [dismissible]=&quot;true&quot;&gt;
+&lt;strong&gt; How are you! &lt;/strong&gt; A simple &lt;b&gt;Dismissible secondary alert&lt;/b&gt;
+&mdash;check it out!
+&lt;/alert&gt;
+    
+&lt;alert type=&quot;success&quot; [dismissible]=&quot;true&quot;&gt;
+&lt;strong&gt;Right Way !&lt;/strong&gt; A simple &lt;b&gt;Dismissible success alert&lt;/b&gt; &mdash;check
+it out!
+&lt;/alert&gt;
+    
+&lt;alert type=&quot;danger&quot; [dismissible]=&quot;true&quot;&gt;
+&lt;strong&gt; Something is very wrong! &lt;/strong&gt; A simple &lt;b&gt;Dismissible danger alert&lt;/b&gt; &mdash;check
+it out!
+&lt;/alert&gt;
+    
+&lt;alert type=&quot;warning&quot; [dismissible]=&quot;true&quot;&gt;
+&lt;strong&gt;Welcome Back!&lt;/strong&gt; A simple &lt;b&gt;Dismissible warning alert&lt;/b&gt; &mdash;check it out!
+&lt;/alert&gt;
+    
+&lt;alert type=&quot;info&quot; [dismissible]=&quot;true&quot;&gt;
+&lt;strong&gt;Don't forget' it !&lt;/strong&gt; A simple &lt;b&gt;Dismissible info alert&lt;/b&gt;
+&mdash;check it out!
+&lt;/alert&gt;
+    
+&lt;alert type=&quot;info&quot; [dismissible]=&quot;true&quot;&gt;
+&lt;strong&gt;Don't forget' it !&lt;/strong&gt; A simple &lt;b&gt;Dismissible info alert&lt;/b&gt;
+&mdash;check it out!
+&lt;/alert&gt;
+    
+&lt;alert type=&quot;light&quot; [dismissible]=&quot;true&quot;&gt;
+&lt;strong&gt;Mind Your Step!&lt;/strong&gt; A simple &lt;b&gt;Dismissible light alert&lt;/b&gt;
+&mdash;check it out!
+&lt;/alert&gt;
+    
+&lt;alert type=&quot;dark&quot; [dismissible]=&quot;true&quot;&gt;
+&lt;strong&gt;Did you know?&lt;/strong&gt; A simple &lt;b&gt;Dismissible dark alert&lt;/b&gt;
+&mdash;check it out!
+&lt;/alert&gt;</pre>
+            </div>
+        </div><!-- end card -->
+    </div><!--end col-->
+</div><!--end row-->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title mb-0">Link Color Alerts</h4>
+            </div><!-- end card header -->
+
+            <div class="card-body">
+                <p class="text-muted">Use the <code>alert-link</code> class at &lt;a&gt; tag to show matching colored
+                    links within the given alert.</p>
+
+                <div class="row">
+                    <div class="col-xl-6">
+                        <h6>Primary Alert</h6>
+                        <alert type="primary">
+                            A simple Primary alert with <a href="javascript:void(0);" class="alert-link">an example
+                                link</a>. Give it a click if you like.
+                        </alert>
+
+                        <h6>Secondary Alert</h6>
+                        <alert type="secondary">
+                            A simple Secondary alert with <a href="javascript:void(0);" class="alert-link">an example
+                                link</a>. Give it a click if you like.
+                        </alert>
+
+                        <h6>Success Alert</h6>
+                        <alert type="success">
+                            A simple Success alert with <a href="javascript:void(0);" class="alert-link">an example
+                                link</a>. Give it a click if you like.
+                        </alert>
+
+                        <h6>Danger Alert</h6>
+                        <alert type="danger">
+                            A simple Danger alert with <a href="javascript:void(0);" class="alert-link">an example
+                                link</a>. Give it a click if you like.
+                        </alert>
+                    </div>
+
+                    <div class="col-xl-6">
+                        <h6>Warning Alert</h6>
+                        <alert type="warning">
+                            A simple Warning alert with <a href="javascript:void(0);" class="alert-link">an example
+                                link</a>. Give it a click if you like.
+                        </alert>
+
+                        <h6>Info Alert</h6>
+                        <alert type="info">
+                            A simple Info alert with <a href="javascript:void(0);" class="alert-link">an example
+                                link</a>. Give it a click if you like.
+                        </alert>
+
+                        <h6>Light Alert</h6>
+                        <alert type="light">
+                            A simple Light alert with <a href="javascript:void(0);" class="alert-link">an example
+                                link</a>. Give it a click if you like.
+                        </alert>
+
+                        <h6>Dark Alert</h6>
+                        <alert type="dark">
+                            A simple Dark alert with <a href="javascript:void(0);" class="alert-link">an example
+                                link</a>. Give it a click if you like.
+                        </alert>
+                    </div>
+                </div>
+            </div><!-- end card-body -->
+            <div class="card-body bg-light border-bottom border-top bg-opacity-25">
+                <h5 class="fs-xs text-muted mb-0">HTML Preview</h5>
+            </div>
+            <div class="card-body">
+                <pre class="language-markup" style="max-height: 260px;">
+<code>&lt;!-- Primary Alert --&gt;
+&lt;div class=&quot;alert alert-primary&quot; role=&quot;alert&quot;&gt;
+A simple &lt;b&gt;Primary alert&lt;/b&gt; with &lt;a href=&quot;#&quot; class=&quot;alert-link&quot;&gt;an example link&lt;/a&gt;. Give it a click if you like.
+&lt;/div&gt;</code>
+
+<code>&lt;!-- Secondary Alert --&gt;
+&lt;div class=&quot;alert alert-secondary&quot; role=&quot;alert&quot;&gt;
+A simple &lt;b&gt;Secondary alert&lt;/b&gt; with &lt;a href=&quot;#&quot; class=&quot;alert-link&quot;&gt;an example link&lt;/a&gt;. Give it a click if you like.
+&lt;/div&gt;</code>
+
+<code>&lt;!-- Success Alert --&gt;
+&lt;div class=&quot;alert alert-success&quot; role=&quot;alert&quot;&gt;
+A simple &lt;b&gt;Success alert&lt;/b&gt; with &lt;a href=&quot;#&quot; class=&quot;alert-link&quot;&gt;an example link&lt;/a&gt;. Give it a click if you like.
+&lt;/div&gt;</code>
+
+<code>&lt;!-- Danger Alert --&gt;
+&lt;div class=&quot;alert alert-danger&quot; role=&quot;alert&quot;&gt;
+A simple &lt;b&gt;Danger alert&lt;/b&gt; with &lt;a href=&quot;#&quot; class=&quot;alert-link&quot;&gt;an example link&lt;/a&gt;. Give it a click if you like.
+&lt;/div&gt;</code>
+
+<code>&lt;!-- Warning Alert --&gt;
+&lt;div class=&quot;alert alert-warning&quot; role=&quot;alert&quot;&gt;
+A simple &lt;b&gt;Warning alert&lt;/b&gt; with &lt;a href=&quot;#&quot; class=&quot;alert-link&quot;&gt;an example link&lt;/a&gt;. Give it a click if you like.
+&lt;/div&gt;</code>
+
+&lt;div class=&quot;card-body&quot;&gt;
+&lt;p class=&quot;text-muted&quot;&gt;Use the &lt;code&gt;alert-link&lt;/code&gt; class at &amp;lt;a&amp;gt; tag to show matching colored
+links within the given alert.&lt;/p&gt;
+
+&lt;div class=&quot;row&quot;&gt;
+&lt;div class=&quot;col-xl-6&quot;&gt;
+&lt;h6&gt;Primary Alert&lt;/h6&gt;
+        &lt;alert type=&quot;primary&quot;&gt;
+            A simple Primary alert with &lt;a href=&quot;javascript:void(0);&quot; class=&quot;alert-link&quot;&gt;an example
+                link&lt;/a&gt;. Give it a click if you like.
+        &lt;/alert&gt;
+
+        &lt;h6&gt;Secondary Alert&lt;/h6&gt;
+        &lt;alert type=&quot;secondary&quot;&gt;
+            A simple Secondary alert with &lt;a href=&quot;javascript:void(0);&quot; class=&quot;alert-link&quot;&gt;an example
+                link&lt;/a&gt;. Give it a click if you like.
+        &lt;/alert&gt;
+
+        &lt;h6&gt;Success Alert&lt;/h6&gt;
+        &lt;alert type=&quot;success&quot;&gt;
+            A simple Success alert with &lt;a href=&quot;javascript:void(0);&quot; class=&quot;alert-link&quot;&gt;an example
+                link&lt;/a&gt;. Give it a click if you like.
+        &lt;/alert&gt;
+
+        &lt;h6&gt;Danger Alert&lt;/h6&gt;
+        &lt;alert type=&quot;danger&quot;&gt;
+            A simple Danger alert with &lt;a href=&quot;javascript:void(0);&quot; class=&quot;alert-link&quot;&gt;an example
+                link&lt;/a&gt;. Give it a click if you like.
+        &lt;/alert&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;col-xl-6&quot;&gt;
+        &lt;h6&gt;Warning Alert&lt;/h6&gt;
+        &lt;alert type=&quot;warning&quot;&gt;
+            A simple Warning alert with &lt;a href=&quot;javascript:void(0);&quot; class=&quot;alert-link&quot;&gt;an example
+                link&lt;/a&gt;. Give it a click if you like.
+        &lt;/alert&gt;
+
+        &lt;h6&gt;Info Alert&lt;/h6&gt;
+        &lt;alert type=&quot;info&quot;&gt;
+            A simple Info alert with &lt;a href=&quot;javascript:void(0);&quot; class=&quot;alert-link&quot;&gt;an example
+                link&lt;/a&gt;. Give it a click if you like.
+        &lt;/alert&gt;
+
+        &lt;h6&gt;Light Alert&lt;/h6&gt;
+        &lt;alert type=&quot;light&quot;&gt;
+            A simple Light alert with &lt;a href=&quot;javascript:void(0);&quot; class=&quot;alert-link&quot;&gt;an example
+                link&lt;/a&gt;. Give it a click if you like.
+        &lt;/alert&gt;
+
+        &lt;h6&gt;Dark Alert&lt;/h6&gt;
+        &lt;alert type=&quot;dark&quot;&gt;
+            A simple Dark alert with &lt;a href=&quot;javascript:void(0);&quot; class=&quot;alert-link&quot;&gt;an example
+                link&lt;/a&gt;. Give it a click if you like.
+        &lt;/alert&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;!-- end card-body --&gt;</pre>
+            </div>
+        </div><!-- end card -->
+    </div>
+</div><!--end row-->
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title mb-0">Live Alert Example</h4>
+            </div><!-- end card header -->
+
+            <div class="card-body">
+                <p class="text-muted">Click the Show live alert button to show an alert on button click.</p>
+                @for (alert of alerts; track $index) {
+                <div id="liveAlertPlaceholder">
+                    <alert [type]="alert.type" [dismissOnTimeout]="alert.timeout" [dismissible]="true">{{ alert.msg }}
+                    </alert>
+                </div>
+            }
+                <button type="button" class="btn btn-primary" (click)="showalert()">Show live alert</button>
+            </div><!-- end card-body -->
+            <div class="card-body bg-light border-bottom border-top bg-opacity-25">
+                <h5 class="fs-xs text-muted mb-0">HTML Preview</h5>
+            </div>
+            <div class="card-body">
+                <pre class="language-markup" style="max-height: 260px;">
+<code>&#64;for (alert of alerts; track $index) &#0123;
+    &lt;div id=&quot;liveAlertPlaceholder&quot;&gt;
+        &lt;alert [type]=&quot;alert.type&quot; [dismissOnTimeout]=&quot;alert.timeout&quot; [dismissible]=&quot;true&quot;&gt; &#0123;alert.msg&#0125;
+        &lt;/alert&gt;
+    &lt;/div&gt;
+    &#0125;
+</code></pre>
+            </div>
+        </div><!-- end card -->
+    </div><!--end col-->
+</div><!--end row-->
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title mb-0">Outline Alerts</h4>
+            </div><!-- end card header -->
+
+            <div class="card-body">
+                <p class="text-muted">Use the <code>alert-outline</code> class to set an alert with outline.</p>
+                <div class="row">
+                    <div class="col-xl-6">
+                        <h6>Primary Outline Alert</h6>
+
+                        <alert type="primary bg-body-secondary fade show" [dismissible]="true">
+                            <strong> Hi! </strong> A simple <b>Primary alert</b> —check it out!
+                        </alert>
+                        <h6>Secondary Outline Alert</h6>
+                        <alert type="secondary bg-body-secondary fade show" [dismissible]="true">
+                            <strong> How are you! </strong> - Outline <b>secondary alert</b> example
+                        </alert>
+
+                        <h6>Success Outline Alert</h6>
+                        <alert type="success alert-outline bg-body-secondary fade show" [dismissible]="true">
+                            <strong> Yey! Everything worked! </strong> - Outline <b>success alert</b> example
+                        </alert>
+
+                        <h6>Danger Outline Alert</h6>
+                        <alert type="danger alert-outline bg-body-secondary fade show" [dismissible]="true">
+                            <strong> Something is very wrong! </strong> - Outline <b>danger alert</b> example
+                        </alert>
+                    </div>
+
+                    <div class="col-xl-6">
+                        <h6>Warning Outline Alert</h6>
+                        <alert type="warning alert-outline bg-body-secondary fade show" [dismissible]="true">
+                            <strong> Uh oh, something went wrong! </strong> - Outline <b>warning alert</b> example
+                        </alert>
+
+                        <h6>Info Outline Alert</h6>
+                        <alert type="info alert-outline bg-body-secondary fade show" [dismissible]="true">
+                            <strong>Don't forget' it !</strong> - Outline <b>info alert</b> example
+                        </alert>
+
+                        <h6>Dark Alert</h6>
+                        <alert type="dark alert-outline bg-body-secondary fade show" [dismissible]="true">
+                            <strong>Did you know?</strong> - Outline <b>dark alert</b> example
+                        </alert>
+                    </div>
+                </div>
+            </div><!-- end card-body -->
+            <div class="card-body bg-light border-bottom border-top bg-opacity-25">
+                <h5 class="fs-xs text-muted mb-0">HTML Preview</h5>
+            </div>
+            <div class="card-body">
+                <pre class="language-markup" style="max-height: 310px;">
+<code>&lt;!-- Primary Alert --&gt;
+&lt;div id=&quot;liveAlertPlaceholder&quot;&gt;
+&lt;alert [type]=&quot;alert.type&quot; [dismissOnTimeout]=&quot;alert.timeout&quot; [dismissible]=&quot;true&quot;&gt; alert.msg 
+&lt;/alert&gt;
+&lt;/div&gt;
+</code>
+<code>&lt;!-- Secondary Alert --&gt;
+ &lt;alert type=&quot;secondary bg-body-secondary fade show&quot; [dismissible]=&quot;true&quot;&gt;
+&lt;strong&gt; How are you! &lt;/strong&gt; - Outline &lt;b&gt;secondary alert&lt;/b&gt; example
+&lt;/alert&gt;
+</code>
+<code>&lt;!-- Success Alert --&gt;
+ &lt;alert type=&quot;success alert-outline bg-body-secondary fade show&quot; [dismissible]=&quot;true&quot;&gt;
+&lt;strong&gt; Yey! Everything worked! &lt;/strong&gt; - Outline &lt;b&gt;success alert&lt;/b&gt; example
+&lt;/alert&gt;
+</code>
+<code>&lt;!-- Danger Alert --&gt;
+&lt;div class=&quot;alert alert-danger alert-dismissible alert-outline fade show&quot; role=&quot;alert&quot;&gt;
+&lt;strong&gt; Something is very wrong! &lt;/strong&gt; - Outline &lt;b&gt;danger alert&lt;/b&gt; example
+&lt;button type=&quot;button&quot; class=&quot;btn-close&quot; data-bs-dismiss=&quot;alert&quot; aria-label=&quot;Close&quot;&gt;&lt;/button&gt;
+&lt;/div&gt;
+</code>
+<code>&lt;!-- Warning Alert --&gt;
+    &lt;alert type=&quot;warning alert-outline bg-body-secondary fade show&quot; [dismissible]=&quot;true&quot;&gt;
+    &lt;strong&gt; Uh oh, something went wrong! &lt;/strong&gt; - Outline &lt;b&gt;warning alert&lt;/b&gt; example
+&lt;/alert&gt;
+</code>
+<code>&lt;!-- Info Alert --&gt;
+    &lt;alert type=&quot;info alert-outline bg-body-secondary fade show&quot; [dismissible]=&quot;true&quot;&gt;
+    &lt;strong&gt;Don't forget' it !&lt;/strong&gt; - Outline &lt;b&gt;info alert&lt;/b&gt; example
+&lt;/alert&gt;
+</code>
+<code>&lt;!-- Dark Alert --&gt;
+&lt;alert type=&quot;dark alert-outline&quot; [dismissible]=&quot;true&quot;&gt;
+     &lt;strong&gt;Did you know?&lt;/strong&gt; - Outline &lt;b&gt;dark alert&lt;/b&gt; example
+ &lt;/alert&gt;
+</code></pre>
+            </div>
+        </div><!-- end card -->
+    </div><!--end col-->
+</div><!--end row-->
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title mb-0">Left Border Alerts</h4>
+            </div><!-- end card header -->
+            <div class="card-body">
+                <p class="text-muted">Use the <code>alert-border-left </code> class to set an alert with the left border
+                    & outline.</p>
+
+                <div class="row">
+                    <div class="col-xl-6">
+                        <h6>Primary Alert</h6>
+                        <alert type="primary  alert-border-left alert-dismissible fade show" [dismissible]="true">
+                            <i class="ri-user-smile-line me-3 align-middle fs-lg"></i><strong>Primary</strong>
+                            - Left border alert
+                        </alert>
+
+                        <h6>Secondary Alert</h6>
+                        <alert type="secondary alert-border-left alert-dismissible fade show" [dismissible]="true">
+                            <i class="ri-check-double-line me-3 align-middle fs-lg"></i><strong>Secondary</strong>
+                            - Left border alert
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </alert>
+
+                        <h6>Success Alert</h6>
+                        <alert type="success alert-border-left alert-dismissible fade show" [dismissible]="true">
+                            <i class="ri-notification-off-line me-3 align-middle fs-lg"></i><strong>Success</strong>
+                            - Left border alert
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </alert>
+
+                        <h6>Danger Alert</h6>
+                        <alert type="danger alert-border-left alert-dismissible fade show" [dismissible]="true">
+                            <i class="ri-error-warning-line me-3 align-middle fs-lg"></i><strong>Danger</strong>
+                            - Left border alert
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </alert>
+                    </div>
+
+                    <div class="col-xl-6">
+                        <h6>Warning Alert</h6>
+                        <alert type="warning alert-border-left alert-dismissible fade show" [dismissible]="true">
+                            <i class="ri-alert-line me-3 align-middle fs-lg"></i><strong>Warning</strong>
+                            - Left border alert
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </alert>
+
+                        <h6>Info Alert</h6>
+                        <alert type="info alert-border-left alert-dismissible fade show" [dismissible]="true">
+                            <i class="ri-airplay-line me-3 align-middle fs-lg"></i><strong>Info</strong>
+                            - Left border alert
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </alert>
+
+                        <h6>Light Alert</h6>
+                        <alert type="Light alert-border-left alert-dismissible fade show" [dismissible]="true">
+                            <i class="ri-mail-line me-3 align-middle fs-lg"></i><strong>Light</strong>
+                            - Left border alert
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </alert>
+
+                        <h6>Dark Alert</h6>
+                        <alert type="dark alert-border-left alert-dismissible fade show" [dismissible]="true">
+                            <i class="ri-refresh-line me-3  align-middle fs-lg"></i><strong>Dark</strong>
+                            - Left border alert
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </alert>
+                    </div>
+                </div>
+
+            </div><!-- end card-body -->
+            <div class="card-body bg-light border-bottom border-top bg-opacity-25">
+                <h5 class="fs-xs text-muted mb-0">HTML Preview</h5>
+            </div>
+            <div class="card-body">
+                <pre class="language-markup" style="max-height: 310px;">
+<code>&lt;!-- Primary Alert --&gt;
+&lt;alert type=&quot;primary  alert-border-left alert-dismissible fade show&quot; [dismissible]=&quot;true&quot;&gt;
+&lt;i class=&quot;ri-user-smile-line me-3 align-middle fs-lg&quot;&gt;&lt;/i&gt;&lt;strong&gt;Primary&lt;/strong&gt;
+- Left border alert
+&lt;/alert&gt;
+</code>
+<code>&lt;!-- Secondary Alert --&gt;
+&lt;alert type=&quot;secondary alert-border-left alert-dismissible fade show&quot; [dismissible]=&quot;true&quot;&gt;
+&lt;i class=&quot;ri-check-double-line me-3 align-middle fs-lg&quot;&gt;&lt;/i&gt;&lt;strong&gt;Secondary&lt;/strong&gt;
+- Left border alert
+&lt;button type=&quot;button&quot; class=&quot;btn-close&quot; data-bs-dismiss=&quot;alert&quot; aria-label=&quot;Close&quot;&gt;&lt;/button&gt;
+&lt;/alert&gt;
+</code>
+<code>&lt;!-- Success Alert --&gt;
+    &lt;alert type=&quot;success alert-border-left alert-dismissible fade show&quot; [dismissible]=&quot;true&quot;&gt;
+    &lt;i class=&quot;ri-notification-off-line me-3 align-middle fs-lg&quot;&gt;&lt;/i&gt;&lt;strong&gt;Success&lt;/strong&gt;
+    - Left border alert
+    &lt;button type=&quot;button&quot; class=&quot;btn-close&quot; data-bs-dismiss=&quot;alert&quot; aria-label=&quot;Close&quot;&gt;&lt;/button&gt;
+&lt;/alert&gt;
+</code>
+<code>&lt;!-- Danger Alert --&gt;
+    &lt;alert type=&quot;danger alert-border-left alert-dismissible fade show&quot; [dismissible]=&quot;true&quot;&gt;
+    &lt;i class=&quot;ri-error-warning-line me-3 align-middle fs-lg&quot;&gt;&lt;/i&gt;&lt;strong&gt;Danger&lt;/strong&gt;
+    - Left border alert
+    &lt;button type=&quot;button&quot; class=&quot;btn-close&quot; data-bs-dismiss=&quot;alert&quot; aria-label=&quot;Close&quot;&gt;&lt;/button&gt;
+&lt;/alert&gt;
+</code>
+<code>&lt;!-- Warning Alert --&gt;
+    &lt;alert type=&quot;warning alert-border-left alert-dismissible fade show&quot; [dismissible]=&quot;true&quot;&gt;
+    &lt;i class=&quot;ri-alert-line me-3 align-middle fs-lg&quot;&gt;&lt;/i&gt;&lt;strong&gt;Warning&lt;/strong&gt;
+    - Left border alert
+    &lt;button type=&quot;button&quot; class=&quot;btn-close&quot; data-bs-dismiss=&quot;alert&quot; aria-label=&quot;Close&quot;&gt;&lt;/button&gt;
+&lt;/alert&gt;
+</code>
+<code>&lt;!-- Info Alert --&gt;
+    &lt;alert type=&quot;info alert-border-left alert-dismissible fade show&quot; [dismissible]=&quot;true&quot;&gt;
+    &lt;i class=&quot;ri-airplay-line me-3 align-middle fs-lg&quot;&gt;&lt;/i&gt;&lt;strong&gt;Info&lt;/strong&gt;
+    - Left border alert
+    &lt;button type=&quot;button&quot; class=&quot;btn-close&quot; data-bs-dismiss=&quot;alert&quot; aria-label=&quot;Close&quot;&gt;&lt;/button&gt;
+&lt;/alert&gt;
+</code>
+<code>&lt;!-- Light Alert --&gt;
+    &lt;alert type=&quot;Light alert-border-left alert-dismissible fade show&quot; [dismissible]=&quot;true&quot;&gt;
+    &lt;i class=&quot;ri-mail-line me-3 align-middle fs-lg&quot;&gt;&lt;/i&gt;&lt;strong&gt;Light&lt;/strong&gt;
+    - Left border alert
+    &lt;button type=&quot;button&quot; class=&quot;btn-close&quot; data-bs-dismiss=&quot;alert&quot; aria-label=&quot;Close&quot;&gt;&lt;/button&gt;
+&lt;/alert&gt;
+</code>
+<code>&lt;!-- Dark Alert --&gt;
+    &lt;alert type=&quot;dark alert-border-left alert-dismissible fade show&quot; [dismissible]=&quot;true&quot;&gt;
+    &lt;i class=&quot;ri-refresh-line me-3  align-middle fs-lg&quot;&gt;&lt;/i&gt;&lt;strong&gt;Dark&lt;/strong&gt;
+    - Left border alert
+    &lt;button type=&quot;button&quot; class=&quot;btn-close&quot; data-bs-dismiss=&quot;alert&quot; aria-label=&quot;Close&quot;&gt;&lt;/button&gt;
+&lt;/alert&gt;
+</code></pre>
+            </div>
+        </div><!-- end card -->
+    </div>
+</div><!--end row-->
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title mb-0">Label Icon Alerts</h4>
+            </div><!-- end card header -->
+
+            <div class="card-body">
+                <p class="text-muted">Use the <code>alert-label-icon</code> class to set an alert with a label icon.</p>
+                <div class="row">
+                    <div class="col-xl-6">
+                        <h6>Primary Alert</h6>
+                        <alert type="primary alert-dismissible text-white bg-primary alert-label-icon fade show" role="alert" [dismissible]="true">
+                            <i class="ri-user-smile-line label-icon"></i><strong>Primary</strong> -
+                            Label icon alert
+                        </alert>
+
+                        <h6>Secondary Alert</h6>
+                        <alert type="secondary alert-dismissible text-white  bg-secondary alert-label-icon fade show" role="alert" [dismissible]="true">
+                            <i class="ri-check-double-line label-icon"></i><strong>Secondary</strong>
+                            - Label icon alert
+                        </alert>
+
+                        <h6>Success Alert</h6>
+                        <alert type="success alert-dismissible text-white bg-success alert-label-icon fade show" role="alert" [dismissible]="true">
+                            <i class="ri-notification-off-line label-icon"></i><strong>Success</strong>
+                            - Label icon alert
+                        </alert>
+                        <h6>Danger Alert</h6>
+                        <alert type="danger alert-dismissible text-white bg-danger alert-label-icon fade show" role="alert" [dismissible]="true">
+                            <i class="ri-error-warning-line label-icon"></i><strong>Danger</strong>
+                            - Label
+                            icon alert
+                        </alert>
+                    </div>
+
+                    <div class="col-xl-6">
+                        <h6>Warning Alert</h6>
+                        <alert type="Warning  alert-dismissible text-white bg-warning  alert-label-icon fade show" role="alert" [dismissible]="true">
+                            <i class="ri-alert-line label-icon"></i><strong>Warning</strong>
+                            - Label
+                            icon alert
+                        </alert>
+                        <h6>Info Alert</h6>
+                        <alert type="Info  alert-dismissible text-white bg-info  alert-label-icon fade show" role="alert" [dismissible]="true">
+                            <i class="ri-airplay-line label-icon"></i><strong>Info </strong>
+                            - Label
+                            icon alert
+                        </alert>
+
+                        <h6>Light Alert</h6>
+                        <alert type="light alert-dismissible text-dark bg-light alert-label-icon fade show" role="alert" [dismissible]="true">
+                            <i class="ri-mail-line label-icon"></i><strong>Light </strong>
+                            - Label
+                            icon alert
+                        </alert>
+
+                        <h6>Dark Alert</h6>
+                        <alert type="dark lert-dismissible text-white bg-dark alert-label-icon fade show" role="alert" [dismissible]="true">
+                            <i class="ri-refresh-line label-icon"></i><strong>Dark</strong>
+                            - Label
+                            icon alert
+                        </alert>
+                    </div>
+                </div>
+            </div><!-- end card-body -->
+            <div class="card-body bg-light border-bottom border-top bg-opacity-25">
+                <h5 class="fs-xs text-muted mb-0">HTML Preview</h5>
+            </div>
+            <div class="card-body">
+                <pre class="language-markup" style="max-height: 310px;">
+<code>&lt;!-- Primary Alert --&gt;
+&lt;alert type=&quot;primary alert-dismissible text-white bg-primary alert-label-icon fade show&quot;
+role=&quot;alert&quot; [dismissible]=&quot;true&quot;&gt;
+&lt;i class=&quot;ri-user-smile-line label-icon&quot;&gt;&lt;/i&gt;&lt;strong&gt;Primary&lt;/strong&gt; -
+Label icon alert
+&lt;/alert&gt;;
+</code>
+<code>&lt;!-- Secondary Alert --&gt;
+&lt;alert type=&quot;secondary alert-dismissible text-white  bg-secondary alert-label-icon fade show&quot;
+role=&quot;alert&quot; [dismissible]=&quot;true&quot;&gt;
+&lt;i class=&quot;ri-check-double-line label-icon&quot;&gt;&lt;/i&gt;&lt;strong&gt;Secondary&lt;/strong&gt;
+- Label icon alert
+&lt;/alert&gt;
+</code>
+<code>&lt;!-- Success Alert --&gt;
+&lt;alert type=&quot;secondary alert-dismissible text-white  bg-secondary alert-label-icon fade show&quot;
+role=&quot;alert&quot; [dismissible]=&quot;true&quot;&gt;
+&lt;i class=&quot;ri-check-double-line label-icon&quot;&gt;&lt;/i&gt;&lt;strong&gt;Secondary&lt;/strong&gt;
+- Label icon alert
+&lt;/alert&gt;
+</code>
+<code>&lt;!-- Danger Alert --&gt;
+&lt;alert type=&quot;danger alert-dismissible text-white bg-danger alert-label-icon fade show&quot;
+role=&quot;alert&quot; [dismissible]=&quot;true&quot;&gt;
+&lt;i class=&quot;ri-error-warning-line label-icon&quot;&gt;&lt;/i&gt;&lt;strong&gt;Danger&lt;/strong&gt;
+- Label
+icon alert
+&lt;/alert&gt;
+</code>
+<code>&lt;!-- Warning Alert --&gt;
+&lt;alert type=&quot;Warning  alert-dismissible text-white bg-warning  alert-label-icon fade show&quot;
+role=&quot;alert&quot; [dismissible]=&quot;true&quot;&gt;
+&lt;i class=&quot;ri-error-warning-line label-icon&quot;&gt;&lt;/i&gt;&lt;strong&gt;Warning&lt;/strong&gt;
+- Label icon alert
+&lt;/alert&gt;
+</code>
+<code>&lt;!-- Info Alert --&gt;
+&lt;alert type=&quot;Info  alert-dismissible text-white bg-info  alert-label-icon fade show&quot;
+role=&quot;alert&quot; [dismissible]=&quot;true&quot;&gt;
+&lt;i class=&quot;ri-error-warning-line label-icon&quot;&gt;&lt;/i&gt;&lt;strong&gt;Info &lt;/strong&gt;
+- Label icon alert
+&lt;/alert&gt;
+</code>
+<code>&lt;!-- Light Alert --&gt;
+&lt;alert type=&quot;light alert-dismissible text-dark bg-light alert-label-icon fade show&quot; role=&quot;alert&quot;
+[dismissible]=&quot;true&quot;&gt;
+&lt;i class=&quot;ri-error-warning-line label-icon&quot;&gt;&lt;/i&gt;&lt;strong&gt;Light &lt;/strong&gt;
+- Label icon alert
+&lt;/alert&gt;
+</code>
+<code>&lt;!-- Dark Alert --&gt;
+&lt;alert type=&quot;dark lert-dismissible text-white bg-dark alert-label-icon fade show&quot; role=&quot;alert&quot; 
+[dismissible]=&quot;true&quot;&gt;
+&lt;i class=&quot;ri-error-warning-line label-icon&quot;&gt;&lt;/i&gt;&lt;strong&gt;Dark&lt;/strong&gt;
+- Label icon alert
+&lt;/alert&gt;
+</code></pre>
+
+            </div>
+        </div><!-- end card -->
+    </div><!--end col-->
+</div><!--end row-->
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title mb-0">Additional Content Alerts</h4>
+            </div><!-- end card header -->
+
+            <div class="card-body">
+                <p class="text-muted">Use the <code>alert-additional</code> class and Use the <code>alert-</code> class
+                    to HTML elements like headings, paragraphs, dividers etc.</p>
+                <div class="row">
+                    <div class="col-xl-6">
+                        <h6>Primary Alert</h6>
+                        <alert type="primary" [dismissible]="true" class="alert-primary alert-additional fade show">
+                            <div class="alert-body">
+                                <div class="d-flex">
+                                    <div class="flex-shrink-0 me-3">
+                                        <i class="ri-error-warning-line fs-16 align-middle"></i>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <h5 class="alert-heading">Well done !</h5>
+                                        <p class="mb-0">Aww yeah, you successfully read this important alert message.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="alert-content">
+                                <p class="mb-0">Whenever you need to, be sure to use margin utilities to keep things
+                                    nice and tidy.</p>
+                            </div>
+                        </alert>
+
+                        <h6>Danger Alert</h6>
+                        <alert type="danger" [dismissible]="true" class="alert-danger alert-additional fade show mb-xl-0" role="alert">
+                            <div class="alert-body">
+                                <div class="d-flex">
+                                    <div class="flex-shrink-0 me-3">
+                                        <i class="ri-alert-line fs-16 align-middle"></i>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <h5 class="alert-heading">Something is very wrong!</h5>
+                                        <p class="mb-0">Change a few things up and try submitting again.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="alert-content">
+                                <p class="mb-0">Whenever you need to, be sure to use margin
+                                    utilities to keep things nice and tidy.</p>
+                            </div>
+                        </alert>
+                    </div>
+
+                    <div class="col-xl-6">
+
+                        <h6>Success Alert</h6>
+                        <alert type="success" [dismissible]="true" class="alert-success alert-additional fade show">
+                            <div class="alert-body">
+                                <div class="d-flex">
+                                    <div class="flex-shrink-0 me-3">
+                                        <i class="ri-notification-off-line fs-16 align-middle"></i>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <h5 class="alert-heading">Yey! Everything worked!</h5>
+                                        <p class="mb-0">This alert needs your attention, but it's not super important.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="alert-content">
+                                <p class="mb-0">Whenever you need to, be sure to use margin utilities to keep things
+                                    nice and tidy.</p>
+                            </div>
+                        </alert>
+
+                        <h6>Warning Alert</h6>
+                        <alert type="warning" [dismissible]="true" class="alert-warning alert-additional fade show mb-0">
+                            <div class="alert-body">
+                                <div class="d-flex">
+                                    <div class="flex-shrink-0 me-3">
+                                        <i class="ri-alert-line fs-16 align-middle"></i>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <h5 class="alert-heading">Uh oh, something went wrong!</h5>
+                                        <p class="mb-0">Better check yourself, you're not looking too good.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="alert-content">
+                                <p class="mb-0">Whenever you need to, be sure to use margin utilities to keep things
+                                    nice and tidy.</p>
+                            </div>
+                        </alert>
+
+                    </div>
+                </div>
+            </div><!-- end card-body -->
+            <div class="card-body bg-light border-bottom border-top bg-opacity-25">
+                <h5 class="fs-xs text-muted mb-0">HTML Preview</h5>
+            </div>
+            <div class="card-body">
+                <pre class="language-markup" style="max-height: 310px;">
+<code>&lt;!-- Primary Alert --&gt;
+&lt;alert type=&quot;primary&quot; [dismissible]=&quot;true&quot; class=&quot;alert-primary alert-additional fade show&quot;&gt;
+&lt;div class=&quot;alert-body&quot;&gt;
+&lt;div class=&quot;d-flex&quot;&gt;
+&lt;div class=&quot;flex-shrink-0 me-3&quot;&gt;
+&lt;i class=&quot;ri-error-warning-line fs-16 align-middle&quot;&gt;&lt;/i&gt;
+&lt;/div&gt;
+&lt;div class=&quot;flex-grow-1&quot;&gt;
+&lt;h5 class=&quot;alert-heading&quot;&gt;Well done !&lt;/h5&gt;
+&lt;p class=&quot;mb-0&quot;&gt;Aww yeah, you successfully read this important alert message.
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;alert-content&quot;&gt;
+&lt;p class=&quot;mb-0&quot;&gt;Whenever you need to, be sure to use margin utilities to keep things
+nice and tidy.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/alert&gt;</code>
+
+<code>&lt;!-- Danger Alert --&gt;
+&lt;alert type=&quot;danger&quot; [dismissible]=&quot;true&quot;
+class=&quot;alert-danger alert-additional fade show mb-xl-0&quot; role=&quot;alert&quot;&gt;
+&lt;div class=&quot;alert-body&quot;&gt;
+&lt;div class=&quot;d-flex&quot;&gt;
+&lt;div class=&quot;flex-shrink-0 me-3&quot;&gt;
+&lt;i class=&quot;ri-alert-line fs-16 align-middle&quot;&gt;&lt;/i&gt;
+&lt;/div&gt;
+&lt;div class=&quot;flex-grow-1&quot;&gt;
+&lt;h5 class=&quot;alert-heading&quot;&gt;Something is very wrong!&lt;/h5&gt;
+&lt;p class=&quot;mb-0&quot;&gt;Change a few things up and try submitting again.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;alert-content&quot;&gt;
+&lt;p class=&quot;mb-0&quot;&gt;Whenever you need to, be sure to use margin
+utilities to keep things nice and tidy.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/alert&gt;</code>
+
+<code>&lt;!-- Success Alert --&gt;
+&lt;alert type=&quot;success&quot; [dismissible]=&quot;true&quot; class=&quot;alert-success alert-additional fade show&quot;&gt;
+&lt;div class=&quot;alert-body&quot;&gt;
+&lt;div class=&quot;d-flex&quot;&gt;
+&lt;div class=&quot;flex-shrink-0 me-3&quot;&gt;
+&lt;i class=&quot;ri-notification-off-line fs-16 align-middle&quot;&gt;&lt;/i&gt;
+&lt;/div&gt;
+&lt;div class=&quot;flex-grow-1&quot;&gt;
+&lt;h5 class=&quot;alert-heading&quot;&gt;Yey! Everything worked!&lt;/h5&gt;
+&lt;p class=&quot;mb-0&quot;&gt;This alert needs your attention, but it's not super important.
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;alert-content&quot;&gt;
+&lt;p class=&quot;mb-0&quot;&gt;Whenever you need to, be sure to use margin utilities to keep things
+nice and tidy.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/alert&gt;</code>
+
+<code>&lt;!-- Warning Alert --&gt;
+&lt;alert type=&quot;success&quot; [dismissible]=&quot;true&quot; class=&quot;alert-success alert-additional fade show&quot;&gt;
+&lt;div class=&quot;alert-body&quot;&gt;
+&lt;div class=&quot;d-flex&quot;&gt;
+&lt;div class=&quot;flex-shrink-0 me-3&quot;&gt;
+&lt;i class=&quot;ri-notification-off-line fs-16 align-middle&quot;&gt;&lt;/i&gt;
+&lt;/div&gt;
+&lt;div class=&quot;flex-grow-1&quot;&gt;
+&lt;h5 class=&quot;alert-heading&quot;&gt;Yey! Everything worked!&lt;/h5&gt;
+&lt;p class=&quot;mb-0&quot;&gt;This alert needs your attention, but it's not super important.
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;alert-content&quot;&gt;
+&lt;p class=&quot;mb-0&quot;&gt;Whenever you need to, be sure to use margin utilities to keep things
+nice and tidy.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/alert&gt;</code></pre>
+            </div>
+        </div><!-- end card -->
+    </div>
+</div><!--end row-->
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title mb-0">Top Border with Outline Alerts</h4>
+            </div><!-- end card header -->
+
+            <div class="card-body">
+                <p class="text-muted">Use the <code>alert-top-border</code> class to set an alert with the top border
+                    and outline.</p>
+                <div class="row">
+                    <div class="col-xl-6">
+                        <h6>Primary Alert</h6>
+                        <alert [dismissible]="true" type="primary alert-top-border alert-dismissible fade show">
+                            <i class="ri-user-smile-line me-3 align-middle fs-16 text-primary"></i><strong>Primary</strong>
+                            - Top border alert
+                        </alert>
+
+
+                        <h6>Secondary Alert</h6>
+                        <alert [dismissible]="true" type="secondary alert-top-border alert-dismissible fade show">
+                            <i class="ri-check-double-line me-3 align-middle fs-16 text-secondary"></i><strong>Secondary</strong>
+                            - Top border alert
+                        </alert>
+
+                        <h6>Success Alert</h6>
+                        <alert [dismissible]="true" type="success alert-top-border alert-dismissible fade show">
+                            <i class="ri-notification-off-line me-3 align-middle fs-16 text-success"></i><strong>Success</strong>
+                            - Top border alert
+                        </alert>
+
+                        <h6>Danger Alert</h6>
+                        <alert [dismissible]="true" type="danger alert-top-border alert-dismissible fade show">
+                            <i class="ri-error-warning-line me-3 align-middle fs-16 text-danger"></i><strong>Danger</strong>
+                            - Top border alert
+                        </alert>
+                    </div>
+
+                    <div class="col-xl-6">
+                        <h6>Warning Alert</h6>
+                        <alert [dismissible]="true" type="warning alert-top-border alert-dismissible fade show">
+                            <i class="ri-alert-line me-3 align-middle fs-16 text-warning"></i><strong>Warning</strong>
+                            - Top border alert
+                        </alert>
+
+                        <h6>Info Alert</h6>
+                        <alert [dismissible]="true" type="info alert-top-border alert-dismissible fade show">
+                            <i class="ri-airplay-line me-3 align-middle fs-16 text-info"></i><strong>Info</strong>
+                            - Top border alert
+                        </alert>
+
+                        <h6>Light Alert</h6>
+                        <alert [dismissible]="true" type="light alert-top-border alert-dismissible fade show">
+                            <i class="ri-mail-line me-3 align-middle fs-16 text-light"></i><strong>Light</strong>
+                            - Top border alert
+                        </alert>
+
+                        <h6>Dark Alert</h6>
+                        <alert [dismissible]="true" type="dark alert-top-border alert-dismissible fade show">
+                            <i class="ri-refresh-line me-3 align-middle fs-16 text-dark"></i><strong>Dark</strong>
+                            - Top border alert
+                        </alert>
+                    </div>
+                </div>
+            </div><!-- end card-body -->
+            <div class="card-body bg-light border-bottom border-top bg-opacity-25">
+                <h5 class="fs-xs text-muted mb-0">HTML Preview</h5>
+            </div>
+            <div class="card-body">
+                <pre class="language-markup" style="max-height: 310px;">
+<code>&lt;!-- Primary Alert --&gt;
+&lt;alert type=&quot;primary alert-top-border alert-dismissible fade show&quot;&gt;
+&lt;i
+class=&quot;ri-user-smile-line me-3 align-middle fs-16 text-primary&quot;&gt;&lt;/i&gt;&lt;strong&gt;Primary&lt;/strong&gt;
+- Top border alert
+&lt;button type=&quot;button&quot; class=&quot;btn-close&quot; data-bs-dismiss=&quot;alert&quot; aria-label=&quot;Close&quot;&gt;&lt;/button&gt;
+&lt;/alert&gt;
+</code>
+<code>&lt;!-- Secondary Alert --&gt;
+&lt;alert type=&quot;secondary alert-top-border alert-dismissible fade show&quot;&gt;
+&lt;i
+class=&quot;ri-user-smile-line me-3 align-middle fs-16 text-secondary&quot;&gt;&lt;/i&gt;&lt;strong&gt;Secondary&lt;/strong&gt;
+- Top border alert
+&lt;button type=&quot;button&quot; class=&quot;btn-close&quot; data-bs-dismiss=&quot;alert&quot; aria-label=&quot;Close&quot;&gt;&lt;/button&gt;
+&lt;/alert&gt;
+</code>
+<code>&lt;!-- Success Alert --&gt;
+&lt;alert type=&quot;success alert-top-border alert-dismissible fade show&quot;&gt;
+&lt;i
+class=&quot;ri-user-smile-line me-3 align-middle fs-16 text-success&quot;&gt;&lt;/i&gt;&lt;strong&gt;Success&lt;/strong&gt;
+- Top border alert
+&lt;button type=&quot;button&quot; class=&quot;btn-close&quot; data-bs-dismiss=&quot;alert&quot; aria-label=&quot;Close&quot;&gt;&lt;/button&gt;
+&lt;/alert&gt;;
+</code>
+<code>&lt;!-- Danger Alert --&gt;
+    &lt;alert type=&quot;danger alert-top-border alert-dismissible fade show&quot;&gt;
+    &lt;i class=&quot;ri-user-smile-line me-3 align-middle fs-16 text-danger&quot;&gt;&lt;/i&gt;&lt;strong&gt;Danger&lt;/strong&gt;
+    - Top border alert
+    &lt;button type=&quot;button&quot; class=&quot;btn-close&quot; data-bs-dismiss=&quot;alert&quot; aria-label=&quot;Close&quot;&gt;&lt;/button&gt;
+&lt;/alert&gt;
+</code>
+<code>&lt;!-- Warning Alert --&gt;
+&lt;alert type=&quot;warning alert-top-border alert-dismissible fade show&quot;&gt;
+&lt;i class=&quot;ri-user-smile-line me-3 align-middle fs-16 text-warning&quot;&gt;&lt;/i&gt;&lt;strong&gt;Warning&lt;/strong&gt;
+- Top border alert
+&lt;button type=&quot;button&quot; class=&quot;btn-close&quot; data-bs-dismiss=&quot;alert&quot; aria-label=&quot;Close&quot;&gt;&lt;/button&gt;
+&lt;/alert&gt;
+</code>
+<code>&lt;!-- Info Alert --&gt;
+&lt;alert type=&quot;info alert-top-border alert-dismissible fade show&quot;&gt;
+&lt;i class=&quot;ri-user-smile-line me-3 align-middle fs-16 text-info&quot;&gt;&lt;/i&gt;&lt;strong&gt;Info&lt;/strong&gt;
+- Top border alert
+&lt;button type=&quot;button&quot; class=&quot;btn-close&quot; data-bs-dismiss=&quot;alert&quot; aria-label=&quot;Close&quot;&gt;&lt;/button&gt;
+&lt;/alert&gt;;
+</code>
+<code>&lt;!-- Light Alert --&gt;
+ &lt;alert type=&quot;light alert-top-border alert-dismissible fade show&quot;&gt;
+&lt;i class=&quot;ri-user-smile-line me-3 align-middle fs-16 text-light&quot;&gt;&lt;/i&gt;&lt;strong&gt;Light&lt;/strong&gt;
+- Top border alert
+&lt;button type=&quot;button&quot; class=&quot;btn-close&quot; data-bs-dismiss=&quot;alert&quot; aria-label=&quot;Close&quot;&gt;&lt;/button&gt;
+&lt;/alert&gt;
+</code>
+<code>&lt;!-- Dark Alert --&gt;
+&lt;alert type=&quot;dark alert-top-border alert-dismissible fade show&quot;&gt;
+&lt;i class=&quot;ri-user-smile-line me-3 align-middle fs-16 text-dark&quot;&gt;&lt;/i&gt;&lt;strong&gt;Dark&lt;/strong&gt;
+- Top border alert
+&lt;button type=&quot;button&quot; class=&quot;btn-close&quot; data-bs-dismiss=&quot;alert&quot; aria-label=&quot;Close&quot;&gt;&lt;/button&gt;
+&lt;/alert&gt;
+</code></pre>
+            </div>
+        </div><!-- end card -->
+    </div>
+</div><!--end row-->
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title mb-0">Label Icon Arrow Alerts</h4>
+            </div><!-- end card header -->
+
+            <div class="card-body">
+                <p class="text-muted">Use the <code>alert-label-icon label-arrow</code> class to show an alert with
+                    label icon and arrow.</p>
+                <div class="row">
+                    <div class="col-xl-6">
+                        <h6>Primary Alert</h6>
+                        <alert type="primary alert-label-icon label-arrow" [dismissible]="true">
+                            <i class="ri-user-smile-line label-icon"></i><strong>Primary</strong> -
+                            Label icon arrow alert
+                        </alert>
+
+                        <h6>Secondary Alert</h6>
+                        <alert type="secondary alert-label-icon label-arrow" [dismissible]="true">
+                            <i class="ri-check-double-line label-icon"></i><strong>Secondary</strong> -
+                            Label icon
+                            arrow alert
+                        </alert>
+
+                        <h6>Success Alert</h6>
+                        <alert type="success alert-label-icon label-arrow" [dismissible]="true">
+                            <i class="ri-notification-off-line label-icon"></i><strong>Success</strong>
+                            - Label icon arrow alert
+                        </alert>
+
+                        <h6>Danger Alert</h6>
+                        <alert type="danger alert-label-icon label-arrow" [dismissible]="true">
+                            <i class="ri-error-warning-line label-icon"></i><strong>Danger</strong>
+                            - Label
+                            icon arrow alert
+                        </alert>
+                    </div>
+
+                    <div class="col-xl-6">
+                        <h6>Warning Alert</h6>
+                        <alert type="warning alert-label-icon label-arrow" [dismissible]="true">
+                            <i class="ri-alert-line label-icon"></i><strong>Warning</strong> -
+                            Label icon arrow alert
+                        </alert>
+
+                        <h6>info Alert</h6>
+                        <alert type="info alert-label-icon label-arrow" [dismissible]="true">
+                            <i class="ri-airplay-line label-icon"></i><strong>Info</strong> -
+                            Label icon arrow alert
+                        </alert>
+
+                        <h6>Light Alert</h6>
+                        <alert type="light alert-label-icon label-arrow" [dismissible]="true">
+                            <i class="ri-mail-line label-icon"></i><strong>Light</strong>
+                            - Label icon arrow alert
+                        </alert>
+
+                        <h6>Dark Alert</h6>
+                        <alert type="dark alert-label-icon label-arrow" [dismissible]="true">
+                            <i class="ri-refresh-line label-icon"></i><strong>Dark</strong>
+                            - Label icon arrow alert
+                        </alert>
+                    </div>
+                </div>
+            </div><!-- end card-body -->
+            <div class="card-body bg-light border-bottom border-top bg-opacity-25">
+                <h5 class="fs-xs text-muted mb-0">HTML Preview</h5>
+            </div>
+            <div class="card-body">
+                <pre class="language-markup" style="max-height: 310px;">
+<code>&lt;!-- Primary Alert --&gt;
+&lt;alert type=&quot;dark alert-top-border alert-dismissible fade show&quot;&gt;
+&lt;i class=&quot;ri-user-smile-line me-3 align-middle fs-16 text-dark&quot;&gt;&lt;/i&gt;&lt;strong&gt;Dark&lt;/strong&gt;
+- Top border alert
+&lt;button type=&quot;button&quot; class=&quot;btn-close&quot; data-bs-dismiss=&quot;alert&quot; aria-label=&quot;Close&quot;&gt;&lt;/button&gt;
+&lt;/alert&gt;gt;
+</code>
+<code>&lt;!-- Secondary Alert --&gt;
+&lt;alert type=&quot;secondary alert-label-icon label-arrow&quot; [dismissible]=&quot;true&quot;&gt;
+&lt;i class=&quot;ri-check-double-line label-icon&quot;&gt;&lt;/i&gt;&lt;strong&gt;Secondary&lt;/strong&gt; -
+Label icon arrow alert
+&lt;/alert&gt;
+</code>
+<code>&lt;!-- Success Alert --&gt;
+&lt;alert type=&quot;success alert-label-icon label-arrow&quot; [dismissible]=&quot;true&quot;&gt;
+&lt;i class=&quot;ri-notification-off-line label-icon&quot;&gt;&lt;/i&gt;&lt;strong&gt;Success&lt;/strong&gt;
+- Label icon arrow alert
+&lt;/alert&gt;
+</code>
+<code>&lt;!-- Danger Alert --&gt;
+&lt;alert type=&quot;danger alert-label-icon label-arrow&quot; [dismissible]=&quot;true&quot;&gt;
+&lt;i class=&quot;ri-error-warning-line label-icon&quot;&gt;&lt;/i&gt;&lt;strong&gt;Danger&lt;/strong&gt;
+- Label icon arrow alert
+&lt;/alert&gt;
+</code>
+<code>&lt;!-- Warning Alert --&gt;
+&lt;alert type=&quot;warning alert-label-icon label-arrow&quot; [dismissible]=&quot;true&quot;&gt;
+&lt;i class=&quot;ri-alert-line label-icon&quot;&gt;&lt;/i&gt;&lt;strong&gt;Warning&lt;/strong&gt; -
+Label icon arrow alert
+&lt;/alert&gt;;
+</code>
+<code>&lt;!-- Info Alert --&gt;
+&lt;alert type=&quot;info alert-label-icon label-arrow&quot; [dismissible]=&quot;true&quot;&gt;
+&lt;i class=&quot;ri-airplay-line label-icon&quot;&gt;&lt;/i&gt;&lt;strong&gt;Info&lt;/strong&gt; -
+Label icon arrow alert
+&lt;/alert&gt;
+</code>
+<code>&lt;!-- Light Alert --&gt;
+&lt;alert type=&quot;light alert-label-icon label-arrow&quot; [dismissible]=&quot;true&quot;&gt;
+&lt;i class=&quot;ri-mail-line label-icon&quot;&gt;&lt;/i&gt;&lt;strong&gt;Light&lt;/strong&gt;
+- Label icon arrow alert
+&lt;/alert&gt;
+</code>
+<code>&lt;!-- Dark Alert --&gt;
+&lt;alert type=&quot;dark alert-label-icon label-arrow&quot; [dismissible]=&quot;true&quot;&gt;
+&lt;i class=&quot;ri-refresh-line label-icon&quot;&gt;&lt;/i&gt;&lt;strong&gt;Dark&lt;/strong&gt;
+- Label icon arrow alert
+&lt;/alert&gt;
+</code></pre>
+            </div>
+        </div><!-- end card -->
+    </div>
+</div><!--end row-->
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title mb-0">Rounded Label Icon Alerts</h4>
+            </div><!-- end card header -->
+
+            <div class="card-body">
+                <p class="text-muted">Use the <code>alert-label-icon rounded-label</code> class to set an alert with a
+                    rounded label icon.</p>
+                <div class="row">
+                    <div class="col-xl-6">
+                        <h6>Primary Alert</h6>
+                        <alert type="primary alert-label-icon rounded-label" [dismissible]="true">
+                            <i class="ri-user-smile-line label-icon"></i><strong>Primary</strong> -
+                            Rounded label alert
+                        </alert>
+
+                        <h6>Secondary Alert</h6>
+                        <alert type="secondary alert-label-icon rounded-label" [dismissible]="true">
+                            <i class="ri-check-double-line label-icon"></i><strong>Secondary</strong>
+                            - Rounded
+                            label alert
+                        </alert>
+
+                        <h6>Success Alert</h6>
+                        <alert type="success alert-label-icon rounded-label" [dismissible]="true">
+                            <i class="ri-notification-off-line label-icon"></i><strong>Success</strong>
+                            - Rounded
+                            label alert
+                        </alert>
+
+                        <h6>Danger Alert</h6>
+                        <alert type="danger alert-label-icon rounded-label" [dismissible]="true">
+                            <i class="ri-error-warning-line label-icon"></i><strong>Danger</strong>
+                            - Rounded
+                            label alert
+                        </alert>
+                    </div>
+
+                    <div class="col-xl-6">
+                        <h6>Warning Alert</h6>
+                        <alert type="warning alert-label-icon rounded-label" [dismissible]="true">
+                            <i class="ri-alert-line label-icon"></i><strong>Warning</strong> - Rounded
+                            label alert
+                        </alert>
+
+                        <h6>Info Alert</h6>
+                        <alert type="info alert-label-icon rounded-label" [dismissible]="true">
+                            <i class="ri-airplay-line label-icon"></i><strong>Info</strong> -
+                            Rounded label
+                            alert
+                        </alert>
+
+                        <h6>Light Alert</h6>
+                        <alert type="light alert-label-icon rounded-label" [dismissible]="true">
+                            <i class="ri-mail-line label-icon"></i><strong>Light</strong> -
+                            Rounded label
+                            alert
+                        </alert>
+
+                        <h6>Dark Alert</h6>
+                        <alert type="dark alert-label-icon rounded-label" [dismissible]="true">
+                            <i class="ri-refresh-line label-icon"></i><strong>Dark</strong> -
+                            Rounded label
+                            alert
+                        </alert>
+                    </div>
+
+                </div>
+            </div><!-- end card-body -->
+            <div class="card-body bg-light border-bottom border-top bg-opacity-25">
+                <h5 class="fs-xs text-muted mb-0">HTML Preview</h5>
+            </div>
+            <div class="card-body">
+                <pre class="language-markup" style="max-height: 310px;">
+<code>&lt;!-- Primary Alert --&gt;
+&lt;alert type=&quot;primary alert-label-icon rounded-label&quot; [dismissible]=&quot;true&quot;&gt;
+&lt;i class=&quot;ri-user-smile-line label-icon&quot;&gt;&lt;/i&gt;&lt;strong&gt;Primary&lt;/strong&gt; -
+Rounded label alert
+&lt;/alert&gt;
+</code>
+<code>&lt;!-- Secondary Alert --&gt;
+&lt;alert type=&quot;secondary alert-label-icon rounded-label&quot; [dismissible]=&quot;true&quot;&gt;
+&lt;i class=&quot;ri-check-double-line label-icon&quot;&gt;&lt;/i&gt;&lt;strong&gt;Secondary&lt;/strong&gt;
+- Rounded
+label alert
+&lt;/alert&gt;
+</code>
+<code>&lt;!-- Success Alert --&gt;
+&lt;alert type=&quot;success alert-label-icon rounded-label&quot; [dismissible]=&quot;true&quot;&gt;
+&lt;i class=&quot;ri-notification-off-line label-icon&quot;&gt;&lt;/i&gt;&lt;strong&gt;Success&lt;/strong&gt;
+- Rounded label alert
+&lt;/alert&gt;;
+</code>
+<code>&lt;!-- Danger Alert --&gt;
+&lt;alert type=&quot;warning alert-label-icon rounded-label&quot; [dismissible]=&quot;true&quot;&gt;
+&lt;i class=&quot;ri-alert-line label-icon&quot;&gt;&lt;/i&gt;&lt;strong&gt;Warning&lt;/strong&gt; - Rounded
+label alert
+&lt;/alert&gt;
+</code>
+<code>&lt;!-- Warning Alert --&gt;
+&lt;alert type=&quot;warning alert-label-icon rounded-label&quot; [dismissible]=&quot;true&quot;&gt;
+&lt;i class=&quot;ri-alert-line label-icon&quot;&gt;&lt;/i&gt;&lt;strong&gt;Warning&lt;/strong&gt; - Rounded label alert
+&lt;/alert&gt;
+</code>
+<code>&lt;!-- Info Alert --&gt;
+    &lt;alert type=&quot;info alert-label-icon rounded-label&quot; [dismissible]=&quot;true&quot;&gt;
+&lt;i class=&quot;ri-airplay-line label-icon&quot;&gt;&lt;/i&gt;&lt;strong&gt;Info&lt;/strong&gt; -
+Rounded labelalert
+&lt;/alert
+</code>
+<code>&lt;!-- Light Alert --&gt;
+&lt;alert type=&quot;light alert-label-icon rounded-label&quot; [dismissible]=&quot;true&quot;&gt;
+&lt;i class=&quot;ri-mail-line label-icon&quot;&gt;&lt;/i&gt;&lt;strong&gt;Light&lt;/strong&gt; -
+Rounded label alert
+&lt;/alert&gt;
+</code>
+<code>&lt;!-- Dark Alert --&gt;
+&lt;alert type=&quot;dark alert-label-icon rounded-label&quot; [dismissible]=&quot;true&quot;&gt;
+&lt;i class=&quot;ri-refresh-line label-icon&quot;&gt;&lt;/i&gt;&lt;strong&gt;Dark&lt;/strong&gt; -Rounded label alert
+&lt;/alert&gt;
+</code></pre>
+            </div>
+        </div><!-- end card -->
+    </div>
+</div><!--end row-->
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title mb-0">Solid Alerts</h4>
+            </div><!-- end card header -->
+
+            <div class="card-body">
+                <p class="text-muted">Use the <code>border-*</code>, <code>bg-*</code>, <code>text-white</code> class to
+                    set an alert with solid style.</p>
+                <div class="row">
+                    <div class="col-xl-6">
+                        <h6>Primary Solid Alert</h6>
+                        <alert type="primary bg-primary text-white" [dismissible]="true">
+                            <strong>Hi!</strong> - Solid <b>primary alert</b> example
+                        </alert>
+
+                        <h6>Secondary Solid Alert</h6>
+                        <alert type="secondary bg-secondary text-white" [dismissible]="true">
+                            <strong>How are you!</strong> - Solid <b>Secondary alert</b> example
+                        </alert>
+
+                        <h6>Success Solid Alert</h6>
+                        <alert type="success bg-success text-white" [dismissible]="true"> <strong>Yey! Everything
+                                worked! </strong> - Solid <b>success alert</b> example
+                        </alert>
+
+                        <h6>Danger Solid Alert</h6>
+                        <alert type="danger bg-danger text-white" [dismissible]="true"> <strong>Something is very
+                                wrong!</strong> - Solid <b>danger alert</b> example
+                        </alert>
+                    </div>
+
+                    <div class="col-xl-6">
+                        <h6>Warning Solid Alert</h6>
+                        <alert type="warning bg-warning text-white" [dismissible]="true"> <strong>Uh oh, something
+                                went wrong!</strong> - Solid <b>warning alert</b> example
+                        </alert>
+
+                        <h6>Info Solid Alert</h6>
+                        <alert type="info bg-info text-white" [dismissible]="true"> <strong>Don't forget' it
+                                !</strong> - Solid <b>info alert</b> example
+                        </alert>
+
+
+                        <h6>Light Solid Alert</h6>
+                        <alert type="light bg-light text-white" [dismissible]="true"> <strong>Mind Your
+                                Step!</strong> - Solid <b>secondary alert</b> example
+                        </alert>
+
+                        <h6>Dark Solid Alert</h6>
+                        <alert type="dark bg-dark text-white" [dismissible]="true"> <strong>Did you
+                                know?</strong> - Solid <b>dark alert</b> example
+                        </alert>
+
+                    </div>
+                </div>
+            </div><!-- end card-body -->
+            <div class="card-body bg-light border-bottom border-top bg-opacity-25">
+                <h5 class="fs-xs text-muted mb-0">HTML Preview</h5>
+            </div>
+            <div class="card-body">
+                <pre class="language-markup" style="max-height: 310px;">
+<code>&lt;!-- Primary Alert --&gt;
+&lt;alert type=&quot;primary bg-primary text-white&quot; [dismissible]=&quot;true&quot;&gt;
+&lt;strong&gt;Hi!&lt;/strong&gt; - Solid &lt;b&gt;primary alert&lt;/b&gt; example
+&lt;/alert&gt;
+</code>
+<code>&lt;!-- Secondary Alert --&gt;
+&lt;alert type=&quot;secondary bg-secondary text-white&quot; [dismissible]=&quot;true&quot;&gt;
+ &lt;strong&gt;How are you!&lt;/strong&gt; - Solid &lt;b&gt;Secondary alert&lt;/b&gt; example
+&lt;/alert&gt;
+</code>
+<code>&lt;!-- Success Alert --&gt;
+&lt;alert type=&quot;success bg-success text-white&quot; [dismissible]=&quot;true&quot;&gt; &lt;strong&gt;Yey! Everything
+worked! &lt;/strong&gt; - Solid &lt;b&gt;success alert&lt;/b&gt; example
+&lt;/alert&gt;
+</code>
+<code>&lt;!-- Danger Alert --&gt;
+&lt;alert type=&quot;danger bg-danger text-white&quot; [dismissible]=&quot;true&quot;&gt; &lt;strong&gt;Something is very
+wrong!&lt;/strong&gt; - Solid &lt;b&gt;danger alert&lt;/b&gt; example
+&lt;/alert&gt;
+</code>
+<code>&lt;!-- Warning Alert --&gt;
+&lt;alert type=&quot;warning bg-warning text-white&quot; [dismissible]=&quot;true&quot;&gt; &lt;strong&gt;Uh oh, something
+went wrong!&lt;/strong&gt; - Solid &lt;b&gt;warning alert&lt;/b&gt; example
+&lt;/alert&gt;t;
+</code>
+<code>&lt;!-- Info Alert --&gt;
+&lt;alert type=&quot;info bg-info text-white&quot; [dismissible]=&quot;true&quot;&gt; &lt;strong&gt;Don't forget' it
+!&lt;/strong&gt; - Solid &lt;b&gt;info alert&lt;/b&gt; example
+&lt;/alert
+</code>
+<code>&lt;!-- Light Alert --&gt;
+&lt;alert type=&quot;light bg-light text-white&quot; [dismissible]=&quot;true&quot;&gt; &lt;strong&gt;Mind Your
+Step!&lt;/strong&gt; - Solid &lt;b&gt;secondary alert&lt;/b&gt; example
+&lt;/alert&gt;
+</code>
+<code>&lt;!-- Dark Alert --&gt;
+&lt;alert type=&quot;dark bg-dark text-white&quot; [dismissible]=&quot;true&quot;&gt; &lt;strong&gt;Did you
+know?&lt;/strong&gt; - Solid &lt;b&gt;dark alert&lt;/b&gt; example
+&lt;/alert&gt;;
+</code></pre>
+            </div>
+        </div><!-- end card -->
+    </div>
+</div><!--end row-->

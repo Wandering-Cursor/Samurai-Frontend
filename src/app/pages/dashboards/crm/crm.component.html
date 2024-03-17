@@ -1,0 +1,319 @@
+<!-- Start Breadcrumbs -->
+<app-breadcrumbs title="CRM" [breadcrumbItems]="breadCrumbItems"></app-breadcrumbs>
+<!-- End Breadcrumbs -->
+
+<div class="row">
+    @for (data of statedata; track $index) {
+    <div class="col-xxl col-sm-6">
+        <div class="card overflow-hidden">
+            <div class="card-body">
+                <div class="avatar-sm float-end">
+                    <div class="avatar-title bg-{{data.iconcolor}}-subtle text-{{data.iconcolor}} fs-3xl rounded">
+                        <i class="ph ph-{{data.icon}}"></i>
+                    </div>
+                </div>
+                <h4>{{data.frontsymbol}}<span class="counter-value" [countUp]="data.amount"></span>{{data.symbol}} </h4>
+                <p class="text-muted mb-4">{{data.title}}</p>
+                <p class="text-muted mb-0"><span class="badge bg-{{data.color}}-subtle text-{{data.color}}"><i class="bi bi-{{data.arrowicon}}"></i> {{data.rate}}%</span> vs last month</p>
+            </div>
+            <div class="progress-sm rounded-0" role="progressbar">
+                <progressbar [value]="data.rangevalue" [type]="data.iconcolor"></progressbar>
+            </div>
+        </div>
+    </div><!--end col-->
+    }
+</div><!--end row-->
+
+<div class="row">
+    <div class="col-xl-3">
+        <div class="card card-height-100">
+            <div class="card-header align-items-center d-flex">
+                <h6 class="card-title mb-0 flex-grow-1">Realized Rate</h6>
+                <div dropdown class="dropdown card-header-dropdown flex-shrink-0">
+                    <a dropdownToggle class="text-reset dropdown-btn" href="javascript:void(0);">
+                        <i class="bi bi-three-dots-vertical"></i>
+                    </a>
+                    <div *bsDropdownMenu class="dropdown-menu dropdown-menu-end">
+                        <a class="dropdown-item" href="javascript:void(0);" (click)="changerealizedValue()">Current Years</a>
+                        <a class="dropdown-item" href="javascript:void(0);" (click)="changerealizedValue()">Last Years</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div id="realized_rate" class="apex-charts" dir="ltr">
+                    <apx-chart [series]="realizedChart.series" [chart]="realizedChart.chart" [markers]="realizedChart.markers" [stroke]="realizedChart.stroke" [fill]="realizedChart.fill" [colors]="realizedChart.colors" [xaxis]="realizedChart.xaxis" dir="ltr"></apx-chart>
+                </div>
+            </div>
+        </div>
+    </div><!--end col-->
+    <div class="col-xl-9">
+        <div class="card card-height-100">
+            <div class="card-header align-items-center d-flex">
+                <h6 class="card-title mb-0 flex-grow-1">Balance Overview</h6>
+                <div>
+                    <button type="button" class="btn btn-subtle-secondary btn-sm me-1" (click)="changebalanceValue()">
+                        ALL
+                    </button>
+                    <button type="button" class="btn btn-subtle-secondary btn-sm me-1" (click)="changebalanceValue()">
+                        1M
+                    </button>
+                    <button type="button" class="btn btn-subtle-secondary btn-sm me-1" (click)="changebalanceValue()">
+                        6M
+                    </button>
+                    <button type="button" class="btn btn-subtle-primary btn-sm" (click)="changebalanceValue()">
+                        1Y
+                    </button>
+                </div>
+            </div>
+            <div class="card-body">
+                <div id="balance_overview" class="apex-charts ms-n3" dir="ltr">
+                    <apx-chart [series]="balance_overviewChart.series" [chart]="balance_overviewChart.chart" [markers]="balance_overviewChart.markers" [grid]="balance_overviewChart.grid" [legend]="balance_overviewChart.legend" [dataLabels]="balance_overviewChart.dataLabels" [colors]="balance_overviewChart.colors" [xaxis]="balance_overviewChart.xaxis" [stroke]="balance_overviewChart.stroke" dir="ltr"></apx-chart>
+                </div>
+                <div class="table-responsive table-card mb-0 mt-2">
+                    <table class="table table-sm table-borderless align-middle text-center mb-0 table-nowrap">
+                        <tbody>
+                            <tr>
+                                <td class="text-start border-bottom-0"><i class="bi bi-diamond-fill align-baseline me-1 text-primary"></i> Total Revenue</td>
+                                <th>$795.69k</th>
+                                <td class="text-muted"><span class="text-success"><i class="bi bi-caret-up-fill align-baseline me-1"></i> 6.19%</span> than last years</td>
+                                <td class="text-end" style="width: 150px;"><a href="javascript:void(0);" class="icon-link icon-link-hover text-decoration-underline link-underline link-underline-opacity-0 link-underline-opacity-75-hover">View All <i class="bi bi-arrow-right"></i></a></td>
+                            </tr>
+                            <tr>
+                                <td class="text-start"><i class="bi bi-diamond-fill align-baseline me-1 text-light"></i> Total Expenses</td>
+                                <th>$415.37k</th>
+                                <td class="text-muted"><span class="text-success"><i class="bi bi-caret-up-fill align-baseline me-1"></i> 3.62%</span> than last years</td>
+                                <td class="text-end" style="width: 150px;"><a href="javascript:void(0);" class="icon-link icon-link-hover text-decoration-underline link-underline link-underline-opacity-0 link-underline-opacity-75-hover">View All <i class="bi bi-arrow-right"></i></a></td>
+                            </tr>
+                            <tr>
+                                <td class="text-start"><i class="bi bi-diamond-fill align-baseline me-1 text-secondary"></i> Profit Ratio </td>
+                                <th>3.6%</th>
+                                <td class="text-muted"><span class="text-danger"><i class="bi bi-caret-down-fill align-baseline me-1"></i> 1.47%</span> than last years</td>
+                                <td class="text-end" style="width: 150px;"><a href="javascript:void(0);" class="icon-link icon-link-hover text-decoration-underline link-underline link-underline-opacity-0 link-underline-opacity-75-hover">View All <i class="bi bi-arrow-right"></i></a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div><!--end col-->
+</div><!--end row-->
+
+<div class="row">
+    <div class="col-xl-6">
+        <div class="card" id="leadsList">
+            <div class="card-header align-items-center d-flex">
+                <h4 class="card-title mb-0 flex-grow-1">Contact Leads</h4>
+                <div class="flex-shrink-0">
+                    <div dropdown class="dropdown card-header-dropdown sortble-dropdown">
+                        <a dropdownToggle class="text-reset dropdown-btn" href="javascript:void(0);">
+                            <span class="fw-semibold text-uppercase fs-xs">Sort by:
+                            </span><span class="text-muted dropdown-title">{{sortValue}}</span> <i class="mdi mdi-chevron-down ms-1"></i>
+                        </a>
+                        <div *bsDropdownMenu class="dropdown-menu dropdown-menu-end">
+                            <button class="dropdown-item sort" (click)="sortBy('score','Leads Score')">Leads
+                                Score</button>
+                            <button class="dropdown-item sort" (click)="sortBy('name','Contact Name')">Contact
+                                Name</button>
+                            <button class="dropdown-item sort" (click)="sortBy('phone','Phone Number')">Phone
+                                Number</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive table-card mt-0">
+                    <table class="table table-borderless table-centered align-middle table-nowrap mb-0">
+                        <thead class="text-muted table-light">
+                            <tr>
+                                <th scope="col" class="sort cursor-pointer" (click)="onSort('name')">
+                                    Contact Name</th>
+                                <th scope="col" class="sort cursor-pointer" (click)="onSort('phone')">Phone Number</th>
+                                <th scope="col" class="sort cursor-pointer" (click)="onSort('score')">Leads Score</th>
+                                <th scope="col" class="sort cursor-pointer" (click)="onSort('location')">Location</th>
+                                <th scope="col" class="sort cursor-pointer" (click)="onSort('date')">
+                                    Create Date</th>
+                            </tr>
+                        </thead>
+                        <tbody class="list">
+                            @for (data of contact; track $index) {
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center gap-2">
+                                        <img src="{{data.img}}" alt="react.png" class="avatar-xxs rounded">
+                                        <a routerLink="/pages/profile" class="text-reset contact_name">{{data.name}}</a>
+                                    </div>
+                                </td>
+                                <td class="phone_number">{{data.phone}}</td>
+                                <td class="leads_score">{{data.score}}</td>
+                                <td class="location">{{data.location}}</td>
+                                <td class="create_date">{{data.date}}</td>
+                            </tr><!-- end tr -->
+                        }
+                        </tbody><!-- end tbody -->
+                    </table><!-- end table -->
+                </div>
+                <div class="align-items-center mt-4 pt-2 row">
+                    <div class="col-sm">
+                        <div class="text-muted text-center text-sm-start">
+                            Showing <span class="fw-semibold">{{leadlist?.length}}</span> of <span class="fw-semibold">{{contact?.length}}</span> Results
+                        </div>
+                    </div>
+                    <div class="col-sm-auto mt-3 mt-sm-0">
+                        <pagination [totalItems]="leadlist?.length" [itemsPerPage]="5" (pageChanged)="pageChanged($event)"></pagination>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!--end col-->
+    <div class=" col-xl-3 col-lg-6">
+        <div class="card card-height-100">
+            <div class="card-header align-items-center d-flex">
+                <h6 class="card-title mb-0 flex-grow-1">Email Sent</h6>
+                <div dropdown class="dropdown card-header-dropdown flex-shrink-0">
+                    <a dropdownToggle class="text-reset dropdown-btn" href="javascript:void(0);">
+                        <i class="bi bi-three-dots-vertical"></i>
+                    </a>
+                    <div *bsDropdownMenu class="dropdown-menu dropdown-menu-end">
+                        <a class="dropdown-item" href="javascript:void(0);" (click)="changeEmailchart()">Current Years</a>
+                        <a class="dropdown-item" href="javascript:void(0);" (click)="changeEmailchart()">Last Years</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div id="emailSent" dir="ltr">
+                    <apx-chart [series]="emailSentChart.series" [chart]="emailSentChart.chart" [plotOptions]="emailSentChart.plotOptions" [legend]="emailSentChart.legend" [labels]="emailSentChart.labels" [colors]="emailSentChart.colors" dir="ltr"></apx-chart>
+                </div>
+            </div>
+        </div>
+    </div><!--end col-->
+    <div class="col-xl-3 col-lg-6">
+        <div class="card card-height-100">
+            <div class="card-header align-items-center d-flex">
+                <h6 class="card-title mb-0 flex-grow-1">Users Activity</h6>
+                <div dropdown class="dropdown card-header-dropdown flex-shrink-0">
+                    <a dropdownToggle class="text-reset dropdown-btn" href="javascript:void(0);" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="text-muted">This Month<i class="mdi mdi-chevron-down ms-1"></i></span>
+                    </a>
+                    <div *bsDropdownMenu class="dropdown-menu dropdown-menu-end">
+                        <a class="dropdown-item" href="javascript:void(0);" (click)="changeActivity()">This Month</a>
+                        <a class="dropdown-item" href="javascript:void(0);" (click)="changeActivity()">Last Month</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div id="usersActivity" class="apex-charts ms-n2" dir="ltr">
+                    <apx-chart [series]="usersActivityChart.series" [chart]="usersActivityChart.chart" [plotOptions]="usersActivityChart.plotOptions" [dataLabels]="usersActivityChart.dataLabels" [xaxis]="usersActivityChart.xaxis" [grid]="usersActivityChart.grid" [legend]="usersActivityChart.legend" [fill]="usersActivityChart.fill" [colors]="usersActivityChart.colors" dir="ltr"></apx-chart>
+                </div>
+            </div>
+        </div>
+    </div><!--end col-->
+    <div class="col-xxl-4">
+        <div class="card">
+            <div class="card-header align-items-center d-flex">
+                <h6 class="card-title mb-0 flex-grow-1">Sync Status Breakdown</h6>
+                <div dropdown class="dropdown card-header-dropdown flex-shrink-0">
+                    <a dropdownToggle class="text-reset dropdown-btn" href="javascript:void(0);" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="text-muted">This Month<i class="mdi mdi-chevron-down ms-1"></i></span>
+                    </a>
+                    <div *bsDropdownMenu class="dropdown-menu dropdown-menu-end">
+                        <a class="dropdown-item" href="javascript:void(0);" (click)="changeStatuschart()">This Month</a>
+                        <a class="dropdown-item" href="javascript:void(0);" (click)="changeStatuschart()">Last Month</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div id="syncStatusBreakdown" class="apex-charts" dir="ltr">
+                    <apx-chart [series]="syncStatusBreakdownChart.series" [chart]="syncStatusBreakdownChart.chart" [plotOptions]="syncStatusBreakdownChart.plotOptions" [dataLabels]="syncStatusBreakdownChart.dataLabels" [xaxis]="syncStatusBreakdownChart.xaxis" [grid]="syncStatusBreakdownChart.grid" [yaxis]="syncStatusBreakdownChart.yaxis" [fill]="syncStatusBreakdownChart.fill" [legend]="syncStatusBreakdownChart.legend" [colors]="syncStatusBreakdownChart.colors" dir="ltr"></apx-chart>
+                </div>
+            </div>
+        </div>
+    </div><!--end col-->
+    <div class="col-xxl-4">
+        <div class="card">
+            <div class="card-header align-items-center d-flex">
+                <h6 class="card-title mb-0 flex-grow-1">Open Deals</h6>
+                <div dropdown class="dropdown card-header-dropdown flex-shrink-0">
+                    <a dropdownToggle class="text-reset dropdown-btn" href="javascript:void(0);">
+                        <span class="fw-semibold text-uppercase">Sort by:
+                        </span><span class="text-muted">Today<i class="mdi mdi-chevron-down ms-1"></i></span>
+                    </a>
+                    <div *bsDropdownMenu class="dropdown-menu dropdown-menu-end">
+                        <a class="dropdown-item" href="javascript:void(0);">Today</a>
+                        <a class="dropdown-item" href="javascript:void(0);">Yesterday</a>
+                        <a class="dropdown-item" href="javascript:void(0);">Last 7 Days</a>
+                        <a class="dropdown-item" href="javascript:void(0);">Last 30 Days</a>
+                        <a class="dropdown-item" href="javascript:void(0);">This Month</a>
+                        <a class="dropdown-item" href="javascript:void(0);">Last Month</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body px-0">
+                <ngx-simplebar class="card-body py-0" style="max-height: 350px;">
+                    <div class="vstack gap-2">
+                        @for (data of dealList; track $index) {
+                        <div class="py-2 px-3 border border-dashed rounded">
+                            <div class="d-flex align-items-center gap-2">
+                                <div class="flex-shrink-0">
+                                    <img src="{{data.img}}" alt="" class="avatar-sm rounded">
+                                </div>
+                                <div class="flex-grow-1 overflow-hidden">
+                                    <h6 class="fs-md text-truncate"><a href="javascript:void(0);" class="text-reset">{{data.title}}</a></h6>
+                                    <p class="text-muted mb-0">{{data.subtitle}}</p>
+                                </div>
+                                <div class="text-end">
+                                    <h5 class="fs-md text-primary mb-0">{{data.price}}</h5>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    </div>
+                </ngx-simplebar>
+            </div>
+        </div>
+    </div><!--end col-->
+    <div class="col-xxl-4">
+        <div class="card">
+            <div class="card-header align-items-center d-flex">
+                <h6 class="card-title mb-0 flex-grow-1">Create Tasks List</h6>
+                <div dropdown class="dropdown card-header-dropdown flex-shrink-0">
+                    <a dropdownToggle class="text-reset dropdown-btn" href="javascript:void(0);">
+                        <span class="fw-semibold text-uppercase">Sort by:
+                        </span><span class="text-muted">Today<i class="mdi mdi-chevron-down ms-1"></i></span>
+                    </a>
+                    <div *bsDropdownMenu class="dropdown-menu dropdown-menu-end">
+                        <a class="dropdown-item" href="javascript:void(0);">Today</a>
+                        <a class="dropdown-item" href="javascript:void(0);">Yesterday</a>
+                        <a class="dropdown-item" href="javascript:void(0);">Last 7 Days</a>
+                        <a class="dropdown-item" href="javascript:void(0);">Last 30 Days</a>
+                        <a class="dropdown-item" href="javascript:void(0);">This Month</a>
+                        <a class="dropdown-item" href="javascript:void(0);">Last Month</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body px-0">
+                <ngx-simplebar class="card-body py-0" style="max-height: 350px;">
+                    <ul class="list-group list-group-flush">
+                        @for (data of taskList; track $index) {
+                        <li class="list-group-item ps-0">
+                            <div class="d-flex align-items-start">
+                                <div class="form-check ps-0 flex-sharink-0">
+                                    <input type="checkbox" class="form-check-input ms-0" id="task_one">
+                                </div>
+                                <div class="flex-grow-1 overflow-hidden">
+                                    <label class="form-check-label mb-0 ps-2" for="task_one">
+                                        <span class="d-block fw-semibold mb-1 text-truncate">{{data.title}}</span>
+                                        <span class="text-muted d-block">{{data.content}}</span>
+                                    </label>
+                                </div>
+                                <div class="flex-shrink-0 ms-2">
+                                    <p class="text-muted fs-xs fw-medium mb-0">{{data.date}}</p>
+                                </div>
+                            </div>
+                        </li>
+                    }
+                    </ul>
+                </ngx-simplebar>
+            </div>
+        </div>
+    </div><!--end col-->
+</div><!--end row-->

@@ -1,0 +1,48 @@
+//
+// _swiper.scss
+//
+
+.custom-arrow .slick-next {
+    background-color: rgba(var(--#{$prefix}primary-rgb), 0.2);
+    right: 15px;
+    height: 30px;
+    width: 30px;
+    border-radius: 8px;
+
+    &::before {
+        content: "\ea6e" !important;
+        font-family: "remixicon";
+        font-size: 28px;
+        line-height: 1;
+        color: #3762ea;
+        opacity: 0.75;
+    }
+
+    &:hover {
+        background-color: rgba(var(--#{$prefix}primary-rgb), 0.2);
+    }
+
+}
+
+.custom-arrow .slick-prev {
+    background-color: rgba(var(--#{$prefix}primary-rgb), 0.2);
+    right: 15px;
+    left: 15px;
+    height: 30px;
+    width: 30px;
+    border-radius: 8px;
+
+    &::before {
+        content: "\ea64" !important;
+        font-family: "remixicon";
+        font-size: 28px;
+        line-height: 1;
+        color: #3762ea;
+        opacity: 0.75;
+    }
+
+    // &:hover{
+    //     background-color: rgba(var(--#{$prefix}primary-rgb), 0.2);
+    // }
+
+}

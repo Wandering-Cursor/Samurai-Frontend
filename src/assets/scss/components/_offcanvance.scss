@@ -1,0 +1,64 @@
+.custom-offcanvas {
+    position: fixed;
+    inset: 0 0 0 auto;
+    background-color: var(--#{$prefix}secondary-bg);
+    width: 400px;
+    z-index: $zindex-offcanvas;
+    max-width: 100%;
+    color: var(--#{$prefix}body-color);
+    box-shadow: $offcanvas-box-shadow;
+    display: flex;
+    flex-direction: column;
+    visibility: hidden;
+    transition: transform 0.3s ease-in-out;
+    transform: translateX(100%);
+
+    .offcanvas-body {
+        padding: $offcanvas-padding-y $offcanvas-padding-x;
+    }
+
+    &.show {
+        visibility: visible;
+        transform: none;
+    }
+}
+
+#backdrop {
+    &.offcanvas-backdrop {
+        display: none;
+
+        &.show {
+            display: inline-block;
+        }
+    }
+}
+
+
+// rtl
+[dir="rtl"] {
+    .custom-offcanvas {
+        position: fixed;
+        inset: 0 auto 0 0;
+        background-color: var(--#{$prefix}secondary-bg);
+        width: 400px;
+        z-index: $zindex-offcanvas;
+        max-width: 100%;
+        color: var(--#{$prefix}body-color);
+        box-shadow: $offcanvas-box-shadow;
+        display: flex;
+        flex-direction: column;
+        visibility: hidden;
+        transition: transform 0.3s ease-in-out;
+        transform: translateX(-100%);
+
+        .offcanvas-body {
+            padding: $offcanvas-padding-y $offcanvas-padding-x;
+        }
+
+        &.show {
+            visibility: visible;
+            transform: none;
+        }
+    }
+
+}

@@ -1,0 +1,175 @@
+<!-- Start Breadcrumbs -->
+<app-breadcrumbs title="Notifications" [breadcrumbItems]="breadCrumbItems"></app-breadcrumbs>
+<!-- End Breadcrumbs -->
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title mb-0">Default Toast</h4>
+            </div><!-- end card header -->
+
+            <div class="card-body">
+                <p class="text-muted">Use <code>toast-border-</code> with below-mentioned color variation to set a toast
+                    with border and icon.</p>
+                <div>
+
+                    <div class="position-relative">
+                        <div class="hstack flex-wrap gap-2">
+                            <button type="button" class="btn btn-primary" id="borderedToast1Btn" (click)="showStandard()">Primary Toast</button>
+                            <button type="button" class="btn btn-success" id="borderedToast2Btn" (click)="showSuccess()">Success Toast</button>
+                            <button type="button" class="btn btn-warning" id="borderedTost3Btn" (click)="showWarning()">Warning Toast</button>
+                            <button type="button" class="btn btn-danger" id="borderedToast4Btn" (click)="showError()">Danger Toast</button>
+                        </div>
+
+                        <div style="z-index: 11">
+                            <div id="borderedToast1" class="toast toast-border-primary overflow-hidden mt-3" role="alert" aria-live="assertive" aria-atomic="true">
+                                <div class="toast-body">
+                                    <div class="d-flex align-items-center">
+                                        <div class="flex-shrink-0 me-2">
+                                            <i class="ri-user-smile-line align-middle"></i>
+                                        </div>
+                                        <div class="flex-grow-1">
+                                            <h6 class="mb-0">Your application was successfully sent.</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="z-index: 11">
+                            <div id="borderedToast2" class="toast toast-border-success overflow-hidden mt-3 " role="alert" aria-live="assertive" aria-atomic="true">
+                                <div class="toast-body">
+                                    <div class="d-flex align-items-center">
+                                        <div class="flex-shrink-0 me-2">
+                                            <i class="ri-checkbox-circle-fill align-middle"></i>
+                                        </div>
+                                        <div class="flex-grow-1">
+                                            <h6 class="mb-0">Yey! Everything worked!</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="z-index: 11">
+                            <div id="borderedTost3" class="toast toast-border-warning overflow-hidden mt-3" role="alert" aria-live="assertive" aria-atomic="true">
+                                <div class="toast-body">
+                                    <div class="d-flex align-items-center">
+                                        <div class="flex-shrink-0 me-2">
+                                            <i class="ri-notification-off-line align-middle"></i>
+                                        </div>
+                                        <div class="flex-grow-1">
+                                            <h6 class="mb-0">Something went wrong, try again.</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="z-index: 11">
+                            <div id="borderedToast4" class="toast toast-border-danger overflow-hidden mt-3" role="alert" aria-live="assertive" aria-atomic="true">
+                                <div class="toast-body">
+                                    <div class="d-flex align-items-center">
+                                        <div class="flex-shrink-0 me-2">
+                                            <i class="ri-alert-line align-middle"></i>
+                                        </div>
+                                        <div class="flex-grow-1">
+                                            <h6 class="mb-0">Something is very wrong! <a href="javascript:void(0);" class="text-decoration-underline">See detailed report.</a></h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="card-body bg-light border-bottom border-top bg-opacity-25">
+                <h5 class="fs-xs text-muted mb-0">HTML Preview</h5>
+            </div>
+            <div class="card-body">
+                <pre class="language-markup" style="height: 310px;"><code>&lt;!-- Default Toast --&gt;
+                    &lt;div class=&quot;position-relative&quot;&gt;
+                    &lt;div class=&quot;hstack flex-wrap gap-2&quot;&gt;
+                        &lt;button type=&quot;button&quot; class=&quot;btn btn-primary&quot; id=&quot;borderedToast1Btn&quot;
+                            (click)=&quot;showStandard()&quot;&gt;Primary Toast&lt;/button&gt;
+                        &lt;button type=&quot;button&quot; class=&quot;btn btn-success&quot; id=&quot;borderedToast2Btn&quot;
+                            (click)=&quot;showSuccess()&quot;&gt;Success Toast&lt;/button&gt;
+                        &lt;button type=&quot;button&quot; class=&quot;btn btn-warning&quot; id=&quot;borderedTost3Btn&quot;
+                            (click)=&quot;showWarning()&quot;&gt;Warning Toast&lt;/button&gt;
+                        &lt;button type=&quot;button&quot; class=&quot;btn btn-danger&quot; id=&quot;borderedToast4Btn&quot;
+                            (click)=&quot;showError()&quot;&gt;Danger Toast&lt;/button&gt;
+                    &lt;/div&gt;
+
+                    &lt;div style=&quot;z-index: 11&quot;&gt;
+                        &lt;div id=&quot;borderedToast1&quot; class=&quot;toast toast-border-primary overflow-hidden mt-3&quot;
+                            role=&quot;alert&quot; aria-live=&quot;assertive&quot; aria-atomic=&quot;true&quot;&gt;
+                            &lt;div class=&quot;toast-body&quot;&gt;
+                                &lt;div class=&quot;d-flex align-items-center&quot;&gt;
+                                    &lt;div class=&quot;flex-shrink-0 me-2&quot;&gt;
+                                        &lt;i class=&quot;ri-user-smile-line align-middle&quot;&gt;&lt;/i&gt;
+                                    &lt;/div&gt;
+                                    &lt;div class=&quot;flex-grow-1&quot;&gt;
+                                        &lt;h6 class=&quot;mb-0&quot;&gt;Your application was successfully sent.&lt;/h6&gt;
+                                    &lt;/div&gt;
+                                &lt;/div&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+
+                    &lt;div style=&quot;z-index: 11&quot;&gt;
+                        &lt;div id=&quot;borderedToast2&quot; class=&quot;toast toast-border-success overflow-hidden mt-3&quot;
+                            role=&quot;alert&quot; aria-live=&quot;assertive&quot; aria-atomic=&quot;true&quot;&gt;
+                            &lt;div class=&quot;toast-body&quot;&gt;
+                                &lt;div class=&quot;d-flex align-items-center&quot;&gt;
+                                    &lt;div class=&quot;flex-shrink-0 me-2&quot;&gt;
+                                        &lt;i class=&quot;ri-checkbox-circle-fill align-middle&quot;&gt;&lt;/i&gt;
+                                    &lt;/div&gt;
+                                    &lt;div class=&quot;flex-grow-1&quot;&gt;
+                                        &lt;h6 class=&quot;mb-0&quot;&gt;Yey! Everything worked!&lt;/h6&gt;
+                                    &lt;/div&gt;
+                                &lt;/div&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+
+                    &lt;div style=&quot;z-index: 11&quot;&gt;
+                        &lt;div id=&quot;borderedTost3&quot; class=&quot;toast toast-border-warning overflow-hidden mt-3&quot; role=&quot;alert&quot;
+                            aria-live=&quot;assertive&quot; aria-atomic=&quot;true&quot;&gt;
+                            &lt;div class=&quot;toast-body&quot;&gt;
+                                &lt;div class=&quot;d-flex align-items-center&quot;&gt;
+                                    &lt;div class=&quot;flex-shrink-0 me-2&quot;&gt;
+                                        &lt;i class=&quot;ri-notification-off-line align-middle&quot;&gt;&lt;/i&gt;
+                                    &lt;/div&gt;
+                                    &lt;div class=&quot;flex-grow-1&quot;&gt;
+                                        &lt;h6 class=&quot;mb-0&quot;&gt;Something went wrong, try again.&lt;/h6&gt;
+                                    &lt;/div&gt;
+                                &lt;/div&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+
+                    &lt;div style=&quot;z-index: 11&quot;&gt;
+                        &lt;div id=&quot;borderedToast4&quot; class=&quot;toast toast-border-danger overflow-hidden mt-3&quot; role=&quot;alert&quot;
+                            aria-live=&quot;assertive&quot; aria-atomic=&quot;true&quot;&gt;
+                            &lt;div class=&quot;toast-body&quot;&gt;
+                                &lt;div class=&quot;d-flex align-items-center&quot;&gt;
+                                    &lt;div class=&quot;flex-shrink-0 me-2&quot;&gt;
+                                        &lt;i class=&quot;ri-alert-line align-middle&quot;&gt;&lt;/i&gt;
+                                    &lt;/div&gt;
+                                    &lt;div class=&quot;flex-grow-1&quot;&gt;
+                                        &lt;h6 class=&quot;mb-0&quot;&gt;Something is very wrong! &lt;a href=&quot;javascript:void(0);&quot;
+                                                class=&quot;text-decoration-underline&quot;&gt;See detailed report.&lt;/a&gt;&lt;/h6&gt;
+                                    &lt;/div&gt;
+                                &lt;/div&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;</code></pre>
+            </div>
+        </div>
+    </div>
+    <!--end col-->
+</div>
+<!--end row-->

@@ -1,0 +1,91 @@
+<!-- Start Breadcrumbs -->
+<app-breadcrumbs title="My Subscriptions" [breadcrumbItems]="breadCrumbItems"></app-breadcrumbs>
+<!-- End Breadcrumbs -->
+
+<div class="row" id="subscriptionList">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row align-items-center g-3">
+                    <div class="col-xxl-3 col-lg-6 me-auto">
+                        <h6 class="card-title">My Subscriptions</h6>
+                        <p class="text-muted mb-0">Monthly: <b class="text-primary-emphasis">$326.95</b> Yearly: <b class="text-primary-emphasis">$1452.32</b></p>
+                    </div><!--end col-->
+                    <div class="col-xxl-3 col">
+                        <div class="search-box">
+                            <input type="text" class="form-control search" [(ngModel)]="term" (keyup)="filterdata()" placeholder="Search courses, category price etc...">
+                            <i class="ri-search-line search-icon"></i>
+                        </div>
+                    </div><!--end col-->
+                    <div class="col-xxl-auto col-auto">
+                        <a routerLink="/learning/list" class="btn btn-primary"><i class="bi bi-plus-circle align-baseline me-1"></i> Add New</a>
+                    </div><!--end col-->
+                </div><!--end row-->
+            </div>
+        </div><!--end card-->
+    </div><!--end col-->
+    <div class="col-lg-12">
+        <div class="table-responsive">
+            <table class="table table-custom align-middle table-borderless table-nowrap">
+                <thead>
+                    <tr>
+                        <th scope="col" class="sort cursor-pointer" (click)="onSort('title')">Plan</th>
+                        <th scope="col" class="sort cursor-pointer" (click)="onSort('price')">Price</th>
+                        <th scope="col" class="sort cursor-pointer" (click)="onSort('duration')">Duration</th>
+                        <th scope="col" class="sort cursor-pointer" (click)="onSort('status')">Status</th>
+                        <th scope="col" class="sort cursor-pointer" (click)="onSort('duedate')">Payment Due</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody class="list">
+                    @for (data of subscriptions; track $index) {
+                    <tr>
+                        <td>
+                            <div class="d-flex align-items-center gap-2">
+                                <div class="flex-shrink-0">
+                                    <div class="avatar-sm">
+                                        <div class="avatar-title {{data.bgcolor}} rounded">
+                                            <img src="{{data.img}}" alt="" class="avatar-xxs">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <h6 class="fs-md mb-2 plan">{{data.title}}</h6>
+                                    <p class="text-muted mb-0">{{data.type}}</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="price">{{data.price}}</td>
+                        <td class="duration">{{data.duration}}</td>
+                        <td><span class="badge status" [ngClass]="{'bg-success-subtle text-success': data.status === 'Active','bg-danger-subtle text-danger': data.status === 'Unactive'}">{{data.status}}</span>
+                        </td>
+                        <td>
+                            <p class="mb-0 payment_due" [ngClass]="data.due === true? 'text-danger':'text-muted'">
+                                @if (data.due) {<i class="bi bi-clock align-baseline me-1"></i> } {{data.duedate}}</p>
+                        </td>
+                        <td>
+                            @if (data.status == 'Active' && !data.due) {<p class="mb-0 text-muted" disabled>{{data.action}}</p>}
+                            @if (data.status == 'Unactive' || data.due) {<a href="javascript:void(0);" class="text-decoration-underline">{{data.action}} </a>}
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+
+            <div id="elmLoader">
+                <div class="spinner-border text-primary avatar-sm" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+
+            <div class="noresult" style="display: none;">
+                <div class=" text-center py-4">
+                    <i class="ph-magnifying-glass fs-1 text-primary"></i>
+                    <h5 class="mt-2">Sorry! No Result Found</h5>
+                    <p class="text-muted mb-0">We've searched more than 164+ courses We did not find any courses for you
+                        search.</p>
+                </div>
+            </div>
+        </div>
+    </div><!--end col-->
+</div><!--end row-->

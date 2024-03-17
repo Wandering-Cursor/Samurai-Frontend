@@ -1,0 +1,412 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* Importing Bootstrap SCSS file. */
+// @import "./node_modules/bootstrap/scss/bootstrap";
+
+/* Importing Datepicker SCSS file. */
+@import "node_modules/ngx-bootstrap/datepicker/bs-datepicker";
+
+/* Importing Select SCSS file. */
+@import "~@ng-select/ng-select/themes/default.theme.css";
+
+
+.emoji-mart {
+  position: absolute;
+  bottom: 30px;
+  left: 0;
+}
+
+.emoji-mart-preview {
+  display: none;
+}
+
+.small-font {
+  .dz-text {
+    font-size: x-small;
+  }
+}
+
+.apex-charts {
+  div {
+    min-height: 0 !important;
+  }
+}
+
+ngx-dropzone-image-preview {
+  max-width: none !important;
+  justify-content: normal !important;
+  height: 80px !important;
+  min-height: 80px !important;
+  background-image: none !important;
+
+  img {
+    opacity: 1 !important;
+  }
+
+  ngx-dropzone-label {
+    position: unset !important;
+  }
+}
+
+ngx-dropzone-preview {
+  max-width: none !important;
+  justify-content: normal !important;
+  height: 80px !important;
+  min-height: 80px !important;
+  background-image: none !important;
+
+  img {
+    opacity: 1 !important;
+  }
+
+  ngx-dropzone-label {
+    position: unset !important;
+  }
+}
+
+// twostep input
+
+.twostep-input {
+  .wrapper {
+    display: flex;
+    justify-content: center;
+
+    input {
+      &:focus-visible {
+        outline: none;
+      }
+    }
+  }
+}
+
+.progress-nav {
+  .stepper {
+    .stepper-header {
+      .step {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+    }
+
+    .stepper-body[_ngcontent-ng-c625643793] {
+      margin: 0;
+    }
+
+    .completed {
+      .nav-link {
+        color: #fff;
+        background-color: var(--tb-primary);
+      }
+    }
+
+    .step[_ngcontent-ng-c625643793] {
+      .nav-link {
+        z-index: 1;
+        position: relative;
+      }
+
+      &:after {
+        z-index: 0;
+        height: 1px;
+        background-color: var(--tb-border-color);
+        left: -100%;
+      }
+    }
+
+    .step.completed[_ngcontent-ng-c625643793]+.step[_ngcontent-ng-c625643793]:after {
+      background-color: var(--tb-primary);
+    }
+  }
+}
+
+.stepper-header[_ngcontent-ng-c625643793] .steps[_ngcontent-ng-c625643793] {
+  width: 144% !important;
+}
+
+.step-arrow-nav {
+  .stepper {
+    .stepper-body[_ngcontent-ng-c625643793] {
+      margin: 0;
+    }
+
+    .completed {
+      .nav-link {
+        color: var(--tb-primary);
+      }
+
+      background-color: rgba(var(--tb-primary-rgb), 0.15);
+    }
+
+    .active {
+      .nav-link {
+        color: var(--tb-primary);
+      }
+    }
+
+    .step[_ngcontent-ng-c625643793] {
+      .nav-link {
+        z-index: 1;
+        position: relative;
+      }
+    }
+  }
+}
+
+.vertical-wizard {
+  .stepper {
+    .stepper-body[_ngcontent-ng-c625643793] {
+      margin: 0;
+      overflow: hidden;
+    }
+
+    .step-title {
+      // display: none;
+      position: relative !important;
+      bottom: 0 !important;
+
+      i {
+        color: var(--tb-danger);
+      }
+    }
+
+    .steps {
+      gap: 8px;
+
+      .step {
+        background-color: rgba(var(--tb-light-rgb), 0.4) !important;
+        border: 1px solid var(--tb-border-color);
+        border-radius: 0.25rem;
+
+        &.active {
+          .nav-link {
+            .step-title {
+              i {
+                color: var(--tb-primary);
+              }
+            }
+
+            color: var(--tb-primary);
+          }
+
+          border-color: rgba(var(--tb-primary-rgb), 1);
+        }
+
+        &.completed {
+          .nav-link {
+            .step-title {
+              i {
+                color: var(--tb-success);
+              }
+            }
+
+            color: var(--tb-success);
+          }
+
+          border-color: rgba(var(--tb-success-rgb), 1);
+        }
+      }
+    }
+  }
+}
+
+/* Increase the width of the scrollbar track */
+.simplebar-scrollbar::before {
+  width: 5px;
+  /* Adjust the width as needed */
+}
+
+[data-bs-theme="dark"] {
+  .nav-secondary .nav-link.active {
+    background-color: var(--tb-secondary);
+  }
+}
+
+// Swiper
+.coverflowslide .slide {
+  position: relative;
+  transition: transform 0.3s;
+}
+
+.coverflowslide .slick-list {
+  overflow: hidden !important;
+}
+
+.coverflowslide .slick-center {
+  transform: scale(1.2); // Adjust the scale factor for the "Coverflow" effect
+  z-index: 1;
+}
+
+.coverflowslide .carousel {
+  width: 100%;
+  max-width: 600px; // Adjust the carousel width as needed
+  margin: 0 auto;
+}
+
+.space .slick-slide {
+  margin: 25px;
+}
+
+//
+
+// .nav-pills {
+//   --tb-nav-pills-link-active-bg: none !important;
+//   --tb-nav-link-padding-y: 0!important ;
+//   --tb-nav-link-padding-x: 0 !important;
+// }
+
+// .nav-link{
+//   padding: 0 ;
+// }
+
+// .nav-item {
+//   .active{
+//     background-color:  !important;
+//   }
+// }
+
+[data-bs-theme="dark"] {
+  .ng-select .ng-select-container {
+    background-color: transparent !important;
+    border-color: #2c2e30 !important;
+  }
+
+  .ng-select.ng-select-opened>.ng-select-container {
+    background-color: transparent !important;
+    border-color: #2c2e30 !important;
+  }
+
+  .ng-dropdown-panel-items {
+    background-color: transparent !important;
+  }
+
+  .ng-dropdown-panel {
+    border-color: #2c2e30 !important;
+  }
+
+  .ng-dropdown-panel .ng-dropdown-panel-items .ng-option {
+    background-color: #15171a !important;
+    color: #fff !important;
+  }
+
+  .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-marked {
+    background-color: #2c2e30 !important;
+    color: #fff !important;
+  }
+
+  // date-picker
+  .bs-datepicker {
+    background-color: #15171a !important;
+    box-shadow: 0 0 10px 0 #15171a !important;
+
+    .bs-datepicker-body {
+      border-color: #2c2e30 !important;
+    }
+  }
+}
+
+.bs-datepicker-body table td span.is-highlighted:not(.disabled):not(.selected) {
+  background-color: #1e1e1f !important;
+  color: #fff !important;
+}
+
+.ng-select.ng-select-multiple .ng-select-container .ng-value-container .ng-value {
+  background-color: #3762ea !important;
+  color: #fff !important;
+}
+
+.ng-select.ng-select-multiple .ng-select-container .ng-value-container .ng-value .ng-value-icon:hover {
+  background-color: #3762ea !important;
+}
+
+@media (max-width: 425px) {
+  .apexcharts-legend {
+    display: none !important;
+  }
+}
+
+.progress-nav {
+  .progress {
+    height: 0px !important;
+  }
+}
+
+[data-layout-width="boxed"] {
+  .custom-verti-nav-pills {
+    .nav-tabs {
+      display: block;
+    }
+  }
+}
+
+.toast-container {
+  position: fixed;
+
+  .ngx-toaster {
+    margin-bottom: 15px !important;
+  }
+}
+
+.dropdown-responsive {
+  left: 0 !important;
+}
+
+.table-dropdown {
+  right: 0 !important;
+}
+
+@media (max-width: 425px) {
+  .profile-dropdown {
+    right: -13px !important;
+    // z-index: ;
+  }
+}
+
+
+bs-dropdown-container {
+  z-index: 1000 !important;
+}
+
+@media (max-width: 600px) {
+  .navbar-header .dropdown .dropdown-menu {
+    width: 100% !important;
+  }
+}
+
+.ngx-slider {
+  .ngx-slider-pointer {
+    cursor: pointer;
+    width: 12px !important;
+    height: 12px !important;
+    top: -6px !important;
+    background-color: var(--tb-secondary) !important;
+    z-index: 3;
+    border-radius: 16px;
+  }
+
+  .ngx-slider-bar {
+    height: 2px !important;
+  }
+}
+
+.ngx-slider .ngx-slider-pointer:after {
+  display: none;
+}
+
+.ngx-slider-bubble {
+  font-size: 13px !important;
+}
+
+.ngx-slider .ngx-slider-selection {
+  background: var(--tb-secondary) !important;
+}
+
+.read-email {
+  .accordion-header {
+    border-bottom: 1px solid #dde1ef !important;
+  }
+}
+
+.stepper-body {
+  padding: 0px !important;
+}

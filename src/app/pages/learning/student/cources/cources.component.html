@@ -1,0 +1,177 @@
+<!-- Start Breadcrumbs -->
+<app-breadcrumbs title="My Courses " [breadcrumbItems]="breadCrumbItems"></app-breadcrumbs>
+<!-- End Breadcrumbs -->
+
+<div class="row">
+    <div class="col-xl-9 col-lg-8">
+        <div class="card">
+            <div class="card-body d-flex gap-3 align-items-center">
+                <h6 class="card-title flex-grow-1 mb-0">My Courses <span
+                        class="badge bg-dark-subtle text-body align-baseline ms-1">23</span></h6>
+                <div class="flex-shrink-0">
+                    <a routerLink="/learning/subscriptions" class="btn btn-primary"><i
+                            class="bi bi-bag align-baseline me-1"></i> Upgrade Courses</a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            @for (data of courseList; track $index) {
+            <div class="col-lg-12">
+                <div class="card overflow-hidden">
+                    <div class="row g-0">
+                        <div class="col-xl-3 col-md-4">
+                            <div
+                                class="card-body bg-{{data.color}}-subtle text-center learning-widgets d-flex align-items-center justify-content-center h-100">
+                                <img src="{{data.img}}" alt="" class="avatar-lg">
+                                <img src="{{data.img}}" alt="" class="effect">
+                            </div>
+                        </div><!--end col-->
+                        <div class="col-xl-9 col-md-8">
+                            <div class="card-body">
+                                <div class="d-flex mb-3 align-items-center">
+                                    <div class="flex-grow-1">
+                                        <span
+                                            class="badge bg-{{data.colors}}-subtle text-{{data.colors}}">{{data.exLevel}}</span>
+                                    </div>
+                                    <div class="flex-shrink-0 fs-lg fw-medium">
+                                        {{data.price}}
+                                    </div>
+                                </div>
+                                <h5 class="text-truncate text-capitalize"><a routerLink="/learning/overview"
+                                        class="text-reset">{{data.postDetail}}</a></h5>
+                                <p class="text-muted">{{data.post}}</p>
+                                <ul class="d-flex align-items-center gap-2 flex-wrap list-unstyled mb-0">
+                                    <li>
+                                        <p class="text-muted mb-0"><i
+                                                class="bi bi-clock align-baseline text-primary me-1"></i> {{data.time}}
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <p class="text-muted mb-0"><i
+                                                class="ph ph-student align-middle text-primary me-1"></i> {{data.top}}
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <p class="text-muted mb-0"><i
+                                                class="ph ph-graduation-cap align-middle text-primary me-1"></i>
+                                            {{data.lesson}}
+                                            Lessons</p>
+                                    </li>
+                                    <li>
+                                        <p class="text-muted mb-0"><i
+                                                class="ph ph-globe-stand align-middle text-primary me-1"></i>
+                                            {{data.language}}</p>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="card-body border-top border-dashed hstack align-items-center gap-2">
+                                <div class="d-flex align-items-center gap-2 flex-grow-1 position-relative">
+                                    <div class="flex-shrink-0">
+                                        <img src="{{data.profile}}" alt="" class="avatar-xxs rounded-circle">
+                                    </div>
+                                    <h6 class="flex-grow-1 mb-0"><a routerLink="/pages/profile"
+                                            class="text-reset stretched-link">{{data.name}}</a></h6>
+                                </div>
+                                <div class="flex-shrink-0">
+                                    <span class="badge bg-warning-subtle text-warning"><i
+                                            class="bi bi-star-fill align-baseline me-1"></i> {{data.rating}}</span>
+                                </div>
+                            </div>
+                            <div class="bg-primary-subtle progress-sm rounded-0"
+                                tooltip="{{data.progressvalue}}% Completed">
+                                <progressbar [value]="data.progressvalue" [type]="data.progresscolor"></progressbar>
+                            </div>
+                        </div><!--end col-->
+                    </div><!--end row-->
+                </div><!--end card-->
+            </div><!--end col-->
+        }
+            <div id="elmLoader">
+                <div class="spinner-border text-primary avatar-sm" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+        </div><!--end row-->
+    </div><!--end col-->
+    <div class="col-xl-3 col-lg-4">
+        <div class="card">
+            <div class="card-body">
+                <div class="text-center mb-0 pb-2">
+                    <img src="assets/images/users/avatar-1.jpg" alt="" class="avatar-md rounded-circle d-block mx-auto">
+                    <div class="mt-3">
+                        <a routerLink="/pages/profile">
+                            <h5>Josefa Weissna</h5>
+                        </a>
+                        <p class="text-muted mb-0">Student</p>
+                    </div>
+                </div>
+                <div class="upcoming-scheduled pt-4">
+                    <input type="text" class="form-control" mwlFlatpickr [altInput]="true" [convertModelValue]="true" [inline]="true">
+                </div>
+            </div>
+        </div><!--end card-->
+        <div class="mb-3">
+            <h6 class="card-title">Courses Schedule</h6>
+        </div>
+        <div class="card">
+            <div class="card-body d-flex gap-3">
+                <div class="flex-shrink-0">
+                    <div class="avatar-sm border-end border-dashed">
+                        <div class="avatar-title bg-body-secondary text-body-secondary p-2 text-center">
+                            16 Feb
+                        </div>
+                    </div>
+                </div>
+                <div class="flex-grow-1">
+                    <a routerLink="/learning/overview" class="stretched-link">
+                        <h6 class="fs-md">React Development</h6>
+                    </a>
+                    <p class="text-muted mb-0"><b>9</b> of 15 Lessons</p>
+                </div>
+                <div class="flex-shrink-0 text-muted">
+                    08:54 AM
+                </div>
+            </div>
+        </div><!--end card-->
+        <div class="card">
+            <div class="card-body d-flex gap-3">
+                <div class="flex-shrink-0">
+                    <div class="avatar-sm border-end border-dashed">
+                        <div class="avatar-title bg-body-secondary text-body-secondary p-2 text-center">
+                            28 Jan
+                        </div>
+                    </div>
+                </div>
+                <div class="flex-grow-1">
+                    <a routerLink="/learning/overview" class="stretched-link">
+                        <h6 class="fs-md">Shopify Development</h6>
+                    </a>
+                    <p class="text-muted mb-0"><b>18</b> of 43 Lessons</p>
+                </div>
+                <div class="flex-shrink-0 text-muted">
+                    10:49 PM
+                </div>
+            </div>
+        </div><!--end card-->
+        <div class="card">
+            <div class="card-body d-flex gap-3">
+                <div class="flex-shrink-0">
+                    <div class="avatar-sm border-end border-dashed">
+                        <div class="avatar-title bg-body-secondary text-body-secondary p-2 text-center">
+                            19 Jan
+                        </div>
+                    </div>
+                </div>
+                <div class="flex-grow-1">
+                    <a routerLink="/learning/overview" class="stretched-link">
+                        <h6 class="fs-md">Laravel Development</h6>
+                    </a>
+                    <p class="text-muted mb-0"><b>3</b> of 68 Lessons</p>
+                </div>
+                <div class="flex-shrink-0 text-muted">
+                    03:24 PM
+                </div>
+            </div>
+        </div><!--end card-->
+    </div><!--end col-->
+</div><!--end row-->

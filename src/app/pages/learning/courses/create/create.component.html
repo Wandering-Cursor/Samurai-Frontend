@@ -1,0 +1,247 @@
+<!-- Start Breadcrumbs -->
+<app-breadcrumbs title="Create Course" [breadcrumbItems]="breadCrumbItems"></app-breadcrumbs>
+<!-- End Breadcrumbs -->
+
+<div class="row">
+    <div class="col-xl-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>Create Course</h5>
+            </div>
+            <div class="card-body form-steps">
+                <form action="#">
+                    <div id="custom-progress-bar" class="progress-nav mb-4">
+                        <div class="progress" style="height: 1px;">
+                            <div class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+
+                        <ng-stepper #cdkStepper [linear]="true" class="cdksteppercontent nav nav-pills progress-bar-tab custom-nav">
+                            <cdk-step [optional]="false">
+                                <ng-template cdkStepLabel class="wizard-nav mb-5">
+                                    <button class="nav-link rounded-pill active" data-progressbar="custom-progress-bar" id="pills-gen-info-tab" data-bs-toggle="pill" data-bs-target="#pills-gen-info" type="button" role="tab" aria-controls="pills-gen-info" aria-selected="true">1</button>
+                                </ng-template>
+                                @if (cdkStepper.selectedIndex === 0) {
+                                <div>
+                                    <h5 class="card-title mb-3 mt-3">Course details</h5>
+                                    <div class="row g-3 align-items-center">
+                                        <div class="col-lg-12">
+                                            <div>
+                                                <label for="course-title-input" class="form-label">Course title<span class="text-danger">*</span></label>
+                                                <input type="text" id="course-title-input" class="form-control" placeholder="Enter course title" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div>
+                                                <label for="course-category-input" class="form-label">Course
+                                                    Category<span class="text-danger">*</span></label>
+                                                <select class="form-select" id="course-category-input" data-choices>
+                                                    <option value="">Select Course Category</option>
+                                                    <option value="Marketing & Management">Marketing & Management
+                                                    </option>
+                                                    <option value="React Development">React Development</option>
+                                                    <option value="Shopify Development">Shopify Development</option>
+                                                    <option value="Graphic Design">Graphic Design</option>
+                                                    <option value="Laravel Development">Laravel Development</option>
+                                                    <option value="Flask Development">Flask Development</option>
+                                                    <option value="Web Design">Web Design</option>
+                                                    <option value="Asp.Net Development">Asp.Net Development</option>
+                                                    <option value="Marketing & Management">Marketing & Management
+                                                    </option>
+                                                    <option value="PHP Development">PHP Development</option>
+                                                    <option value="Graphic Design">Graphic Design</option>
+                                                    <option value="Digital Marketing">Digital Marketing</option>
+                                                    <option value="Data Science">Data Science</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div>
+                                                <label for="lavel-input" class="form-label">Courses Level<span class="text-danger">*</span></label>
+                                                <ng-select [items]="items" [multiple]="true" bindLabel="name"></ng-select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div>
+                                                <label for="language-input" class="form-label">Language<span class="text-danger">*</span></label>
+                                                <select class="form-select" id="language-input">
+                                                    <option value="">Select Language</option>
+                                                    <option value="English" selected>English</option>
+                                                    <option value="Hindi">Hindi</option>
+                                                    <option value="France">France</option>
+                                                    <option value="Expert">Expert</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div>
+                                                <label for="lessons-input" class="form-label">Lessons<span class="text-danger">*</span></label>
+                                                <input type="number" id="lessons-input" class="form-control" placeholder="Lessons" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div>
+                                                <label for="price-input" class="form-label">Course price<span class="text-danger">*</span></label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text">$</span>
+                                                    <input type="number" class="form-control" id="price-input" placeholder="0.00" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div>
+                                                <label for="discount-input" class="form-label">Discount price<span class="text-danger">*</span></label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text">%</span>
+                                                    <input type="number" class="form-control" id="discount-input" placeholder="00" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="checkBox1" checked="">
+                                                <label class="form-check-label" for="checkBox1">
+                                                    Enable this Discount
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div>
+                                                <label for="shortDescription" class="form-label">Short Description<span class="text-danger">*</span></label>
+                                                <textarea class="form-control" id="shortDescription" rows="3" placeholder="Enter description"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <label class="form-label">Add Description<span class="text-danger">*</span></label>
+                                            <ckeditor [editor]="Editor" data=""></ckeditor>
+                                        </div>
+                                    </div><!--end row-->
+                                    <div class="d-flex align-items-start gap-3 mt-4">
+                                        <button type="button" class="btn btn-primary btn-label right ms-auto nexttab nexttab" cdkStepperNext><i class="ri-arrow-right-line label-icon align-middle fs-lg ms-2"></i> Next
+                                            Step</button>
+                                    </div>
+                                    <!-- end tab pane -->
+                                </div>
+                                }
+                            </cdk-step>
+
+                            <cdk-step [optional]="true">
+                                <ng-template cdkStepLabel>
+                                    <button class="nav-link rounded-pill" data-progressbar="custom-progress-bar" id="pills-info-desc-tab" data-bs-toggle="pill" data-bs-target="#pills-info-desc" type="button" role="tab" aria-controls="pills-info-desc" aria-selected="false">2</button>
+                                </ng-template>
+                                @if (cdkStepper.selectedIndex === 1) {
+                                <div>
+                                    <div>
+                                        <label class="form-label">Main Course Image<span class="text-danger">*</span></label>
+
+                                        <dropzone class="dropzone" [config]="dropzoneConfig" [message]="'Drop files here or click to upload.'" (success)="onUploadSuccess($event)"></dropzone>
+
+                                        @if (uploadedFiles) {
+                                        <ul class="list-unstyled mb-0" id="dropzone-preview">
+                                            @for (file of uploadedFiles; track $index) {
+                                            <li class="mt-2" id="dropzone-preview-list">
+                                                <div class="border rounded">
+                                                    <div class="d-flex flex-wrap gap-2 p-2">
+                                                        <div class="flex-shrink-0 me-3">
+                                                            <div class="avatar-sm bg-light rounded p-2">
+                                                                @if (file.dataURL) {
+                                                                <img class="img-fluid rounded d-block" [src]="file.dataURL" alt="Dropzone-Image" />
+                                                                }@else {
+                                                                <img class="img-fluid rounded d-block" [src]="file" alt="Dropzone-Image" />
+                                                                }
+                                                            </div>
+                                                        </div>
+                                                        <div class="flex-grow-1">
+                                                            <div class="pt-1">
+                                                                @if (file.name) {<h5 class="fs-md mb-1">{{ file.name }}</h5>}
+                                                                @if (file.size) {<p class="fs-sm text-muted mb-0">{{ file.size }}</p>}
+                                                            </div>
+                                                        </div>
+                                                        <div class="flex-shrink-0 ms-3">
+                                                            <button (click)="removeFile(file)" class="btn btn-sm btn-danger">Delete</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            }
+                                        </ul>
+                                        <!-- end dropzon-preview -->
+                                        }
+                                    </div>
+                                    <div class="mt-4">
+                                        <div class="mb-3">
+                                            <label for="videoURL" class="form-label">Video URL</label>
+                                            <input type="url" class="form-control" id="videoURL" placeholder="Enter url">
+                                        </div>
+                                        <div>
+                                            <label class="form-label">Upload Video<span class="text-danger">*</span></label>
+                                            <dropzone class="dropzone" [config]="videodropzoneConfig" [message]="'Drop files here or click to upload.'" (success)="onUploadSuccess1($event)"></dropzone>
+                                            @if (uploadedFiles) {
+                                            <ul class="list-unstyled mb-0" id="dropzone-preview">
+                                                @for (file of uploadedFiles1; track $index) {
+                                                <li class="mt-2" id="dropzone-preview-list">
+                                                    <div class="border rounded">
+                                                        <div class="d-flex p-2">
+                                                            <div class="flex-shrink-0 me-3">
+                                                                <div class="avatar-sm bg-light rounded">
+                                                                    <img data-dz-thumbnail="" class="img-fluid rounded d-block" src="assets/images/new-document.png" alt="Dropzone-Image">
+                                                                </div>
+                                                            </div>
+                                                            <div class="flex-grow-1">
+                                                                <div class="pt-1">
+                                                                    @if (file.name) {<h5 class="fs-md mb-1">{{ file.name }}</h5>}
+                                                                    @if (file.size) {<p class="fs-sm text-muted mb-0">{{ file.size }}</p>}
+                                                                </div>
+                                                            </div>
+                                                            <div class="flex-shrink-0 ms-3">
+                                                                <button (click)="removeFile1(file)" class="btn btn-sm btn-danger">Delete</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                }
+                                            </ul>
+                                            <!-- end dropzon-preview -->
+                                            }
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-start gap-3 mt-4">
+                                        <button type="button" class="btn btn-link text-decoration-none btn-label previestab" cdkStepperPrevious><i class="ri-arrow-left-line label-icon align-middle fs-lg me-2"></i>
+                                            Back
+                                            to
+                                            Course Details</button>
+                                        <button type="button" class="btn btn-primary btn-label right ms-auto nexttab nexttab" cdkStepperNext><i class="ri-arrow-right-line label-icon align-middle fs-lg ms-2"></i>Submit</button>
+                                    </div>
+                                </div>
+                                }
+                            </cdk-step>
+
+                            <cdk-step [optional]="false">
+                                <ng-template cdkStepLabel>
+                                    <button class="nav-link rounded-pill" data-progressbar="custom-progress-bar" id="pills-success-tab" data-bs-toggle="pill" data-bs-target="#pills-success" type="button" role="tab" aria-controls="pills-success" aria-selected="false">3</button>
+                                </ng-template>
+                                @if (cdkStepper.selectedIndex === 2) {
+                                <div>
+                                    <div>
+                                        <div class="text-center">
+                                            <div class="my-4">
+                                                <img src="assets/images/success-img.png" alt="" height="150">
+                                            </div>
+                                            <h4>Well Done !</h4>
+                                            <p class="text-muted mb-0">You have added successfully course</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                }
+                            </cdk-step>
+
+                        </ng-stepper>
+                    </div>
+                    <!-- end tab content -->
+                </form>
+            </div>
+            <!-- end card body -->
+        </div>
+        <!-- end card -->
+    </div>
+    <!-- end col -->
+</div>

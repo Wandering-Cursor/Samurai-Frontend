@@ -1,0 +1,239 @@
+{
+  "MENUITEMS": {
+    "MENU": {
+      "TEXT": "قائمة طعام"
+    },
+    "DASHBOARD": {
+      "TEXT": "لوحات القيادة",
+      "LIST": {
+        "ANALYTICS": "تحليلات",
+        "CRM": "CRM",
+        "ECOMMERCE": "التجارة الإلكترونية",
+        "LEARNING": "تعلُّم",
+        "REALESTATE": "العقارات"
+      }
+    },
+    "APPS": {
+      "TEXT": "تطبيقات",
+      "LIST": {
+        "CALENDAR": "تقويم",
+        "CHAT": "محادثة",
+        "EMAIL": "بريد إلكتروني",
+        "ECOMMERCE": "التجارة الإلكترونية",
+        "PRODUCTS": "منتجات",
+        "PRODUCTGRID": "شبكة المنتجات",
+        "PRODUCTDETAILS": "تفاصيل المنتج",
+        "CREATEPRODUCT": "إنشاء منتج",
+        "ORDERS": "طلبات",
+        "ORDEROVERVIEW": "نظرة عامة على الطلب",
+        "CUSTOMERS": "عملاء",
+        "SHOPPINGCART": "عربة التسوق",
+        "CHECKOUT": "الدفع",
+        "SELLERS": "الباعة",
+        "SELLEROVERVIEW": "نظرة عامة على البائع",
+        "FILEMANAGER": "مدير الملفات",
+        "LEARNING": "تعلُّم",
+        "COURSES": "الدورات",
+        "LISTVIEW": "عرض القائمة",
+        "GRIDVIEW": "عرض شبكي",
+        "CATEGORY": "فئة",
+        "OVERVIEW": "ملخص",
+        "CREATECOURSE": "إنشاء دورة",
+        "STUDENTS": "طلاب",
+        "MYSUBSCRIPTIONS": "اشتراكاتي",
+        "MYCOURSES": "دوراتي",
+        "INSTRUCTORS": "المدربين",
+        "CREATEINSTRUCTOR": "إنشاء مدرس",
+        "INVOICES": "الفواتير",
+        "CREATEINVOICE": "إنشاء فاتورة",
+        "SUPPORTTICKETS": "تذاكر الدعم الفني",
+        "REALESTATE": "العقارات",
+        "LISTINGGRID": "قائمة الشبكة",
+        "LISTINGLIST": "قائمة القائمة",
+        "LISTINGMAP": "خريطة القائمة",
+        "PROPERTYOVERVIEW": "نظرة عامة على الملكية",
+        "AGENT": "عامل",
+        "AGENCIES": "وكالات",
+        "ADDPROPERTY": "أضف خاصية",
+        "EARNINGS": "المكاسب"
+      }
+    },
+    "PAGES": {
+      "TEXT": "الصفحات"
+    },
+    "AUTHENTICATION": {
+      "TEXT": "المصادقة",
+      "LIST": {
+        "SIGNIN": "تسجيل الدخول",
+        "SIGNUP": "اشتراك",
+        "PASSWORDRESET": "إعادة تعيين كلمة المرور",
+        "PASSWORDCREATE": "إنشاء كلمة المرور",
+        "LOCKSCREEN": "اقفل الشاشة",
+        "LOGOUT": "تسجيل خروج",
+        "SUCCESSMESSAGE": "نجاح رسالة",
+        "TWOSTEPVERIFICATION": "التحقق بخطوتين",
+        "ERRORS": "أخطاء",
+        "404ERROR": "404 خطأ",
+        "500": "500",
+        "503": "503",
+        "OFFLINE": "الصفحة غير المتصلة"
+      }
+    },
+    "EXTRAPAGES": {
+      "TEXT": "الصفحات",
+      "LIST": {
+        "STARTER": "بداية",
+        "PROFILE": "حساب تعريفي",
+        "PROFILESETTINGS": "إعدادات الملف الشخصي",
+        "CONTACTS": "جهات الاتصال",
+        "TIMELINE": "الجدول الزمني",
+        "FAQS": "أسئلة وأجوبة",
+        "PRICING": "التسعير",
+        "MAINTENANCE": "صيانة",
+        "COMINGSOON": "قريباً",
+        "PRIVACYPOLICY": "سياسة الخصوصية",
+        "TERMS&CONDITIONS": "الشروط والأحكام"
+      }
+    },
+    "COMPONENTS": {
+      "TEXT": "عناصر"
+    },
+    "BOOTSTRAPUI": {
+      "TEXT": "Bootstrap UI",
+      "LIST": {
+        "ALERTS": "تنبيهات",
+        "BADGES": "شارات",
+        "BUTTONS": "أزرار",
+        "COLORS": "الألوان",
+        "CARDS": "البطاقات",
+        "CAROUSEL": "دائري",
+        "DROPDOWNS": "هبوط قطرة",
+        "GRID": "شبكة",
+        "IMAGES": "الصور",
+        "TABS": "نوافذ التبويب",
+        "ACCORDION&COLLAPSE": "الأكورديون والانهيار",
+        "MODALS": "الوسائط",
+        "OFFCANVAS": "أوفاكانفاس",
+        "PLACEHOLDERS": "العناصر النائبة",
+        "PROGRESS": "تقدم",
+        "NOTIFICATIONS": "إشعارات",
+        "MEDIAOBJECT": "كائن الوسائط",
+        "EMBEDVIDEO": "تضمين الفيديو",
+        "TYPOGRAPHY": "الطباعة",
+        "LISTS": "القوائم",
+        "LINKS": "الروابط",
+        "GENERAL": "عام",
+        "UTILITIES": "خدمات"
+      }
+    },
+    "ADVANCEUI": {
+      "TEXT": "واجهة المستخدم المتقدمة",
+      "LIST": {
+        "SWEETALERTS": "تنبيهات حلوة",
+        "NESTABLELIST": "قائمة عش",
+        "SCROLLBAR": "شريط التمرير",
+        "SWIPERSLIDER": "سويبر سلايدر",
+        "RATTINGS": "التقييمات",
+        "HIGHLIGHT": "تسليط الضوء",
+        "SCROLLSPY": "ScrollSpy"
+      }
+    },
+    "CUSTOMUI": {
+      "TEXT": "واجهة مستخدم مخصصة",
+      "BADGE": "مخصص",
+      "LIST": {
+        "RIBBONS": "شرائط",
+        "PROFILE": "حساب تعريفي",
+        "COUNTER": "عداد"
+      }
+    },
+    "WIDGETS": {
+      "TEXT": "الحاجيات"
+    },
+    "FORMS": {
+      "TEXT": "نماذج",
+      "LIST": {
+        "BASICELEMENTS": "العناصر الأساسية",
+        "FORMSELECT": "حدد النموذج",
+        "CHECKBOXS&RADIOS": "مربعات الاختيار وأجهزة الراديو",
+        "PICKERS": "جامعي",
+        "INPUTMASKS": "أقنعة الإدخال",
+        "ADVANCED": "متقدم",
+        "RANGESLIDER": "نطاق المنزلق",
+        "VALIDATION": "تصديق",
+        "WIZARD": "ساحر",
+        "EDITORS": "المحررين",
+        "FILEUPLOADS": "تحميلات الملف",
+        "FORMLAYOUTS": "تخطيطات النموذج"
+      }
+    },
+    "TABLES": {
+      "TEXT": "الجداول",
+      "LIST": {
+        "BASICTABLES": "الجداول الأساسية",
+        "GRIDJS": "شبكة شبيبة",
+        "LISTJS": "قائمة شبيبة",
+        "DATATABLES": "جداول البيانات"
+      }
+    },
+    "CHARTS": {
+      "TEXT": "الرسوم البيانية",
+      "LIST": {
+        "APEXCHARTS": "أبكسشارتس",
+        "LINE": "خط",
+        "AREA": "منطقة",
+        "COLUMN": "عمود",
+        "BAR": "حاجِز",
+        "MIXED": "مختلط",
+        "TIMELINE": "الجدول الزمني",
+        "RANGEAREA": "منطقة النطاق",
+        "FUNNEL": "قمع",
+        "CANDLSTICK": "شمعدان",
+        "BOXPLOT": "مربع مؤامرة",
+        "BUBBLE": "فقاعة",
+        "SCATTER": "مبعثر",
+        "HEATMAP": "خريطة الحرارة",
+        "TREEMAP": "مخطط ",
+        "PIE": "فطيرة",
+        "RADIALBAR": "شعاعي",
+        "RADAR": "رادار",
+        "POLARAREA": "المنطقة القطبية"
+      }
+    },
+    "ICONS": {
+      "TEXT": "أيقونات",
+      "LIST": {
+        "REMIX": "ريمكس",
+        "BOXICONS": "بوكسيكونس",
+        "MATERIALDESIGN": "تصميم المواد",
+        "BOOTSTRAP": "التمهيد",
+        "PHOSPHOR": "الفوسفور"
+      }
+    },
+    "MAPS": {
+      "TEXT": "خرائط",
+      "LIST": {
+        "GOOGLE": "جوجل",
+        "VECTOR": "AmCharts",
+        "LEAFLET": "منشور"
+      }
+    },
+    "MULTILEVEL": {
+      "TEXT": "متعدد المستويات",
+      "LIST": {
+        "LEVEL1": {
+          "1": "المستوى 1.1",
+          "2": "المستوى 1.2",
+          "LEVEL2": {
+            "1": "المستوى 2.1",
+            "2": "المستوى 2.2",
+            "LEVEL3": {
+              "1": "3.1 المستوى",
+              "2": "3.2 المستوى"
+            }
+          }
+        }
+      }
+    }
+  }
+}

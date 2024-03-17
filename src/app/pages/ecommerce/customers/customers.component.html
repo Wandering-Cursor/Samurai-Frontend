@@ -1,0 +1,465 @@
+<!-- Start Breadcrumbs -->
+<app-breadcrumbs title="Customers" [breadcrumbItems]="breadCrumbItems"></app-breadcrumbs>
+<!-- End Breadcrumbs -->
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex align-items-center flex-wrap gap-3">
+                    <div class="flex-grow-1">
+                        <h3 class="card-title mb-0">Customers List</h3>
+                    </div>
+                    <div>
+                        <div class="d-flex flex-wrap gap-2">
+                            <button type="button" class="btn btn-primary add-btn" (click)="showModal.show()"><i class="bi bi-plus-circle align-baseline me-1"></i> Add
+                                Customer</button>
+                            <button type="button" class="btn btn-secondary"><i class="ph-cloud-arrow-down align-middle me-1"></i> Import</button>
+                            <button type="button" class="btn btn-subtle-info"><i class="ph-cloud-arrow-up align-middle me-1"></i> Export</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!--end col-->
+</div><!--end row-->
+
+<div class="row" id="customer-list">
+    <div class="col-xxl-8">
+        <div class="card">
+            <div class="card-body">
+                <div class="row gy-3">
+                    <div class="col-xl-4">
+                        <div class="search-box">
+                            <input type="text" class="form-control search" placeholder="Search customer, email etc..." [(ngModel)]="term" (keyup)="filterdata()">
+                            <i class="ri-search-line search-icon"></i>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-4">
+                        <div>
+                            <select class="form-control" id="idStatus" (click)="selectstatus()">
+                                <option value="" selected>All Select</option>
+                                <option value="Active">Active</option>
+                                <option value="Unactive">Unactive</option>
+                                <option value="Block">Block</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-4">
+                        <input type="text" class="form-control" id="datepicker-range" mwlFlatpickr dateFormat="d M, Y" mode="range" placeholder="Select date">
+                    </div>
+                    <div class="col-xl-2 col-md-4">
+                        <button class="btn btn-subtle-primary w-100"><i class="bi bi-funnel align-baseline me-1"></i> Filter</button>
+                    </div>
+                </div>
+            </div>
+        </div><!--end card-->
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive table-card">
+                    <table class="table align-middle table-nowrap">
+                        <tbody class="list">
+                            @for (data of customers; track $index) {
+                            <tr>
+                                <td class="id d-none"><a href="javascript:void(0);" class="fw-medium link-primary">01</a></td>
+                                <td class="customer">
+                                    <div class="d-flex align-items-center">
+                                        <div class="flex-shrink-0 me-2">
+                                            <div>
+                                                <img class="avatar-xs rounded-circle customer-image-elem" alt="" src="{{data.img}}">
+                                            </div>
+                                        </div>
+                                        <div class="flex-grow-1">
+                                            <h5 class="fs-base mb-0"><a href="javascript:void(0);" class="text-reset customer-name-elem">{{data.name}}</a></h5>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="email">{{data.email}}</td>
+                                <td class="contact">{{data.phone}}</td>
+                                <td class="date">{{data.create_date}}</td>
+                                <td class="status"><span class="badge" [ngClass]="{'bg-secondary-subtle text-secondary': data.status === 'Unactive','bg-success-subtle text-success': data.status === 'Active','bg-danger-subtle text-danger': data.status === 'Block'}">{{data.status}}</span></td>
+                                <td>
+                                    <div dropdown class="dropdown">
+                                        <button dropdownToggle class="btn btn-subtle-secondary btn-sm dropdown" type="button">
+                                            <i class="ri-more-fill align-middle"></i>
+                                        </button>
+                                        <ul *bsDropdownMenu class="dropdown-menu dropdown-menu-end">
+                                            <li><a class="dropdown-item view-item-btn" href="javascript:void(0);" (click)="viewCustomer($index)"><i class="ri-eye-fill align-bottom me-2 text-muted"></i>View</a>
+                                            </li>
+                                            <li><a class="dropdown-item edit-item-btn" href="javascript:void(0);" (click)="editCustomer($index)"><i class="ri-pencil-fill align-bottom me-2 text-muted"></i>
+                                                    Edit</a></li>
+                                            <li><a class="dropdown-item remove-item-btn" href="javascript:void(0);" (click)="removeCustomer(data.id)"><i class="ri-delete-bin-fill align-bottom me-2 text-muted"></i>
+                                                    Delete</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                        </tbody>
+                    </table>
+                </div>
+                <div id="elmLoader">
+                    <div class="spinner-border text-primary avatar-sm" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+                <div class="noresult" style="display:none">
+                    <div class="text-center py-4">
+                        <i class="ph-magnifying-glass fs-1 text-primary"></i>
+                        <h5 class="mt-2">Sorry! No Result Found</h5>
+                        <p class="text-muted mb-0">We've searched more than 150+ customers We did not find any customers
+                            for you search.</p>
+                    </div>
+                </div>
+                <div class="align-items-center mt-4 justify-content-between row text-center text-sm-start" id="pagination-element">
+                    <div class="col-sm">
+                        <div class="text-muted">
+                            Showing <span class="fw-semibold">{{customers?.length}}</span> of <span class="fw-semibold">{{Customerlist?.length}}</span> Results
+                        </div>
+                    </div>
+                    <div class="col-sm-auto  mt-3 mt-sm-0">
+                        <pagination class="pagination-wrap hstack gap-2" [totalItems]="Customerlist?.length" [itemsPerPage]="10" (pageChanged)="pageChanged($event)"></pagination>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!--end col-->
+    <div class="col-xxl-4">
+        @if(customerdetail){
+            <div class="card" id="overview-card">
+                <div class="card-body">
+                    <div class="d-flex gap-3 align-items-center flex-wrap">
+                        <div class="flex-shirnk-0">
+                            <img src="{{customerdetail.img}}" alt="" class="avatar-sm rounded overview-img">
+                        </div>
+                        <div class="flex-grow-1">
+                            <h6 class="fs-lg overview-name">{{customerdetail.name}}</h6>
+                            <p class="text-muted mb-0"><a href="javascript:void(0);" class="overview-nick-name">&#64;mosciski</a></p>
+                        </div>
+                        <div class="flex-shrink-0">
+                            <button type="button" class="btn btn-subtle-primary custom-toggle active me-1" (click)="followbtn($event)">
+                                <span class="icon-on"><i class="ri-add-line align-bottom me-1"></i> Follow</span>
+                                <span class="icon-off"><i class="ri-user-unfollow-line align-bottom me-1"></i>
+                                    Unfollow</span>
+                            </button>
+                            <button class="btn btn-subtle-danger btn-icon"><i class="ph-trash"></i></button>
+                        </div>
+                    </div>
+                    <ul class="d-flex align-items-center gap-2 list-unstyled mt-4">
+                        <li>Social Media:</li>
+                        <li>
+                            <a href="javascript:void(0);" class="btn btn-subtle-success btn-icon btn-sm"><i class="bi bi-whatsapp"></i></a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" class="btn btn-subtle-primary btn-icon btn-sm"><i class="bi bi-facebook"></i></a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" class="btn btn-subtle-secondary btn-icon btn-sm"><i class="bi bi-github"></i></a>
+                        </li>
+                    </ul>
+                    <div>
+                        <table class="table table-sm table-borderless">
+                            <tbody>
+                                <tr>
+                                    <th>Email</th>
+                                    <td class="overview-email">{{customerdetail.email}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Contact</th>
+                                    <td class="overview-contact">{{customerdetail.phone}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Joining Date</th>
+                                    <td class="overview-date">{{customerdetail.create_date}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Status</th>
+                                    <td class="overview-status"><span class="badge bg-danger-subtle text-danger">{{customerdetail.status}}</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="mt-4">
+                        <label class="form-label fs-md">Private Notes</label>
+                        <div class="private-notes">
+                            <ckeditor [editor]="Editor" data=""></ckeditor>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body px-0 pt-0">
+                    <h6 class="fs-md px-4 mb-3">Order History</h6>
+                    <ngx-simplebar class="px-4" style="max-height: 333px;">
+                        <div class="vstack gap-2">
+                            <div class="p-2 border border-dashed">
+                                <div class="d-flex align-items-center gap-2">
+                                    <div class="avatar-sm flex-shrink-0">
+                                        <div class="avatar-title bg-light rounded">
+                                            <img src="assets/images/products/32/img-1.png" alt="" class="avatar-xs">
+                                        </div>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <a href="javascript:void(0);">
+                                            <h6 class="fs-md mb-2">Craft Women Black Sling Bag</h6>
+                                        </a>
+                                        <ul class="hstack list-unstyled gap-2 mb-0 fs-sm fw-medium text-muted">
+                                            <li>
+                                                <i class="ph-star align-baseline"></i> 487
+                                            </li>
+                                            <li>
+                                                <i class="ph-shopping-cart align-baseline"></i> 936
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="text-end">
+                                        <h5 class="fs-md text-primary mb-0">$15.99</h5>
+                                    </div>
+                                    <div class="flex-shrink-0">
+                                        <button class="btn btn-secondary btn-icon btn-sm"><i class="ph-arrow-right"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-2 border border-dashed">
+                                <div class="d-flex align-items-center gap-2">
+                                    <div class="avatar-sm flex-shrink-0">
+                                        <div class="avatar-title bg-light rounded">
+                                            <img src="assets/images/products/32/img-2.png" alt="" class="avatar-xs">
+                                        </div>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <a href="javascript:void(0);">
+                                            <h6 class="fs-md mb-2">Unique Men's Wrist Watch</h6>
+                                        </a>
+                                        <ul class="hstack list-unstyled gap-2 mb-0 fs-sm fw-medium text-muted">
+                                            <li>
+                                                <i class="ph-star align-baseline"></i> 452
+                                            </li>
+                                            <li>
+                                                <i class="ph-shopping-cart align-baseline"></i> 1420
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="text-end">
+                                        <h5 class="fs-md text-primary mb-0">$84.99</h5>
+                                    </div>
+                                    <div class="flex-shrink-0">
+                                        <button class="btn btn-secondary btn-icon btn-sm"><i class="ph-arrow-right"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-2 border border-dashed">
+                                <div class="d-flex align-items-center gap-2">
+                                    <div class="avatar-sm flex-shrink-0">
+                                        <div class="avatar-title bg-light rounded">
+                                            <img src="assets/images/products/32/img-3.png" alt="" class="avatar-xs">
+                                        </div>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <a href="javascript:void(0);">
+                                            <h6 class="fs-md mb-2">Twiala Floral Dress</h6>
+                                        </a>
+                                        <ul class="hstack list-unstyled gap-2 mb-0 fs-sm fw-medium text-muted">
+                                            <li>
+                                                <i class="ph-star align-baseline"></i> 562
+                                            </li>
+                                            <li>
+                                                <i class="ph-shopping-cart align-baseline"></i> 1348
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="text-end">
+                                        <h5 class="fs-md text-primary mb-0">$149.99</h5>
+                                    </div>
+                                    <div class="flex-shrink-0">
+                                        <button class="btn btn-secondary btn-icon btn-sm"><i class="ph-arrow-right"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-2 border border-dashed">
+                                <div class="d-flex align-items-center gap-2">
+                                    <div class="avatar-sm flex-shrink-0">
+                                        <div class="avatar-title bg-light rounded">
+                                            <img src="assets/images/products/32/img-4.png" alt="" class="avatar-xs">
+                                        </div>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <a href="javascript:void(0);">
+                                            <h6 class="fs-md mb-2">Tokyo Fancy Bomber Jacket</h6>
+                                        </a>
+                                        <ul class="hstack list-unstyled gap-2 mb-0 fs-sm fw-medium text-muted">
+                                            <li>
+                                                <i class="ph-star align-baseline"></i> 644
+                                            </li>
+                                            <li>
+                                                <i class="ph-shopping-cart align-baseline"></i> 1540
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="text-end">
+                                        <h5 class="fs-md text-primary mb-0">$245.00</h5>
+                                    </div>
+                                    <div class="flex-shrink-0">
+                                        <button class="btn btn-secondary btn-icon btn-sm"><i class="ph-arrow-right"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-2 border border-dashed">
+                                <div class="d-flex align-items-center gap-2">
+                                    <div class="avatar-sm flex-shrink-0">
+                                        <div class="avatar-title bg-light rounded">
+                                            <img src="assets/images/products/32/img-5.png" alt="" class="avatar-xs">
+                                        </div>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <a href="javascript:void(0);">
+                                            <h6 class="fs-md mb-2">Aster Dress 2XL / Royal Blue</h6>
+                                        </a>
+                                        <ul class="hstack list-unstyled gap-2 mb-0 fs-sm fw-medium text-muted">
+                                            <li>
+                                                <i class="ph-star align-baseline"></i> 841
+                                            </li>
+                                            <li>
+                                                <i class="ph-shopping-cart align-baseline"></i> 985
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="text-end">
+                                        <h5 class="fs-md text-primary mb-0">$74.63</h5>
+                                    </div>
+                                    <div class="flex-shrink-0">
+                                        <button class="btn btn-secondary btn-icon btn-sm"><i class="ph-arrow-right"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-2 border border-dashed">
+                                <div class="d-flex align-items-center gap-2">
+                                    <div class="avatar-sm flex-shrink-0">
+                                        <div class="avatar-title bg-light rounded">
+                                            <img src="assets/images/products/32/img-6.png" alt="" class="avatar-xs">
+                                        </div>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <a href="javascript:void(0);">
+                                            <h6 class="fs-md mb-2">Craft Women Black Sling Bag</h6>
+                                        </a>
+                                        <ul class="hstack list-unstyled gap-2 mb-0 fs-sm fw-medium text-muted">
+                                            <li>
+                                                <i class="ph-star align-baseline"></i> 763
+                                            </li>
+                                            <li>
+                                                <i class="ph-shopping-cart align-baseline"></i> 763
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="text-end">
+                                        <h5 class="fs-md text-primary mb-0">$245.74</h5>
+                                    </div>
+                                    <div class="flex-shrink-0">
+                                        <button class="btn btn-secondary btn-icon btn-sm"><i class="ph-arrow-right"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ngx-simplebar>
+                </div>
+            </div>
+        }
+    </div>
+</div><!--end row-->
+
+<!-- showModal -->
+<div bsModal #showModal="bs-modal" class="modal fade" id="showModal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-light p-3">
+                <h5 class="modal-title" id="exampleModalLabel">Add Customer</h5>
+                <button type="button" class="btn-close" (click)="showModal.hide()"></button>
+            </div>
+            <form (ngSubmit)="saveCustomer()" [formGroup]="customerForm" class="tablelist-form" novalidate autocomplete="off">
+                <div class="modal-body">
+                    <div id="alert-error-msg" class="d-none alert alert-danger py-2"></div>
+                    <input type="hidden" id="id-field">
+
+                    <div class="text-center mb-3">
+                        <div class="position-relative d-inline-block">
+                            <div class="position-absolute top-100 start-100 translate-middle">
+                                <label for="customer-image-input" class="mb-0" placement="right" tooltip="Select customer photo">
+                                    <span class="avatar-xs d-inline-block">
+                                        <span class="avatar-title bg-light border rounded-circle text-muted cursor-pointer">
+                                            <i class="ri-image-fill"></i>
+                                        </span>
+                                    </span>
+                                </label>
+                                <input class="form-control d-none" id="customer-image-input" type="file" accept="image/png, image/gif, image/jpeg" (change)="fileChange($event)">
+                            </div>
+                            <div class="avatar-lg">
+                                <div class="avatar-title bg-light rounded-3">
+                                    <img src="assets/images/users/user-dummy-img.jpg" alt="" id="customer-img" class="avatar-md h-auto rounded-3 object-fit-cover">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="customername-field" class="form-label">Customer Name</label>
+                        <input type="text" id="customername-field" formControlName="name" class="form-control" placeholder="Enter customer name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email-field" class="form-label">Email</label>
+                        <input type="email" id="email-field" formControlName="email" class="form-control" placeholder="Enter email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="contact-field" class="form-label">Contact no.</label>
+                        <input type="text" id="contact-field" formControlName="phone" class="form-control" placeholder="Enter contact no" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="date-field" class="form-label">Joining Date</label>
+                        <input type="date" id="date-field" class="form-control" formControlName="create_date" mwlFlatpickr dateFormat="d M, Y" required>
+                    </div>
+                    <div>
+                        <label for="status-field" class="form-label">Status</label>
+                        <select class="form-control" formControlName="status" name="status-field" id="status-field" required>
+                            <option value="">Status</option>
+                            <option value="Active">Active</option>
+                            <option value="Block">Block</option>
+                            <option value="Unactive">Unactive</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="hstack gap-2 justify-content-end">
+                        <button type="button" class="btn btn-light" (click)="showModal.hide()">Close</button>
+                        <button type="submit" class="btn btn-success" id="add-btn">Add Order</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- end showModal -->
+
+<!-- deleteRecordModal -->
+<div bsModal #deleteRecordModal="bs-modal" id="deleteRecordModal" class="modal fade zoomIn">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" id="deleteRecord-close" (click)="deleteRecordModal.hide()"></button>
+            </div>
+            <div class="modal-body p-md-5">
+                <div class="text-center">
+                    <div class="text-danger">
+                        <i class="bi bi-trash display-4"></i>
+                    </div>
+                    <div class="mt-4">
+                        <h3 class="mb-2">Are you sure ?</h3>
+                        <p class="text-muted fs-lg mx-3 mb-0">Are you sure you want to remove this record ?</p>
+                    </div>
+                </div>
+                <div class="d-flex gap-2 justify-content-center mt-4 mb-2">
+                    <button type="button" class="btn w-sm btn-light btn-hover" (click)="deleteRecordModal.hide()">Close</button>
+                    <button type="button" class="btn w-sm btn-danger btn-hover" id="delete-record" (click)="deleteCustomer()">Yes, Delete
+                        It!</button>
+                </div>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /deleteRecordModal -->

@@ -1,0 +1,471 @@
+<!-- Start Breadcrumbs -->
+<app-breadcrumbs title="Carousel" [breadcrumbItems]="breadCrumbItems"></app-breadcrumbs>
+<!-- End Breadcrumbs -->
+
+<div class="row">
+    <div class="col-xl-6">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title mb-0">Slides Only</h4>
+            </div><!-- end card header -->
+            <div class="card-body">
+                <p class="text-muted">Use<code> slide</code> class to set carousel with slides. Note the presence of the
+                    <code>d-block</code> and <code>w-100</code> class on carousel images to prevent browser default
+                    image alignment.
+                </p>
+                <carousel id="carouselExampleSlidesOnly" [showIndicators]="false" class="carousel slide">
+                    <div class="carousel-inner" role="listbox">
+                        <slide class="carousel-item">
+                            <img class="d-block img-fluid mx-auto" src="assets/images/small/img-1.jpg"
+                                alt="First slide">
+                        </slide>
+                        <slide class="carousel-item">
+                            <img class="d-block img-fluid mx-auto" src="assets/images/small/img-2.jpg"
+                                alt="Second slide">
+                        </slide>
+                        <slide class="carousel-item">
+                            <img class="d-block img-fluid mx-auto" src="assets/images/small/img-3.jpg"
+                                alt="Third slide">
+                        </slide>
+                    </div>
+                </carousel>
+            </div><!-- end card-body -->
+            <div class="card-body bg-light border-bottom border-top bg-opacity-25">
+                <h5 class="fs-xs text-muted mb-0">HTML Preview</h5>
+            </div>
+            <div class="card-body">
+                <pre class="language-markup" style="height: 240px;">
+<code>&lt;!-- Slides Only --&gt;
+    &lt;carousel id=&quot;carouselExampleSlidesOnly&quot; [showIndicators]=&quot;false&quot; class=&quot;carousel slide&quot;&gt;
+    &lt;div class=&quot;carousel-inner&quot; role=&quot;listbox&quot;&gt;
+        &lt;slide class=&quot;carousel-item&quot;&gt;
+            &lt;img class=&quot;d-block img-fluid mx-auto&quot; src=&quot;assets/images/small/img-1.jpg&quot;
+                alt=&quot;First slide&quot;&gt;
+        &lt;/slide&gt;
+        &lt;slide class=&quot;carousel-item&quot;&gt;
+            &lt;img class=&quot;d-block img-fluid mx-auto&quot; src=&quot;assets/images/small/img-2.jpg&quot;
+                alt=&quot;Second slide&quot;&gt;
+        &lt;/slide&gt;
+        &lt;slide class=&quot;carousel-item&quot;&gt;
+            &lt;img class=&quot;d-block img-fluid mx-auto&quot; src=&quot;assets/images/small/img-3.jpg&quot;
+                alt=&quot;Third slide&quot;&gt;
+        &lt;/slide&gt;
+    &lt;/div&gt;
+&lt;/carousel&gt;</code></pre>
+            </div>
+        </div><!-- end card -->
+    </div>
+
+    <div class="col-xl-6">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title mb-0">With Controls</h4>
+            </div><!-- end card header -->
+            <div class="card-body">
+                <p class="text-muted">Use <code>carousel-control-prev</code> and <code>carousel-control-next</code>
+                    class with &lt;button&gt; or &lt;a&gt; tag element to show carousel with control navigation.</p>
+                <carousel id="carouselExampleSlidesOnly" [showIndicators]="false" class="carousel slide">
+                    <div class="carousel-inner" role="listbox">
+                        <slide class="carousel-item active">
+                            <img class="d-block img-fluid mx-auto" src="assets/images/small/img-4.jpg"
+                                alt="First slide">
+                        </slide>
+                        <slide class="carousel-item">
+                            <img class="d-block img-fluid mx-auto" src="assets/images/small/img-5.jpg"
+                                alt="Second slide">
+                        </slide>
+                        <slide class="carousel-item">
+                            <img class="d-block img-fluid mx-auto" src="assets/images/small/img-6.jpg"
+                                alt="Third slide">
+                        </slide>
+                    </div>
+                </carousel>
+            </div><!-- end card-body -->
+            <div class="card-body bg-light border-bottom border-top bg-opacity-25">
+                <h5 class="fs-xs text-muted mb-0">HTML Preview</h5>
+            </div>
+            <div class="card-body">
+                <pre class="language-markup" style="height: 240px;">
+<code>&lt;!-- With Controls --&gt;
+    &lt;carousel id=&quot;carouselExampleSlidesOnly&quot; [showIndicators]=&quot;false&quot; class=&quot;carousel slide&quot;&gt;
+    &lt;div class=&quot;carousel-inner&quot; role=&quot;listbox&quot;&gt;
+        &lt;slide class=&quot;carousel-item active&quot;&gt;
+            &lt;img class=&quot;d-block img-fluid mx-auto&quot; src=&quot;assets/images/small/img-4.jpg&quot;
+                alt=&quot;First slide&quot;&gt;
+        &lt;/slide&gt;
+        &lt;slide class=&quot;carousel-item&quot;&gt;
+            &lt;img class=&quot;d-block img-fluid mx-auto&quot; src=&quot;assets/images/small/img-5.jpg&quot;
+                alt=&quot;Second slide&quot;&gt;
+        &lt;/slide&gt;
+        &lt;slide class=&quot;carousel-item&quot;&gt;
+            &lt;img class=&quot;d-block img-fluid mx-auto&quot; src=&quot;assets/images/small/img-6.jpg&quot;
+                alt=&quot;Third slide&quot;&gt;
+        &lt;/slide&gt;
+    &lt;/div&gt;
+&lt;/carousel&gt;;</code></pre>
+            </div>
+        </div><!-- end card -->
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xl-6">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title mb-0">with Indicators</h4>
+            </div><!-- end card header -->
+
+            <div class="card-body">
+                <p class="text-muted">Use <code>carousel-indicators</code> class with &lt;ol&gt; element to show
+                    carousel with indicators.</p>
+
+                <carousel id="carouselExampleSlidesOnly" class="carousel slide">
+                    <div class="carousel-inner" role="listbox">
+                        <slide class="carousel-item">
+                            <img class="d-block img-fluid mx-auto" src="assets/images/small/img-3.jpg"
+                                alt="First slide">
+                        </slide>
+                        <slide class="carousel-item">
+                            <img class="d-block img-fluid mx-auto" src="assets/images/small/img-2.jpg"
+                                alt="Second slide">
+                        </slide>
+                        <slide class="carousel-item">
+                            <img class="d-block img-fluid mx-auto" src="assets/images/small/img-1.jpg"
+                                alt="Third slide">
+                        </slide>
+                    </div>
+                </carousel>
+            </div><!-- end card-body -->
+            <div class="card-body bg-light border-bottom border-top bg-opacity-25 d-flex align-items-center">
+                <h5 class="flex-grow-1 fs-xs text-muted mb-0">HTML Preview</h5>
+                <div class="flex-shrink-0">
+                    <a href="javascript:void(0);"><i class="bi bi-clipboard"></i></a>
+                </div>
+            </div>
+            <div class="card-body">
+                <pre class="language-markup" style="height: 310px;">
+<code>&lt;!-- With Indicators --&gt;
+&lt;carousel id=&quot;carouselExampleSlidesOnly&quot; class=&quot;carousel slide&quot;&gt;
+    &lt;div class=&quot;carousel-inner&quot; role=&quot;listbox&quot;&gt;
+        &lt;slide class=&quot;carousel-item&quot;&gt;
+            &lt;img class=&quot;d-block img-fluid mx-auto&quot; src=&quot;assets/images/small/img-3.jpg&quot;
+                alt=&quot;First slide&quot;&gt;
+        &lt;/slide&gt;
+        &lt;slide class=&quot;carousel-item&quot;&gt;
+            &lt;img class=&quot;d-block img-fluid mx-auto&quot; src=&quot;assets/images/small/img-2.jpg&quot;
+                alt=&quot;Second slide&quot;&gt;
+        &lt;/slide&gt;
+        &lt;slide class=&quot;carousel-item&quot;&gt;
+            &lt;img class=&quot;d-block img-fluid mx-auto&quot; src=&quot;assets/images/small/img-1.jpg&quot;
+                alt=&quot;Third slide&quot;&gt;
+        &lt;/slide&gt;
+&lt;/div&gt;</code></pre>
+            </div>
+        </div><!-- end card -->
+    </div>
+    <!--end col-->
+
+    <div class="col-xl-6">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title mb-0">with Captions</h4>
+            </div><!-- end card header -->
+            <div class="card-body">
+                <p class="text-muted">Use <code>carousel-caption</code> class to add captions to the carousel.</p>
+                <carousel id="carouselExampleCaption" [noWrap]="false" [showIndicators]="false" class="carousel slide">
+                    <div class="carousel-inner" role="listbox">
+                        <slide class="carousel-item">
+                            <img src="assets/images/small/img-7.jpg" alt="" class="d-block img-fluid mx-auto">
+                            <div class="carousel-caption text-white-50">
+                                <h5 class="text-white">Sunrise above a beach</h5>
+                                <p>You've probably heard that opposites attract. The same is true for fonts. Don't be
+                                    afraid to combine font styles that are different but complementary.</p>
+                            </div>
+                        </slide>
+                        <slide class="carousel-item active">
+                            <img src="assets/images/small/img-2.jpg" alt="" class="d-block img-fluid mx-auto">
+                            <div class="carousel-caption text-white-50">
+                                <h5 class="text-white">Working from home little spot</h5>
+                                <p>Consistency piques people’s interest is that it has become more and more popular over
+                                    the years, which is excellent.</p>
+                            </div>
+                        </slide>
+                        <slide class="carousel-item">
+                            <img src="assets/images/small/img-9.jpg" alt="" class="d-block img-fluid mx-auto">
+                            <div class="carousel-caption text-white-50">
+                                <h5 class="text-white">Dramatic clouds at the Golden Gate Bridge</h5>
+                                <p>Increase or decrease the letter spacing depending on the situation and try, try again
+                                    until it looks right, and each letter.</p>
+                            </div>
+                        </slide>
+                    </div>
+                </carousel>
+            </div><!-- end card-body -->
+            <div class="card-body bg-light border-bottom border-top bg-opacity-25">
+                <h5 class="fs-xs text-muted mb-0">HTML Preview</h5>
+            </div>
+            <div class="card-body">
+                <pre class="language-markup" style="height: 310px;">
+<code>&lt;!-- With Captions --&gt;
+    &lt;carousel id=&quot;carouselExampleCaption&quot; [noWrap]=&quot;false&quot; [showIndicators]=&quot;false&quot; class=&quot;carousel slide&quot;&gt;
+    &lt;div class=&quot;carousel-inner&quot; role=&quot;listbox&quot;&gt;
+        &lt;slide class=&quot;carousel-item&quot;&gt;
+            &lt;img src=&quot;assets/images/small/img-7.jpg&quot; alt=&quot;&quot; class=&quot;d-block img-fluid mx-auto&quot;&gt;
+            &lt;div class=&quot;carousel-caption text-white-50&quot;&gt;
+                &lt;h5 class=&quot;text-white&quot;&gt;Sunrise above a beach&lt;/h5&gt;
+                &lt;p&gt;You've probably heard that opposites attract. The same is true for fonts. Don't be
+                    afraid to combine font styles that are different but complementary.&lt;/p&gt;
+            &lt;/div&gt;
+        &lt;/slide&gt;
+        &lt;slide class=&quot;carousel-item active&quot;&gt;
+            &lt;img src=&quot;assets/images/small/img-2.jpg&quot; alt=&quot;&quot; class=&quot;d-block img-fluid mx-auto&quot;&gt;
+            &lt;div class=&quot;carousel-caption text-white-50&quot;&gt;
+                &lt;h5 class=&quot;text-white&quot;&gt;Working from home little spot&lt;/h5&gt;
+                &lt;p&gt;Consistency piques people&rsquo;s interest is that it has become more and more popular over
+                    the years, which is excellent.&lt;/p&gt;
+            &lt;/div&gt;
+        &lt;/slide&gt;
+        &lt;slide class=&quot;carousel-item&quot;&gt;
+            &lt;img src=&quot;assets/images/small/img-9.jpg&quot; alt=&quot;&quot; class=&quot;d-block img-fluid mx-auto&quot;&gt;
+            &lt;div class=&quot;carousel-caption text-white-50&quot;&gt;
+                &lt;h5 class=&quot;text-white&quot;&gt;Dramatic clouds at the Golden Gate Bridge&lt;/h5&gt;
+                &lt;p&gt;Increase or decrease the letter spacing depending on the situation and try, try again
+                    until it looks right, and each letter.&lt;/p&gt;
+            &lt;/div&gt;
+        &lt;/slide&gt;
+    &lt;/div&gt;
+&lt;/carousel&gt;</code></pre>
+            </div>
+        </div><!-- end card -->
+    </div>
+    <!--end col-->
+</div>
+<!--end row-->
+
+<div class="row">
+    <div class="col-xl-6">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title mb-0">Crossfade Animation</h4>
+            </div><!-- end card header -->
+
+            <div class="card-body">
+                <p class="text-muted">Use <code>carousel-fade</code> class to the carousel to animate slides with a fade
+                    transition instead of a slide.</p>
+                <carousel id="carouselExampleCaption" [isAnimated]="true" class="carousel slide carousel-fade">
+                    <div class="carousel-inner" role="listbox">
+                        <slide class="carousel-item">
+                            <img class="d-block img-fluid mx-auto" src="assets/images/small/img-1.jpg"
+                                alt="First slide">
+                        </slide>
+                        <slide class="carousel-item">
+                            <img class="d-block img-fluid mx-auto" src="assets/images/small/img-2.jpg"
+                                alt="Second slide">
+                        </slide>
+                        <slide class="carousel-item">
+                            <img class="d-block img-fluid mx-auto" src="assets/images/small/img-3.jpg"
+                                alt="Third slide">
+                        </slide>
+                    </div>
+                </carousel>
+            </div><!-- end card-body -->
+            <div class="card-body bg-light border-bottom border-top bg-opacity-25">
+                <h5 class="fs-xs text-muted mb-0">HTML Preview</h5>
+            </div>
+            <div class="card-body">
+                <pre class="language-markup" style="height: 330px;"><code>&lt;!-- With Crossfade Animation --&gt;
+&lt;carousel id=&quot;carouselExampleCaption&quot; [isAnimated]=&quot;true&quot; class=&quot;carousel slide carousel-fade&quot;&gt;
+&lt;div class=&quot;carousel-inner&quot; role=&quot;listbox&quot;&gt;
+    &lt;slide class=&quot;carousel-item&quot;&gt;
+        &lt;img class=&quot;d-block img-fluid mx-auto&quot; src=&quot;assets/images/small/img-1.jpg&quot;
+            alt=&quot;First slide&quot;&gt;
+    &lt;/slide&gt;
+    &lt;slide class=&quot;carousel-item&quot;&gt;
+        &lt;img class=&quot;d-block img-fluid mx-auto&quot; src=&quot;assets/images/small/img-2.jpg&quot;
+            alt=&quot;Second slide&quot;&gt;
+    &lt;/slide&gt;
+    &lt;slide class=&quot;carousel-item&quot;&gt;
+        &lt;img class=&quot;d-block img-fluid mx-auto&quot; src=&quot;assets/images/small/img-3.jpg&quot;
+            alt=&quot;Third slide&quot;&gt;
+    &lt;/slide&gt;
+&lt;/div&gt;
+&lt;/carousel&gt;
+</code></pre>
+            </div>
+        </div><!-- end card -->
+    </div>
+    <!--end col-->
+
+    <div class="col-xl-6">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title mb-0">Individual carousel-item Interval</h4>
+            </div><!-- end card header -->
+            <div class="card-body">
+                <p class="text-muted">Use <code>data-bs-interval=" "</code> to a carousel-item to change the amount of
+                    time to delay between automatically cycling to the next item.</p>
+                <carousel [interval]="2000" id="carouselExampleInterval" class="carousel slide">
+                    <div class="carousel-inner">
+                        <slide class="carousel-item active">
+                            <img src="assets//images/small/img-12.jpg" class="d-block w-100" alt="First slide" />
+                        </slide>
+                        <slide class="carousel-item">
+                            <img src="assets/images/small/img-11.jpg" class="d-block w-100" alt="two slide" />
+                        </slide>
+                        <slide class="carousel-item">
+                            <img src="assets/images/small/img-10.jpg" class="d-block w-100" alt="There slide" />
+                        </slide>
+                    </div>
+                </carousel>
+            </div><!-- end card-body -->
+            <div class="card-body bg-light border-bottom border-top bg-opacity-25">
+                <h5 class="fs-xs text-muted mb-0">HTML Preview</h5>
+            </div>
+            <div class="card-body">
+                <pre class="language-markup" style="height: 310px;"><code>&lt;!-- Individual Slide --&gt;
+&lt;carousel [interval]=&quot;2000&quot; id=&quot;carouselExampleInterval&quot; class=&quot;carousel slide&quot;&gt;
+&lt;div class=&quot;carousel-inner&quot;&gt;
+    &lt;slide class=&quot;carousel-item active&quot;&gt;
+        &lt;img src=&quot;assets//images/small/img-12.jpg&quot; class=&quot;d-block w-100&quot; alt=&quot;First slide&quot; /&gt;
+    &lt;/slide&gt;
+    &lt;slide class=&quot;carousel-item&quot;&gt;
+        &lt;img src=&quot;assets/images/small/img-11.jpg&quot; class=&quot;d-block w-100&quot; alt=&quot;two slide&quot; /&gt;
+    &lt;/slide&gt;
+    &lt;slide class=&quot;carousel-item&quot;&gt;
+        &lt;img src=&quot;assets/images/small/img-10.jpg&quot; class=&quot;d-block w-100&quot; alt=&quot;There slide&quot; /&gt;
+    &lt;/slide&gt;
+&lt;/div&gt;
+&lt;/carousel&gt;</code></pre>
+            </div>
+        </div><!-- end card -->
+    </div>
+    <!--end col-->
+</div>
+<!--end row-->
+
+<div class="row">
+    <div class="col-xl-6">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title mb-0">Disable Slide Looping</h4>
+            </div><!-- end card header -->
+            <div class="card-body">
+                <p class="text-muted">Carousels support autoplay slides.
+                    This can be disabled using the <code>[noWrap]="false"</code> attribute.so it doesn’t autoplay.
+                </p>
+                <carousel [noWrap]="false" [interval]="10000" [showIndicators]="false">
+                    <div class="carousel-inner">
+                        <slide class="carousel-item">
+                            <img src="assets/images/small/img-9.jpg" class="d-block w-100" alt="One Slide" />
+                        </slide>
+                        <slide class="carousel-item">
+                            <img src="assets/images/small/img-8.jpg" class="d-block w-100" alt="Two Slide" />
+                        </slide>
+                        <slide class="carousel-item">
+                            <img src="assets/images/small/img-7.jpg" class="d-block w-100" alt="Three Slide" />
+                        </slide>
+                    </div>
+                </carousel>
+            </div><!-- end card-body -->
+            <div class="card-body bg-light border-bottom border-top bg-opacity-25">
+                <h5 class="fs-xs text-muted mb-0">HTML Preview</h5>
+            </div>
+            <div class="card-body">
+                <pre class="language-markup" style="height: 310px;">
+<code>&lt;!-- Disable Touch Swiping --&gt;
+&lt;carousel [noWrap]=&quot;false&quot; [interval]=&quot;10000&quot; [showIndicators]=&quot;false&quot;&gt;
+    &lt;div class=&quot;carousel-inner&quot;&gt;
+        &lt;slide class=&quot;carousel-item&quot;&gt;
+            &lt;img src=&quot;assets/images/small/img-9.jpg&quot; class=&quot;d-block w-100&quot; alt=&quot;One Slide&quot; /&gt;
+        &lt;/slide&gt;
+        &lt;slide class=&quot;carousel-item&quot;&gt;
+            &lt;img src=&quot;assets/images/small/img-8.jpg&quot; class=&quot;d-block w-100&quot; alt=&quot;Two Slide&quot; /&gt;
+        &lt;/slide&gt;
+        &lt;slide class=&quot;carousel-item&quot;&gt;
+            &lt;img src=&quot;assets/images/small/img-7.jpg&quot; class=&quot;d-block w-100&quot; alt=&quot;Three Slide&quot; /&gt;
+        &lt;/slide&gt;
+    &lt;/div&gt;
+&lt;/carousel&gt;</code></pre>
+            </div>
+        </div><!-- end card -->
+    </div>
+    <!--end col-->
+
+    <div class="col-xl-6">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title mb-0">Dark Variant</h4>
+            </div><!-- end card header -->
+            <div class="card-body">
+                <p class="text-muted">Use <code>carousel-dark</code> class to the carousel for darker controls,
+                    indicators, and captions.</p>
+
+                <carousel [noWrap]="false" [interval]="10000" class="carousel carousel-dark slide">
+                    <div class="carousel-inner">
+                        <slide class="carousel-item active" data-bs-interval="10000">
+                            <img src="assets/images/small/img-4.jpg" class="d-block w-100" alt="One Slide">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>Drawing a sketch</h5>
+                                <p>Too much or too little spacing, as in the example below, can make things unpleasant
+                                    for the reader.</p>
+                            </div>
+                        </slide>
+                        <slide class="carousel-item" data-bs-interval="2000">
+                            <img src="assets/images/small/img-5.jpg" class="d-block w-100" alt="Two Slide">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>Blue clock on a pastel background</h5>
+                                <p>In some designs, you might adjust your tracking to create a certain artistic effect
+                                    asked them what graphic design tips they live.</p>
+                            </div>
+                        </slide>
+                        <slide class="carousel-item">
+                            <img src="assets/images/small/img-6.jpg" class="d-block w-100" alt="Three Slide">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>Working at a coffee shop</h5>
+                                <p>A wonderful serenity has taken possession of my entire soul, like these sweet
+                                    mornings of spring.</p>
+                            </div>
+                        </slide>
+                    </div>
+                </carousel>
+            </div><!-- end card-body -->
+            <div class="card-body bg-light border-bottom border-top bg-opacity-25">
+                <h5 class="fs-xs text-muted mb-0">HTML Preview</h5>
+            </div>
+            <div class="card-body">
+                <pre class="language-markup" style="height: 350px;">
+<code>&lt;!-- Dark Variant --&gt;
+    &lt;carousel [noWrap]=&quot;false&quot; [interval]=&quot;10000&quot; class=&quot;carousel carousel-dark slide&quot;&gt;
+    &lt;div class=&quot;carousel-inner&quot;&gt;
+        &lt;slide class=&quot;carousel-item active&quot; data-bs-interval=&quot;10000&quot;&gt;
+            &lt;img src=&quot;assets/images/small/img-4.jpg&quot; class=&quot;d-block w-100&quot; alt=&quot;One Slide&quot;&gt;
+            &lt;div class=&quot;carousel-caption d-none d-md-block&quot;&gt;
+                &lt;h5&gt;Drawing a sketch&lt;/h5&gt;
+                &lt;p&gt;Too much or too little spacing, as in the example below, can make things unpleasant
+                    for the reader.&lt;/p&gt;
+            &lt;/div&gt;
+        &lt;/slide&gt;
+        &lt;slide class=&quot;carousel-item&quot; data-bs-interval=&quot;2000&quot;&gt;
+            &lt;img src=&quot;assets/images/small/img-5.jpg&quot; class=&quot;d-block w-100&quot; alt=&quot;Two Slide&quot;&gt;
+            &lt;div class=&quot;carousel-caption d-none d-md-block&quot;&gt;
+                &lt;h5&gt;Blue clock on a pastel background&lt;/h5&gt;
+                &lt;p&gt;In some designs, you might adjust your tracking to create a certain artistic effect
+                    asked them what graphic design tips they live.&lt;/p&gt;
+            &lt;/div&gt;
+        &lt;/slide&gt;
+        &lt;slide class=&quot;carousel-item&quot;&gt;
+            &lt;img src=&quot;assets/images/small/img-6.jpg&quot; class=&quot;d-block w-100&quot; alt=&quot;Three Slide&quot;&gt;
+            &lt;div class=&quot;carousel-caption d-none d-md-block&quot;&gt;
+                &lt;h5&gt;Working at a coffee shop&lt;/h5&gt;
+                &lt;p&gt;A wonderful serenity has taken possession of my entire soul, like these sweet
+                    mornings of spring.&lt;/p&gt;
+            &lt;/div&gt;
+        &lt;/slide&gt;
+    &lt;/div&gt;
+&lt;/carousel&gt;</code></pre>
+            </div>
+        </div><!-- end card -->
+    </div>
+    <!--end col-->
+</div>
+<!--end row-->

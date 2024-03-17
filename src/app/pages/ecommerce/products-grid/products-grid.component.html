@@ -1,0 +1,352 @@
+<!-- Start Breadcrumbs -->
+<app-breadcrumbs title="Products Grid" [breadcrumbItems]="breadCrumbItems"></app-breadcrumbs>
+<!-- End Breadcrumbs -->
+
+<div class="row">
+    <div class="col-xxl-3">
+        <div class="card">
+            <div class="card-header d-flex align-items-center">
+                <div class="flex-grow-1">
+                    <h5 class="card-title mb-0">Filters</h5>
+                </div>
+                <div class="flex-shrink-0">
+                    <a href="javascript:void(0);" class="text-reset text-decoration-underline">Clear All</a>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="search-box mb-3">
+                    <input type="text" class="form-control" id="searchResultList" placeholder="Search products, category etc..." [(ngModel)]="searchTerm" (ngModelChange)="performSearch()">
+                    <i class="ri-search-line search-icon"></i>
+                </div>
+                <accordion class="accordion accordion-flush filter-panel" id="accordionExample">
+                    <accordion-group [isOpen]="true" class="accordion-item">
+                        <h2 accordion-heading class="accordion-header" id="categoryAccordion">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCategory" aria-expanded="true" aria-controls="collapseCategory">
+                                Product Category
+                            </button>
+                        </h2>
+                        <div id="collapseCategory" class="accordion-collapse collapse show" aria-labelledby="categoryAccordion" data-bs-parent="#categoryFilters">
+                            <div class="accordion-body">
+                                <ul class="list-unstyled mb-0 filter-list">
+                                    <li>
+                                        <a href="javascript:void(0);" class="d-flex py-1 align-items-center">
+                                            <div class="flex-grow-1" (click)="categoryFilter('Appliances')">
+                                                <h5 class="fs-sm mb-0 listname">Appliances</h5>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);" class="d-flex py-1 align-items-center">
+                                            <div class="flex-grow-1" (click)="categoryFilter('Automotive Accessories')">
+                                                <h5 class="fs-sm mb-0 listname">Automotive Accessories</h5>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);" class="d-flex py-1 align-items-center">
+                                            <div class="flex-grow-1" (click)="categoryFilter('Electronics')">
+                                                <h5 class="fs-sm mb-0 listname">Electronics</h5>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);" class="d-flex py-1 align-items-center">
+                                            <div class="flex-grow-1" (click)="categoryFilter('Fashion')">
+                                                <h5 class="fs-sm mb-0 listname">Fashion</h5>
+                                            </div>
+                                            <div class="flex-shrink-0 ms-2">
+                                                <span class="badge bg-light text-muted">7</span>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);" class="d-flex py-1 align-items-center">
+                                            <div class="flex-grow-1" (click)="categoryFilter('Furniture')">
+                                                <h5 class="fs-sm mb-0 listname">Furniture</h5>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);" class="d-flex py-1 align-items-center">
+                                            <div class="flex-grow-1" (click)="categoryFilter('Grocery')">
+                                                <h5 class="fs-sm mb-0 listname">Grocery</h5>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);" class="d-flex py-1 align-items-center">
+                                            <div class="flex-grow-1" (click)="categoryFilter('Headphones')">
+                                                <h5 class="fs-sm mb-0 listname">Headphones</h5>
+                                            </div>
+                                            <div class="flex-shrink-0 ms-2">
+                                                <span class="badge bg-light text-muted">2</span>
+                                            </div>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="javascript:void(0);" class="d-flex py-1 align-items-center">
+                                            <div class="flex-grow-1" (click)="categoryFilter('Luggage')">
+                                                <h5 class="fs-sm mb-0 listname">Luggage</h5>
+                                            </div>
+                                            <div class="flex-shrink-0 ms-2">
+                                                <span class="badge bg-light text-muted">1</span>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);" class="d-flex py-1 align-items-center">
+                                            <div class="flex-grow-1" (click)="categoryFilter('Sports')">
+                                                <h5 class="fs-sm mb-0 listname">Sports</h5>
+                                            </div>
+                                            <div class="flex-shrink-0 ms-2">
+                                                <span class="badge bg-light text-muted">1</span>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);" class="d-flex py-1 align-items-center">
+                                            <div class="flex-grow-1" (click)="categoryFilter('Watches')">
+                                                <h5 class="fs-sm mb-0 listname">Watches</h5>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </accordion-group>
+                    <accordion-group [isOpen]="true" class="accordion-item">
+                        <h2 accordion-heading class="accordion-header" id="priceAccordion">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePrice" aria-expanded="true" aria-controls="collapsePrice">
+                                Price
+                            </button>
+                        </h2>
+                        <div id="collapsePrice" class="accordion-collapse collapse show" aria-labelledby="priceAccordion" data-bs-parent="#priceFilters">
+                            <div class="accordion-body">
+                                <div id="product-price-range" data-slider-color="secondary"></div>
+                                <ngx-slider [(value)]="pricevalue" [(highValue)]="maxVal" [options]="priceoption" (valueChange)="valueChange($event,true)" (highValueChange)="valueChange($event,false)"></ngx-slider>
+                                <div class="formCost d-flex gap-2 align-items-center mt-3">
+                                    <input class="form-control form-control-sm" type="text" id="minCost" value="{{minVal}}">
+                                    <span class="fw-semibold text-muted">to</span> <input class="form-control form-control-sm" type="text" id="maxCost" value="{{maxVal}}">
+                                </div>
+                            </div>
+                        </div>
+                    </accordion-group>
+                    <accordion-group [isOpen]="true" class="accordion-item">
+                        <h2 accordion-heading class="accordion-header" id="ColorsAccordion">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseColors" aria-expanded="true" aria-controls="collapseColors">
+                                Colors
+                            </button>
+                        </h2>
+                        <div id="collapseColors" class="accordion-collapse collapse show" aria-labelledby="ColorsAccordion" data-bs-parent="#ColorsFilters">
+                            <div class="accordion-body">
+                                <div class="hstack gap-2 flex-wrap">
+                                    <a href="javascript:void(0);" class="btn btn-sm btn-subtle-primary">Blue</a>
+                                    <a href="javascript:void(0);" class="btn btn-sm btn-subtle-secondary">Dark</a>
+                                    <a href="javascript:void(0);" class="btn btn-sm btn-subtle-success">Green</a>
+                                    <a href="javascript:void(0);" class="btn btn-sm btn-subtle-danger">Red</a>
+                                    <a href="javascript:void(0);" class="btn btn-sm btn-subtle-dark">Black</a>
+                                    <a href="javascript:void(0);" class="btn btn-sm btn-subtle-warning">Yellow</a>
+                                    <a href="javascript:void(0);" class="btn btn-sm btn-subtle-info">Cyan</a>
+                                </div>
+                            </div>
+                        </div>
+                    </accordion-group>
+                    <accordion-group [isOpen]="true" class="accordion-item">
+                        <h2 accordion-heading class="accordion-header" id="brandsAccordion">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseBrands" aria-expanded="true" aria-controls="collapseBrands">
+                                Brands <span class="badge bg-primary ms-2 fs-xxs">3</span>
+                            </button>
+                        </h2>
+                        <div id="collapseBrands" class="accordion-collapse collapse show" aria-labelledby="brandsAccordion" data-bs-parent="#brandsFilters">
+                            <div class="accordion-body">
+                                <div class="d-flex flex-column gap-2 filter-check">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="Boat" id="productBrandAll">
+                                        <label class="form-check-label" for="productBrandAll">All Select</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="Boat" id="productBrandRadio5" checked>
+                                        <label class="form-check-label" for="productBrandRadio5">Boat</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="OnePlus" id="productBrandRadio4">
+                                        <label class="form-check-label" for="productBrandRadio4">OnePlus</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="Realme" id="productBrandRadio3">
+                                        <label class="form-check-label" for="productBrandRadio3">Realme</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="Sony" id="productBrandRadio2">
+                                        <label class="form-check-label" for="productBrandRadio2">Sony</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="JBL" id="productBrandRadio1" checked>
+                                        <label class="form-check-label" for="productBrandRadio1">JBL</label>
+                                    </div>
+
+                                    <div>
+                                        <button type="button" class="btn btn-link text-decoration-none text-uppercase fw-medium p-0">1,235
+                                            More</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </accordion-group>
+                    <accordion-group [isOpen]="true" class="accordion-item">
+                        <h2 accordion-heading class="accordion-header" id="discountAccordion">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDiscount" aria-expanded="false" aria-controls="collapseDiscount">
+                                Discount
+                            </button>
+                        </h2>
+                        <div id="collapseDiscount" class="accordion-collapse collapse show" aria-labelledby="discountAccordion" data-bs-parent="#brandsFilters">
+                            <div class="accordion-body">
+                                <div class="d-flex flex-column gap-2 filter-check" id="discount-filter">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="5" id="productdiscountRadio6" (change)="changeDiscount($event)">
+                                        <label class="form-check-label" for="productdiscountRadio6">50% or more</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="4" id="productdiscountRadio5" (change)="changeDiscount($event)">
+                                        <label class="form-check-label" for="productdiscountRadio5">40% or more</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="3" id="productdiscountRadio4" (change)="changeDiscount($event)">
+                                        <label class="form-check-label" for="productdiscountRadio4">
+                                            30% or more
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="2" id="productdiscountRadio3" (change)="changeDiscount($event)">
+                                        <label class="form-check-label" for="productdiscountRadio3">
+                                            20% or more
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="1" id="productdiscountRadio2" (change)="changeDiscount($event)">
+                                        <label class="form-check-label" for="productdiscountRadio2">
+                                            10% or more
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="0" id="productdiscountRadio1" (change)="changeDiscount($event)">
+                                        <label class="form-check-label" for="productdiscountRadio1">
+                                            Less than 10%
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </accordion-group>
+                </accordion>
+            </div>
+        </div>
+    </div><!--end col-->
+
+    <div class="col-xxl-9">
+        <div class="row align-items-center mb-4 g-3">
+            <div class="col-xxl-2 col-lg-4 col-sm-6 me-auto">
+                <h5 class="mb-0">Products <span class="badge bg-secondary-subtle text-secondary align-middle ms-1">254</span></h5>
+            </div><!--end col-->
+            <div class="col-xxl-2 col-lg-4 col-sm-6">
+                <select class="form-control" data-choices data-choices-search-false>
+                    <option value="All Select" selected>All Select</option>
+                    <option value="Best Rated">Best Rated</option>
+                    <option value="Best Selling">Best Selling</option>
+                    <option value="Newest">Newest</option>
+                    <option value="Trending">Trending</option>
+                </select>
+            </div><!--end col-->
+            <div class="col-lg-auto">
+                <a routerLink="/ecommerce/add-product" class="btn btn-primary"><i class="bi bi-plus-circle align-baseline me-1"></i> Add Product</a>
+            </div><!--end col-->
+        </div><!--end row-->
+
+        <div id="elmLoader">
+            <div class="spinner-border text-primary avatar-sm" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+        <div class="row" id="product-grid">
+            @for ( data of products; track $index) {
+            <div class="col-xxl-3 col-lg-4 col-md-6">
+                <div class="card ribbon-box ribbon-fill">
+                    @if (data.tag) {<div class="ribbon ribbon-danger">Sale</div>}
+                    <div class="card-body p-4 m-4"> <button type="button" class="btn btn-sm btn-icon btn-subtle-danger position-absolute top-0 end-0 m-3" (click)="removeItem(data.id)"><i class="ph-trash"></i></button>
+                        <img src="{{data.img1}}" alt="" class="img-fluid">
+                    </div>
+                    <div class="card-body pt-0"> <span class="badge bg-warning-subtle text-warning float-end"><i class="bi bi-star-fill align-baseline me-1"></i> <span class="rate">{{data.ratings}}</span></span>
+                        <h5 class="fs-lg mb-3">${{data.price}} 
+                            @if (data.mrp) {
+                            <small class="fs-sm fw-normal text-decoration-line-through text-muted">{{data.mrp}}</small>
+                            }
+                        </h5> 
+                        <a routerLink="/ecommerce/product-details">
+                            <h6 class="fs-md text-truncate">{{data.title}}</h6>
+                        </a> <a href="javascript:void(0);" class="text-decoration-underline text-muted mb-0">{{data.category}}</a>
+                        <div class="mt-3 hstack gap-2"> <a routerLink="/ecommerce/add-product" class="btn btn-primary w-100"><i class="ph-pencil me-1 align-middle"></i> Edit</a> <a routerLink="/ecommerce/product-details" class="btn btn-secondary w-100"><i class="ph-eye me-1 align-middle"></i> Overview</a> </div>
+                    </div>
+                </div>
+
+            </div>
+        }
+        </div><!--end row-->
+
+
+        <div class="row mb-4 align-items-center" id="pagination-element">
+            <div class="col-sm">
+                <div class="text-muted">
+                    Showing <span class="fw-semibold">{{products?.length}}</span> of <span class="fw-semibold">{{productlist?.length}}</span> Results
+                </div>
+            </div>
+
+            <div class="col-sm-auto mt-3 mt-sm-0">
+                <pagination class="pagination-wrap hstack gap-2 justify-content-center" [totalItems]="productlist?.length" [itemsPerPage]="12" (pageChanged)="pageChanged($event)"></pagination>
+            </div>
+        </div>
+        <!-- end pagination -->
+
+
+
+        <div class="row" id="search-result-elem" style="display: none;">
+            <div class="col-lg-12">
+                <div class="text-center py-5">
+                    <div class="avatar-lg mx-auto mb-4">
+                        <div class="avatar-title bg-light text-primary rounded-circle fs-4xl">
+                            <i class="bi bi-search"></i>
+                        </div>
+                    </div>
+                    <h5>No matching records found</h5>
+                </div>
+            </div>
+        </div>
+        <!-- end search-result -->
+    </div><!--end col-->
+</div><!--end row-->
+
+<!-- deleteRecordModal -->
+<div id="deleteRecordModal" class="modal fade zoomIn" bsModal #deleteRecordModal="bs-modal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" id="deleteRecord-close" (click)="deleteRecordModal.hide()"></button>
+            </div>
+            <div class="modal-body p-md-5">
+                <div class="text-center">
+                    <div class="text-danger">
+                        <i class="bi bi-trash display-4"></i>
+                    </div>
+                    <div class="mt-4">
+                        <h3 class="mb-2">Are you sure ?</h3>
+                        <p class="text-muted fs-lg mx-3 mb-0">Are you sure you want to remove this record ?</p>
+                    </div>
+                </div>
+                <div class="d-flex gap-2 justify-content-center mt-4 mb-2">
+                    <button type="button" class="btn w-sm btn-light btn-hover" (click)="deleteRecordModal.hide()">Close</button>
+                    <button type="button" class="btn w-sm btn-danger btn-hover" id="delete-record" (click)="confirmDelete()">Yes, Delete It!</button>
+                </div>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>

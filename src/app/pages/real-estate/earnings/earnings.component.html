@@ -1,0 +1,140 @@
+<!-- Start Breadcrumbs -->
+<app-breadcrumbs title="Earnings" [breadcrumbItems]="breadCrumbItems"></app-breadcrumbs>
+<!-- End Breadcrumbs -->
+
+<div class="row row-cols-xxl-5 row-cols-lg-3 row-cols-md-2 row-cols-1">
+    @for (data of earningcards; track $index) {
+    <div class="col">
+        <div class="card border-bottom border-2 card-animate border-{{data.border}}">
+            <div class="card-body">
+                <span class="badge bg-{{data.iconColor}}-subtle text-{{data.iconColor}} float-end"><i class="{{data.icon}} align-middle me-1"></i> {{data.ratting}}%</span>
+                <h4 class="mb-4">$<span class="counter-value" [countUp]="data.target" [options]="data.option"></span>{{data.letter}}</h4>
+
+                <p class="text-muted fw-medium text-uppercase mb-0">{{data.title}}</p>
+            </div>
+        </div>
+    </div>
+}
+</div><!---end row-->
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body pb-0 mb-n4">
+                <div class="d-flex z-1 position-relative">
+                    <div class="flex-shrink-0">
+                        <input mwlFlatpickr [(ngModel)]="currentDate" altFormat="d M, Y" dateFormat="d M, Y" mode="range" [altInput]="true" [convertModelValue]="true">
+                    </div>
+                </div>
+            </div>
+            <div class="card-body pt-0 mt-4 mt-md-0">
+                <div id="line_chart_basic" class="apex-charts" dir="ltr">
+                    <apx-chart [series]="lineChart.series" [chart]="lineChart.chart" [grid]="lineChart.grid" [legend]="lineChart.legend" [stroke]="lineChart.stroke" [xaxis]="lineChart.xaxis" [yaxis]="lineChart.yaxis" [colors]="lineChart.colors" [markers]="lineChart.markers" dir="ltr"></apx-chart>
+                </div>
+            </div>
+        </div>
+    </div><!--end col-->
+</div><!--end row-->
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card" id="agenciesList">
+            <div class="card-header">
+                <div class="row align-items-center gy-3">
+                    <div class="col-xl-3 col-lg-4 col-md-6 order-last order-md-first me-auto">
+                        <div class="search-box">
+                            <input type="text" class="form-control search" placeholder="Search for transaction, date or something..." [(ngModel)]="searchTerm" (ngModelChange)="performSearch()">
+                            <i class="ri-search-line search-icon"></i>
+                        </div>
+                    </div><!--end col-->
+                    <div class="col-xl-2 col-lg-3 col-md-5">
+                        <div class="d-flex align-items-center gap-2">
+                            <span class="text-muted flex-shrink-0">Sort by: </span>
+                            <div class="flex-grow-1">
+                                <select class="form-control" id="select-category">
+                                    <option value="All Select">All Select</option>
+                                    <option value="Email">Email</option>
+                                    <option value="Agencies Name">Agencies</option>
+                                    <option value="Address">Address</option>
+                                    <option value="Total Property">Total Property</option>
+                                    <option value="Employee">Employee</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div><!--end col-->
+                </div><!--end row-->
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-borderless table-centered align-middle table-nowrap mb-0">
+                        <thead class="text-muted table-light">
+                            <tr>
+                                <th>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="checkbox-all">
+                                        <label class="form-check-label" for="checkbox-all"></label>
+                                    </div>
+                                </th>
+                                <th scope="col" class="sort cursor-pointer">#</th>
+                                <th scope="col" class="sort cursor-pointer" (click)="onSort('transactionID')">Transaction ID</th>
+                                <th scope="col" class="sort cursor-pointer" (click)="onSort('timestamp')">Timestamp</th>
+                                <th scope="col" class="sort cursor-pointer" (click)="onSort('details')">Details</th>
+                                <th scope="col" class="sort cursor-pointer" (click)="onSort('type')">Type</th>
+                                <th scope="col" class="sort cursor-pointer" (click)="onSort('amount')">Amount</th>
+                                <th scope="col" class="sort cursor-pointer" (click)="onSort('status')">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody class="list">
+                            @for (data of transaction; track $index) {
+                            <tr>
+                                <td>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="checkbox-1">
+                                        <label class="form-check-label" for="checkbox-1"></label>
+                                    </div>
+                                </td>
+                                <td class="in_out text-{{data.color}} fs-md"><i class="{{data.icon}}"></i></td>
+                                <td class="transactionID"><a routerLink="/real-estate/agencies/overview" class="fw-medium link-primary">#{{data.transactionID}}</a></td>
+                                <td class="timestamp">{{data.date}} <small class="text-muted">{{data.timestamp}}</small>
+                                </td>
+                                <td class="details">{{data.details}}</td>
+                                <td class="type">
+                                    {{data.type}}
+                                </td>
+                                <td class="amount">${{data.amount}}</td>
+                                <td class="status"><span class="badge" [ngClass]="{'bg-warning-subtle text-warning':data.status === 'Pending','bg-success-subtle text-success':data.status === 'Successful','bg-danger-subtle text-danger':data.status === 'Cancelled'}">{{data.status}}</span>
+                                </td>
+                            </tr>
+                        }
+                        </tbody><!-- end tbody -->
+                    </table><!-- end table -->
+
+                    <div id="elmLoader">
+                        <div class="spinner-border text-primary avatar-sm" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+
+                    <div class="noresult" style="display: none;">
+                        <div class="text-center py-4">
+                            <i class="ph-magnifying-glass fs-1 text-primary"></i>
+                            <h5 class="mt-2">Sorry! No Result Found</h5>
+                            <p class="text-muted mb-0">We've searched more than 150+ agencies We did not find any
+                                agencies for you search.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row align-items-center text-center text-sm-start mt-3" id="pagination-element">
+                    <div class="col-sm">
+                        <div class="text-muted text-center text-sm-start">
+                            Showing <span class="fw-semibold">{{transaction?.length}}</span> of <span class="fw-semibold">{{transactionlist?.length}}</span> Results
+                        </div>
+                    </div><!--end col-->
+                    <div class="col-sm-auto mt-3 mt-sm-0">
+                        <pagination class="pagination-wrap hstack justify-content-center gap-2" [totalItems]="transactionlist?.length" [itemsPerPage]="10" (pageChanged)="pageChanged($event)"></pagination>
+                    </div><!--end col-->
+                </div><!--end row-->
+            </div>
+        </div>
+    </div><!--end col-->
+</div><!--end row-->
