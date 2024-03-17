@@ -1823,7 +1823,7 @@ const columnWithDataChart: ChartOptions = {
               gradient: {
                   colorFrom: "#D8E3F0",
                   colorTo: "#BED1E6",
-                  stops: [0, 100],
+                  
                   opacityFrom: 0.4,
                   opacityTo: 0.5,
               },
@@ -1843,7 +1843,7 @@ const columnWithDataChart: ChartOptions = {
           inverseColors: true,
           opacityFrom: 1,
           opacityTo: 1,
-          stops: [50, 0, 100, 100],
+          
       },
   },
   yaxis: {
@@ -2192,7 +2192,7 @@ const ColumnWithRotatedChart: ChartOptions = {
           inverseColors: true,
           opacityFrom: 0.85,
           opacityTo: 0.85,
-          stops: [50, 0, 100],
+          
       },
   },
 };

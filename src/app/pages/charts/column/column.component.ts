@@ -232,7 +232,7 @@ export class ColumnComponent {
             gradient: {
               colorFrom: "#D8E3F0",
               colorTo: "#BED1E6",
-              stops: [0, 100],
+              
               opacityFrom: 0.4,
               opacityTo: 0.5,
             },
@@ -252,7 +252,7 @@ export class ColumnComponent {
           inverseColors: true,
           opacityFrom: 1,
           opacityTo: 1,
-          stops: [50, 0, 100, 100],
+          
         },
       },
       yaxis: {
@@ -650,7 +650,7 @@ export class ColumnComponent {
           inverseColors: true,
           opacityFrom: 0.85,
           opacityTo: 0.85,
-          stops: [50, 0, 100],
+          
         },
       },
       colors: colors
@@ -1435,7 +1435,7 @@ export class ColumnComponent {
           type: 'vertical',
           gradientToColors: ['#00E396'],
           inverseColors: true,
-          stops: [0, 100]
+          
         }
       },
       grid: {

@@ -59,5 +59,6 @@ testem.log
 .DS_Store
 Thumbs.db
 
+.angular/
 */.angular/*
 */node_modules/

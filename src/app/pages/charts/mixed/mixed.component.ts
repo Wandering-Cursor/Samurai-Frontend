@@ -382,7 +382,7 @@ export class MixedComponent {
           type: "vertical",
           opacityFrom: 0.85,
           opacityTo: 0.55,
-          stops: [0, 100, 100, 100]
+          
         }
       },
       labels: ['01/01/2003', '02/01/2003', '03/01/2003', '04/01/2003', '05/01/2003', '06/01/2003', '07/01/2003',

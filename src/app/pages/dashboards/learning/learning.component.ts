@@ -236,7 +236,7 @@ export class LearningComponent {
           inverseColors: false,
           opacityFrom: 1,
           opacityTo: 1,
-          stops: [0, 50, 65, 91]
+          
         },
       },
       stroke: {
@@ -304,7 +304,7 @@ export class LearningComponent {
           inverseColors: false,
           opacityFrom: 0.2,
           opacityTo: 0.0,
-          stops: [50, 70, 100, 100]
+          
         },
       },
       markers: {
