@@ -22,9 +22,6 @@ concurrency:
 jobs:
   # Single deploy job since we're just deploying
   deploy:
-    defaults:
-      run:
-        working-directory: samurai
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -47,23 +44,14 @@ jobs:
         env:
           PAGE_ABSOLUTE_URL: ${{ vars.PAGE_ABSOLUTE_URL }}
       
-      - name: Show files
-        run: pwd && ls -la
-
-      - name: Copy files
-        run: mv dist/samurai/browser/* dist/samurai/
-      
-      - name: Remove browser folder
-        run: rm -rf dist/samurai/browser
-      
       - name: Add 404 page
-        run: cp dist/samurai/index.html dist/samurai/404.html
+        run: cp dist/steex/index.html dist/steex/404.html
 
       # Create an artifact, and upload it to github-pg branch
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
-          path: samurai/dist/samurai/
+          path: dist/steex/
       
       # Deploy to GitHub Pages
       - name: Deploy to GitHub Pages

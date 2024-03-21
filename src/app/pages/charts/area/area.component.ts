@@ -3937,6 +3937,7 @@ export class AreaComponent {
           inverseColors: false,
           opacityFrom: 0.45,
           opacityTo: 0.05,
+          
         },
       },
     };
@@ -4523,6 +4524,7 @@ export class AreaComponent {
           inverseColors: false,
           opacityFrom: 0.45,
           opacityTo: 0.05,
+          
         },
       },
       yaxis: {

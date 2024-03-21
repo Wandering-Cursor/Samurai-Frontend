@@ -250,9 +250,9 @@ export class ColumnComponent {
           fill: {
             type: 'gradient',
             gradient: {
-              colorFrom: '#D8E3F0',
-              colorTo: '#BED1E6',
-
+              colorFrom: "#D8E3F0",
+              colorTo: "#BED1E6",
+              
               opacityFrom: 0.4,
               opacityTo: 0.5,
             },
@@ -272,6 +272,7 @@ export class ColumnComponent {
           inverseColors: true,
           opacityFrom: 1,
           opacityTo: 1,
+          
         },
       },
       yaxis: {
@@ -702,6 +703,7 @@ export class ColumnComponent {
           inverseColors: true,
           opacityFrom: 0.85,
           opacityTo: 0.85,
+          
         },
       },
       colors: colors,

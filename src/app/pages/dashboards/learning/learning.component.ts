@@ -235,7 +235,9 @@ export class LearningComponent {
           shadeIntensity: 0.15,
           inverseColors: false,
           opacityFrom: 1,
-          opacityTo: 1,        },
+          opacityTo: 1,
+          
+        },
       },
       stroke: {
         dashArray: 4
@@ -301,7 +303,9 @@ export class LearningComponent {
           type: "vertical",
           inverseColors: false,
           opacityFrom: 0.2,
-          opacityTo: 0.0        },
+          opacityTo: 0.0,
+          
+        },
       },
       markers: {
         size: 4,

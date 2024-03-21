@@ -332,6 +332,7 @@ export class TimelineComponent implements OnInit {
           inverseColors: true,
           opacityFrom: 1,
           opacityTo: 1,
+          
         },
       },
       xaxis: {
@@ -809,7 +810,8 @@ export class TimelineComponent implements OnInit {
         gradient: {
           gradientToColors: ['#36BDCB'],
           inverseColors: false,
-        },
+          
+        }
       },
       grid: {
         xaxis: {

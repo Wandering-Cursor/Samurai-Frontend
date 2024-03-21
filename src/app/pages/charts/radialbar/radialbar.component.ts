@@ -287,6 +287,7 @@ export class RadialbarComponent {
           inverseColors: true,
           opacityFrom: 1,
           opacityTo: 1,
+          
         },
       },
       stroke: {
@@ -347,6 +348,7 @@ export class RadialbarComponent {
           inverseColors: false,
           opacityFrom: 1,
           opacityTo: 1,
+          
         },
       },
       stroke: {
@@ -423,6 +425,7 @@ export class RadialbarComponent {
           inverseColors: false,
           opacityFrom: 1,
           opacityTo: 1,
+          
         },
       },
       labels: ['Average Results'],

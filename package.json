@@ -1,6 +1,6 @@
 {
   "name": "steex",
-  "version": "0.0.0",
+  "version": "0.3.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -8,7 +8,6 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
-  "private": true,
   "dependencies": {
     "@amcharts/amcharts5": "^5.5.7",
     "@amcharts/amcharts5-geodata": "^5.1.1",

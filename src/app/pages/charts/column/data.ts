@@ -1786,57 +1786,58 @@ const columnWithDataChart: ChartOptions = {
     borderColor: '#f1f1f1',
   },
   xaxis: {
-    categories: [
-      'Jan',
-      'Feb',
-      'Mar',
-      'Apr',
-      'May',
-      'Jun',
-      'Jul',
-      'Aug',
-      'Sep',
-      'Oct',
-      'Nov',
-      'Dec',
-    ],
-    position: 'top',
-    labels: {
-      offsetY: -18,
-    },
-    axisBorder: {
-      show: false,
-    },
-    axisTicks: {
-      show: false,
-    },
-    crosshairs: {
-      fill: {
-        type: 'gradient',
-        gradient: {
-          colorFrom: '#D8E3F0',
-          colorTo: '#BED1E6',
-
-          opacityFrom: 0.4,
-          opacityTo: 0.5,
-        },
+      categories: [
+          "Jan",
+          "Feb",
+          "Mar",
+          "Apr",
+          "May",
+          "Jun",
+          "Jul",
+          "Aug",
+          "Sep",
+          "Oct",
+          "Nov",
+          "Dec",
+      ],
+      position: "top",
+      labels: {
+          offsetY: -18,
       },
-    },
-    tooltip: {
-      enabled: true,
-      offsetY: -35,
-    },
+      axisBorder: {
+          show: false,
+      },
+      axisTicks: {
+          show: false,
+      },
+      crosshairs: {
+          fill: {
+              type: "gradient",
+              gradient: {
+                  colorFrom: "#D8E3F0",
+                  colorTo: "#BED1E6",
+                  
+                  opacityFrom: 0.4,
+                  opacityTo: 0.5,
+              },
+          },
+      },
+      tooltip: {
+          enabled: true,
+          offsetY: -35,
+      },
   },
   fill: {
-    gradient: {
-      shade: 'light',
-      type: 'horizontal',
-      shadeIntensity: 0.25,
-      gradientToColors: undefined,
-      inverseColors: true,
-      opacityFrom: 1,
-      opacityTo: 1,
-    },
+      gradient: {
+          shade: "light",
+          type: "horizontal",
+          shadeIntensity: 0.25,
+          gradientToColors: undefined,
+          inverseColors: true,
+          opacityFrom: 1,
+          opacityTo: 1,
+          
+      },
   },
   yaxis: {
     axisBorder: {
@@ -2204,16 +2205,17 @@ const ColumnWithRotatedChart: ChartOptions = {
     },
   },
   fill: {
-    type: 'gradient',
-    gradient: {
-      shade: 'light',
-      type: 'horizontal',
-      shadeIntensity: 0.25,
-      gradientToColors: undefined,
-      inverseColors: true,
-      opacityFrom: 0.85,
-      opacityTo: 0.85,
-    },
+      type: "gradient",
+      gradient: {
+          shade: "light",
+          type: "horizontal",
+          shadeIntensity: 0.25,
+          gradientToColors: undefined,
+          inverseColors: true,
+          opacityFrom: 0.85,
+          opacityTo: 0.85,
+          
+      },
   },
 };
 

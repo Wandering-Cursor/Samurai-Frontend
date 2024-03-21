@@ -430,7 +430,8 @@ export class MixedComponent {
           type: 'vertical',
           opacityFrom: 0.85,
           opacityTo: 0.55,
-        },
+          
+        }
       },
       labels: [
         '01/01/2003',

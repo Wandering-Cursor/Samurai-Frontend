@@ -940,6 +940,7 @@ export class LineComponent {
           inverseColors: false,
           opacityFrom: 0.5,
           opacityTo: 0,
+          
         },
       },
       yaxis: {
@@ -1804,6 +1805,7 @@ export class LineComponent {
           type: 'horizontal',
           opacityFrom: 1,
           opacityTo: 1,
+          
         },
       },
       markers: {
