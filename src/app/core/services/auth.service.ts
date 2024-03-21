@@ -6,122 +6,148 @@ import { getFirebaseBackend } from 'src/app/authUtils';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
-import { GlobalComponent } from "../../global-component";
+import { GlobalComponent } from '../../global-component';
 import { API_URL } from '../../token/api-url.token';
 import { AuthResponse } from '../../interfaces/api-interfaces';
 // Action
-import { login, loginSuccess, loginFailure, logout, logoutSuccess, RegisterSuccess } from '../../store/Authentication/authentication.actions';
+import {
+  login,
+  loginSuccess,
+  loginFailure,
+  logout,
+  logoutSuccess,
+  RegisterSuccess,
+  RegisterFailure,
+} from '../../store/Authentication/authentication.actions';
 
 // Firebase
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import firebase from 'firebase/compat/app';
 
-
 const AUTH_API = GlobalComponent.API_URL;
 
 const httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
 };
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
-    user!: User;
-    currentUserValue: any;
+  user!: User;
+  currentUserValue: any;
 
-    private currentUserSubject: BehaviorSubject<User>;
+  private currentUserSubject: BehaviorSubject<User>;
 
-    constructor(private http: HttpClient, private store: Store, private afAuth: AngularFireAuth) {
-        this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')!));
-    }
-    
-      public tokenCreate(email: string, password: string): Observable<AuthResponse> {
-        return this.http.post<AuthResponse>(`${AUTH_API}/api/accounts/token`, {
-          email: email,
-          password: password,
-        });
-      }
-    
-      public tokenRefresh(refresh: string) {
-        return this.http.post(`${AUTH_API}/api/accounts/token`, {
-          refresh: refresh,
-        });
-      }
-    
-      public signUp(email: string, password: string, registration_code: string) {
-        return this.http.post(`${AUTH_API}/api/accounts/sign-up`, {
-          email: email,
-          password: password,
-          registration_code: registration_code,
-        });
-      }
+  constructor(
+    private http: HttpClient,
+    private store: Store,
+    private afAuth: AngularFireAuth
+  ) {
+    this.currentUserSubject = new BehaviorSubject<User>(
+      JSON.parse(localStorage.getItem('currentUser')!)
+    );
+  }
 
-    // Sign out the current user
-    signOut(): Promise<void> {
-        return this.afAuth.signOut();
-    }
+  public tokenCreate(
+    username: string,
+    password: string
+  ): Observable<AuthResponse> {
+    return this.http.post<AuthResponse>(`${AUTH_API}/api/accounts/token`, {
+      username: username,
+      password: password,
+    });
+  }
 
+  public tokenRefresh(refresh: string) {
+    return this.http.post(`${AUTH_API}api/accounts/token`, {
+      refresh: refresh,
+    });
+  }
 
-    register(email: string, first_name: string, password: string) {
-        return this.http.post(AUTH_API + 'signup', {
-            email,
-            first_name,
-            password,
-        }, httpOptions).pipe(
-            map((response: any) => {
-                const user = response;
-                this.store.dispatch(RegisterSuccess({ user }));
-                return user;
-            }),
-            catchError((error: any) => {
-                const errorMessage = 'Login failed'; // Customize the error message as needed
-                this.store.dispatch(loginFailure({ error: errorMessage }));
-                return throwError(errorMessage);
-            })
-        );
-    }
+  // Sign out the current user
+  signOut(): Promise<void> {
+    return this.afAuth.signOut();
+  }
 
-    login(email: string, password: string) {
-        this.store.dispatch(login({ email, password }));
+  public register(
+    email: string,
+    password: string,
+    registration_code: string,
+    username: string
+  ) {
+    const signUpData = {
+      email: email,
+      password: password,
+      registration_code: registration_code,
+      username: username,
+    };
 
-        return this.http.post(AUTH_API + 'signin', {
-            email,
-            password
-        }, httpOptions).pipe(
-            map((response: any) => {
-                const user = response;
-                this.store.dispatch(loginSuccess({ user }));
-                return user;
-            }),
-            catchError((error: any) => {
-                const errorMessage = 'Login failed'; // Customize the error message as needed
-                this.store.dispatch(loginFailure({ error: errorMessage }));
-                return throwError(errorMessage);
-            })
-        );
-    }
+    return this.http
+      .post(`${AUTH_API}account/register`, signUpData, httpOptions)
+      .pipe(
+        map((response: any) => {
+          const user = response;
+          this.store.dispatch(RegisterSuccess({ user }));
+          return user;
+        }),
+        catchError((error: any) => {
+          const errorMessage = 'Registration failed';
+          this.store.dispatch(RegisterFailure({ error: errorMessage }));
+          return throwError(errorMessage);
+        })
+      );
+  }
 
-    logout(): Observable<void> {
-        this.store.dispatch(logout());
-        // Perform any additional logout logic, e.g., calling an API to invalidate the token
+  public login(username: string, password: string): Observable<AuthResponse> {
+    return this.http.post<AuthResponse>(`${AUTH_API}auth/token`, {
+      username: username,
+      password: password,
+    }, httpOptions).pipe(
+      map((authResponse: AuthResponse) => {
+        if (authResponse && authResponse.access_token) {
+          // Create a User object from the AuthResponse
+          const user: User = {
+            username: username, // Use the username from the login method's argument
+            email: '', // You need to get the email from somewhere, possibly from the response or another source
+            access_token: authResponse.access_token,
+            token_type: authResponse.token_type,
+          };
+  
+          localStorage.setItem('currentUser', JSON.stringify(user));
+          localStorage.setItem('token', authResponse.access_token);
+          this.currentUserSubject.next(user); // Now passing a User object
+        }
+        this.store.dispatch(loginSuccess({ authResponse }));
+        return authResponse;
+      }),
+      catchError((error: any) => {
+        const errorMessage = 'Login failed';
+        this.store.dispatch(loginFailure({ error: errorMessage }));
+        return throwError(errorMessage);
+      })
+    );
+  }
+  
 
-        localStorage.removeItem('currentUser');
-        localStorage.removeItem('token');
-        this.currentUserSubject.next(null!);
-        this.store.dispatch(logoutSuccess());
+  logout(): Observable<void> {
+    this.store.dispatch(logout());
 
-        // Return an Observable<void> indicating the successful logout
-        return of(undefined).pipe(
-            tap(() => {
-                // Perform any additional logic after the logout is successful
-            })
-        );
-    }
+    localStorage.removeItem('currentUser');
+    localStorage.removeItem('token');
+    this.currentUserSubject.next(null!);
+    this.store.dispatch(logoutSuccess());
 
-    resetPassword(email: string) {
-        return this.http.post(AUTH_API + 'reset-password', { email }, httpOptions);
-    }
+    return of(undefined).pipe(
+      tap(() => {
+        // Perform any additional logic after the logout is successful
+      })
+    );
+  }
 
-    public currentUser(): any {
-        return getFirebaseBackend()!.getAuthenticatedUser();
-    }
+  resetPassword(email: string) {
+    return this.http.post(AUTH_API + 'reset-password', { email }, httpOptions);
+  }
+
+  public currentUser(): any {
+    return getFirebaseBackend()!.getAuthenticatedUser();
+  }
 }

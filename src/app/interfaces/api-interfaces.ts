@@ -96,7 +96,7 @@ export interface ShortTeacherInfo {
 }
 
 export interface AuthResponse {
-  access: string;
-  refresh: string;
+  access_token: string;
+  token_type: string;
 }
 

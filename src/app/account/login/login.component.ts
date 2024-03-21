@@ -12,38 +12,33 @@ import { login } from 'src/app/store/Authentication/authentication.actions';
   styleUrls: ['./login.component.scss']
 })
 
-// Login Component
 export class LoginComponent {
-
   // Login Form
   loginForm!: UntypedFormGroup;
   submitted = false;
   fieldTextType!: boolean;
   error = '';
   returnUrl!: string;
-  a: any = 10;
-  b: any = 20;
-  toast!: false;
 
   // set the current year
   year: number = new Date().getFullYear();
 
-  // tslint:disable-next-line: max-line-length
-  constructor(private formBuilder: UntypedFormBuilder,
+  constructor(
+    private formBuilder: UntypedFormBuilder,
     private router: Router,
     private store: Store,
-) { }
+    private authService: AuthenticationService // Inject the AuthenticationService
+  ) { }
 
   ngOnInit(): void {
     if (localStorage.getItem('currentUser')) {
       this.router.navigate(['/']);
     }
-    /**
-     * Form Validatyion
-     */
+
+    // Form Validation
     this.loginForm = this.formBuilder.group({
-      email: ['admin@themesbrand.com', [Validators.required, Validators.email]],
-      password: ['123456', [Validators.required]],
+      username: ['', [Validators.required]], // Changed from 'email' to 'username'
+      password: ['', [Validators.required]],
     });
   }
 
@@ -56,11 +51,25 @@ export class LoginComponent {
   onSubmit() {
     this.submitted = true;
 
-    const email = this.f['email'].value; // Get the username from the form
+    // stop here if form is invalid
+    if (this.loginForm.invalid) {
+      return;
+    }
+
+    const username = this.f['username'].value; // Get the username from the form
     const password = this.f['password'].value; // Get the password from the form
 
-    // Login Api
-    this.store.dispatch(login({ email: email, password: password }));
+    // Call the login method from AuthenticationService
+    this.authService.login(username, password).subscribe({
+      next: (authResponse) => {
+        // Handle successful login
+        this.router.navigate(['/']); // Navigate to the home page or dashboard
+      },
+      error: (error) => {
+        // Handle login error
+        this.error = error;
+      }
+    });
   }
 
   /**

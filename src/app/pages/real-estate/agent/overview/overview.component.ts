@@ -125,9 +125,7 @@ export class OverviewComponent {
           shade: 'light',
           type: "vertical",
           opacityFrom: 0.85,
-          opacityTo: 0.55,
-          stops: [0, 100, 100, 100]
-        }
+          opacityTo: 0.55        }
       },
       legend: {
         show: true,

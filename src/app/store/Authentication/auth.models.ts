@@ -1,9 +1,6 @@
-export class User {
-  id?: number;
-  username?: string;
-  password?: string;
-  firstName?: string;
-  lastName?: string;
-  token?: string;
-  email?: string;
+export interface User {
+  username: string;
+  email: string;
+  access_token: string;
+  token_type: string;
 }

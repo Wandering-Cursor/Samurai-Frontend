@@ -21,7 +21,8 @@ export const authenticationReducer = createReducer(
     on(RegisterFailure, (state, { error }) => ({ ...state, error })),
 
     on(login, (state) => ({ ...state, error: null })),
-    on(loginSuccess, (state, { user }) => ({ ...state, isLoggedIn: true, user, error: null, })),
+    on(loginSuccess, (state, { authResponse }) => ({ ...state, isLoggedIn: true,      token: authResponse.access_token,
+        tokenType: authResponse.token_type, error: null, })),
     on(loginFailure, (state, { error }) => ({ ...state, error })),
     on(logout, (state) => ({ ...state, user: null })),
 

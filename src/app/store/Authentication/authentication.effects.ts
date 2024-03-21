@@ -3,45 +3,45 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { map, switchMap, catchError, exhaustMap, tap } from 'rxjs/operators';
 import { from, of } from 'rxjs';
 import { AuthenticationService } from '../../core/services/auth.service';
-import { login, loginSuccess, loginFailure, logout, logoutSuccess, Register } from './authentication.actions';
+import { login, loginSuccess, loginFailure, logout, logoutSuccess, Register, RegisterFailure, RegisterSuccess } from './authentication.actions';
 import { Router } from '@angular/router';
+import { AuthResponse } from 'src/app/interfaces/api-interfaces';
 
 @Injectable()
 export class AuthenticationEffects {
-
+  // Updated Register$ effect to include registration_code and username
   Register$ = createEffect(() =>
     this.actions$.pipe(
       ofType(Register),
-      exhaustMap(({ email, first_name, password }) =>
-        this.AuthenticationService.register(email, first_name, password).pipe(
+      exhaustMap(({ email, password, registration_code, username }) =>
+        this.AuthenticationService.register(email, password, registration_code, username).pipe(
           map((user) => {
             this.router.navigate(['/auth/login']);
-            return loginSuccess({ user });
+            return RegisterSuccess({ user });
           }),
-          catchError((error) => of(loginFailure({ error })))
+          catchError((error) => of(RegisterFailure({ error })))
         )
       )
     )
   );
-
   login$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(login),
-      exhaustMap(({ email, password }) =>
-        this.AuthenticationService.login(email, password).pipe(
-          map((user) => {
-            if (user.status == 'success') {
-              localStorage.setItem('currentUser', JSON.stringify(user.data));
-              localStorage.setItem('token', user.token);
-              this.router.navigate(['/']);
-            }
-            return loginSuccess({ user });
-          }),
-          catchError((error) => of(loginFailure({ error })))
-        )
+  this.actions$.pipe(
+    ofType(login),
+    exhaustMap(({ username, password }) =>
+      this.AuthenticationService.login(username, password).pipe(
+        map((authResponse: AuthResponse) => {
+          if (authResponse && authResponse.access_token) {
+            localStorage.setItem('token', authResponse.access_token);
+            localStorage.setItem('token_type', authResponse.token_type);
+            this.router.navigate(['/']); // Navigate to the home page or dashboard
+          }
+          return loginSuccess({ authResponse }); // Make sure this matches the updated action
+        }),
+        catchError((error) => of(loginFailure({ error })))
       )
     )
-  );
+  )
+);
 
   logout$ = createEffect(() =>
     this.actions$.pipe(
@@ -56,6 +56,7 @@ export class AuthenticationEffects {
   constructor(
     @Inject(Actions) private actions$: Actions,
     private AuthenticationService: AuthenticationService,
-    private router: Router) { }
+    private router: Router
+  ) { }
 
 }

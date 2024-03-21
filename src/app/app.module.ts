@@ -64,6 +64,7 @@ if (environment.defaultauth === 'firebase') {
     AuthlayoutComponent
   ],
   imports: [
+    FormsModule,
     TranslateModule.forRoot({
       defaultLanguage: 'en',
       loader: {

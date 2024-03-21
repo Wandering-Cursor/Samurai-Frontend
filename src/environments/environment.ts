@@ -7,7 +7,6 @@ export const environment = {
   production: false,
   defaultauth: 'fakebackend',
   firebaseConfig: {
-    apiKey: "AIzaSyCqS9cSPrDCNSQ-Ku2kZf5DBWjPPv7hvcA",
     authDomain: "test-demo-774f8.firebaseapp.com",
     databaseURL: "https://test-demo-774f8-default-rtdb.firebaseio.com",
     projectId: "test-demo-774f8",

@@ -15,9 +15,8 @@ import { Register } from 'src/app/store/Authentication/authentication.actions';
   styleUrls: ['./register.component.scss']
 })
 
-// Register Component
 export class RegisterComponent {
-  // Login Form
+  // Register Form
   signupForm!: UntypedFormGroup;
   submitted = false;
   successmsg = false;
@@ -27,41 +26,62 @@ export class RegisterComponent {
 
   fieldTextType!: boolean;
 
-  constructor(private formBuilder: UntypedFormBuilder,  public store: Store) { }
+  constructor(
+    private formBuilder: UntypedFormBuilder,
+    private authService: AuthenticationService, // Inject the AuthenticationService
+    public store: Store
+  ) { }
 
   ngOnInit(): void {
     /**
-     * Form Validatyion
+     * Form Validation
      */
     this.signupForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
-      name: ['', [Validators.required]],
+      username: ['', [Validators.required]], // Add username field
       password: ['', Validators.required],
+      registration_code: ['', Validators.required], // Add registration_code field
     });
   }
 
-    // convenience getter for easy access to form fields
-    get f() { return this.signupForm.controls; }
+  // convenience getter for easy access to form fields
+  get f() { return this.signupForm.controls; }
 
-  /**
-   * Register submit form
-   */
+  /* Register submit form */
   onSubmit() {
     this.submitted = true;
 
-    const email = this.f['email'].value;
-    const name = this.f['name'].value;
-    const password = this.f['password'].value;
+    // stop here if form is invalid
+    if (this.signupForm.invalid) {
+      return;
+    }
 
-    //Dispatch Action
-    this.store.dispatch(Register({ email: email, first_name: name, password: password }));
+    const email = this.f['email'].value;
+    const username = this.f['username'].value; // Get username value
+    const password = this.f['password'].value;
+    const registration_code = this.f['registration_code'].value; // Get registration_code value
+
+    // Call the register method from AuthenticationService
+    this.authService.register(email, password, registration_code, username).subscribe({
+      next: (user) => {
+        // Handle successful registration
+        console.log('Registration successful', user);
+        this.successmsg = true;
+        // You might want to navigate to a different page or show a success message
+      },
+      error: (error) => {
+        // Handle registration error
+        console.error('Registration failed', error);
+        this.error = error;
+        this.successmsg = false;
+      }
+    });
   }
 
   /**
- * Password Hide/Show
- */
+   * Password Hide/Show
+   */
   toggleFieldTextType() {
     this.fieldTextType = !this.fieldTextType;
   }
-
 }
