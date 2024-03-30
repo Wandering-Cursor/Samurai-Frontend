@@ -29,6 +29,10 @@ const AUTH_API = GlobalComponent.API_URL;
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
 };
+const httpOptionsForAuth = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+  withCredentials: true,
+}
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
@@ -101,7 +105,7 @@ export class AuthenticationService {
     return this.http.post<AuthResponse>(`${AUTH_API}auth/token`, {
       username: username,
       password: password,
-    }, httpOptions).pipe(
+    }, httpOptionsForAuth).pipe(
       map((authResponse: AuthResponse) => {
         if (authResponse && authResponse.access_token) {
           // Create a User object from the AuthResponse
@@ -111,7 +115,7 @@ export class AuthenticationService {
             access_token: authResponse.access_token,
             token_type: authResponse.token_type,
           };
-  
+
           localStorage.setItem('currentUser', JSON.stringify(user));
           localStorage.setItem('token', authResponse.access_token);
           this.currentUserSubject.next(user); // Now passing a User object
@@ -126,10 +130,15 @@ export class AuthenticationService {
       })
     );
   }
-  
+
 
   logout(): Observable<void> {
     this.store.dispatch(logout());
+    this.http.post<any>(
+      `${AUTH_API}auth/logout`,
+      {},
+      httpOptionsForAuth,
+    ).subscribe();
 
     localStorage.removeItem('currentUser');
     localStorage.removeItem('token');
