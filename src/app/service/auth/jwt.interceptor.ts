@@ -2,7 +2,8 @@ import { Injectable, Injector } from '@angular/core';
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse } from '@angular/common/http';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError, filter, switchMap, take } from 'rxjs/operators';
-import { AuthService } from './auth.service';
+import { AuthenticationService } from 'src/app/core/services/auth.service';
+import { AuthResponse } from 'src/app/interfaces/api-interfaces';
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
@@ -12,7 +13,7 @@ export class JwtInterceptor implements HttpInterceptor {
   constructor(private injector: Injector) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const authService = this.injector.get(AuthService);
+    const authService = this.injector.get(AuthenticationService);
     let accessToken = localStorage.getItem('access_token');
 
     if (accessToken) {
@@ -28,6 +29,7 @@ export class JwtInterceptor implements HttpInterceptor {
       })
     );
   }
+  
 
   private addTokenHeader(request: HttpRequest<any>, token: string): HttpRequest<any> {
     return request.clone({
@@ -35,33 +37,34 @@ export class JwtInterceptor implements HttpInterceptor {
     });
   }
 
-  private handle401Error(request: HttpRequest<any>, next: HttpHandler, authService: AuthService): Observable<HttpEvent<any>> {
+  private handle401Error(request: HttpRequest<any>, next: HttpHandler, authService: AuthenticationService): Observable<HttpEvent<any>> {
     if (!this.isRefreshing) {
       this.isRefreshing = true;
       this.refreshTokenSubject.next(null);
 
-      const refreshToken = localStorage.getItem('refresh_token');
-      if (refreshToken) {
-        return authService.tokenRefresh(refreshToken).pipe(
-          switchMap((tokenResponse: any) => {
+      const accessToken = localStorage.getItem('access_token');
+      if (accessToken) {
+        return authService.tokenRefresh(accessToken).pipe(
+          switchMap((authResponse: AuthResponse) => {
             this.isRefreshing = false;
-            this.refreshTokenSubject.next(tokenResponse.access);
-            localStorage.setItem('access_token', tokenResponse.access);
-            return next.handle(this.addTokenHeader(request, tokenResponse.access));
+            this.refreshTokenSubject.next(authResponse.access_token);
+            return next.handle(this.addTokenHeader(request, authResponse.access_token));
           }),
           catchError((error) => {
             this.isRefreshing = false;
-            // Handle refresh token expiration (e.g., logout or redirect to login)
+            authService.logout();
             return throwError(() => error);
           })
         );
+      } else {
+        return throwError(() => new Error('No Access Token Available'));
       }
+    } else {
+      return this.refreshTokenSubject.pipe(
+        filter(token => token !== null),
+        take(1),
+        switchMap(token => next.handle(this.addTokenHeader(request, token!)))
+      );
     }
-
-    return this.refreshTokenSubject.pipe(
-      filter(token => token !== null),
-      take(1),
-      switchMap((token) => next.handle(this.addTokenHeader(request, token!)))
-    );
   }
 }
