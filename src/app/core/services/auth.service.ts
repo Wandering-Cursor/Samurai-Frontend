@@ -19,6 +19,7 @@ import {
   RegisterSuccess,
   RegisterFailure,
 } from '../../store/Authentication/authentication.actions';
+import { jwtDecode } from 'jwt-decode';
 
 // Firebase
 import { AngularFireAuth } from '@angular/fire/compat/auth';
@@ -51,6 +52,27 @@ export class AuthenticationService {
     );
   }
 
+  
+
+  handleAuthentication(authResponse: AuthResponse, refreshToken?: string) {
+    const accessToken = authResponse.access_token;
+    localStorage.setItem('access_token', accessToken);
+    if (refreshToken) {
+      localStorage.setItem('refresh_token', refreshToken);
+    }
+    const decodedToken: any = jwtDecode(accessToken);
+    const user: User = {
+      username: decodedToken.username,
+      email: decodedToken.email,
+      access_token: accessToken,
+      token_type: authResponse.token_type,
+    };
+    this.currentUserSubject.next(user);
+    localStorage.setItem('currentUser', JSON.stringify(user));
+    this.store.dispatch(loginSuccess({ authResponse }));
+    this.scheduleTokenRefresh();
+  }
+
   public tokenCreate(
     username: string,
     password: string
@@ -61,16 +83,59 @@ export class AuthenticationService {
     });
   }
 
-  public tokenRefresh(refresh: string) {
-    return this.http.post(`${AUTH_API}api/accounts/token`, {
-      refresh: refresh,
+  public tokenRefresh(accessToken: string): Observable<AuthResponse> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${accessToken}`
     });
+
+    return this.http.post<AuthResponse>(`${AUTH_API}auth/refresh`, {}, { headers }).pipe(
+      tap((authResponse: AuthResponse) => {
+        localStorage.setItem('access_token', authResponse.access_token);
+        const currentUser = this.currentUserSubject.value;
+        if (currentUser) {
+          currentUser.access_token = authResponse.access_token;
+          this.currentUserSubject.next(currentUser);
+        }
+        this.scheduleTokenRefresh();
+      }),
+      catchError((error: any) => {
+        const errorMessage = 'Token refresh failed';
+        this.store.dispatch(loginFailure({ error: errorMessage }));
+        return throwError(errorMessage);
+      })
+    );
+  }
+
+  isTokenExpired(token?: string): boolean {
+    if (!token) {
+      return true;
+    }
+    const decoded: any = jwtDecode(token);
+    const now = Date.now() / 1000; // Current time in seconds
+    return decoded.exp < now;
+  }
+
+  scheduleTokenRefresh() {
+    const accessToken = localStorage.getItem('access_token');
+    if (!accessToken || this.isTokenExpired(accessToken)) {
+      return;
+    }
+    const decoded: any = jwtDecode(accessToken);
+    const exp = decoded.exp;
+    const now = Date.now() / 1000;
+    const delay = (exp - now) * 1000 - 20000;
+
+    setTimeout(() => {
+      this.tokenRefresh(accessToken).subscribe();
+    }, delay);
   }
 
   // Sign out the current user
   signOut(): Promise<void> {
     return this.afAuth.signOut();
   }
+
+  
 
   public register(
     email: string,
@@ -107,20 +172,8 @@ export class AuthenticationService {
       password: password,
     }, httpOptionsForAuth).pipe(
       map((authResponse: AuthResponse) => {
-        if (authResponse && authResponse.access_token) {
-          // Create a User object from the AuthResponse
-          const user: User = {
-            username: username, // Use the username from the login method's argument
-            email: '', // You need to get the email from somewhere, possibly from the response or another source
-            access_token: authResponse.access_token,
-            token_type: authResponse.token_type,
-          };
-
-          localStorage.setItem('currentUser', JSON.stringify(user));
-          localStorage.setItem('token', authResponse.access_token);
-          this.currentUserSubject.next(user); // Now passing a User object
-        }
-        this.store.dispatch(loginSuccess({ authResponse }));
+        this.handleAuthentication(authResponse);
+        this.refreshTokenImmediately(authResponse.access_token);
         return authResponse;
       }),
       catchError((error: any) => {
@@ -129,6 +182,17 @@ export class AuthenticationService {
         return throwError(errorMessage);
       })
     );
+  }
+
+  refreshTokenImmediately(accessToken: string) {
+    this.tokenRefresh(accessToken).subscribe({
+      next: (authResponse) => {
+        console.log('Token refreshed successfully:', authResponse.access_token);
+      },
+      error: (error) => {
+        console.error('Error refreshing token:', error);
+      }
+    });
   }
 
 
@@ -147,7 +211,6 @@ export class AuthenticationService {
 
     return of(undefined).pipe(
       tap(() => {
-        // Perform any additional logic after the logout is successful
       })
     );
   }
