@@ -8,7 +8,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
 import { GlobalComponent } from '../../global-component';
 import { API_URL } from '../../token/api-url.token';
-import { AuthResponse } from '../../interfaces/api-interfaces';
+import { AuthResponse, TokenRefreshConfig } from '../../interfaces/api-interfaces';
 // Action
 import {
   login,
@@ -35,12 +35,18 @@ const httpOptionsForAuth = {
   withCredentials: true,
 }
 
+const refreshConfig: TokenRefreshConfig = {
+  timeInSeconds: 10
+};
+
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
   user!: User;
   currentUserValue: any;
 
   private currentUserSubject: BehaviorSubject<User>;
+
+
 
   constructor(
     private http: HttpClient,
@@ -70,7 +76,7 @@ export class AuthenticationService {
     this.currentUserSubject.next(user);
     localStorage.setItem('currentUser', JSON.stringify(user));
     this.store.dispatch(loginSuccess({ authResponse }));
-    this.scheduleTokenRefresh();
+    this.scheduleTokenRefresh(refreshConfig);
   }
 
   public tokenCreate(
@@ -84,11 +90,7 @@ export class AuthenticationService {
   }
 
   public tokenRefresh(accessToken: string): Observable<AuthResponse> {
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${accessToken}`
-    });
-
-    return this.http.post<AuthResponse>(`${AUTH_API}auth/refresh`, {}, { headers }).pipe(
+    return this.http.post<AuthResponse>(`${AUTH_API}auth/refresh`, httpOptionsForAuth).pipe(
       tap((authResponse: AuthResponse) => {
         localStorage.setItem('access_token', authResponse.access_token);
         const currentUser = this.currentUserSubject.value;
@@ -96,7 +98,7 @@ export class AuthenticationService {
           currentUser.access_token = authResponse.access_token;
           this.currentUserSubject.next(currentUser);
         }
-        this.scheduleTokenRefresh();
+        this.scheduleTokenRefresh(refreshConfig);
       }),
       catchError((error: any) => {
         const errorMessage = 'Token refresh failed';
@@ -107,28 +109,37 @@ export class AuthenticationService {
   }
 
   isTokenExpired(token?: string): boolean {
+    console.log('Checking if token is expired...');
     if (!token) {
       return true;
     }
     const decoded: any = jwtDecode(token);
-    const now = Date.now() / 1000; // Current time in seconds
-    return decoded.exp < now;
+    const now = Date.now() / 1000;
+    const isExpired = decoded.exp < now;
+    return isExpired;
   }
-
-  scheduleTokenRefresh() {
+  
+  scheduleTokenRefresh(config: TokenRefreshConfig) {
     const accessToken = localStorage.getItem('access_token');
-    if (!accessToken || this.isTokenExpired(accessToken)) {
+    if (!accessToken) {
+      return;
+    }
+    if (this.isTokenExpired(accessToken)) {
       return;
     }
     const decoded: any = jwtDecode(accessToken);
-    const exp = decoded.exp;
-    const now = Date.now() / 1000;
-    const delay = (exp - now) * 1000 - 20000;
-
-    setTimeout(() => {
+    const exp = decoded.exp; // Token expiration time in seconds
+    const now = Date.now() / 1000; // Current time in seconds
+    const delay = (config.timeInSeconds) * 1000;
+    if (delay > 0) {
+      setTimeout(() => {
+        this.tokenRefresh(accessToken).subscribe();
+      }, delay);
+    } else {
       this.tokenRefresh(accessToken).subscribe();
-    }, delay);
+    }
   }
+
 
   // Sign out the current user
   signOut(): Promise<void> {
@@ -173,7 +184,7 @@ export class AuthenticationService {
     }, httpOptionsForAuth).pipe(
       map((authResponse: AuthResponse) => {
         this.handleAuthentication(authResponse);
-        this.refreshTokenImmediately(authResponse.access_token);
+        console.log("My token is",  authResponse.access_token)
         return authResponse;
       }),
       catchError((error: any) => {

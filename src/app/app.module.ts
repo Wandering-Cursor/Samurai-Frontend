@@ -27,7 +27,7 @@ import { AnalyticsEffects } from './store/Analytics/analytics.effects';
 import { rootReducer } from './store';
 import { fakebackendInterceptor } from './core/helpers/fake-backend';
 import { ErrorInterceptor } from './core/helpers/error.interceptor';
-import { JwtInterceptor } from './core/helpers/jwt.interceptor';
+import { JwtInterceptor } from './service/auth/jwt.interceptor';
 import { CRMEffects } from './store/CRM/crm.effects';
 import { ECoReducer } from './store/Ecommerce/ecommerce.reducer';
 import { ECoEffects } from './store/Ecommerce/ecommerce.effects';
@@ -48,6 +48,7 @@ import { InstructorEffects } from './store/Learning-instructor/instructor.effect
 import { CustomerEffects } from './store/Customer/customer.effects';
 import { studentsEffects } from './store/students/student.effcts';
 import { CourcesEffects } from './store/Learning-cources/cources.effect';
+import { AuthInterceptor } from './core/helpers/auth.interceptor';
 
 export function createTranslateLoader(http: HttpClient): any {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
@@ -116,6 +117,7 @@ if (environment.defaultauth === 'firebase') {
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: fakebackendInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]
 })
