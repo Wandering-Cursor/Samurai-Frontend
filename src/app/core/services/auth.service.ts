@@ -90,7 +90,7 @@ export class AuthenticationService {
   }
 
   public tokenRefresh(accessToken: string): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>(`${AUTH_API}auth/refresh`, httpOptionsForAuth).pipe(
+    return this.http.post<AuthResponse>(`${AUTH_API}auth/refresh`, {}, httpOptionsForAuth).pipe(
       tap((authResponse: AuthResponse) => {
         localStorage.setItem('access_token', authResponse.access_token);
         const currentUser = this.currentUserSubject.value;
