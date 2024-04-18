@@ -8,7 +8,10 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
 import { GlobalComponent } from '../../global-component';
 import { API_URL } from '../../token/api-url.token';
-import { AuthResponse, TokenRefreshConfig } from '../../interfaces/api-interfaces';
+import {
+  AuthResponse,
+  TokenRefreshConfig,
+} from '../../interfaces/api-interfaces';
 // Action
 import {
   login,
@@ -33,20 +36,19 @@ const httpOptions = {
 const httpOptionsForAuth = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
   withCredentials: true,
-}
+};
 
 const refreshConfig: TokenRefreshConfig = {
-  timeInSeconds: 1700
+  timeInSeconds: 10,
 };
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
+  private isUserLoggedIn = false;
   user!: User;
   currentUserValue: any;
 
   private currentUserSubject: BehaviorSubject<User>;
-
-
 
   constructor(
     private http: HttpClient,
@@ -57,8 +59,6 @@ export class AuthenticationService {
       JSON.parse(localStorage.getItem('currentUser')!)
     );
   }
-
-  
 
   handleAuthentication(authResponse: AuthResponse, refreshToken?: string) {
     const accessToken = authResponse.access_token;
@@ -76,6 +76,7 @@ export class AuthenticationService {
     this.currentUserSubject.next(user);
     localStorage.setItem('currentUser', JSON.stringify(user));
     this.store.dispatch(loginSuccess({ authResponse }));
+    this.isUserLoggedIn = true;
     this.scheduleTokenRefresh(refreshConfig);
   }
 
@@ -90,22 +91,24 @@ export class AuthenticationService {
   }
 
   public tokenRefresh(accessToken: string): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>(`${AUTH_API}auth/refresh`, {}, httpOptionsForAuth).pipe(
-      tap((authResponse: AuthResponse) => {
-        localStorage.setItem('access_token', authResponse.access_token);
-        const currentUser = this.currentUserSubject.value;
-        if (currentUser) {
-          currentUser.access_token = authResponse.access_token;
-          this.currentUserSubject.next(currentUser);
-        }
-        this.scheduleTokenRefresh(refreshConfig);
-      }),
-      catchError((error: any) => {
-        const errorMessage = 'Token refresh failed';
-        this.store.dispatch(loginFailure({ error: errorMessage }));
-        return throwError(errorMessage);
-      })
-    );
+    return this.http
+      .post<AuthResponse>(`${AUTH_API}auth/refresh`, {}, httpOptionsForAuth)
+      .pipe(
+        tap((authResponse: AuthResponse) => {
+          localStorage.setItem('access_token', authResponse.access_token);
+          const currentUser = this.currentUserSubject.value;
+          if (currentUser) {
+            currentUser.access_token = authResponse.access_token;
+            this.currentUserSubject.next(currentUser);
+          }
+          this.scheduleTokenRefresh(refreshConfig);
+        }),
+        catchError((error: any) => {
+          const errorMessage = 'Token refresh failed';
+          this.store.dispatch(loginFailure({ error: errorMessage }));
+          return throwError(errorMessage);
+        })
+      );
   }
 
   isTokenExpired(token?: string): boolean {
@@ -118,9 +121,12 @@ export class AuthenticationService {
     const isExpired = decoded.exp < now;
     return isExpired;
   }
-  
+
   scheduleTokenRefresh(config: TokenRefreshConfig) {
     const accessToken = localStorage.getItem('access_token');
+    if (!this.isUserLoggedIn) {
+      return;
+    }
     if (!accessToken) {
       return;
     }
@@ -130,7 +136,7 @@ export class AuthenticationService {
     const decoded: any = jwtDecode(accessToken);
     const exp = decoded.exp; // Token expiration time in seconds
     const now = Date.now() / 1000; // Current time in seconds
-    const delay = (config.timeInSeconds) * 1000;
+    const delay = config.timeInSeconds * 1000;
     if (delay > 0) {
       setTimeout(() => {
         this.tokenRefresh(accessToken).subscribe();
@@ -140,13 +146,10 @@ export class AuthenticationService {
     }
   }
 
-
   // Sign out the current user
   signOut(): Promise<void> {
     return this.afAuth.signOut();
   }
-
-  
 
   public register(
     email: string,
@@ -178,21 +181,27 @@ export class AuthenticationService {
   }
 
   public login(username: string, password: string): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>(`${AUTH_API}auth/token`, {
-      username: username,
-      password: password,
-    }, httpOptionsForAuth).pipe(
-      map((authResponse: AuthResponse) => {
-        this.handleAuthentication(authResponse);
-        console.log("My token is",  authResponse.access_token)
-        return authResponse;
-      }),
-      catchError((error: any) => {
-        const errorMessage = 'Login failed';
-        this.store.dispatch(loginFailure({ error: errorMessage }));
-        return throwError(errorMessage);
-      })
-    );
+    return this.http
+      .post<AuthResponse>(
+        `${AUTH_API}auth/token`,
+        {
+          username: username,
+          password: password,
+        },
+        httpOptionsForAuth
+      )
+      .pipe(
+        map((authResponse: AuthResponse) => {
+          this.handleAuthentication(authResponse);
+          console.log('My token is', authResponse.access_token);
+          return authResponse;
+        }),
+        catchError((error: any) => {
+          const errorMessage = 'Login failed';
+          this.store.dispatch(loginFailure({ error: errorMessage }));
+          return throwError(errorMessage);
+        })
+      );
   }
 
   refreshTokenImmediately(accessToken: string) {
@@ -202,28 +211,22 @@ export class AuthenticationService {
       },
       error: (error) => {
         console.error('Error refreshing token:', error);
-      }
+      },
     });
   }
 
-
   logout(): Observable<void> {
     this.store.dispatch(logout());
-    this.http.post<any>(
-      `${AUTH_API}auth/logout`,
-      {},
-      httpOptionsForAuth,
-    ).subscribe();
+    this.http
+      .post<any>(`${AUTH_API}auth/logout`, {}, httpOptionsForAuth)
+      .subscribe();
 
     localStorage.removeItem('currentUser');
     localStorage.removeItem('token');
     this.currentUserSubject.next(null!);
     this.store.dispatch(logoutSuccess());
-
-    return of(undefined).pipe(
-      tap(() => {
-      })
-    );
+    this.isUserLoggedIn = false;
+    return of(undefined).pipe(tap(() => {}));
   }
 
   resetPassword(email: string) {
