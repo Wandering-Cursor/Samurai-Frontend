@@ -2,7 +2,7 @@
 const supporttickets = [
     {
         id: 1,
-        imgBg: 'success',
+        imgBg: 'info',
         img: 'bi bi-ticket',
         iconColor: 'success',
         icon: 'ri-arrow-right-up-line',
@@ -22,8 +22,8 @@ const supporttickets = [
         title: 'Pending Tickets'
     }, {
         id: 3,
-        imgBg: 'danger',
-        img: 'bi bi-lock',
+        imgBg: 'success',
+        img: 'bx bx-check-square',
         iconColor: 'success',
         icon: 'ri-arrow-right-up-line',
         num: '7.34',
