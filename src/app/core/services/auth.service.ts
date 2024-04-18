@@ -36,7 +36,7 @@ const httpOptionsForAuth = {
 }
 
 const refreshConfig: TokenRefreshConfig = {
-  timeInSeconds: 10
+  timeInSeconds: 1700
 };
 
 @Injectable({ providedIn: 'root' })
