@@ -39,12 +39,12 @@ const httpOptionsForAuth = {
 };
 
 const refreshConfig: TokenRefreshConfig = {
-  timeInSeconds: 10,
+  timeInSeconds: 1700,
 };
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
-  private isUserLoggedIn = false;
+  public isUserLoggedIn = false;
   user!: User;
   currentUserValue: any;
 
@@ -91,6 +91,12 @@ export class AuthenticationService {
   }
 
   public tokenRefresh(accessToken: string): Observable<AuthResponse> {
+  
+    if (!this.isUserLoggedIn) {
+      console.log('Token refresh skipped. User not logged in.');
+      return throwError('User not logged in');
+    }
+  
     return this.http
       .post<AuthResponse>(`${AUTH_API}auth/refresh`, {}, httpOptionsForAuth)
       .pipe(
@@ -110,9 +116,9 @@ export class AuthenticationService {
         })
       );
   }
+  
 
   isTokenExpired(token?: string): boolean {
-    console.log('Checking if token is expired...');
     if (!token) {
       return true;
     }
@@ -193,7 +199,6 @@ export class AuthenticationService {
       .pipe(
         map((authResponse: AuthResponse) => {
           this.handleAuthentication(authResponse);
-          console.log('My token is', authResponse.access_token);
           return authResponse;
         }),
         catchError((error: any) => {
@@ -207,7 +212,6 @@ export class AuthenticationService {
   refreshTokenImmediately(accessToken: string) {
     this.tokenRefresh(accessToken).subscribe({
       next: (authResponse) => {
-        console.log('Token refreshed successfully:', authResponse.access_token);
       },
       error: (error) => {
         console.error('Error refreshing token:', error);
@@ -225,6 +229,7 @@ export class AuthenticationService {
     localStorage.removeItem('token');
     this.currentUserSubject.next(null!);
     this.store.dispatch(logoutSuccess());
+    this.isUserLoggedIn = false;
     this.isUserLoggedIn = false;
     return of(undefined).pipe(tap(() => {}));
   }
