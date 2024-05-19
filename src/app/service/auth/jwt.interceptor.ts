@@ -33,7 +33,11 @@ export class JwtInterceptor implements HttpInterceptor {
     return next.handle(req).pipe(
       catchError((error: HttpErrorResponse) => {
         if (error.status === 401 && !req.url.endsWith('/api/accounts/token')) {
-          return this.handle401Error(req, next, authService);
+          if (authService.isUserLoggedIn) {
+            return this.handle401Error(req, next, authService);
+          } else {
+            return throwError(() => error);
+          }
         }
         return throwError(() => error);
       })
