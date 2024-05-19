@@ -1,7 +1,8 @@
 {
   "MENUITEMS": {
     "MENU": {
-      "TEXT": "MENU"
+      "TEXT": "MENU",
+      "StudentTasks":"Student Tasks"
     },
     "DASHBOARD": {
       "TEXT": "Dashboards",

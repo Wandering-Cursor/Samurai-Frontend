@@ -172,11 +172,11 @@ export class TopbarComponent {
    * Language Listing
    */
   listLang = [
+    { text: 'Українська', flag: 'assets/images/flags/ua.svg', lang: 'ua' },
     { text: 'English', flag: 'assets/images/flags/us.svg', lang: 'en' },
     { text: 'Española', flag: 'assets/images/flags/spain.svg', lang: 'sp' },
     { text: 'Deutsche', flag: 'assets/images/flags/germany.svg', lang: 'gr' },
     { text: 'Italiana', flag: 'assets/images/flags/italy.svg', lang: 'it' },
-    { text: 'русский', flag: 'assets/images/flags/russia.svg', lang: 'ru' },
     { text: '中国人', flag: 'assets/images/flags/china.svg', lang: 'ch' },
     { text: 'français', flag: 'assets/images/flags/french.svg', lang: 'fr' },
     { text: 'Arabic', flag: 'assets/images/flags/ae.svg', lang: 'ar' },

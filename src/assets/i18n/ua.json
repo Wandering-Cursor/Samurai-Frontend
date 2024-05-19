@@ -1,0 +1,242 @@
+{
+  "MENUITEMS": {
+    "MENU": {
+      "TEXT": "МЕНЮ",
+      "StudentTasks": "Завдання студентів"
+    },
+    "DASHBOARD": {
+      "TEXT": "Панель приладів",
+      "LIST": {
+        "ANALYTICS": "Аналітика",
+        "CRM": "CRM",
+        "ECOMMERCE": "Електронна комерція",
+        "LEARNING": "Навчання",
+        "REALESTATE": "Нерухомість"
+      }
+    },
+    "APPS": {
+      "TEXT": "Додатки",
+      "LIST": {
+        "CALENDAR": "Календар",
+        "CHAT": "Чат",
+        "EMAIL": "Електронна пошта",
+        "ECOMMERCE": "Електронна комерція",
+        "PRODUCTS": "Продукти",
+        "PRODUCTGRID": "Сітка продуктів",
+        "PRODUCTDETAILS": "Деталі продукту",
+        "CREATEPRODUCT": "Створити продукт",
+        "ORDERS": "Замовлення",
+        "ORDEROVERVIEW": "Огляд замовлень",
+        "CUSTOMERS": "Клієнти",
+        "SHOPPINGCART": "Кошик",
+        "CHECKOUT": "Оформлення замовлення",
+        "SELLERS": "Продавці",
+        "SELLEROVERVIEW": "Огляд продавців",
+        "FILEMANAGER": "Файловий менеджер",
+        "LEARNING": "Навчання",
+        "COURSES": "Курси",
+        "LISTVIEW": "Перегляд списку",
+        "GRIDVIEW": "Перегляд сітки",
+        "CATEGORY": "Категорія",
+        "OVERVIEW": "Огляд",
+        "CREATECOURSE": "Створити курс",
+        "STUDENTS": "Студенти",
+        "MYSUBSCRIPTIONS": "Мої підписки",
+        "MYCOURSES": "Мої курси",
+        "INSTRUCTORS": "Інструктори",
+        "CREATEINSTRUCTOR": "Створити інструктора",
+        "INVOICES": "Рахунки",
+        "CREATEINVOICE": "Створити рахунок",
+        "SUPPORTTICKETS": "Тікети підтримки",
+        "REALESTATE": "Нерухомість",
+        "LISTINGGRID": "Сітка оголошень",
+        "LISTINGLIST": "Список оголошень",
+        "LISTINGMAP": "Карта оголошень",
+        "PROPERTYOVERVIEW": "Огляд нерухомості",
+        "AGENT": "Агент",
+        "AGENCIES": "Агенції",
+        "ADDPROPERTY": "Додати об'єкт",
+        "EARNINGS": "Доходи"
+      }
+    },
+    "PAGES": {
+      "TEXT": "Сторінки"
+    },
+    "AUTHENTICATION": {
+      "TEXT": "Аутентифікація",
+      "LIST": {
+        "SIGNIN": "Вхід",
+        "SIGNUP": "Реєстрація",
+        "PASSWORDRESET": "Скидання пароля",
+        "PASSWORDCREATE": "Створення пароля",
+        "LOCKSCREEN": "Блокування екрану",
+        "LOGOUT": "Вихід",
+        "SUCCESSMESSAGE": "Повідомлення про успіх",
+        "TWOSTEPVERIFICATION": "Двофакторна перевірка",
+        "ERRORS": "Помилки",
+        "404ERROR": "Помилка 404",
+        "500": "500",
+        "503": "503",
+        "OFFLINE": "Офлайн сторінка"
+      }
+    },
+    "MORE": {
+      "TEXT": "Більше"
+    },
+    "EXTRAPAGES": {
+      "TEXT": "Сторінки",
+      "LIST": {
+        "STARTER": "Стартова",
+        "PROFILE": "Профіль",
+        "PROFILESETTINGS": "Налаштування профілю",
+        "CONTACTS": "Контакти",
+        "TIMELINE": "Хронологія",
+        "FAQS": "Часті запитання",
+        "PRICING": "Ціноутворення",
+        "MAINTENANCE": "Технічне обслуговування",
+        "COMINGSOON": "Скоро буде",
+        "PRIVACYPOLICY": "Політика конфіденційності",
+        "TERMS&CONDITIONS": "Умови та положення"
+      }
+    },
+    "COMPONENTS": {
+      "TEXT": "Компоненти"
+    },
+    "BOOTSTRAPUI": {
+      "TEXT": "Bootstrap UI",
+      "LIST": {
+        "ALERTS": "Сповіщення",
+        "BADGES": "Значки",
+        "BUTTONS": "Кнопки",
+        "COLORS": "Кольори",
+        "CARDS": "Карточки",
+        "CAROUSEL": "Карусель",
+        "DROPDOWNS": "Випадаючі меню",
+        "GRID": "Сітка",
+        "IMAGES": "Зображення",
+        "TABS": "Вкладки",
+        "ACCORDION&COLLAPSE": "Акордеон і згортання",
+        "MODALS": "Модальні вікна",
+        "OFFCANVAS": "Випливаюче меню",
+        "PLACEHOLDERS": "Заповнювачі",
+        "PROGRESS": "Прогрес",
+        "NOTIFICATIONS": "Повідомлення",
+        "MEDIAOBJECT": "Медіа-об'єкти",
+        "EMBEDVIDEO": "Вставлене відео",
+        "TYPOGRAPHY": "Типографіка",
+        "LISTS": "Списки",
+        "LINKS": "Посилання",
+        "GENERAL": "Загальне",
+        "UTILITIES": "Утиліти"
+      }
+    },
+    "ADVANCEUI": {
+      "TEXT": "Розширений UI",
+      "LIST": {
+        "SWEETALERTS": "Sweet Alerts",
+        "NESTABLELIST": "Згортувальний список",
+        "SCROLLBAR": "Скролбар",
+        "SWIPERSLIDER": "Swiper слайдер",
+        "RATTINGS": "Рейтинги",
+        "HIGHLIGHT": "Виділення",
+        "SCROLLSPY": "Спостереження за прокруткою"
+      }
+    },
+    "CUSTOMUI": {
+      "TEXT": "Користувацький UI",
+      "BADGE": "Користувацький",
+      "LIST": {
+        "RIBBONS": "Стрічки",
+        "PROFILE": "Профіль",
+        "COUNTER": "Лічильник"
+      }
+    },
+    "WIDGETS": {
+      "TEXT": "Віджети"
+    },
+    "FORMS": {
+      "TEXT": "Форми",
+      "LIST": {
+        "BASICELEMENTS": "Основні елементи",
+        "FORMSELECT": "Форма вибору",
+        "CHECKBOXS&RADIOS": "Прапорці і радіокнопки",
+        "PICKERS": "Вибірники",
+        "INPUTMASKS": "Маски введення",
+        "ADVANCED": "Розширені",
+        "RANGESLIDER": "Слайдер діапазону",
+        "VALIDATION": "Валідація",
+        "WIZARD": "Майстер",
+        "EDITORS": "Редактори",
+        "FILEUPLOADS": "Завантаження файлів",
+        "FORMLAYOUTS": "Макети форм"
+      }
+    },
+    "TABLES": {
+      "TEXT": "Таблиці",
+      "LIST": {
+        "BASICTABLES": "Основні таблиці",
+        "GRIDJS": "Grid Js",
+        "LISTJS": "List Js",
+        "DATATABLES": "Таблиці даних"
+      }
+    },
+    "CHARTS": {
+      "TEXT": "Діаграми Apex",
+      "LIST": {
+        "LINE": "Лінійні",
+        "AREA": "Площинні",
+        "COLUMN": "Стовпчикові",
+        "BAR": "Гістограми",
+        "MIXED": "Змішані",
+        "TIMELINE": "Хронологія",
+        "RANGEAREA": "Діапазон площ",
+        "FUNNEL": "Воронка",
+        "CANDLSTICK": "Свічкові",
+        "BOXPLOT": "Ящикові",
+        "BUBBLE": "Бульбашкові",
+        "SCATTER": "Точкові",
+        "HEATMAP": "Теплові карти",
+        "TREEMAP": "Деревовидні карти",
+        "PIE": "Кругові",
+        "RADIALBAR": "Радіальні смуги",
+        "RADAR": "Радар",
+        "POLARAREA": "Полярні області"
+      }
+    },
+    "ICONS": {
+      "TEXT": "Іконки",
+      "LIST": {
+        "REMIX": "Remix",
+        "BOXICONS": "Boxicons",
+        "MATERIALDESIGN": "Material Design",
+        "BOOTSTRAP": "Bootstrap",
+        "PHOSPHOR": "Phosphor"
+      }
+    },
+    "MAPS": {
+      "TEXT": "Карти",
+      "LIST": {
+        "GOOGLE": "Google",
+        "VECTOR": "AmCharts",
+        "LEAFLET": "Leaflet"
+      }
+    },
+    "MULTILEVEL": {
+      "TEXT": "Багаторівневе",
+      "LIST": {
+        "LEVEL1": {
+          "1": "Рівень 1.1",
+          "2": "Рівень 1.2",
+          "LEVEL2": {
+            "1": "Рівень 2.1",
+            "2": "Рівень 2.2",
+            "LEVEL3": {
+              "1": "Рівень 3.1",
+              "2": "Рівень 3.2"
+            }
+          }
+        }
+      }
+    }
+  }
+}

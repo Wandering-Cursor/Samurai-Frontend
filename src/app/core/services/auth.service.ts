@@ -68,6 +68,7 @@ export class AuthenticationService {
     }
     const decodedToken: any = jwtDecode(accessToken);
     const user: User = {
+      uuid: decodedToken.sub,  // Store the UUID from the token
       username: decodedToken.username,
       email: decodedToken.email,
       access_token: accessToken,
@@ -79,6 +80,22 @@ export class AuthenticationService {
     this.isUserLoggedIn = true;
     this.scheduleTokenRefresh(refreshConfig);
   }
+  
+getCurrentUserUUID(): string {
+  const currentUserJson = localStorage.getItem('currentUser');
+  if (currentUserJson) {
+    const currentUser = JSON.parse(currentUserJson);
+    if (currentUser && currentUser.uuid) {
+      return currentUser.uuid;
+    } else {
+      throw new Error('UUID is not available');
+    }
+  } else {
+    throw new Error('User is not logged in');
+  }
+}
+
+    
 
   public tokenCreate(
     username: string,

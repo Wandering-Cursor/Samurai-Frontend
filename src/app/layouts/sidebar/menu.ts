@@ -8,6 +8,13 @@ export const MENU: MenuItem[] = [
     },
     {
         id: 2,
+        label: 'MENUITEMS.MENU.StudentTasks',
+        icon: 'ph-list-checks',
+        link: '/tickets/list',
+        parentId: 8
+    },
+    {
+        id: 2,
         label: 'MENUITEMS.DASHBOARD.TEXT',
         icon: 'ph-gauge',
         subItems: [

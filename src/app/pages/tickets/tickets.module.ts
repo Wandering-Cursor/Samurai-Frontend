@@ -19,11 +19,12 @@ import { SimplebarAngularModule } from 'simplebar-angular';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
-
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 // Component
 import { ListComponent } from './list/list.component';
 import { OverviewComponent } from './overview/overview.component';
 
+import { QuillModule } from 'ngx-quill';
 @NgModule({
   declarations: [
     ListComponent,
@@ -37,10 +38,12 @@ import { OverviewComponent } from './overview/overview.component';
     PaginationModule,
     ModalModule,
     FormsModule,
+    BsDropdownModule.forRoot(),
     ReactiveFormsModule,
     SimplebarAngularModule,
     FlatpickrModule.forRoot(),
-    TooltipModule
+    TooltipModule,
+    QuillModule.forRoot()
   ],
   providers:[DatePipe]
 })

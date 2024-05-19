@@ -59,11 +59,12 @@ export class JwtInterceptor implements HttpInterceptor {
     authService: AuthenticationService
   ): Observable<HttpEvent<any>> {
     if (!this.isRefreshing) {
-      this.isRefreshing = true;
-      this.refreshTokenSubject.next(null);
-
       const accessToken = localStorage.getItem('access_token');
-      if (accessToken) {
+      // Only attempt to refresh the token if it is expired
+      if (accessToken && authService.isTokenExpired(accessToken)) {
+        this.isRefreshing = true;
+        this.refreshTokenSubject.next(null);
+
         return authService.tokenRefresh(accessToken).pipe(
           switchMap((authResponse: AuthResponse) => {
             this.isRefreshing = false;
@@ -79,7 +80,8 @@ export class JwtInterceptor implements HttpInterceptor {
           })
         );
       } else {
-        return throwError(() => new Error('No Access Token Available'));
+        // If the token is not expired, just forward the original error
+        return throwError(() => new Error('Received 401 with a valid token'));
       }
     } else {
       return this.refreshTokenSubject.pipe(
