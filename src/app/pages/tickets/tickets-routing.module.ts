@@ -10,10 +10,7 @@ const routes: Routes = [
     path: 'list',
     component: ListComponent
   },
-  {
-    path: 'overview',
-    component: OverviewComponent
-  }
+  { path: 'overview/:taskId', component: OverviewComponent },
 ];
 
 @NgModule({

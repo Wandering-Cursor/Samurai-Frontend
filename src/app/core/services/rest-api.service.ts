@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { GlobalComponent } from '../../global-component';
 import {
+  CommentApiResponse,
+  Comment,
   CreateUserProject,
   PaginationParams,
 } from 'src/app/interfaces/api-interfaces';
@@ -60,6 +62,12 @@ this.restApiService.getProjectTasks(projectId, { page: 1, page_size: 10 }, 'task
     );
   }
 
+  getCurrentProjects(): Observable<any> {
+    return this.http.get(
+      `${GlobalComponent.API_URL}projects/projects/current`
+    )
+  }
+
   //Tasks
   getProjectTasks(
     projectId: string,
@@ -81,7 +89,7 @@ this.restApiService.getProjectTasks(projectId, { page: 1, page_size: 10 }, 'task
   }
 
   getTaskById(taskId: string): Observable<any> {
-    return this.http.get(`${GlobalComponent.API_URL}/projects/task/${taskId}`);
+    return this.http.get(`${GlobalComponent.API_URL}projects/task/${taskId}`);
   }
 
   // Get
@@ -95,15 +103,81 @@ this.restApiService.getProjectTasks(projectId, { page: 1, page_size: 10 }, 'task
     });
   }
 
-  getComment(): Observable<any> {
-    var headerToken = {
-      Authorization: `Bearer ` + localStorage.getItem('token'),
-    };
-    return this.http.get(GlobalComponent.API_URL + GlobalComponent.product, {
-      headers: headerToken,
-      responseType: 'text',
-    });
+  updateTaskStatus(taskId: string, status: string): Observable<any> {
+    return this.http.put(`${GlobalComponent.API_URL}project/task/${taskId}/status`, { status });
   }
+
+  postComment(taskId: string, comment: any): Observable<any> {
+    return this.http.post(`${GlobalComponent.API_URL}projects/tasks/${taskId}/comment`, comment);
+  }
+
+  getComments(taskId: string): Observable<Comment[]> {
+    return this.http.get<CommentApiResponse>(`${GlobalComponent.API_URL}projects/tasks/${taskId}/comments`).pipe(
+      map(response => response.content)
+    );
+  }
+
+  // Update a comment
+  updateComment(commentId: string, comment: any): Observable<any> {
+    return this.http.put(`${GlobalComponent.API_URL}projects/comments/${commentId}`, comment);
+  }
+
+    // Create a new chat
+    createChat(chatData: any): Observable<any> {
+      return this.http.post(`${GlobalComponent.API_URL}communication/chat`, chatData);
+    }
+  
+    // Get all chats
+    getChats(): Observable<any[]> {
+      return this.http.get<any[]>(`${GlobalComponent.API_URL}communication/chat`);
+    }
+  
+    // Get specific chat by ID
+    getChat(chatId: string): Observable<any> {
+      return this.http.get(`${GlobalComponent.API_URL}communication/chat/${chatId}`);
+    }
+  
+    // Update specific chat
+    updateChat(chatId: string, updateData: any): Observable<any> {
+      return this.http.patch(`${GlobalComponent.API_URL}communication/chat/${chatId}`, updateData);
+    }
+  
+    // Add member to chat
+    addChatMember(chatId: string, userId: string): Observable<any> {
+      return this.http.post(`${GlobalComponent.API_URL}communication/chat/${chatId}/add_member`, { userId });
+    }
+  
+    // Leave a chat
+    leaveChat(chatId: string): Observable<any> {
+      return this.http.post(`${GlobalComponent.API_URL}communication/chat/${chatId}/leave`, {});
+    }
+  
+    // Get chat participants
+    getChatParticipants(chatId: string): Observable<any[]> {
+      return this.http.get<any[]>(`${GlobalComponent.API_URL}communication/chat/${chatId}/participants`);
+    }
+  
+    // Messaging services
+    createMessage(messageData: any): Observable<any> {
+      return this.http.post(`${GlobalComponent.API_URL}communication/message`, messageData);
+    }
+  
+    getMessage(messageId: string): Observable<any> {
+      return this.http.get(`${GlobalComponent.API_URL}communication/message/${messageId}`);
+    }
+  
+    updateMessage(messageId: string, messageData: any): Observable<any> {
+      return this.http.put(`${GlobalComponent.API_URL}communication/message/${messageId}`, messageData);
+    }
+  
+    markMessageSeen(messageId: string): Observable<any> {
+      return this.http.patch(`${GlobalComponent.API_URL}communication/message/${messageId}/seen`, {});
+    }
+  
+    // Get who has seen the message
+    getMessageSeenBy(messageId: string): Observable<any[]> {
+      return this.http.get<any[]>(`${GlobalComponent.API_URL}communication/message/${messageId}/seen_by`);
+    }
 
   // Delete
   deleteData(id: any): Observable<any> {

@@ -1,29 +1,34 @@
 <!-- Start Breadcrumbs -->
 <app-breadcrumbs title="List View" [breadcrumbItems]="breadCrumbItems"></app-breadcrumbs>
-<!-- End Breadcrumbs -->
+
+<div class="col-lg-3 me-auto" style="margin-bottom: 20px;">
+    <h6 class="card-title mb-0">{{ project.name }}</h6>
+    <quill-editor [readOnly]="true" [modules]="{toolbar: false}" [(ngModel)]="project.description"></quill-editor>
+</div>
+
+
 
 <div class="row">
-    @for (data of supportList; track $index) {
-    <div class="col-lg-3">
-        <div class="card file-manager-widgets" style="background-size: 95px;background-position:right bottom;">
+    <div *ngFor="let data of supportTickets" class="col-lg-3">
+        <div class="card file-manager-widgets" [style.background-size]="'95px'"
+            [style.background-position]="'right bottom'">
             <div class="card-body">
                 <div class="d-flex align-items-center mb-4">
                     <div class="flex-grow-1">
                         <div class="avatar-sm">
-                            <div class="avatar-title bg-{{data.imgBg}}-subtle text-{{data.imgBg}} rounded fs-xl">
-                                <i class="{{data.img}}"></i>
+                            <div class="avatar-title" [ngClass]="[data.imgBg + '-subtle', 'text-' + data.imgBg]"
+                                class="rounded fs-xl">
+                                <i [class]="data.img"></i>
                             </div>
                         </div>
                     </div>
                 </div>
-                <h4 class="fw-semibold mb-3"><span class="counter-value" [countUp]="data.count"></span>{{data.label}}
-                </h4>
-                <p class="fw-medium text-muted mb-0">{{data.title}}</p>
+                <h4 class="fw-semibold mb-3">{{ data.count }}</h4>
+                <p class="fw-medium text-muted mb-0">{{ data.title }}</p>
             </div>
         </div>
-    </div><!--end col-->
-}
-</div><!--end row-->
+    </div>
+</div>
 
 <div class="row" id="ticketsList">
     <div class="col-lg-12">
@@ -35,110 +40,74 @@
                     </div><!--end col-->
                     <div class="col-lg-2 col-sm-4">
                         <div class="search-box">
-                            <input type="text" class="form-control search" [(ngModel)]="term" (keyup)="filterdata()" placeholder="Search for tickets, date, client or something...">
+                            <input type="text" class="form-control search" [(ngModel)]="term" (keyup)="filterdata()"
+                                placeholder="Search for tickets, date, client or something...">
                             <i class="ri-search-line search-icon"></i>
-                        </div>
-                    </div><!--end col-->
-                    <div class="col-sm-auto">
-                        <div class="hstack gap-2">
-                            <button class="btn btn-subtle-danger d-none" id="remove-actions" (click)="deleteRecordModal.show()"><i class="ri-delete-bin-2-line"></i></button>
-                            <a href="javascript:void(0);" (click)="addTickets.show()" class="btn btn-secondary"><i class="bi bi-plus-circle align-baseline me-1"></i> Add Ticket</a>
                         </div>
                     </div><!--end col-->
                 </div><!--end row-->
             </div>
             <div class="card-body mt-3">
-                <div class="table-responsive table-card">
-                    <table class="table table-centered align-middle table-custom-effect table-nowrap mb-0">
+                <div class="table-responsive">
+                    <table class="table table-hover table-nowrap mb-0">
                         <thead class="table-light">
                             <tr>
-                                <th>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="checkAll" [(ngModel)]="masterSelected" (change)="checkUncheckAll($event)">
-                                        <label class="form-check-label" for="checkAll"></label>
-                                    </div>
-                                </th>
-                                <th scope="col" class="sort cursor-pointer" ticketsortable="id" (click)="onSort('id')">
-                                    ID</th>
-                                <th scope="col" class="sort cursor-pointer" ticketsortable="assignedto" (click)="onSort('assignedto')">Assigned To</th>
-                                <th scope="col" class="sort cursor-pointer" ticketsortable="ticketTitle" (click)="onSort('ticketTitle')">Ticket Title</th>
-                                <th scope="col" class="sort cursor-pointer" ticketsortable="clientName" (click)="onSort('clientName')">Client Name</th>
-                                <th scope="col" class="sort cursor-pointer" ticketsortable="createDate" (click)="onSort('createDate')">Create Date</th>
-                                <th scope="col" class="sort cursor-pointer" ticketsortable="dueDate" (click)="onSort('dueDate')">Due Date</th>
-                                <th scope="col" class="sort cursor-pointer" ticketsortable="priority" (click)="onSort('priority')">Priority</th>
-                                <th scope="col" class="sort cursor-pointer" ticketsortable="status" (click)="onSort('status')">Status</th>
-                                <th scope="col">Action</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Priority</th>
+                                <th scope="col">State</th>
                             </tr>
                         </thead>
-                        <tbody class="list form-check-all">
-                            @for (data of tickets; track $index) {
-                            <tr id="l_{{data._id}}">
-                                <td>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="checkAll" value="{{data._id}}" [(ngModel)]="data.states" (change)="onCheckboxChange($event)">
-                                        <label class="form-check-label"></label>
-                                    </div>
-                                </td>
-                                <td class="tickets_id"><a routerLink="/tickets/overview" class="fw-medium link-primary">#TBS2430190{{data.id}}</a></td>
-                                <td class="assign">
-                                    <div class="avatar-group flex-nowrap">
-                                        @for (profile of data.assignedto; track $index) {
-                                        <a routerLink="/tickets/overview" class="avatar-group-item" tooltip="profile.assigneeName">
-                                            <img src="{{profile.assigneeImg}}" alt="" class="avatar-xxs rounded-circle">
-                                        </a>
-                                    }
-                                    </div>
-                                </td>
-                                <td class="ticket_title">{{data.ticketTitle}}</td>
-                                <td class="client_name">{{data.clientName}}</td>
-                                <td class="create_date">{{data.createDate}}</td>
-                                <td class="due_date">{{data.dueDate}}</td>
-                                <td class="priority"><span class="badge" [ngClass]="{'bg-danger':data.priority === 'High','bg-info':data.priority === 'Medium','bg-success':data.priority === 'Low'}">{{data.priority}}</span>
-                                </td>
-                                <td class="status"><span class="badge" [ngClass]="{'bg-primary-subtle text-primary':data.status === 'Open','bg-warning-subtle text-warning':data.status === 'Pending','bg-info-subtle text-info':data.status === 'New','bg-danger-subtle text-danger':data.status === 'Close'}">{{data.status}}</span>
-                                </td>
+                        <tbody>
+                            <tr *ngFor="let task of tasks; let i = index"
+                                [routerLink]="['/tickets/overview', task.task_id]">
+                                <td>{{ task.name }}</td>
+
+                                <td>{{ task.priority }}</td>
                                 <td>
                                     <ul class="d-flex gap-2 list-unstyled mb-0">
-                                        <li>
-                                            <a routerLink="/tickets/overview" class="btn btn-subtle-primary btn-icon btn-sm "><i class="ph-eye"></i></a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0);" (click)="editList($index)" class="btn btn-subtle-secondary btn-icon btn-sm edit-item-btn"><i class="ph-pencil"></i></a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0);" (click)="removeItem(data.id)" class="btn btn-subtle-danger btn-icon btn-sm remove-item-btn"><i class="ph-trash"></i></a>
-                                        </li>
+                                        <li *ngIf="task.state === 'open'"><a href="javascript:void(0);"
+                                                class="btn btn-subtle-primary btn-icon btn-sm"><i
+                                                    class="ph-ticket"></i></a></li>
+                                        <li *ngIf="task.state === 'in_progress'"><a href="javascript:void(0);"
+                                                class="btn btn-subtle-primary btn-icon btn-sm"><i
+                                                    class="ph-pen"></i></a></li>
+                                        <li *ngIf="task.state === 'in_review'"><a href="javascript:void(0);"
+                                                class="btn btn-subtle-primary btn-icon btn-sm"><i
+                                                    class="ph-eye"></i></a></li>
+                                        <li *ngIf="task.state === 'resubmit'"><a href="javascript:void(0);"
+                                                class="btn btn-subtle-warning btn-icon btn-sm"><i
+                                                    class="bx bx-time"></i></a></li>
+                                        <li *ngIf="task.state === 'done'"><a href="javascript:void(0);"
+                                                class="btn btn-subtle-success btn-icon btn-sm"><i
+                                                    class="bx bx-check-square"></i></a></li>
                                     </ul>
                                 </td>
                             </tr>
-                        }
-                        </tbody><!-- end tbody -->
-                    </table><!-- end table -->
+                        </tbody>
+                    </table>
+                </div>
 
-                    <div id="elmLoader">
-                        <div class="spinner-border text-primary avatar-sm" role="status">
-                            <span class="visually-hidden">Loading...</span>
-                        </div>
-                    </div>
 
-                    <div class="noresult d-none">
-                        <div class="text-center py-4">
-                            <i class="ph-magnifying-glass fs-1 text-primary"></i>
-                            <h5 class="mt-2">Sorry! No Result Found</h5>
-                            <p class="text-muted mb-0">We've searched more than 6k+ tickets We did not find any tickets
-                                for you search.</p>
-                        </div>
+                <div class="noresult d-none">
+                    <div class="text-center py-4">
+                        <i class="ph-magnifying-glass fs-1 text-primary"></i>
+                        <h5 class="mt-2">Sorry! No Result Found</h5>
+                        <p class="text-muted mb-0">We've searched more than 6k+ tickets We did not find any tickets
+                            for you search.</p>
                     </div>
                 </div>
-                <div class="row align-items-center mt-4 pt-3" id="pagination-element">
-                    <div class="col-sm">
-                        <div class="text-muted text-center text-sm-start">
-                            Showing <span class="fw-semibold">{{tickets?.length}}</span> of <span class="fw-semibold">{{alltickets?.length}}</span> Results
-                        </div>
-                    </div><!--end col-->
-                    <div class="col-sm-auto mt-3 mt-sm-0">
-                        <pagination class="pagination-wrap hstack justify-content-center gap-2" [totalItems]="alltickets?.legnth" [itemsPerPage]="10" (pageChanged)="pageChanged($event)"></pagination>
+            </div>
+            <div class="row align-items-center mt-4 pt-3" id="pagination-element">
+                <div class="col-sm">
+                    <div class="text-muted text-center text-sm-start">
+                        Showing <span class="fw-semibold">{{tickets?.length}}</span> of <span
+                            class="fw-semibold">{{alltickets?.length}}</span> Results
                     </div>
+                </div><!--end col-->
+                <div class="col-sm-auto mt-3 mt-sm-0">
+                    <pagination class="pagination-wrap hstack justify-content-center gap-2"
+                        [totalItems]="alltickets?.legnth" [itemsPerPage]="10" (pageChanged)="pageChanged($event)">
+                    </pagination>
                 </div>
             </div>
         </div>
@@ -160,8 +129,10 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="mb-3">
-                                <label for="client-name-input" class="form-label">Client Name<span class="text-danger">*</span></label>
-                                <input type="text" id="client-name-input" class="form-control" formControlName="clientName" placeholder="Enter client name" required>
+                                <label for="client-name-input" class="form-label">Client Name<span
+                                        class="text-danger">*</span></label>
+                                <input type="text" id="client-name-input" class="form-control"
+                                    formControlName="clientName" placeholder="Enter client name" required>
                             </div>
                         </div>
                         <div class="col-lg-12">
@@ -172,10 +143,11 @@
                                 @if (assignto) {
                                 <div class="avatar-group justify-content-center" id="assignee-member">
                                     @for (profile of assignto; track $index) {
-                                    <a routerLink="/tickets/overview" class="avatar-group-item mb-2" tooltip="profile.assigneeName">
+                                    <a routerLink="/tickets/overview/:taskId" class="avatar-group-item mb-2"
+                                        tooltip="profile.assigneeName">
                                         <img src="{{profile.assigneeImg}}" alt="" class="rounded-circle avatar-xs">
                                     </a>
-                                }
+                                    }
                                 </div>
                                 }
                             </div>
@@ -187,19 +159,21 @@
                                             <img src="{{data.assigneeImg}}" alt="" class="img-fluid rounded-circle">
                                         </div>
                                         <div class="flex-grow-1">
-                                            <h6 class="mb-0"><a href="javascript:void(0);" class="text-body d-block">{{data.assigneeName}}</a></h6>
+                                            <h6 class="mb-0"><a href="javascript:void(0);"
+                                                    class="text-body d-block">{{data.assigneeName}}</a></h6>
                                         </div>
                                         <div class="flex-shrink-0">
-                                            <button type="button" class="btn btn-light btn-sm btn-action{{$index}}" (click)="addAssign($index)">
+                                            <button type="button" class="btn btn-light btn-sm btn-action{{$index}}"
+                                                (click)="addAssign($index)">
                                                 @if(data.checked == '0'){
-                                                    Add
+                                                Add
                                                 }@else {
-                                                    Remove
+                                                Remove
                                                 }
                                             </button>
                                         </div>
                                     </div>
-                                }
+                                    }
                                     <!-- end member item -->
                                 </div>
                                 <!-- end list -->
@@ -208,27 +182,38 @@
 
                         <div class="col-lg-12">
                             <div class="mb-3">
-                                <label for="ticket-title-input" class="form-label">Ticket title<span class="text-danger">*</span></label>
-                                <input type="text" id="ticket-title-input" formControlName="ticketTitle" class="form-control" placeholder="Ticket title" required>
+                                <label for="ticket-title-input" class="form-label">Ticket title<span
+                                        class="text-danger">*</span></label>
+                                <input type="text" id="ticket-title-input" formControlName="ticketTitle"
+                                    class="form-control" placeholder="Ticket title" required>
                             </div>
                         </div><!--end col-->
                         <div class="col-lg-6">
                             <div class="mb-3">
-                                <label for="create-date-input" class="form-label">Create Date<span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" mwlFlatpickr [altInput]="true" [convertModelValue]="true" dateFormat="d M,Y" altFormat="d M,Y" formControlName="createDate" id="create-date-input" placeholder="Create date" required>
+                                <label for="create-date-input" class="form-label">Create Date<span
+                                        class="text-danger">*</span></label>
+                                <input type="text" class="form-control" mwlFlatpickr [altInput]="true"
+                                    [convertModelValue]="true" dateFormat="d M,Y" altFormat="d M,Y"
+                                    formControlName="createDate" id="create-date-input" placeholder="Create date"
+                                    required>
                             </div>
                         </div><!--end col-->
                         <div class="col-lg-6">
                             <div class="mb-3">
-                                <label for="due-date-input" class="form-label">Due Date<span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" mwlFlatpickr [altInput]="true" [convertModelValue]="true" dateFormat="d M,Y" altFormat="d M,Y" formControlName="dueDate" id="due-date-input" placeholder="Due date" required>
+                                <label for="due-date-input" class="form-label">Due Date<span
+                                        class="text-danger">*</span></label>
+                                <input type="text" class="form-control" mwlFlatpickr [altInput]="true"
+                                    [convertModelValue]="true" dateFormat="d M,Y" altFormat="d M,Y"
+                                    formControlName="dueDate" id="due-date-input" placeholder="Due date" required>
                             </div>
                         </div><!--end col-->
                         <div class="col-lg-12">
                             <div class="mb-3">
-                                <label for="priority-input" class="form-label">Priority<span class="text-danger">*</span></label>
+                                <label for="priority-input" class="form-label">Priority<span
+                                        class="text-danger">*</span></label>
 
-                                <select class="form-select" id="priority-input" formControlName="priority" data-choices data-choices-search-false>
+                                <select class="form-select" id="priority-input" formControlName="priority" data-choices
+                                    data-choices-search-false>
                                     <option value="High">High</option>
                                     <option value="Medium">Medium</option>
                                     <option value="Low">Low</option>
@@ -237,9 +222,11 @@
                         </div><!--end col-->
                         <div class="col-lg-12">
                             <div class="mb-3">
-                                <label for="status-input" class="form-label">Status<span class="text-danger">*</span></label>
+                                <label for="status-input" class="form-label">Status<span
+                                        class="text-danger">*</span></label>
 
-                                <select class="form-select" id="status-input" formControlName="status" data-choices data-choices-search-false>
+                                <select class="form-select" id="status-input" formControlName="status" data-choices
+                                    data-choices-search-false>
                                     <option value="">Select Status</option>
                                     <option value="Open">Open</option>
                                     <option value="New">New</option>
@@ -252,7 +239,8 @@
                 </div>
                 <div class="modal-footer">
                     <div class="hstack gap-2 justify-content-end">
-                        <button type="button" class="btn btn-ghost-danger" (click)="addTickets.hide()"><i class="bi bi-x-lg align-baseline me-1"></i> Close</button>
+                        <button type="button" class="btn btn-ghost-danger" (click)="addTickets.hide()"><i
+                                class="bi bi-x-lg align-baseline me-1"></i> Close</button>
                         <button type="submit" class="btn btn-primary" id="add-btn">Add Ticket</button>
                     </div>
                 </div>
@@ -267,7 +255,8 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="btn-close" id="deleteRecord-close" (click)="deleteRecordModal.hide()"></button>
+                <button type="button" class="btn-close" id="deleteRecord-close"
+                    (click)="deleteRecordModal.hide()"></button>
             </div>
             <div class="modal-body p-md-5">
                 <div class="text-center">
@@ -280,8 +269,10 @@
                     </div>
                 </div>
                 <div class="d-flex gap-2 justify-content-center mt-4 pt-2 mb-2">
-                    <button type="button" class="btn w-sm btn-light btn-hover" (click)="deleteRecordModal.hide()">Close</button>
-                    <button type="button" class="btn w-sm btn-danger btn-hover" id="delete-record" (click)="deleteData(deleteID)">Yes, Delete It!</button>
+                    <button type="button" class="btn w-sm btn-light btn-hover"
+                        (click)="deleteRecordModal.hide()">Close</button>
+                    <button type="button" class="btn w-sm btn-danger btn-hover" id="delete-record"
+                        (click)="deleteData(deleteID)">Yes, Delete It!</button>
                 </div>
             </div>
         </div><!-- /.modal-content -->

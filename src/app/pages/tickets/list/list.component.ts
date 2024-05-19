@@ -1,9 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
 
 // Get Modal
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { DatePipe, DecimalPipe } from '@angular/common';
-import { Observable } from 'rxjs';
+import { Observable, forkJoin, switchMap } from 'rxjs';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { Store } from '@ngrx/store';
 import { addticketlistData, deleteticketlistData, fetchsupporticketsData, fetchticketlistData, updateticketlistData } from 'src/app/store/Tickets/ticket.actions';
@@ -11,6 +11,10 @@ import { selectData, selectlistData } from 'src/app/store/Tickets/ticket-selecto
 import { PageChangedEvent } from 'ngx-bootstrap/pagination';
 import { cloneDeep } from 'lodash';
 import { assignesTickets } from 'src/app/core/data';
+import { restApiService } from 'src/app/core/services/rest-api.service';
+import { Project } from 'src/app/interfaces/api-interfaces';
+import { SupportTicket, supporttickets } from 'src/app/core/data/ticket';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list',
@@ -21,6 +25,30 @@ import { assignesTickets } from 'src/app/core/data';
 
 // List component
 export class ListComponent {
+  title = '';
+
+  project: Project = {
+    created_at: '',
+    updated_at: '',
+    name: '',
+    description: '',
+    faculty_id: '',
+    project_id: '',
+    tasks: [],
+    account_links: [],
+    tasks_count: 0,
+    _links: {
+      self: { href: '' },
+      tasks: { href: '' }
+    },
+    tasks_count_by_status: {
+      open: 0,
+      resubmit: 0,
+      in_progress: 0,
+      in_review: 0,
+      done: 0
+    }
+  };
 
   // bread crumb items
   breadCrumbItems!: Array<{}>;
@@ -39,49 +67,87 @@ export class ListComponent {
   assignto: any = [];
   editData: any;
   alltickets: any;
-
-  constructor(private formBuilder: UntypedFormBuilder, public store: Store,public datepipe:DatePipe) {
+  tasks: any[] = [];
+  alltasks: any[] = [];
+  myGroup!: FormGroup;
+  
+  constructor( private formBuilder: FormBuilder, public store: Store,public datepipe:DatePipe, public apiService: restApiService, private router: Router) {
   }
 
+  public supportTickets: SupportTicket[] = supporttickets;
+
   ngOnInit(): void {
-    /**
-     * BreadCrumb
-     */
-    this.breadCrumbItems = [
-      { label: 'Support Tickets', active: true },
-      { label: 'List View', active: true }
-    ];
+    this.initializeForm();
+    this.apiService.getCurrentProjects().subscribe((response: any) => {
+      this.project = response;
+      this.tasks = response.tasks;
+      this.alltasks = [...this.tasks]; // Create a copy of tasks for resetting the list
+      this.updateSupportTickets(response.tasks_count_by_status);
+    });
+  }
 
-    /**
-     * Form Validation
-     */
+  viewTaskDetails(taskId: string) {
+    this.router.navigate(['/overview', taskId]);
+  }
+
+  initializeForm() {
     this.ListForm = this.formBuilder.group({
-      id: [''],
-      clientName: ['', [Validators.required]],
-      ticketTitle: ['', [Validators.required]],
-      createDate: ['', [Validators.required]],
-      dueDate: ['', [Validators.required]],
-      priority: ['', [Validators.required]],
-      status: ['', [Validators.required]]
+      clientName: ['', Validators.required],
+      ticketTitle: ['', Validators.required],
+      createDate: ['', Validators.required],
+      dueDate: ['', Validators.required],
+      priority: ['', Validators.required],
+      status: ['', Validators.required]
     });
+  }
 
-    this.store.dispatch(fetchsupporticketsData());
-    this.store.select(selectData).subscribe((data) => {
-      this.supportList = data;
+  filterdata() {
+    if (this.term) {
+      this.tasks = this.alltasks.filter(task =>
+        task.name.toLowerCase().includes(this.term.toLowerCase()) ||
+        task.description.toLowerCase().includes(this.term.toLowerCase()) ||
+        task.state.toLowerCase().includes(this.term.toLowerCase())
+      );
+    } else {
+      this.tasks = [...this.alltasks]; // Reset to original list when search term is cleared
+    }
+    this.updateNoResultDisplay();
+  }
+
+  updateNoResultDisplay() {
+    const noResultElement = document.querySelector('.noresult') as HTMLElement;
+    const paginationElement = document.getElementById('pagination-element') as HTMLElement;
+
+    if (this.term && this.tasks.length === 0) {
+      noResultElement.classList.remove('d-none');
+      paginationElement.classList.add('d-none');
+    } else {
+      noResultElement.classList.add('d-none');
+      paginationElement.classList.remove('d-none');
+    }
+  }
+
+  private updateSupportTickets(counts: any): void {
+    this.supportTickets = this.supportTickets.map(ticket => {
+      switch (ticket.title) {
+        case 'Open Tickets':
+          ticket.count = counts.open;
+          break;
+          case 'Tickets in Progess':
+            ticket.count = counts.in_progress;
+            break;
+        case 'Tickets in Review':
+          ticket.count = counts.in_review;
+          break;
+          case 'Tickets Done':
+            ticket.count = counts.resubmit;
+            break;
+        case 'Tickets Done':
+          ticket.count = counts.done;
+          break;
+      }
+      return ticket;
     });
-
-
-    setTimeout(() => {
-      this.store.dispatch(fetchticketlistData());
-      this.store.select(selectlistData).subscribe((data) => {
-        this.tickets = data;
-        this.alltickets = data;
-        this.tickets = cloneDeep(this.alltickets.slice(0, 10))
-      });
-      document.getElementById('elmLoader')?.classList.add('d-none')
-    }, 1000)
-
-    this.assignList = assignesTickets
   }
 
   // Edit Data
@@ -202,32 +268,6 @@ export class ListComponent {
   }
 
 
-  // filterdata
-  filterdata() {
-    if (this.term) {
-      this.tickets = this.alltickets.filter((es: any) => es.ticketTitle.toLowerCase().includes(this.term.toLowerCase()))
-    } else {
-      this.tickets = this.alltickets.slice(0, 10);
-    }
-    // noResultElement
-    this.updateNoResultDisplay();
-  }
-
-  // no result 
-  updateNoResultDisplay() {
-    const noResultElement = document.querySelector('.noresult') as HTMLElement;
-    const paginationElement = document.getElementById('pagination-element') as HTMLElement;
-
-    if (this.term && this.tickets.length === 0) {
-      noResultElement.classList.remove('d-none')
-      paginationElement.classList.add('d-none')
-
-    } else {
-      noResultElement.classList.add('d-none')
-      paginationElement.classList.remove('d-none')
-    }
-  }
-
   // pagechanged
   pageChanged(event: PageChangedEvent): void {
     const startItem = (event.page - 1) * event.itemsPerPage;
@@ -235,5 +275,3 @@ export class ListComponent {
     this.tickets = this.alltickets.slice(startItem, this.endItem);
   }
 }
-
-

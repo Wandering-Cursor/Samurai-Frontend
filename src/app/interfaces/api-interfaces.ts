@@ -50,12 +50,6 @@ export interface NewComment {
   text?: string; // Optional since x-nullable is true.
 }
 
-export interface Comment {
-  created_at: string;
-  updated_at: string;
-
-}
-
 export interface DeleteCommentInput {
   comment_id: string;
 }
@@ -128,4 +122,89 @@ export interface AuthResponse {
 
 export interface TokenRefreshConfig {
   timeInSeconds: number;
+}
+
+export interface Project {
+  created_at: string;
+  updated_at: string;
+  name: string;
+  description: string;
+  faculty_id: string;
+  project_id: string;
+  tasks: Task[];
+  account_links: AccountLink[];
+  tasks_count: number;
+  _links: Links;
+  tasks_count_by_status: TasksCountByStatus;
+}
+
+export interface Task {
+  created_at: string;
+  updated_at: string;
+  name: string;
+  description: string;
+  priority: number;
+  reviewer: string | null;
+  due_date: string | null;
+  project_id: string;
+  task_id: string;
+  state: string;
+  comment_count: number;
+}
+
+export interface AccountLink {
+  account_id: string;
+  account_details: AccountDetails;
+}
+
+export interface AccountDetails {
+  account_id: string;
+  email: string;
+  username: string;
+  first_name: string;
+  middle_name: string;
+  last_name: string;
+}
+
+export interface Links {
+  self: Link;
+  tasks: Link;
+}
+
+export interface Link {
+  href: string;
+}
+
+export interface TasksCountByStatus {
+  open: number;
+  resubmit: number;
+  in_progress: number;
+  in_review: number;
+  done: number;
+}
+
+export interface CommentApiResponse {
+  meta: {
+    total: number;
+    page: number;
+    page_size: number;
+    total_pages: number;
+  };
+  content: Comment[];
+}
+
+export interface Comment {
+  created_at: string;
+  updated_at: string;
+  file_id: string | null;
+  text: string;
+  task_id: string;
+  sender_id: string;
+  comment_id: string;
+}
+
+export interface Chat {
+  chat_id: string;
+  name: string;
+  _links: any;
 }

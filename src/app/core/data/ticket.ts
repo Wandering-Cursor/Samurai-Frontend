@@ -1,47 +1,69 @@
-
-const supporttickets = [
+export interface SupportTicket {
+    id: number;
+    imgBg: string;
+    img: string;
+    iconColor: string;
+    icon: string;
+    num: string;
+    count: number;
+    title: string;
+  }    
+    
+    export const supporttickets: SupportTicket[]  = [
     {
         id: 1,
         imgBg: 'info',
-        img: 'bi bi-ticket',
+        img: 'bx ph-ticket',
         iconColor: 'success',
         icon: 'ri-arrow-right-up-line',
-        num: '3.47',
-        count: 249,
-        label: 'k',
-        title: 'Total Tickets'
+        num: '',
+        count: 0,
+        title: 'Open Tickets'
     },
     {
         id: 2,
-        imgBg: 'warning',
-        img: 'bi bi-hourglass-split',
+        imgBg: 'info',
+        img: 'bx ph-pen',
         iconColor: 'danger',
         icon: 'ri-arrow-right-down-line',
-        num: '6.33',
-        count: 3174,
-        title: 'Pending Tickets'
-    }, {
+        num: '',
+        count: 0,
+        title: 'Tickets in Progess'
+    },
+    {
         id: 3,
+        imgBg: 'warning',
+        img: 'bx ph-eye',
+        iconColor: 'danger',
+        icon: 'ri-arrow-right-down-line',
+        num: '',
+        count: 0,
+        title: 'Tickets in Review'
+    },
+    {
+        id: 4,
+        imgBg: 'warning',
+        img: 'bx bx-time',
+        iconColor: 'danger',
+        icon: 'ri-arrow-right-down-line',
+        num: '',
+        count: 0,
+        title: 'Tickets in Resubmit'
+    },
+    {
+        id: 5,
         imgBg: 'success',
         img: 'bx bx-check-square',
         iconColor: 'success',
         icon: 'ri-arrow-right-up-line',
-        num: '7.34',
-        count: 1596,
-        title: 'Closed Tickets'
-    }, {
-        id: 4,
-        imgBg: 'info',
-        img: 'bi bi-ticket-perforated',
-        iconColor: 'danger',
-        icon: 'ri-arrow-right-down-line',
-        num: '1.29',
-        count: 365,
-        title: 'New Tickets'
+        num: '',
+        count: 0,
+        title: 'Tickets Done'
     },
-];
 
-const assignesTickets = [
+  ];
+
+  export const assignesTickets = [
     {
         id: 1,
         assigneeImg: "assets/images/users/32/avatar-1.jpg",
@@ -105,7 +127,7 @@ const assignesTickets = [
 ]
 
 
-const ticketList = [
+export const ticketList = [
     {
         id: 1,
         assignedto: [
@@ -369,4 +391,3 @@ const ticketList = [
         status: "Pending"
     }
 ]
-export { supporttickets, assignesTickets, ticketList };
