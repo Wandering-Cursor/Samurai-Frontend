@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 import { GlobalComponent } from '../../global-component';
 import {
@@ -7,6 +7,8 @@ import {
   Comment,
   CreateUserProject,
   PaginationParams,
+  DownloadFileResponse,
+  FileInfo,
 } from 'src/app/interfaces/api-interfaces';
 
 const httpOptions = {
@@ -44,7 +46,7 @@ this.restApiService.getProjectTasks(projectId, { page: 1, page_size: 10 }, 'task
       params = params.set('name', name);
     }
 
-    return this.http.get(GlobalComponent.API_URL + '/projects/projects', {
+    return this.http.get(GlobalComponent.API_URL + 'projects/projects', {
       params: params,
     });
   }
@@ -58,7 +60,7 @@ this.restApiService.getProjectTasks(projectId, { page: 1, page_size: 10 }, 'task
 
   getProjectById(projectId: string): Observable<any> {
     return this.http.get(
-      `${GlobalComponent.API_URL}/projects/projects/${projectId}`
+      `${GlobalComponent.API_URL}projects/projects/${projectId}`
     );
   }
 
@@ -120,6 +122,43 @@ this.restApiService.getProjectTasks(projectId, { page: 1, page_size: 10 }, 'task
   // Update a comment
   updateComment(commentId: string, comment: any): Observable<any> {
     return this.http.put(`${GlobalComponent.API_URL}projects/comments/${commentId}`, comment);
+  }
+
+// In your service
+  postFile(fileData: FormData): Observable<any> {
+    return this.http.post(`${GlobalComponent.API_URL}common/file`, fileData);
+  }
+  
+
+downloadFile(fileId: string): Observable<{blob: Blob, filename: string}> {
+  return this.http.get(`${GlobalComponent.API_URL}common/file/${fileId}`, {
+    responseType: 'blob',
+    observe: 'response'
+  }).pipe(
+    map((response: HttpResponse<Blob>) => {
+      // Log all response headers
+      const headers = response.headers.keys();
+      headers.forEach(header => console.log(`${header}: ${response.headers.get(header)}`));
+
+      const contentDisposition = response.headers.get('Content-Disposition') || '';
+      console.log('Content-Disposition header:', contentDisposition);
+
+      const matches = /filename\s*=\s*(?:"([^"]*)"|([^;]*))/i.exec(contentDisposition);
+      console.log('Regex matches:', matches);
+
+      const filename = matches && (matches[1] || matches[2]) ? matches[1] || matches[2] : 'default-filename.ext';
+      console.log('Extracted filename:', filename);
+
+      return { blob: response.body as Blob, filename };
+    })
+  );
+}
+
+
+
+
+  getFileInfo(fileId: string): Observable<FileInfo> {
+    return this.http.get<FileInfo>(`${GlobalComponent.API_URL}common/file/${fileId}/info`);
   }
 
     // Create a new chat

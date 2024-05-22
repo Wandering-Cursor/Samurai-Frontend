@@ -193,6 +193,8 @@ export interface CommentApiResponse {
   content: Comment[];
 }
 
+
+
 export interface Comment {
   created_at: string;
   updated_at: string;
@@ -201,6 +203,44 @@ export interface Comment {
   task_id: string;
   sender_id: string;
   comment_id: string;
+}
+
+export interface FileResponse {
+  file_id: string;
+  file_name: string;
+  file_type: string;
+  file_size: number;
+  _links: {
+    self: {
+      href: string;
+    },
+    file: {
+      href: string;
+    }
+  };
+}
+
+export interface FileInfo {
+  file_id: string;
+  file_name: string;
+  file_type: string;
+  file_size: number;
+  _links: {
+    self: {
+      href: string;
+    },
+    file: {
+      href: string;
+    }
+  };
+}
+
+export interface DownloadFileResponse {
+  file_id: string;
+  file_name: string;
+  file_type: string;
+  file_size: number;
+  file_content: string;
 }
 
 export interface Chat {
