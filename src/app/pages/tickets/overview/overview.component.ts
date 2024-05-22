@@ -16,7 +16,7 @@ export class OverviewComponent implements OnInit {
   commentText: string = '';
   files: File[] = [];
   selectedStatus: string = '';
-  statuses: string[] = ['open', 'in_progress', 'in_review', 'resubmit', 'done'];
+  statuses: string[] = ['open', 'in_progress', 'in_review'];
   taskId: string = '';
   fileId: any;
 
