@@ -80,7 +80,7 @@
     "rxjs": "~7.8.1",
     "simplebar-angular": "3.2.4",
     "slick-carousel": "^1.8.1",
-    "sweetalert2": "^11.10.7",
+    "sweetalert2": "^11.11.0",
     "tslib": "^2.6.2",
     "zone.js": "0.14.2"
   },
