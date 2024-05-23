@@ -106,7 +106,7 @@ this.restApiService.getProjectTasks(projectId, { page: 1, page_size: 10 }, 'task
   }
 
   updateTaskStatus(taskId: string, status: string): Observable<any> {
-    return this.http.put(`${GlobalComponent.API_URL}project/task/${taskId}/status`, { status });
+    return this.http.put(`${GlobalComponent.API_URL}projects/task/${taskId}/status`, { status });
   }
 
   postComment(taskId: string, comment: any): Observable<any> {
