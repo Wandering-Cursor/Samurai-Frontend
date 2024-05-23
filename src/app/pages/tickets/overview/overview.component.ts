@@ -11,24 +11,14 @@ import { Task, Comment } from 'src/app/interfaces/api-interfaces';
   styleUrls: ['./overview.component.scss'],
 })
 export class OverviewComponent implements OnInit {
-  task: Task = {
-    created_at: '',
-    updated_at: '',
-    name: '',
-    description: '',
-    priority: 0,
-    reviewer: null,
-    due_date: null,
-    project_id: '',
-    task_id: '',
-    state: '',
-    comment_count: 0,
-  };
+  task: any; // Define the type based on your model
   comments: any[] = [];
   commentText: string = '';
+  files: File[] = [];
   selectedStatus: string = '';
   statuses: string[] = ['open', 'in_progress', 'in_review'];
   taskId: string = '';
+  fileId: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -39,66 +29,122 @@ export class OverviewComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
-      this.taskId = params['taskId']; // Set the taskId from the route parameters
+      this.taskId = params['taskId'];
       this.apiService.getTaskById(this.taskId).subscribe((task) => {
         this.task = task;
-        this.selectedStatus = task.state; // Set the initial selected status from the task's current state
+        this.selectedStatus = task.state;
         this.loadComments(this.taskId);
       });
     });
   }
 
   loadComments(taskId: string) {
-    this.apiService.getComments(taskId).subscribe(
-      (comments) => {
-        this.comments = comments;
-      },
-      (error) => {
-        console.error('Error loading comments:', error);
-      }
-    );
-  }
-
-  postComment(taskId: string, commentText: string) {
-    const comment = { text: commentText };
-    this.apiService.postComment(taskId, comment).subscribe(() => {
-      this.loadComments(taskId); // Reload comments after posting
-      this.commentText = ''; // Clear the comment input field
+    this.apiService.getComments(taskId).subscribe((comments) => {
+      this.comments = comments;
+      this.comments.forEach((comment) => {
+        if (comment.file_id) {
+          this.apiService.getFileInfo(comment.file_id).subscribe((fileInfo) => {
+            comment.fileInfo = fileInfo;
+          });
+        }
+      });
     });
   }
 
-  isCurrentUser(senderId: string): boolean {
-    try {
-      return this.authService.getCurrentUserUUID() === senderId;
-    } catch (error) {
-      console.error(error);
-      return false;
+  handleFileInput(event: Event) {
+    const element = event.target as HTMLInputElement;
+    let files: FileList | null = element.files;
+
+    if (files && files.length > 0) {
+      this.uploadFile(files[0]); // Upload only the first file
     }
   }
 
-  toggleEdit(comment: any): void {
+  uploadFile(file: File): void {
+    const formData = new FormData();
+    formData.append('file', file, file.name);
+
+    this.apiService.postFile(formData).subscribe({
+      next: (response) => {
+        console.log('File uploaded successfully:', response);
+        // Store the file_id from the response
+        this.fileId = response.file_id; // Assume this.fileId is a string to store the file ID
+      },
+      error: (error) => {
+        console.error('Error uploading file:', error);
+      },
+    });
+  }
+
+  postComment(taskId: string, commentText: string) {
+    const commentData: any = {
+      text: commentText,
+    };
+
+    // Only add file_id to the commentData if it exists
+    if (this.fileId) {
+      commentData.file_id = this.fileId;
+    }
+
+    this.apiService.postComment(taskId, commentData).subscribe({
+      next: (response) => {
+        console.log('Comment posted successfully:', response);
+        this.loadComments(taskId);
+        this.commentText = '';
+        this.fileId = null; // Clear the stored file ID after posting
+      },
+      error: (error) => {
+        console.error('Error posting comment:', error);
+      },
+    });
+  }
+
+downloadFile(fileId: string) {
+  this.apiService.downloadFile(fileId).subscribe({
+    next: ({ blob, filename }) => {
+      const url = window.URL.createObjectURL(blob);
+      const anchor = document.createElement('a');
+      anchor.href = url;
+      anchor.download = filename;  // Use the extracted filename
+      document.body.appendChild(anchor);
+      anchor.click();
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(anchor);
+    },
+    error: error => {
+      console.error('Download failed:', error);
+    }
+  });
+}
+
+
+  
+
+  isCurrentUser(senderId: string): boolean {
+    return this.authService.getCurrentUserUUID() === senderId;
+  }
+
+  toggleEdit(comment: any) {
     if (this.isCurrentUser(comment.sender_id)) {
       comment.isEditing = !comment.isEditing;
     }
   }
 
-  changeStatus(newStatus: string): void {
+  changeStatus(newStatus: string) {
     if (newStatus !== this.selectedStatus) {
       this.selectedStatus = newStatus;
       this.apiService.updateTaskStatus(this.taskId, newStatus).subscribe({
         next: (response) => {
           console.log('Status updated successfully:', response);
-          // Optionally, handle any additional logic after successful update
         },
         error: (error) => {
           console.error('Failed to update status:', error);
-          // Optionally, handle errors, e.g., show an error message to the user
         },
       });
     }
   }
 
-  saveComment(comment: any): void {
+  saveComment(comment: any) {
     if (this.isCurrentUser(comment.sender_id) && comment.isEditing) {
       this.http
         .put(
@@ -108,35 +154,12 @@ export class OverviewComponent implements OnInit {
         .subscribe({
           next: (response) => {
             console.log('Comment updated successfully:', response);
-            comment.isEditing = false; // Turn off edit mode after saving
+            comment.isEditing = false;
           },
           error: (error) => {
             console.error('Failed to update comment:', error);
           },
         });
-    }
-  }
-
-  updateComment(comment: Comment): void {
-    if (this.isCurrentUser(comment.sender_id)) {
-      this.http
-        .put(
-          `${GlobalComponent.API_URL}projects/comments/${comment.comment_id}`,
-          { text: comment.text }
-        )
-        .subscribe({
-          next: (response) => {
-            console.log('Comment updated successfully:', response);
-            // Optionally, refresh the comments list or handle UI updates here
-          },
-          error: (error) => {
-            console.error('Failed to update comment:', error);
-            // Handle errors, e.g., show an error message to the user
-          },
-        });
-    } else {
-      console.error('Unauthorized attempt to update comment');
-      // Optionally, show an error message to the user
     }
   }
 }
