@@ -100,13 +100,14 @@
             <div class="row align-items-center mt-4 pt-3" id="pagination-element">
                 <div class="col-sm">
                     <div class="text-muted text-center text-sm-start">
-                        Showing <span class="fw-semibold">{{tickets?.length}}</span> of <span
-                            class="fw-semibold">{{alltickets?.length}}</span> Results
+                        Showing <span class="fw-semibold">{{tasks.length}}</span> of <span
+                            class="fw-semibold">{{tasksMeta.total}}</span> Results
                     </div>
                 </div><!--end col-->
                 <div class="col-sm-auto mt-3 mt-sm-0">
                     <pagination class="pagination-wrap hstack justify-content-center gap-2"
-                        [totalItems]="alltickets?.legnth" [itemsPerPage]="10" (pageChanged)="pageChanged($event)">
+                        [totalItems]="tasksMeta.total" [itemsPerPage]="itemsPerPage"
+                        (pageChanged)="pageChanged($event)">
                     </pagination>
                 </div>
             </div>
