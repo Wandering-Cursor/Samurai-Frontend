@@ -22,7 +22,7 @@ const httpOptions = {
   providedIn: 'root',
 })
 export class restApiService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   /**
   * Product Rest Api
@@ -85,7 +85,7 @@ this.restApiService.getProjectTasks(projectId, { page: 1, page_size: 10 }, 'task
     }
 
     return this.http.get(
-      `${GlobalComponent.API_URL}/projects/tasks/${projectId}`,
+      `${GlobalComponent.API_URL}projects/tasks/${projectId}`,
       { params }
     );
   }
@@ -106,7 +106,7 @@ this.restApiService.getProjectTasks(projectId, { page: 1, page_size: 10 }, 'task
   }
 
   updateTaskStatus(taskId: string, status: string): Observable<any> {
-    return this.http.put(`${GlobalComponent.API_URL}projects/task/${taskId}/status`, { status });
+    return this.http.put(`${GlobalComponent.API_URL}projects/task/${taskId}/status`, { state: status });
   }
 
   postComment(taskId: string, comment: any): Observable<any> {
@@ -124,35 +124,35 @@ this.restApiService.getProjectTasks(projectId, { page: 1, page_size: 10 }, 'task
     return this.http.put(`${GlobalComponent.API_URL}projects/comments/${commentId}`, comment);
   }
 
-// In your service
+  // In your service
   postFile(fileData: FormData): Observable<any> {
     return this.http.post(`${GlobalComponent.API_URL}common/file`, fileData);
   }
-  
 
-downloadFile(fileId: string): Observable<{blob: Blob, filename: string}> {
-  return this.http.get(`${GlobalComponent.API_URL}common/file/${fileId}`, {
-    responseType: 'blob',
-    observe: 'response'
-  }).pipe(
-    map((response: HttpResponse<Blob>) => {
-      // Log all response headers
-      const headers = response.headers.keys();
-      headers.forEach(header => console.log(`${header}: ${response.headers.get(header)}`));
 
-      const contentDisposition = response.headers.get('Content-Disposition') || '';
-      console.log('Content-Disposition header:', contentDisposition);
+  downloadFile(fileId: string): Observable<{ blob: Blob, filename: string }> {
+    return this.http.get(`${GlobalComponent.API_URL}common/file/${fileId}`, {
+      responseType: 'blob',
+      observe: 'response'
+    }).pipe(
+      map((response: HttpResponse<Blob>) => {
+        // Log all response headers
+        const headers = response.headers.keys();
+        headers.forEach(header => console.log(`${header}: ${response.headers.get(header)}`));
 
-      const matches = /filename\s*=\s*(?:"([^"]*)"|([^;]*))/i.exec(contentDisposition);
-      console.log('Regex matches:', matches);
+        const contentDisposition = response.headers.get('Content-Disposition') || '';
+        console.log('Content-Disposition header:', contentDisposition);
 
-      const filename = matches && (matches[1] || matches[2]) ? matches[1] || matches[2] : 'default-filename.ext';
-      console.log('Extracted filename:', filename);
+        const matches = /filename\s*=\s*(?:"([^"]*)"|([^;]*))/i.exec(contentDisposition);
+        console.log('Regex matches:', matches);
 
-      return { blob: response.body as Blob, filename };
-    })
-  );
-}
+        const filename = matches && (matches[1] || matches[2]) ? matches[1] || matches[2] : 'default-filename.ext';
+        console.log('Extracted filename:', filename);
+
+        return { blob: response.body as Blob, filename };
+      })
+    );
+  }
 
 
 
@@ -161,62 +161,62 @@ downloadFile(fileId: string): Observable<{blob: Blob, filename: string}> {
     return this.http.get<FileInfo>(`${GlobalComponent.API_URL}common/file/${fileId}/info`);
   }
 
-    // Create a new chat
-    createChat(chatData: any): Observable<any> {
-      return this.http.post(`${GlobalComponent.API_URL}communication/chat`, chatData);
-    }
-  
-    // Get all chats
-    getChats(): Observable<any[]> {
-      return this.http.get<any[]>(`${GlobalComponent.API_URL}communication/chat`);
-    }
-  
-    // Get specific chat by ID
-    getChat(chatId: string): Observable<any> {
-      return this.http.get(`${GlobalComponent.API_URL}communication/chat/${chatId}`);
-    }
-  
-    // Update specific chat
-    updateChat(chatId: string, updateData: any): Observable<any> {
-      return this.http.patch(`${GlobalComponent.API_URL}communication/chat/${chatId}`, updateData);
-    }
-  
-    // Add member to chat
-    addChatMember(chatId: string, userId: string): Observable<any> {
-      return this.http.post(`${GlobalComponent.API_URL}communication/chat/${chatId}/add_member`, { userId });
-    }
-  
-    // Leave a chat
-    leaveChat(chatId: string): Observable<any> {
-      return this.http.post(`${GlobalComponent.API_URL}communication/chat/${chatId}/leave`, {});
-    }
-  
-    // Get chat participants
-    getChatParticipants(chatId: string): Observable<any[]> {
-      return this.http.get<any[]>(`${GlobalComponent.API_URL}communication/chat/${chatId}/participants`);
-    }
-  
-    // Messaging services
-    createMessage(messageData: any): Observable<any> {
-      return this.http.post(`${GlobalComponent.API_URL}communication/message`, messageData);
-    }
-  
-    getMessage(messageId: string): Observable<any> {
-      return this.http.get(`${GlobalComponent.API_URL}communication/message/${messageId}`);
-    }
-  
-    updateMessage(messageId: string, messageData: any): Observable<any> {
-      return this.http.put(`${GlobalComponent.API_URL}communication/message/${messageId}`, messageData);
-    }
-  
-    markMessageSeen(messageId: string): Observable<any> {
-      return this.http.patch(`${GlobalComponent.API_URL}communication/message/${messageId}/seen`, {});
-    }
-  
-    // Get who has seen the message
-    getMessageSeenBy(messageId: string): Observable<any[]> {
-      return this.http.get<any[]>(`${GlobalComponent.API_URL}communication/message/${messageId}/seen_by`);
-    }
+  // Create a new chat
+  createChat(chatData: any): Observable<any> {
+    return this.http.post(`${GlobalComponent.API_URL}communication/chat`, chatData);
+  }
+
+  // Get all chats
+  getChats(): Observable<any[]> {
+    return this.http.get<any[]>(`${GlobalComponent.API_URL}communication/chat`);
+  }
+
+  // Get specific chat by ID
+  getChat(chatId: string): Observable<any> {
+    return this.http.get(`${GlobalComponent.API_URL}communication/chat/${chatId}`);
+  }
+
+  // Update specific chat
+  updateChat(chatId: string, updateData: any): Observable<any> {
+    return this.http.patch(`${GlobalComponent.API_URL}communication/chat/${chatId}`, updateData);
+  }
+
+  // Add member to chat
+  addChatMember(chatId: string, userId: string): Observable<any> {
+    return this.http.post(`${GlobalComponent.API_URL}communication/chat/${chatId}/add_member`, { userId });
+  }
+
+  // Leave a chat
+  leaveChat(chatId: string): Observable<any> {
+    return this.http.post(`${GlobalComponent.API_URL}communication/chat/${chatId}/leave`, {});
+  }
+
+  // Get chat participants
+  getChatParticipants(chatId: string): Observable<any[]> {
+    return this.http.get<any[]>(`${GlobalComponent.API_URL}communication/chat/${chatId}/participants`);
+  }
+
+  // Messaging services
+  createMessage(messageData: any): Observable<any> {
+    return this.http.post(`${GlobalComponent.API_URL}communication/message`, messageData);
+  }
+
+  getMessage(messageId: string): Observable<any> {
+    return this.http.get(`${GlobalComponent.API_URL}communication/message/${messageId}`);
+  }
+
+  updateMessage(messageId: string, messageData: any): Observable<any> {
+    return this.http.put(`${GlobalComponent.API_URL}communication/message/${messageId}`, messageData);
+  }
+
+  markMessageSeen(messageId: string): Observable<any> {
+    return this.http.patch(`${GlobalComponent.API_URL}communication/message/${messageId}/seen`, {});
+  }
+
+  // Get who has seen the message
+  getMessageSeenBy(messageId: string): Observable<any[]> {
+    return this.http.get<any[]>(`${GlobalComponent.API_URL}communication/message/${messageId}/seen_by`);
+  }
 
   // Delete
   deleteData(id: any): Observable<any> {

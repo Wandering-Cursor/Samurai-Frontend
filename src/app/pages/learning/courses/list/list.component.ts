@@ -8,7 +8,7 @@ import { addcourcelistData, deletecourcelistData, fetchcourcelistdata, updatecou
 import { selectData } from 'src/app/store/Learning-cources/cources.selector';
 import { PageChangedEvent } from 'ngx-bootstrap/pagination';
 import { cloneDeep } from 'lodash';
-import { Options } from 'ngx-slider-v2';
+import { Options } from '@angular-slider/ngx-slider';
 
 @Component({
   selector: 'app-list',
@@ -67,7 +67,7 @@ export class ListComponent {
       this.store.select(selectData).subscribe((data) => {
         this.courses = data;
         this.courseList = data;
-        this.courses = cloneDeep(this.courseList.slice(0,10))
+        this.courses = cloneDeep(this.courseList.slice(0, 10))
       });
       document.getElementById('elmLoader')?.classList.add('d-none')
     }, 1000)
@@ -100,16 +100,16 @@ export class ListComponent {
     document.querySelector('.backdrop3')?.classList.remove('show')
   }
 
-    /**
+  /**
 * Range Slider Wise Data Filter
 */
-valueChange(value: number, boundary: boolean): void {
-  if (boundary) {
-    this.minVal = value;
-  } else {
-    this.maxVal = value;
+  valueChange(value: number, boundary: boolean): void {
+    if (boundary) {
+      this.minVal = value;
+    } else {
+      this.maxVal = value;
+    }
   }
-}
 
   // File Upload
   public dropzoneConfig: DropzoneConfigInterface = {
@@ -235,11 +235,11 @@ valueChange(value: number, boundary: boolean): void {
   }
   // filterdata
   filterdata() {
-  
+
     if (this.term) {
       this.courses = this.courseList.filter((el: any) => el.name.toLowerCase().includes(this.term.toLowerCase()))
     } else {
-      this.courses = this.courseList.slice(0,10)
+      this.courses = this.courseList.slice(0, 10)
     }
     // noResultElement
     this.updateNoResultDisplay();

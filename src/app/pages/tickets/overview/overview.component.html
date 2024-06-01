@@ -53,14 +53,17 @@
                             <!-- Avatar or other identifier -->
                         </div>
                         <div class="flex-grow-1 ms-3">
-                            <h6>{{ comment.sender_name }} <small class="text-muted">{{ comment.created_at | date:'medium' }}</small></h6>
+                            <h6>{{ comment.account_details.first_name }} {{ comment.account_details.last_name }} <small
+                                    class="text-muted">{{ comment.created_at |
+                                    date:'medium' }}</small></h6>
                             <p class="text-muted">{{ comment.text }}</p>
                             <div *ngIf="comment.fileInfo">
                                 <div class="card">
                                     <div class="card-body">
                                         <h5 class="card-title">{{ comment.fileInfo.file_name }}</h5>
                                         <p class="card-text">Size: {{ comment.fileInfo.file_size }} bytes</p>
-                                        <button class="btn btn-primary" (click)="downloadFile(comment.fileInfo.file_id)">Download</button>
+                                        <button class="btn btn-primary"
+                                            (click)="downloadFile(comment.fileInfo.file_id)">Download</button>
                                     </div>
                                 </div>
                             </div>
@@ -75,17 +78,19 @@
                     <div class="row g-3">
                         <div class="col-lg-12">
                             <label for="exampleFormControlTextarea1" class="form-label">Напишіть коментарій! </label>
-                            <input type="file" class="form-control" id="fileInput" (change)="handleFileInput($event)" multiple>
+                            <input type="file" class="form-control" id="fileInput" (change)="handleFileInput($event)"
+                                multiple>
                             <textarea class="form-control bg-light border-light" id="exampleFormControlTextarea1"
-                                rows="3" placeholder="Напишіть коментар тут" [(ngModel)]="commentText" name="commentText"
-                                required></textarea>
+                                rows="3" placeholder="Напишіть коментар тут" [(ngModel)]="commentText"
+                                name="commentText" required></textarea>
                         </div>
                         <div class="col-lg-12 text-end">
-                            <button type="submit" class="btn btn-success" [disabled]="!commentForm.valid">Залишити коментар</button>
+                            <button type="submit" class="btn btn-success" [disabled]="!commentForm.valid">Залишити
+                                коментар</button>
                         </div>
                     </div>
                 </form>
-                
+
             </div>
         </div><!--end col-->
         <div class="col-xl-3 col-lg-4">
@@ -105,7 +110,7 @@
                                 <td>{{ task.state }}</td>
                             </tr>
                             <tr>
-                                <th>Пріорітет</th>
+                                <th>Пріоритет</th>
                                 <td>{{ task.priority }}</td>
                             </tr>
                             <tr>

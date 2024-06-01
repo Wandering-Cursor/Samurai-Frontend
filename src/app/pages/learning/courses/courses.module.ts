@@ -10,7 +10,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { NgSelectModule } from '@ng-select/ng-select';
 
 // Range Slider
-import { NgxSliderModule } from 'ngx-slider-v2';
+import { NgxSliderModule } from '@angular-slider/ngx-slider';
 
 //Wizard
 import { CdkStepperModule } from '@angular/cdk/stepper';
