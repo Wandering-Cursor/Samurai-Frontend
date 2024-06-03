@@ -22,7 +22,7 @@ import { UiSwitchModule } from 'ngx-ui-switch';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
-import { NgxSliderModule } from '@angular-slider/ngx-slider';
+import { NgxSliderModule } from 'ngx-slider-v2';
 
 // Color Picker
 import { ColorPickerModule } from 'ngx-color-picker';

@@ -18,7 +18,7 @@ export interface SupportTicket {
         icon: 'ri-arrow-right-up-line',
         num: '',
         count: 0,
-        title: 'Open Tickets'
+        title: 'Відкриті задачі'
     },
     {
         id: 2,
@@ -28,7 +28,7 @@ export interface SupportTicket {
         icon: 'ri-arrow-right-down-line',
         num: '',
         count: 0,
-        title: 'Tickets in Progess'
+        title: 'Задачі в роботі'
     },
     {
         id: 3,
@@ -38,7 +38,7 @@ export interface SupportTicket {
         icon: 'ri-arrow-right-down-line',
         num: '',
         count: 0,
-        title: 'Tickets in Review'
+        title: 'Задач на перевірці'
     },
     {
         id: 4,
@@ -48,7 +48,7 @@ export interface SupportTicket {
         icon: 'ri-arrow-right-down-line',
         num: '',
         count: 0,
-        title: 'Tickets in Resubmit'
+        title: 'Задач на доперевірці'
     },
     {
         id: 5,
@@ -58,7 +58,7 @@ export interface SupportTicket {
         icon: 'ri-arrow-right-up-line',
         num: '',
         count: 0,
-        title: 'Tickets Done'
+        title: 'Задач зроблено'
     },
 
   ];

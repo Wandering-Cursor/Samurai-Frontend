@@ -5,6 +5,7 @@ import { AuthenticationService } from 'src/app/core/services/auth.service';
 import { restApiService } from 'src/app/core/services/rest-api.service';
 import { GlobalComponent } from 'src/app/global-component';
 import { Task, Comment } from 'src/app/interfaces/api-interfaces';
+
 @Component({
   selector: 'app-overview',
   templateUrl: './overview.component.html',
@@ -19,6 +20,14 @@ export class OverviewComponent implements OnInit {
   statuses: string[] = ['open', 'in_progress', 'in_review'];
   taskId: string = '';
   fileId: any;
+
+  translations: { [key: string]: string } = {
+    open: 'Відкриті',
+    in_review: 'На перевірці',
+    in_progress: 'В роботі',
+    resubmit: 'На доперевірці',
+    done: 'Зроблено'
+  };
 
   constructor(
     private route: ActivatedRoute,
@@ -99,26 +108,23 @@ export class OverviewComponent implements OnInit {
     });
   }
 
-downloadFile(fileId: string) {
-  this.apiService.downloadFile(fileId).subscribe({
-    next: ({ blob, filename }) => {
-      const url = window.URL.createObjectURL(blob);
-      const anchor = document.createElement('a');
-      anchor.href = url;
-      anchor.download = filename;  // Use the extracted filename
-      document.body.appendChild(anchor);
-      anchor.click();
-      window.URL.revokeObjectURL(url);
-      document.body.removeChild(anchor);
-    },
-    error: error => {
-      console.error('Download failed:', error);
-    }
-  });
-}
-
-
-  
+  downloadFile(fileId: string) {
+    this.apiService.downloadFile(fileId).subscribe({
+      next: ({ blob, filename }) => {
+        const url = window.URL.createObjectURL(blob);
+        const anchor = document.createElement('a');
+        anchor.href = url;
+        anchor.download = filename;  // Use the extracted filename
+        document.body.appendChild(anchor);
+        anchor.click();
+        window.URL.revokeObjectURL(url);
+        document.body.removeChild(anchor);
+      },
+      error: error => {
+        console.error('Download failed:', error);
+      }
+    });
+  }
 
   isCurrentUser(senderId: string): boolean {
     return this.authService.getCurrentUserUUID() === senderId;
@@ -161,5 +167,9 @@ downloadFile(fileId: string) {
           },
         });
     }
+  }
+
+  getTranslatedStatus(status: string): string {
+    return this.translations[status] ?? status;
   }
 }

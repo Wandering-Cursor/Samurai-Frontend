@@ -63,7 +63,7 @@ export class LoginComponent {
     this.authService.login(username, password).subscribe({
       next: (authResponse) => {
         // Handle successful login
-        this.router.navigate(['/']); // Navigate to the home page or dashboard
+        this.router.navigate(['/tickets/list']); // Navigate to the home page or dashboard
       },
       error: (error) => {
         // Handle login error

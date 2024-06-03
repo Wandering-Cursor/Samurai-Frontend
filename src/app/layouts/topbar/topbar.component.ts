@@ -96,6 +96,12 @@ export class TopbarComponent {
         this.readNotify = element.items.length
       }
     });
+
+    
+    const savedMode = localStorage.getItem('selectedMode');
+    if (savedMode) {
+      this.changeMode(savedMode);
+    }
   }
 
   windowScroll() {
@@ -152,21 +158,23 @@ export class TopbarComponent {
   /**
 * Topbar Light-Dark Mode Change
 */
-  changeMode(mode: string) {
-    this.mode = mode;
-    if (mode == 'auto') {
-      document.documentElement.setAttribute('data-bs-theme', 'light')
-      document.documentElement.setAttribute('data-topbar', 'light');
-      document.documentElement.classList.add('mode-auto')
-    } else {
-      this.store.dispatch(changeMode({ mode }));
+changeMode(mode: string) {
+  this.mode = mode;
+  localStorage.setItem('selectedMode', mode); // Save mode to localStorage
+
+  if (mode == 'auto') {
+    document.documentElement.setAttribute('data-bs-theme', 'light');
+    document.documentElement.setAttribute('data-topbar', 'light');
+    document.documentElement.classList.add('mode-auto');
+  } else {
+    this.store.dispatch(changeMode({ mode }));
     this.store.select(getLayoutmode).subscribe((mode) => {
       document.documentElement.setAttribute('data-bs-theme', mode);
-    })
-      document.documentElement.classList.remove('mode-auto')
-      document.documentElement.setAttribute('data-topbar', mode);
-    }
+    });
+    document.documentElement.classList.remove('mode-auto');
+    document.documentElement.setAttribute('data-topbar', mode);
   }
+}
 
   /***
    * Language Listing

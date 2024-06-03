@@ -79,10 +79,63 @@ export class ListComponent {
   myGroup!: FormGroup;
   itemsPerPage = 10;
 
+  
+
   constructor(private formBuilder: FormBuilder, public store: Store, public datepipe: DatePipe, public apiService: restApiService, private router: Router) {
   }
 
-  public supportTickets: SupportTicket[] = supporttickets;
+  supportTickets: SupportTicket[] = [
+    {
+      id: 1,
+      imgBg: 'info',
+      img: 'bx ph-ticket',
+      iconColor: 'success',
+      icon: 'ri-arrow-right-up-line',
+      num: '',
+      count: 0,
+      title: 'Відкриті задачі' // Open Tasks
+    },
+    {
+      id: 2,
+      imgBg: 'info',
+      img: 'bx ph-pen',
+      iconColor: 'danger',
+      icon: 'ri-arrow-right-down-line',
+      num: '',
+      count: 0,
+      title: 'Задачі в роботі' // Tasks in Progress
+    },
+    {
+      id: 3,
+      imgBg: 'warning',
+      img: 'bx ph-eye',
+      iconColor: 'danger',
+      icon: 'ri-arrow-right-down-line',
+      num: '',
+      count: 0,
+      title: 'Задач на перевірці' // Tasks in Review
+    },
+    {
+      id: 4,
+      imgBg: 'warning',
+      img: 'bx bx-time',
+      iconColor: 'danger',
+      icon: 'ri-arrow-right-down-line',
+      num: '',
+      count: 0,
+      title: 'Задач на доперевірці' // Tasks to Resubmit
+    },
+    {
+      id: 5,
+      imgBg: 'success',
+      img: 'bx bx-check-square',
+      iconColor: 'success',
+      icon: 'ri-arrow-right-up-line',
+      num: '',
+      count: 0,
+      title: 'Задач зроблено' // Tasks Done
+    }
+  ];
 
   ngOnInit(): void {
     this.initializeForm();
@@ -91,7 +144,29 @@ export class ListComponent {
       this.updateSupportTickets(response.tasks_count_by_status);
       this.fetchTickets(1, this.itemsPerPage);
     });
+  }
 
+  updateSupportTickets(tasksCountByStatus: any): void {
+    this.supportTickets = this.supportTickets.map(ticket => {
+      switch (ticket.title) {
+        case 'Відкриті задачі':
+          ticket.count = tasksCountByStatus.open || 0;
+          break;
+        case 'Задачі в роботі':
+          ticket.count = tasksCountByStatus.in_progress || 0;
+          break;
+        case 'Задач на перевірці':
+          ticket.count = tasksCountByStatus.in_review || 0;
+          break;
+        case 'Задач на доперевірці':
+          ticket.count = tasksCountByStatus.resubmit || 0;
+          break;
+        case 'Задач зроблено':
+          ticket.count = tasksCountByStatus.done || 0;
+          break;
+      }
+      return ticket;
+    });
   }
 
   fetchTickets(page: number, page_size: number) {
@@ -143,29 +218,6 @@ export class ListComponent {
       noResultElement.classList.add('d-none');
       paginationElement.classList.remove('d-none');
     }
-  }
-
-  private updateSupportTickets(counts: any): void {
-    this.supportTickets = this.supportTickets.map(ticket => {
-      switch (ticket.title) {
-        case 'Open Tickets':
-          ticket.count = counts.open;
-          break;
-        case 'Tickets in Progess':
-          ticket.count = counts.in_progress;
-          break;
-        case 'Tickets in Review':
-          ticket.count = counts.in_review;
-          break;
-        case 'Tickets Resubmit':
-          ticket.count = counts.resubmit;
-          break;
-        case 'Tickets Done':
-          ticket.count = counts.done;
-          break;
-      }
-      return ticket;
-    });
   }
 
   // Edit Data

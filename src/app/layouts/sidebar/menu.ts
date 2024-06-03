@@ -3,7 +3,7 @@ import { MenuItem } from "./menu.model";
 export const MENU: MenuItem[] = [
     {
         id: 0,
-        label: 'ПАНЕЛЬ ЗАВІДУВАЧА КАФЕДРОЮ',
+        label: 'ПАНЕЛЬ СТУДЕНТА',
         isTitle: true
     },
     {
@@ -13,9 +13,9 @@ export const MENU: MenuItem[] = [
     },
     {
         id: 2,
-        label: 'Список Інструкторів',
+        label: 'Список Задач',
         icon: 'bx bx-list-ul',
-        link: '/learning/list-of-instructors',
+        link: '/tickets/list',
         parentId: 34
     },
     {

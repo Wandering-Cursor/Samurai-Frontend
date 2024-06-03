@@ -19,7 +19,7 @@ import { FlatpickrModule } from 'angularx-flatpickr';
 import { NgApexchartsModule } from 'ng-apexcharts';
 
 // Range Slider
-import { NgxSliderModule } from '@angular-slider/ngx-slider';
+import { NgxSliderModule } from 'ngx-slider-v2';
 
 // Swiper Slider
 import { SlickCarouselModule } from 'ngx-slick-carousel';

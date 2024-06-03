@@ -1,5 +1,4 @@
-<!-- Start Breadcrumbs -->
-<app-breadcrumbs title="List View" [breadcrumbItems]="breadCrumbItems"></app-breadcrumbs>
+<app-breadcrumbs title="Список Задач" [breadcrumbItems]="breadCrumbItems"></app-breadcrumbs>
 
 <div class="col-lg-3 me-auto" style="margin-bottom: 20px;">
     <h6 class="card-title mb-0">{{ project.name }}</h6>
@@ -24,7 +23,7 @@
                     </div>
                 </div>
                 <h4 class="fw-semibold mb-3">{{ data.count }}</h4>
-                <p class="fw-medium text-muted mb-0">{{ data.title }}</p>
+                <p class="fw-medium text-muted mb-0">{{ data.title | uppercase }}</p>
             </div>
         </div>
     </div>
@@ -36,14 +35,9 @@
             <div class="card-header">
                 <div class="row align-items-center g-2">
                     <div class="col-lg-3 me-auto">
-                        <h6 class="card-title mb-0">Tickets List</h6>
+                        <h6 class="card-title mb-0">Список задач</h6>
                     </div><!--end col-->
                     <div class="col-lg-2 col-sm-4">
-                        <div class="search-box">
-                            <input type="text" class="form-control search" [(ngModel)]="term" (keyup)="filterdata()"
-                                placeholder="Search for tickets, date, client or something...">
-                            <i class="ri-search-line search-icon"></i>
-                        </div>
                     </div><!--end col-->
                 </div><!--end row-->
             </div>
@@ -52,9 +46,9 @@
                     <table class="table table-hover table-nowrap mb-0">
                         <thead class="table-light">
                             <tr>
-                                <th scope="col">Name</th>
-                                <th scope="col">Priority</th>
-                                <th scope="col">State</th>
+                                <th scope="col">Назва</th>
+                                <th scope="col">Пріорітет</th>
+                                <th scope="col">Статус</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -100,182 +94,16 @@
             <div class="row align-items-center mt-4 pt-3" id="pagination-element">
                 <div class="col-sm">
                     <div class="text-muted text-center text-sm-start">
-                        Showing <span class="fw-semibold">{{tasks.length}}</span> of <span
-                            class="fw-semibold">{{tasksMeta.total}}</span> Results
+                        Showing <span class="fw-semibold">{{tickets?.length}}</span> of <span
+                            class="fw-semibold">{{alltickets?.length}}</span> Results
                     </div>
                 </div><!--end col-->
                 <div class="col-sm-auto mt-3 mt-sm-0">
                     <pagination class="pagination-wrap hstack justify-content-center gap-2"
-                        [totalItems]="tasksMeta.total" [itemsPerPage]="itemsPerPage"
-                        (pageChanged)="pageChanged($event)">
+                        [totalItems]="alltickets?.legnth" [itemsPerPage]="10" (pageChanged)="pageChanged($event)">
                     </pagination>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-<div bsModal #addTickets="bs-modal" class="modal fade" id="addTickets">
-    <div class="modal-dialog">
-        <div class="modal-content border-0">
-            <div class="modal-header">
-                <h5 class="modal-title" id="addTicketModalLabel">Add Ticket</h5>
-                <button type="button" class="btn-close" (click)="addTickets.hide()"></button>
-            </div>
-
-            <form (ngSubmit)="saveList()" [formGroup]="ListForm" class="tablelist-form" novalidate autocomplete="off">
-                <div class="modal-body">
-                    <div id="alert-error-msg" class="d-none alert alert-danger py-2"></div>
-                    <input type="hidden" id="id-field">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="mb-3">
-                                <label for="client-name-input" class="form-label">Client Name<span
-                                        class="text-danger">*</span></label>
-                                <input type="text" id="client-name-input" class="form-control"
-                                    formControlName="clientName" placeholder="Enter client name" required>
-                            </div>
-                        </div>
-                        <div class="col-lg-12">
-                            <div class="mb-4 d-flex align-items-center">
-                                <div class="me-2">
-                                    <h6 class="mb-0">Assigned To :</h6>
-                                </div>
-                                @if (assignto) {
-                                <div class="avatar-group justify-content-center" id="assignee-member">
-                                    @for (profile of assignto; track $index) {
-                                    <a routerLink="/tickets/overview/:taskId" class="avatar-group-item mb-2"
-                                        tooltip="profile.assigneeName">
-                                        <img src="{{profile.assigneeImg}}" alt="" class="rounded-circle avatar-xs">
-                                    </a>
-                                    }
-                                </div>
-                                }
-                            </div>
-                            <ngx-simplebar class="mx-n4 px-4 mb-3" style="max-height: 180px;">
-                                <div class="vstack gap-3 select-element">
-                                    @for (data of assignList; track $index) {
-                                    <div class="d-flex align-items-center option-list">
-                                        <div class="avatar-xs flex-shrink-0 me-3">
-                                            <img src="{{data.assigneeImg}}" alt="" class="img-fluid rounded-circle">
-                                        </div>
-                                        <div class="flex-grow-1">
-                                            <h6 class="mb-0"><a href="javascript:void(0);"
-                                                    class="text-body d-block">{{data.assigneeName}}</a></h6>
-                                        </div>
-                                        <div class="flex-shrink-0">
-                                            <button type="button" class="btn btn-light btn-sm btn-action{{$index}}"
-                                                (click)="addAssign($index)">
-                                                @if(data.checked == '0'){
-                                                Add
-                                                }@else {
-                                                Remove
-                                                }
-                                            </button>
-                                        </div>
-                                    </div>
-                                    }
-                                    <!-- end member item -->
-                                </div>
-                                <!-- end list -->
-                            </ngx-simplebar>
-                        </div>
-
-                        <div class="col-lg-12">
-                            <div class="mb-3">
-                                <label for="ticket-title-input" class="form-label">Ticket title<span
-                                        class="text-danger">*</span></label>
-                                <input type="text" id="ticket-title-input" formControlName="ticketTitle"
-                                    class="form-control" placeholder="Ticket title" required>
-                            </div>
-                        </div><!--end col-->
-                        <div class="col-lg-6">
-                            <div class="mb-3">
-                                <label for="create-date-input" class="form-label">Create Date<span
-                                        class="text-danger">*</span></label>
-                                <input type="text" class="form-control" mwlFlatpickr [altInput]="true"
-                                    [convertModelValue]="true" dateFormat="d M,Y" altFormat="d M,Y"
-                                    formControlName="createDate" id="create-date-input" placeholder="Create date"
-                                    required>
-                            </div>
-                        </div><!--end col-->
-                        <div class="col-lg-6">
-                            <div class="mb-3">
-                                <label for="due-date-input" class="form-label">Due Date<span
-                                        class="text-danger">*</span></label>
-                                <input type="text" class="form-control" mwlFlatpickr [altInput]="true"
-                                    [convertModelValue]="true" dateFormat="d M,Y" altFormat="d M,Y"
-                                    formControlName="dueDate" id="due-date-input" placeholder="Due date" required>
-                            </div>
-                        </div><!--end col-->
-                        <div class="col-lg-12">
-                            <div class="mb-3">
-                                <label for="priority-input" class="form-label">Priority<span
-                                        class="text-danger">*</span></label>
-
-                                <select class="form-select" id="priority-input" formControlName="priority" data-choices
-                                    data-choices-search-false>
-                                    <option value="High">High</option>
-                                    <option value="Medium">Medium</option>
-                                    <option value="Low">Low</option>
-                                </select>
-                            </div>
-                        </div><!--end col-->
-                        <div class="col-lg-12">
-                            <div class="mb-3">
-                                <label for="status-input" class="form-label">Status<span
-                                        class="text-danger">*</span></label>
-
-                                <select class="form-select" id="status-input" formControlName="status" data-choices
-                                    data-choices-search-false>
-                                    <option value="">Select Status</option>
-                                    <option value="Open">Open</option>
-                                    <option value="New">New</option>
-                                    <option value="Pending">Pending</option>
-                                    <option value="Close">Close</option>
-                                </select>
-                            </div>
-                        </div><!--end col-->
-                    </div><!--end row-->
-                </div>
-                <div class="modal-footer">
-                    <div class="hstack gap-2 justify-content-end">
-                        <button type="button" class="btn btn-ghost-danger" (click)="addTickets.hide()"><i
-                                class="bi bi-x-lg align-baseline me-1"></i> Close</button>
-                        <button type="submit" class="btn btn-primary" id="add-btn">Add Ticket</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-        <!-- modal-content -->
-    </div>
-</div>
-
-<!-- deleteRecordModal -->
-<div bsModal #deleteRecordModal="bs-modal" id="deleteRecordModal" class="modal fade zoomIn">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="btn-close" id="deleteRecord-close"
-                    (click)="deleteRecordModal.hide()"></button>
-            </div>
-            <div class="modal-body p-md-5">
-                <div class="text-center">
-                    <div class="text-danger">
-                        <i class="bi bi-trash display-5"></i>
-                    </div>
-                    <div class="mt-4">
-                        <h4 class="mb-2">Are you sure ?</h4>
-                        <p class="text-muted mx-3 mb-0">Are you sure you want to remove this record ?</p>
-                    </div>
-                </div>
-                <div class="d-flex gap-2 justify-content-center mt-4 pt-2 mb-2">
-                    <button type="button" class="btn w-sm btn-light btn-hover"
-                        (click)="deleteRecordModal.hide()">Close</button>
-                    <button type="button" class="btn w-sm btn-danger btn-hover" id="delete-record"
-                        (click)="deleteData(deleteID)">Yes, Delete It!</button>
-                </div>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /deleteRecordModal -->
