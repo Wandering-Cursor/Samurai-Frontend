@@ -15,6 +15,7 @@ import { restApiService } from 'src/app/core/services/rest-api.service';
 import { Project } from 'src/app/interfaces/api-interfaces';
 import { SupportTicket, supporttickets } from 'src/app/core/data/ticket';
 import { Router } from '@angular/router';
+import { PaginationParams } from '../../../interfaces/api-interfaces';
 
 @Component({
   selector: 'app-list',
@@ -67,11 +68,18 @@ export class ListComponent {
   assignto: any = [];
   editData: any;
   alltickets: any;
+  tasksMeta: {
+    total: number;
+    page: number;
+    page_size: number;
+    total_pages: number;
+  } = { total: 0, page: 0, page_size: 0, total_pages: 0 };
   tasks: any[] = [];
-  alltasks: any[] = [];
+  originalTasks: any[] = [];
   myGroup!: FormGroup;
-  
-  constructor( private formBuilder: FormBuilder, public store: Store,public datepipe:DatePipe, public apiService: restApiService, private router: Router) {
+  itemsPerPage = 10;
+
+  constructor(private formBuilder: FormBuilder, public store: Store, public datepipe: DatePipe, public apiService: restApiService, private router: Router) {
   }
 
   public supportTickets: SupportTicket[] = supporttickets;
@@ -80,10 +88,20 @@ export class ListComponent {
     this.initializeForm();
     this.apiService.getCurrentProjects().subscribe((response: any) => {
       this.project = response;
-      this.tasks = response.tasks;
-      this.alltasks = [...this.tasks]; // Create a copy of tasks for resetting the list
       this.updateSupportTickets(response.tasks_count_by_status);
+      this.fetchTickets(1, this.itemsPerPage);
     });
+
+  }
+
+  fetchTickets(page: number, page_size: number) {
+    this.apiService.getProjectTasks(this.project.project_id, { page: page, page_size: page_size }).subscribe(
+      (response: any) => {
+        this.originalTasks = response.content;
+        this.tasks = response.content;
+        this.tasksMeta = response.meta;
+      }
+    );
   }
 
   viewTaskDetails(taskId: string) {
@@ -103,13 +121,13 @@ export class ListComponent {
 
   filterdata() {
     if (this.term) {
-      this.tasks = this.alltasks.filter(task =>
+      this.tasks = this.originalTasks.filter(task =>
         task.name.toLowerCase().includes(this.term.toLowerCase()) ||
         task.description.toLowerCase().includes(this.term.toLowerCase()) ||
         task.state.toLowerCase().includes(this.term.toLowerCase())
       );
     } else {
-      this.tasks = [...this.alltasks]; // Reset to original list when search term is cleared
+      this.tasks = [...this.originalTasks]; // Reset to original list when search term is cleared
     }
     this.updateNoResultDisplay();
   }
@@ -133,15 +151,15 @@ export class ListComponent {
         case 'Open Tickets':
           ticket.count = counts.open;
           break;
-          case 'Tickets in Progess':
-            ticket.count = counts.in_progress;
-            break;
+        case 'Tickets in Progess':
+          ticket.count = counts.in_progress;
+          break;
         case 'Tickets in Review':
           ticket.count = counts.in_review;
           break;
-          case 'Tickets Done':
-            ticket.count = counts.resubmit;
-            break;
+        case 'Tickets Resubmit':
+          ticket.count = counts.resubmit;
+          break;
         case 'Tickets Done':
           ticket.count = counts.done;
           break;
@@ -169,7 +187,7 @@ export class ListComponent {
     } else {
       this.assignList[id].checked = '0'
     }
-   
+
     this.assignto = [];
     this.assignList.forEach((element: any) => {
       if (element.checked == '1') {
@@ -183,16 +201,16 @@ export class ListComponent {
     this.submitted = true
     if (this.ListForm.valid) {
       if (this.ListForm.get('id')?.value) {
-        const updatedData = {assignedto:this.assignto,...this.ListForm.value};
+        const updatedData = { assignedto: this.assignto, ...this.ListForm.value };
         this.store.dispatch(updateticketlistData({ updatedData }));
       }
       else {
         this.ListForm.controls['id'].setValue((this.alltickets.length + 1).toString());
         const createDate = this.datepipe.transform(this.ListForm.get('createDate')?.value, "dd MMM, yyyy") || ''
         const dueDate = this.datepipe.transform(this.ListForm.get('dueDate')?.value, "dd MMM, yyyy") || ''
-        this.ListForm.patchValue({ createDate: createDate,dueDate:dueDate });
+        this.ListForm.patchValue({ createDate: createDate, dueDate: dueDate });
 
-        const newData = {assignedto:this.assignto,...this.ListForm.value} 
+        const newData = { assignedto: this.assignto, ...this.ListForm.value }
         this.store.dispatch(addticketlistData({ newData }));
       }
       this.assignto = [];
@@ -270,8 +288,6 @@ export class ListComponent {
 
   // pagechanged
   pageChanged(event: PageChangedEvent): void {
-    const startItem = (event.page - 1) * event.itemsPerPage;
-    this.endItem = event.page * event.itemsPerPage;
-    this.tickets = this.alltickets.slice(startItem, this.endItem);
+    this.fetchTickets(event.page, event.itemsPerPage);
   }
 }

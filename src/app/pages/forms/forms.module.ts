@@ -22,7 +22,7 @@ import { UiSwitchModule } from 'ngx-ui-switch';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
-import { NgxSliderModule } from 'ngx-slider-v2';
+import { NgxSliderModule } from '@angular-slider/ngx-slider';
 
 // Color Picker
 import { ColorPickerModule } from 'ngx-color-picker';
@@ -60,10 +60,10 @@ import { LayoutComponent } from './layout/layout.component';
 
 const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
   // Change this to your upload POST address:
-   url: 'https://httpbin.org/post',
-   maxFilesize: 50,
-   acceptedFiles: 'image/*'
- };
+  url: 'https://httpbin.org/post',
+  maxFilesize: 50,
+  acceptedFiles: 'image/*'
+};
 
 @NgModule({
   declarations: [
