@@ -5,6 +5,10 @@ import { fetchattachmentData, fetchbookmarkData, fetchcallsData, fetchchannnelDa
 import { Store } from '@ngrx/store';
 import { selectData, selectattachmentData, selectbookmarkData, selectcallData, selectcallslistData, selectchannelData, selectcontactData } from 'src/app/store/chat/chat.selector';
 import { cloneDeep } from 'lodash';
+import { ChatCreateRequest } from 'src/app/interfaces/api-interfaces';
+import { restApiService } from 'src/app/core/services/rest-api.service';
+import { Subscription } from 'rxjs';
+import { WebSocketService } from './websocket/web-socket.service';
 
 @Component({
     selector: 'app-chat',
@@ -41,19 +45,58 @@ export class ChatComponent {
     callsData: any;
     bookmarkData: any;
 
-    constructor(public formBuilder: UntypedFormBuilder, private datePipe: DatePipe, public store: Store) { }
+    private chatSubscription: Subscription;
+    private messageSubscription: Subscription;
+    chats: any[] = [];
+    messages: any[] = [];
+    currentChatId: string;
 
-    ngOnInit(): void {
-        // Chat Data Get Function
-        this._fetchData();
-
-        // Validation
-        this.formData = this.formBuilder.group({
-            message: ['', [Validators.required]],
-        });
-
-        this.onListScroll();
+    constructor(public formBuilder: UntypedFormBuilder, private apiService: restApiService, private webSocketService: WebSocketService,) { 
+        this.chatSubscription = new Subscription();
+        this.messageSubscription = new Subscription();
+        this.currentChatId = '';
     }
+
+    ngOnInit() {
+        this.subscribeToChats();
+      }
+    
+      subscribeToChats() {
+        this.chatSubscription = this.webSocketService.connectToChatWebSocket().subscribe({
+          next: (chatUpdate) => {
+            // Handle chat updates
+            console.log(chatUpdate);
+            this.chats.push(chatUpdate);
+          },
+          error: (error) => console.error(error),
+          complete: () => console.log('Chat WebSocket connection closed')
+        });
+      }
+    
+      subscribeToMessages(chatId: string) {
+        if (this.messageSubscription) {
+          this.messageSubscription.unsubscribe();
+        }
+        this.currentChatId = chatId;
+        this.messageSubscription = this.webSocketService.connectToMessageWebSocket(chatId).subscribe({
+          next: (messageUpdate) => {
+            // Handle message updates
+            console.log(messageUpdate);
+            this.messages.push(messageUpdate);
+          },
+          error: (error) => console.error(error),
+          complete: () => console.log('Message WebSocket connection closed')
+        });
+      }
+    
+      ngOnDestroy() {
+        this.chatSubscription.unsubscribe();
+        if (this.messageSubscription) {
+          this.messageSubscription.unsubscribe();
+        }
+        this.webSocketService.closeChatConnection();
+        this.webSocketService.closeMessageConnection();
+      }
 
     ngAfterViewInit() {
         this.scrollRef.SimpleBar.getScrollElement().scrollTop = 300;
@@ -83,42 +126,6 @@ export class ChatComponent {
         return this.formData.controls;
     }
 
-    // Chat Data Fetch
-    private _fetchData() {
-
-        // Fetch Data
-        setTimeout(() => {
-            this.store.dispatch(fetchmessagesData());
-            this.store.select(selectData).subscribe((data) => {
-                this.messageData = cloneDeep(data);
-            })
-        }, 1200)
-        this.store.dispatch(fetchchatData());
-        this.store.select(selectcallslistData).subscribe((data) => {
-            this.chatData = data;
-        })
-        this.store.dispatch(fetchchannnelData());
-        this.store.select(selectchannelData).subscribe((data) => {
-            this.channeldata = data;
-        })
-        this.store.dispatch(fetchcontactData());
-        this.store.select(selectcontactData).subscribe((data) => {
-            this.contactData = data;
-        })
-        this.store.dispatch(fetchattachmentData());
-        this.store.select(selectattachmentData).subscribe((data) => {
-            this.attachementsData = data;
-        })
-        this.store.dispatch(fetchcallsData());
-        this.store.select(selectcallData).subscribe((data) => {
-            this.callsData = data;
-        })
-        this.store.dispatch(fetchbookmarkData());
-        this.store.select(selectbookmarkData).subscribe((data) => {
-            this.bookmarkData = data;
-        })
-
-    }
 
     onListScroll() {
         if (this.scrollRef !== undefined) {
@@ -137,64 +144,6 @@ export class ChatComponent {
         reader.onload = () => {
             this.imageURL = reader.result as string;
         }
-    }
-    /**
-   * Save the message in chat
-   */
-    messageSave() {
-        const message = this.formData.get('message')!.value;
-        if (this.isreplyMessage == true) {
-            var itemReplyList: any = document.getElementById("users-chat")?.querySelector(".chat-conversation-list");
-            var dateTime = this.datePipe.transform(new Date(), "h:mm a");
-            var chatReplyUser = (document.querySelector(".replyCard .replymessage-block .flex-grow-1 .conversation-name") as HTMLAreaElement).innerHTML;
-            var chatReplyMessage = (document.querySelector(".replyCard .replymessage-block .flex-grow-1 .mb-0") as HTMLAreaElement).innerText;
-
-            this.messageData.push({
-                isSender: true,
-                sender: 'Marcus',
-                replayName: chatReplyUser,
-                replaymsg: chatReplyMessage,
-                message,
-                createdAt: dateTime,
-            });
-
-        }
-        else {
-            if (this.formData.valid && message) {
-                // Message Push in Chat
-                this.messageData.push({
-                    id: this.messageData.length + 1,
-                    isSender: true,
-                    sender: 'Marcus',
-                    message,
-                    image: this.imageURL,
-                    createdAt: this.datePipe.transform(new Date(), "h:mm a"),
-                });
-            }
-            if (this.imageURL) {
-                // Message Push in Chat
-                this.messageData.push({
-                    id: this.messageData.length + 1,
-                    isSender: true,
-                    sender: 'Marcus',
-                    image: this.imageURL,
-                    createdAt: this.datePipe.transform(new Date(), "h:mm a"),
-                });
-            }
-        }
-        document.querySelector('.replyCard')?.classList.remove('show');
-        (document.querySelector(".replyCard .replymessage-block .flex-grow-1 .mb-0") as HTMLAreaElement).innerHTML = '';
-        (document.querySelector(".replyCard .replymessage-block .flex-grow-1 .conversation-name") as HTMLAreaElement).innerHTML = '';
-        this.isreplyMessage = false;
-        this.emoji = '';
-        this.imageURL = '';
-
-        this.onListScroll();
-        // Set Form Data Reset
-        this.formData = this.formBuilder.group({
-            message: null,
-        });
-        this.formData.reset();
     }
 
     // Emoji Picker
@@ -334,22 +283,6 @@ export class ChatComponent {
         if (userChatShow != null) {
             userChatShow.classList.remove('user-chat-show');
         }
-    }
-
-    startVideocall() {
-        this.showChatContent = false;
-        this.showVideoContent = true;
-        this.running = true;
-        this.increment();
-    }
-
-    disconnectCall() {
-        this.showChatContent = true;
-        this.showVideoContent = false;
-        this.running = false;
-        this.chatTime = 0;
-        this.formattedTime = '00:00:00';
-        clearTimeout(this.timerId);
     }
 
     increment() {

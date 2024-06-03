@@ -9,6 +9,16 @@ import {
   PaginationParams,
   DownloadFileResponse,
   FileInfo,
+  ChatRepresentation,
+  ChatCreateRequest,
+  ChatSearchResponse,
+  ChatUpdateRequest,
+  ChatAddMemberRequest,
+  ChatLeaveResponse,
+  ChatParticipantsResponse,
+  MessageRepresentation,
+  MessageCreateRequest,
+  MessageSeenByResponse,
 } from 'src/app/interfaces/api-interfaces';
 
 const httpOptions = {
@@ -161,61 +171,74 @@ downloadFile(fileId: string): Observable<{blob: Blob, filename: string}> {
     return this.http.get<FileInfo>(`${GlobalComponent.API_URL}common/file/${fileId}/info`);
   }
 
-    // Create a new chat
-    createChat(chatData: any): Observable<any> {
-      return this.http.post(`${GlobalComponent.API_URL}communication/chat`, chatData);
-    }
+  createChat(chatData: ChatCreateRequest): Observable<ChatRepresentation> {
+    return this.http.post<ChatRepresentation>(`${GlobalComponent.API_URL}communication/chat`, chatData);
+  }
   
-    // Get all chats
-    getChats(): Observable<any[]> {
-      return this.http.get<any[]>(`${GlobalComponent.API_URL}communication/chat`);
+  getChats(page: number = 1, pageSize: number = 10, name?: string): Observable<ChatRepresentation[]> {
+    let queryParams = `?page=${page}&page_size=${pageSize}`;
+    if (name) {
+      queryParams += `&name=${encodeURIComponent(name)}`;
     }
+    return this.http.get<ChatSearchResponse>(`${GlobalComponent.API_URL}communication/chat${queryParams}`).pipe(
+      map(response => response.content)
+    );
+  }
   
     // Get specific chat by ID
-    getChat(chatId: string): Observable<any> {
-      return this.http.get(`${GlobalComponent.API_URL}communication/chat/${chatId}`);
+    getChat(chatId: string): Observable<ChatRepresentation> {
+      return this.http.get<ChatRepresentation>(`${GlobalComponent.API_URL}communication/chat/${chatId}`);
     }
   
     // Update specific chat
-    updateChat(chatId: string, updateData: any): Observable<any> {
-      return this.http.patch(`${GlobalComponent.API_URL}communication/chat/${chatId}`, updateData);
+    updateChat(chatId: string, updateData: ChatUpdateRequest): Observable<ChatRepresentation> {
+      return this.http.patch<ChatRepresentation>(`${GlobalComponent.API_URL}communication/chat/${chatId}`, updateData);
     }
   
     // Add member to chat
-    addChatMember(chatId: string, userId: string): Observable<any> {
-      return this.http.post(`${GlobalComponent.API_URL}communication/chat/${chatId}/add_member`, { userId });
+    addChatMember(chatId: string, accountIds: string[]): Observable<ChatRepresentation> {
+      const requestData: ChatAddMemberRequest = { account_ids: accountIds };
+      return this.http.post<ChatRepresentation>(`${GlobalComponent.API_URL}communication/chat/${chatId}/add_member`, requestData);
     }
   
     // Leave a chat
-    leaveChat(chatId: string): Observable<any> {
-      return this.http.post(`${GlobalComponent.API_URL}communication/chat/${chatId}/leave`, {});
+    leaveChat(chatId: string): Observable<ChatLeaveResponse> {
+      return this.http.post<ChatLeaveResponse>(`${GlobalComponent.API_URL}communication/chat/${chatId}/leave`, {});
     }
   
     // Get chat participants
-    getChatParticipants(chatId: string): Observable<any[]> {
-      return this.http.get<any[]>(`${GlobalComponent.API_URL}communication/chat/${chatId}/participants`);
-    }
+    getChatParticipants(chatId: string, page: number = 1, pageSize: number = 10, name?: string): Observable<ChatParticipantsResponse> {
+      let params = new HttpParams()
+        .set('page', page.toString())
+        .set('page_size', pageSize.toString());
+  
+      if (name) {
+        params = params.set('name', name);
+      }
+  
+      return this.http.get<ChatParticipantsResponse>(`${GlobalComponent.API_URL}communication/chat/${chatId}/participants`, { params });
+    }  
   
     // Messaging services
-    createMessage(messageData: any): Observable<any> {
-      return this.http.post(`${GlobalComponent.API_URL}communication/message`, messageData);
+    createMessage(messageData: MessageCreateRequest): Observable<MessageRepresentation> {
+      return this.http.post<MessageRepresentation>(`${GlobalComponent.API_URL}communication/message`, messageData);
     }
   
-    getMessage(messageId: string): Observable<any> {
-      return this.http.get(`${GlobalComponent.API_URL}communication/message/${messageId}`);
+    getMessage(messageId: string): Observable<MessageRepresentation> {
+      return this.http.get<MessageRepresentation>(`${GlobalComponent.API_URL}communication/message/${messageId}`);
     }
   
     updateMessage(messageId: string, messageData: any): Observable<any> {
       return this.http.put(`${GlobalComponent.API_URL}communication/message/${messageId}`, messageData);
     }
   
-    markMessageSeen(messageId: string): Observable<any> {
-      return this.http.patch(`${GlobalComponent.API_URL}communication/message/${messageId}/seen`, {});
+    markMessageSeen(messageId: string): Observable<void> {
+      return this.http.patch<void>(`${GlobalComponent.API_URL}communication/message/${messageId}/seen`, {});
     }
   
     // Get who has seen the message
-    getMessageSeenBy(messageId: string): Observable<any[]> {
-      return this.http.get<any[]>(`${GlobalComponent.API_URL}communication/message/${messageId}/seen_by`);
+    getMessageSeenBy(messageId: string): Observable<MessageSeenByResponse> {
+      return this.http.get<MessageSeenByResponse>(`${GlobalComponent.API_URL}communication/message/${messageId}/seen_by`);
     }
 
   // Delete

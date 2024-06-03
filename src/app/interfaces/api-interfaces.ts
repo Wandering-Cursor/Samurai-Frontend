@@ -248,3 +248,78 @@ export interface Chat {
   name: string;
   _links: any;
 }
+
+
+export interface ChatCreateRequest {
+  name: string | null;
+  participants: string[] | null;
+}
+
+export interface ChatRepresentation {
+  chat_id: string;
+  name: string;
+  _links: any;
+}
+
+export interface ChatSearchResponse {
+  meta: {
+    total: number;
+    page: number;
+    page_size: number;
+    total_pages: number;
+  };
+  content: ChatRepresentation[];
+}
+
+export interface ChatUpdateRequest {
+  name: string | null;
+}
+
+export interface ChatAddMemberRequest {
+  account_ids: string[];
+}
+
+export interface ChatLeaveResponse {
+  message: string;
+}
+
+export interface ChatParticipantsResponse {
+  meta: {
+    total: number;
+    page: number;
+    page_size: number;
+    total_pages: number;
+  };
+  content: ChatParticipant[];
+}
+
+export interface ChatParticipant {
+  account_id: string;
+  name: string;
+}
+
+export interface MessageCreateRequest {
+  chat_id: string;
+  text: string | null;
+  file_id: string | null;
+}
+
+export interface MessageRepresentation {
+  chat_id: string;
+  message_id: string;
+  sender_id: string;
+  text: string | null;
+  file_id: string | null;
+  created_at: string;
+  updated_at: string;
+  _links: any;
+}
+
+export interface MessageSeenByResponse {
+  seen_by: SeenBy[];
+}
+
+export interface SeenBy {
+  user_id: string;
+  seen_at: string;
+}

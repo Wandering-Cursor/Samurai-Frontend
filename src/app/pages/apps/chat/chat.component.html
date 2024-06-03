@@ -1,39 +1,13 @@
 <div class="chat-wrapper d-lg-flex gap-1 p-1 mb-3">
     <div class="chat-wrapper-menu p-3 d-flex flex-column rounded">
-        <div class="mb-3 position-relative d-none d-lg-block">
-            <a href="javascript:void(0);"><img src="assets/images/users/48/avatar-1.jpg" alt="" class="avatar-sm rounded"></a>
-            <span class="position-absolute top-0 start-100 translate-middle badge border border-light rounded-circle bg-success p-1"><span class="visually-hidden">unread messages</span></span>
-        </div>
         <ul class="chat-menu list-unstyled text-center nav nav-pills justify-content-center">
             <li class="nav-item" placement="right" tooltip="Chats" [class.active]="currentTab === 'chats'" (click)="changeTab('chats')" placement="right">
                 <a href="javascript:void(0);" class="nav-link active" [ngClass]="{'active':currentTab === 'chats'}"><i class="bi bi-chat-dots"></i></a>
-            </li>
-            <li class="nav-item" placement="right" tooltip="Contacts" [class.active]="currentTab === 'contacts'" (click)="changeTab('contacts')">
-                <a href="javascript:void(0);" class="nav-link" [ngClass]="{'active':currentTab === 'contacts'}"><i class="bi bi-people"></i></a>
-            </li>
-            <li class="nav-item" placement="right" tooltip="Calls" [class.active]="currentTab === 'calls'" (click)="changeTab('calls')" placement="right">
-                <a href="javascript:void(0);" class="nav-link" [ngClass]="{'active':currentTab === 'calls'}"><i class="bi bi-telephone"></i></a>
-            </li>
-            <li class="nav-item" placement="right" tooltip="Bookmark" [class.active]="currentTab === 'bookmark'" (click)="changeTab('bookmark')">
-                <a href="javascript:void(0);" class="nav-link" [ngClass]="{'active':currentTab === 'bookmark'}"><i class="bi bi-star"></i></a>
             </li>
             <li class="nav-item" placement="right" tooltip="Attachment" [class.active]="currentTab === 'attachment'" (click)="changeTab('attachment')">
                 <a href="javascript:void(0);" class="nav-link" [ngClass]="{'active':currentTab === 'attachment'}"><i class="bi bi-file-earmark-richtext"></i></a>
             </li>
         </ul>
-
-        <div class="mt-auto text-center d-none d-lg-block">
-            <div dropdown [dropup]="true" container="body" class="dropdown">
-                <button dropdownToggle class="btn btn-secondary btn-icon" type="button">
-                    <i class="bi bi-gear"></i>
-                </button>
-                <ul *bsDropdownMenu class="dropdown-menu">
-                    <li><a class="dropdown-item" href="javascript:void(0);">Action</a></li>
-                    <li><a class="dropdown-item" href="javascript:void(0);">Another action</a></li>
-                    <li><a class="dropdown-item" href="javascript:void(0);">Something else here</a></li>
-                </ul>
-            </div>
-        </div>
     </div>
     <div class="chat-leftsidebar">
         <div class="tab-content">
@@ -42,14 +16,6 @@
                     <div class="d-flex align-items-start">
                         <div class="flex-grow-1">
                             <h5 class="mb-4">Chats</h5>
-                        </div>
-                        <div class="flex-shrink-0">
-                            <div placement="bottom" tooltip="Add Contact">
-                                <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-subtle-primary btn-sm">
-                                    <i class="ri-add-line align-bottom"></i>
-                                </button>
-                            </div>
                         </div>
                     </div>
                     <div class="search-box">
@@ -69,10 +35,7 @@
                                                 @if (data.nickname) {
                                                 <div class="avatar-title rounded-circle bg-primary text-white fs-xxs">
                                                     {{data.nickname}}</div>
-                                                }@else {
-                                                <img src="{{data.profile}}" class="rounded-circle img-fluid userprofile" alt="">
                                                 }
-                                                <span class="user-status"></span>
                                             </div>
                                         </div>
                                         <div class="flex-grow-1 overflow-hidden">
@@ -166,11 +129,7 @@
                                             <div class="d-flex align-items-center">
                                                 <div class="flex-shrink-0 me-2">
                                                     <div class="avatar-xxs">
-                                                        @if (contact.isImg) {
                                                         <span class="avatar-title rounded-circle bg-primary fs-xxs">{{contact.profile}}</span>
-                                                        }@else{
-                                                        <img src="{{contact.image}}" class="img-fluid rounded-circle" alt="">
-                                                        }
                                                     </div>
                                                 </div>
                                                 <div class="flex-grow-1">
@@ -199,96 +158,6 @@
                 </div>
             </div>
 
-            <div [hidden]="currentTab !== 'calls'" class="tab-pane show  fade active" id="pills-calls">
-                <div>
-                    <div class="px-4 pt-4">
-                        <h5 class="mb-4">Calls</h5>
-                    </div>
-                    <ngx-simplebar data-simplebar-track="light" class="chat-message-list chat-call-list">
-                        <ul class="list-unstyled chat-list">
-                            @for(data of callsData;track $index){
-                            <li>
-                                <div class="d-flex align-items-center">
-                                    <div class="chat-user-img flex-shrink-0 me-2">
-                                        <div class="avatar-xxs">
-                                            @if(data.isImg){
-                                            <span class="avatar-title rounded-circle bg-primary fs-xxs">{{data.profile}}</span>
-
-
-                                            }@else {
-                                            <img src="{{data.image}}" class="rounded-circle img-fluid" alt="">
-                                            }
-                                        </div>
-                                    </div>
-                                    <div class="flex-grow-1 overflow-hidden">
-                                        <a href="javascript:void(0);" class="p-0">
-                                            <p class="fw-medium text-truncate mb-0">{{data.name}}</p>
-                                        </a>
-                                        <div class="text-muted fs-xs text-truncate"><i class="bi bi-arrow-down-left text-success"></i> {{data.date}}
-                                        </div>
-                                    </div>
-                                    <div class="flex-shrink-0 ms-3">
-                                        <div class="d-flex align-items-center gap-3">
-                                            <div>
-                                                <h5 class="mb-0 fs-xs text-muted">{{data.time}}</h5>
-                                            </div>
-                                            <div>
-                                                <button type="button" class="btn btn-link p-0 fs-lg stretched-link shadow-none">
-                                                    <i class="bi bi-camera-video align-middle"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            }
-                        </ul>
-
-                    </ngx-simplebar>
-                </div>
-            </div>
-
-            <div [hidden]="currentTab !== 'bookmark'" class="tab-pane show fade active" id="pills-bookmark">
-                <div>
-                    <div class="px-4 pt-4">
-                        <h5 class="mb-4">Bookmark</h5>
-                    </div>
-                    <ngx-simplebar class="chat-message-list chat-bookmark-list">
-                        <ul class="list-unstyled chat-list">
-                            @for(data of bookmarkData;track $index){
-                            <li>
-                                <div class="d-flex align-items-center">
-                                    <div class="flex-shrink-0 avatar-xs ms-1 me-3">
-                                        <div class="avatar-title bg-primary-subtle text-primary rounded-circle">
-                                            <i class="{{data.icon}}"></i>
-                                        </div>
-                                    </div>
-                                    <div class="flex-grow-1 overflow-hidden">
-                                        <h5 class="mb-1"><a href="javascript:void(0);" class="text-truncate p-0">{{data.fileName}}</a></h5>
-                                        <p class="text-muted text-truncate fs-xs mb-0">{{data.size}}</p>
-                                    </div>
-
-                                    <div class="flex-shrink-0 ms-3">
-                                        <div dropdown [container]="'body'" [dropup]="$index > bookmarkData.length - 4" class="dropdown">
-                                            <a dropdownToggle class="fs-md text-muted px-1" href="javascript:void(0);">
-                                                <i class="bi bi-three-dots"></i>
-                                            </a>
-                                            <div *bsDropdownMenu class="dropdown-menu dropdown-menu-end">
-                                                <a class="dropdown-item d-flex align-items-center justify-content-between" href="javascript:void(0);">Open <i class="bi bi-file-earmark ms-2 text-muted"></i></a>
-                                                <a class="dropdown-item d-flex align-items-center justify-content-between" href="javascript:void(0);">Edit <i class="bi bi-pencil ms-2 text-muted"></i></a>
-                                                <div class="dropdown-divider"></div>
-                                                <a class="dropdown-item d-flex align-items-center justify-content-between" href="javascript:void(0);">Delete <i class="bi bi-trash3 ms-2 text-muted"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            }
-                        </ul>
-                    </ngx-simplebar>
-                </div>
-            </div>
-
             <div [hidden]="currentTab !== 'attachment'" class="tab-pane show fade active" id="pills-attachment">
                 <div>
                     <div class="px-4 pt-4">
@@ -300,9 +169,6 @@
                         <div class="card p-2 border mb-2">
                             <div class="d-flex align-items-center">
                                 <div class="flex-shrink-0 avatar-xs ms-1 me-3">
-                                    <div class="avatar-title bg-primary-subtle text-primary rounded-circle">
-                                        <i class="{{data.foldericon}}"></i>
-                                    </div>
                                 </div>
                                 <div class="flex-grow-1 overflow-hidden">
                                     <h5 class="fs-sm fw-medium text-truncate mb-1">{{data.foldername}}</h5>
@@ -344,85 +210,6 @@
 
     <!-- Start User chat -->
     <div class="user-chat w-100 overflow-hidden">
-        <div class="flex-column justify-content-between h-100 video-content" [ngClass]="{'d-none': !showVideoContent, 'd-flex': showVideoContent}">
-            <div class="p-3 user-chat-topbar border-bottom border-2">
-                <div class="row align-items-center justify-content-between flex-nowrap">
-                    <div class="col-sm-4 col">
-                        <div class="d-flex align-items-center">
-                            <div class="flex-shrink-0 d-block d-lg-none me-3">
-                                <a href="javascript: void(0);" class="user-chat-remove fs-lg p-1"><i class="ri-arrow-left-s-line align-bottom"></i></a>
-                            </div>
-                            <div class="flex-grow-1 overflow-hidden">
-                                <div class="d-flex align-items-center">
-                                    <div class="flex-shrink-0 chat-user-img online user-own-img align-self-center me-3 ms-0">
-                                        <img src="assets/images/users/48/avatar-2.jpg" class="rounded-circle avatar-xs" alt="">
-                                        <span class="user-status"></span>
-                                    </div>
-                                    <div class="flex-grow-1 overflow-hidden">
-                                        <h5 class="text-truncate mb-1 fs-lg"><a class="text-reset username" data-bs-toggle="offcanvas" href="javascript:void(0);" aria-controls="userProfileCanvasExample">{{username}}</a></h5>
-                                        <p class="text-truncate text-muted fs-md mb-0 userStatus"><small>Creative
-                                                Desginer</small></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-auto">
-                        <div class="text-end">
-                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#inviteMembersModal"><i class="bi bi-plus d-block d-sm-none"></i> <span class="ms-1 d-none d-sm-block">Add Participant</span></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- end chat user head -->
-            <ngx-simplebar class="p-3 chat-conversation">
-                <div class="row g-3">
-                    <div class="col-lg-9">
-                        <div class="position-relative">
-                            <a href="javascript:void(0);">
-                                <img src="assets/images/chat-user.jpeg" alt="" class="object-fit-cover w-100 rounded" height="515">
-                            </a>
-                            <div class="btn-group position-absolute top-0 end-0 bg-white bg-opacity-50 p-1 m-3" role="group" aria-label="Basic example">
-                                <button type="button" class="btn-close"></button>
-                            </div>
-                            <div class="badge bg-danger d-inline-block position-absolute bottom-0 end-0 m-3 fs-lg fw-normal">
-                                <span id="outputt" class="timerClock" value="00:00:00">{{formattedTime}}</span>
-                            </div>
-                        </div>
-                    </div><!--end col-->
-                    <div class="col-lg-3">
-                        <div class="row g-3">
-                            <div class="col-lg-12">
-                                <div class="position-relative">
-                                    <a href="javascript:void(0);">
-                                        <img src="assets/images/users/avatar-5.jpg" alt="" class="w-100 object-fit-cover rounded" height="250">
-                                    </a>
-                                </div>
-                            </div><!--end col-->
-                            <div class="col-lg-12">
-                                <div class="position-relative">
-                                    <a href="javascript:void(0);">
-                                        <img src="assets/images/users/avatar-7.jpg" alt="" class="w-100 object-fit-cover rounded" height="250">
-                                    </a>
-                                </div>
-                            </div><!--end col-->
-                        </div><!--end row-->
-                    </div><!--end col-->
-                </div><!--end row-->
-            </ngx-simplebar>
-
-            <div class="p-3 chat-input-section border-top border-2">
-                <div class="row align-items-center justify-content-between">
-                    <div class="col-lg-12">
-                        <div class="hstack gap-2 justify-content-center">
-                            <button class="btn btn-subtle-secondary fs-lg btn-icon rounded-circle"><i class="ph-video-camera-slash"></i></button>
-                            <button class="btn btn-danger fs-lg btn-icon rounded-circle call-disconnect" (click)="disconnectCall()"><i class="ph-phone-disconnect"></i></button>
-                            <button class="btn btn-subtle-secondary fs-lg btn-icon rounded-circle"><i class="ph-microphone-slash"></i></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <div class="chat-content" [ngClass]="{'d-none': !showChatContent, 'd-lg-flex': showChatContent}">
             <!-- start chat conversation section -->
@@ -469,36 +256,6 @@
                                                             <i class="ri-search-2-line search-icon"></i>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </div>
-                                        </li>
-
-                                        <li class="list-inline-item d-none d-lg-inline-block m-0">
-                                            <button type="button" class="btn btn-ghost-secondary fs-lg btn-icon video-icon" (click)="startVideocall()">
-                                                <i class="bi bi-camera-video"></i>
-                                            </button>
-                                        </li>
-
-                                        <li class="list-inline-item d-none d-lg-inline-block m-0">
-                                            <button type="button" class="btn btn-ghost-secondary fs-lg btn-icon" data-bs-toggle="offcanvas" data-bs-target="#userProfileCanvasExample" aria-controls="userProfileCanvasExample" (click)="openEnd()">
-                                                <i class="bi bi-telephone"></i>
-                                            </button>
-                                        </li>
-
-                                        <li class="list-inline-item m-0">
-                                            <div dropdown class="dropdown">
-                                                <button dropdownToggle class="btn btn-ghost-secondary fs-lg btn-icon" type="button">
-                                                    <i class="bi bi-three-dots-vertical"></i>
-                                                </button>
-                                                <div *bsDropdownMenu class="dropdown-menu dropdown-menu-end">
-                                                    <a class="dropdown-item d-block d-lg-none user-profile-show" href="javascript:void(0);"><i class="ri-user-2-fill align-bottom text-muted me-2"></i>
-                                                        View Profile</a>
-                                                    <a class="dropdown-item" href="javascript:void(0);"><i class="ri-inbox-archive-line align-bottom text-muted me-2"></i>
-                                                        Archive</a>
-                                                    <a class="dropdown-item" href="javascript:void(0);"><i class="ri-mic-off-line align-bottom text-muted me-2"></i>
-                                                        Muted</a>
-                                                    <a class="dropdown-item" href="javascript:void(0);" (click)="deleteAllMessage($event)"><i class="ri-delete-bin-5-line align-bottom text-muted me-2"></i>
-                                                        Delete</a>
                                                 </div>
                                             </div>
                                         </li>
@@ -637,30 +394,6 @@
                                                 </div>
                                             </div>
                                         </li>
-
-                                        <li class="list-inline-item d-none d-lg-inline-block m-0">
-                                            <button type="button" class="btn btn-ghost-secondary btn-icon" data-bs-toggle="offcanvas" data-bs-target="#userProfileCanvasExample" aria-controls="userProfileCanvasExample">
-                                                <i data-feather="info" class="icon-sm"></i>
-                                            </button>
-                                        </li>
-
-                                        <li class="list-inline-item m-0">
-                                            <div dropdown class="dropdown">
-                                                <button dropdownToggle class="btn btn-ghost-secondary fs-lg btn-icon" type="button">
-                                                    <i class="bi bi-three-dots-vertical"></i>
-                                                </button>
-                                                <div *bsDropdownMenu class="dropdown-menu dropdown-menu-end">
-                                                    <a class="dropdown-item d-block d-lg-none user-profile-show" href="javascript:void(0);"><i class="ri-user-2-fill align-bottom text-muted me-2"></i>
-                                                        View Profile</a>
-                                                    <a class="dropdown-item" href="javascript:void(0);"><i class="ri-inbox-archive-line align-bottom text-muted me-2"></i>
-                                                        Archive</a>
-                                                    <a class="dropdown-item" href="javascript:void(0);"><i class="ri-mic-off-line align-bottom text-muted me-2"></i>
-                                                        Muted</a>
-                                                    <a class="dropdown-item" href="javascript:void(0);"><i class="ri-delete-bin-5-line align-bottom text-muted me-2"></i>
-                                                        Delete</a>
-                                                </div>
-                                            </div>
-                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -682,42 +415,6 @@
 
                     <div class="chat-input-section p-3 p-lg-4 border-top border-2">
 
-                        <form (ngSubmit)="messageSave()" [formGroup]="formData" id="chatinput-form" enctype="multipart/form-data">
-                            <div class="row g-0 align-items-center">
-                                <div class="col-auto">
-                                    <div class="chat-input-links me-2">
-                                        <div class="links-list-item">
-                                            <button type="button" class="btn btn-link text-decoration-none emoji-btn" (click)="toggleEmojiPicker()" id="emoji-btn">
-                                                <i class="bx bx-smile align-middle"></i>
-                                            </button>
-                                            @if (showEmojiPicker) {
-                                            <emoji-mart class="emoji-mart" (emojiSelect)="addEmoji($event)" title="Pick your emoji…"></emoji-mart>
-                                            }
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col">
-                                    @if (submitted && form['message'].errors) {
-                                    <div class="chat-input-feedback">
-                                        @if (form['message'].errors['required']) {
-                                        <span>Please Enter a Message</span>
-                                        }
-                                    </div>
-                                    }
-                                    <input type="text" class="form-control chat-input bg-light border-light" formControlName="message" [ngClass]="{ 'is-invalid': submitted && form['message'].errors }" [(ngModel)]="emoji" (blur)="onBlur()" (focus)="onFocus()" id="chat-input" placeholder="Type your message..." autocomplete="off">
-                                </div>
-                                <div class="col-auto">
-                                    <div class="chat-input-links ms-2">
-                                        <div class="links-list-item">
-                                            <button type="submit" class="btn btn-dark chat-send waves-effect waves-light">
-                                                <i class="ph-paper-plane-right align-middle"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
                     </div>
 
                     <div class="replyCard">
@@ -744,253 +441,5 @@
 </div>
 <!-- end chat-wrapper -->
 
-
-<div class="custom-offcanvas chat-detail">
-    <!--end offcanvas-header-->
-    <div class="offcanvas-body profile-offcanvas p-0">
-        <div class="p-1 pt-0">
-            <div class="team-settings">
-                <div class="row g-0">
-                    <div class="col">
-                        <div class="btn nav-btn">
-                            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close" (click)="closeoffcanvas()"></button>
-                        </div>
-                    </div>
-                    <div class="col-auto">
-                        <div class="user-chat-nav d-flex">
-
-                            <div dropdown class="dropdown">
-                                <a dropdownToggle class="btn nav-btn" href="javascript:void(0);" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="ri-more-2-fill"></i>
-                                </a>
-                                <ul *bsDropdownMenu class="dropdown-menu dropdown-menu-end">
-                                    <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-inbox-archive-line align-bottom text-muted me-2"></i>Archive</a>
-                                    </li>
-                                    <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-mic-off-line align-bottom text-muted me-2"></i>Muted</a>
-                                    </li>
-                                    <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-delete-bin-5-line align-bottom text-muted me-2"></i>Delete</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <!--end col-->
-        </div>
-        <div class="p-3 text-center">
-            <img src="{{isProfile}}" alt="" class="avatar-lg img-thumbnail rounded-circle mx-auto profile-img">
-            <div class="mt-3">
-                <h5 class="fs-16 mb-1"><a href="javascript:void(0);" class="link-primary username">{{username}}</a>
-                </h5>
-                <p class="text-muted"><i class="ri-checkbox-blank-circle-fill me-1 align-bottom text-success"></i>Online
-                </p>
-            </div>
-
-            <div class="d-flex gap-2 justify-content-center">
-                <button type="button" class="btn avatar-xs p-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Message">
-                    <span class="avatar-title rounded bg-light text-body">
-                        <i class="ri-question-answer-line"></i>
-                    </span>
-                </button>
-
-                <button type="button" class="btn avatar-xs p-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Favorite">
-                    <span class="avatar-title rounded bg-light text-body">
-                        <i class="ri-star-line"></i>
-                    </span>
-                </button>
-
-                <button type="button" class="btn avatar-xs p-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Phone">
-                    <span class="avatar-title rounded bg-light text-body">
-                        <i class="ri-phone-line"></i>
-                    </span>
-                </button>
-
-                <div dropdown class="dropdown">
-                    <button dropdownToggle class="btn avatar-xs p-0" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span class="avatar-title bg-light text-body rounded">
-                            <i class="ri-more-fill"></i>
-                        </span>
-                    </button>
-
-                    <ul *bsDropdownMenu class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-inbox-archive-line align-bottom text-muted me-2"></i>Archive</a></li>
-                        <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-mic-off-line align-bottom text-muted me-2"></i>Muted</a></li>
-                        <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-delete-bin-5-line align-bottom text-muted me-2"></i>Delete</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <div class="border-top border-top-dashed p-3">
-            <h5 class="fs-md mb-3">Personal Details</h5>
-            <div class="mb-3">
-                <p class="text-muted text-uppercase fw-medium mb-1">Number</p>
-                <h6>+(256) 2451 8974</h6>
-            </div>
-            <div class="mb-3">
-                <p class="text-muted text-uppercase fw-medium mb-1">Email</p>
-                <h6>lisaparker&#64;gmail.com</h6>
-            </div>
-            <div>
-                <p class="text-muted text-uppercase fw-medium mb-1">Location</p>
-                <h6 class="mb-0">California, USA</h6>
-            </div>
-        </div>
-
-        <div class="border-top border-top-dashed p-3">
-            <h5 class="fs-md mb-3">Attached Files</h5>
-
-            <div class="vstack gap-2">
-                <div class="card p-2 border mb-0">
-                    <div class="d-flex align-items-center">
-                        <div class="flex-shrink-0 avatar-xs ms-1 me-3">
-                            <div class="avatar-title bg-primary-subtle text-primary rounded-circle">
-                                <i class="bi bi-file-earmark-richtext"></i>
-                            </div>
-                        </div>
-                        <div class="flex-grow-1 overflow-hidden">
-                            <h5 class="fs-sm fw-medium text-truncate mb-1">App pages.zip</h5>
-                            <p class="text-muted fs-xs mb-0">2.5 MB</p>
-                        </div>
-
-                        <div class="flex-shrink-0 ms-3">
-                            <div class="d-flex gap-2">
-                                <div>
-                                    <a href="javascript:void(0);" class="text-muted px-1">
-                                        <i class="bi bi-download"></i>
-                                    </a>
-                                </div>
-                                <div dropdown class="dropdown">
-                                    <a dropdownToggle class="text-muted px-1" href="javascript:void(0);" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="bi bi-three-dots"></i>
-                                    </a>
-                                    <div *bsDropdownMenu class="dropdown-menu dropdown-menu-end">
-                                        <a class="dropdown-item d-flex align-items-center justify-content-between" href="javascript:void(0);">Share <i class="bi bi-share ms-2 text-muted"></i></a>
-                                        <a class="dropdown-item d-flex align-items-center justify-content-between" href="javascript:void(0);">Bookmark <i class="bi bi-bookmarks text-muted ms-2"></i></a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item d-flex align-items-center justify-content-between" href="javascript:void(0);">Delete <i class="bi bi-trash3 ms-2 text-muted"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="card p-2 border mb-0">
-                    <div class="d-flex align-items-center">
-                        <div class="flex-shrink-0 avatar-xs ms-1 me-3">
-                            <div class="avatar-title bg-primary-subtle text-primary rounded-circle">
-                                <i class="bi bi-file-earmark-richtext"></i>
-                            </div>
-                        </div>
-                        <div class="flex-grow-1 overflow-hidden">
-                            <h5 class="fs-sm fw-medium text-truncate mb-1">Steex admin.ppt</h5>
-                            <p class="text-muted fs-xs mb-0">2.4 MB</p>
-                        </div>
-
-                        <div class="flex-shrink-0 ms-3">
-                            <div class="d-flex gap-2">
-                                <div>
-                                    <a href="javascript:void(0);" class="text-muted px-1">
-                                        <i class="bi bi-download"></i>
-                                    </a>
-                                </div>
-                                <div dropdown class="dropdown">
-                                    <a dropdownToggle class="text-muted px-1" href="javascript:void(0);" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="bi bi-three-dots"></i>
-                                    </a>
-                                    <div *bsDropdownMenu class="dropdown-menu dropdown-menu-end">
-                                        <a class="dropdown-item d-flex align-items-center justify-content-between" href="javascript:void(0);">Share <i class="bi bi-share ms-2 text-muted"></i></a>
-                                        <a class="dropdown-item d-flex align-items-center justify-content-between" href="javascript:void(0);">Bookmark <i class="bi bi-bookmarks text-muted ms-2"></i></a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item d-flex align-items-center justify-content-between" href="javascript:void(0);">Delete <i class="bi bi-trash3 ms-2 text-muted"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card p-2 border mb-0">
-                    <div class="d-flex align-items-center">
-                        <div class="flex-shrink-0 avatar-xs ms-1 me-3">
-                            <div class="avatar-title bg-primary-subtle text-primary rounded-circle">
-                                <i class="bi bi-file-earmark-richtext"></i>
-                            </div>
-                        </div>
-                        <div class="flex-grow-1 overflow-hidden">
-                            <h5 class="fs-sm fw-medium text-truncate mb-1">Images.zip</h5>
-                            <p class="text-muted fs-xs mb-0">1.2MB</p>
-                        </div>
-
-                        <div class="flex-shrink-0 ms-3">
-                            <div class="d-flex gap-2">
-                                <div>
-                                    <a href="javascript:void(0);" class="text-muted px-1">
-                                        <i class="bi bi-download"></i>
-                                    </a>
-                                </div>
-                                <div dropdown class="dropdown">
-                                    <a dropdownToggle class="text-muted px-1" href="javascript:void(0);" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="bi bi-three-dots"></i>
-                                    </a>
-                                    <div *bsDropdownMenu class="dropdown-menu dropdown-menu-end">
-                                        <a class="dropdown-item d-flex align-items-center justify-content-between" href="javascript:void(0);">Share <i class="bi bi-share ms-2 text-muted"></i></a>
-                                        <a class="dropdown-item d-flex align-items-center justify-content-between" href="javascript:void(0);">Bookmark <i class="bi bi-bookmarks text-muted ms-2"></i></a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item d-flex align-items-center justify-content-between" href="javascript:void(0);">Delete <i class="bi bi-trash3 ms-2 text-muted"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card p-2 border mb-0">
-                    <div class="d-flex align-items-center">
-                        <div class="flex-shrink-0 avatar-xs ms-1 me-3">
-                            <div class="avatar-title bg-primary-subtle text-primary rounded-circle">
-                                <i class="bi bi-file-earmark-richtext"></i>
-                            </div>
-                        </div>
-                        <div class="flex-grow-1 overflow-hidden">
-                            <h5 class="fs-sm fw-medium text-truncate mb-1">bg-pattern.png</h5>
-                            <p class="text-muted fs-xs mb-0">1.1MB</p>
-                        </div>
-
-                        <div class="flex-shrink-0 ms-3">
-                            <div class="d-flex gap-2">
-                                <div>
-                                    <a href="javascript:void(0);" class="text-muted px-1">
-                                        <i class="bi bi-download"></i>
-                                    </a>
-                                </div>
-                                <div dropdown class="dropdown">
-                                    <a dropdownToggle class="text-muted px-1" href="javascript:void(0);" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="bi bi-three-dots"></i>
-                                    </a>
-                                    <div *bsDropdownMenu class="dropdown-menu dropdown-menu-end">
-                                        <a class="dropdown-item d-flex align-items-center justify-content-between" href="javascript:void(0);">Share <i class="bi bi-share ms-2 text-muted"></i></a>
-                                        <a class="dropdown-item d-flex align-items-center justify-content-between" href="javascript:void(0);">Bookmark <i class="bi bi-bookmarks text-muted ms-2"></i></a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item d-flex align-items-center justify-content-between" href="javascript:void(0);">Delete <i class="bi bi-trash3 ms-2 text-muted"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="text-center mt-2">
-                    <button type="button" class="btn btn-danger">Load more <i class="ri-arrow-right-fill align-bottom ms-1"></i></button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--end offcanvas-body-->
-</div>
 <div class="offcanvas-backdrop fade backdrop1" id="backdrop" (click)="closeoffcanvas()"></div>
 <!--end offcanvas-->
