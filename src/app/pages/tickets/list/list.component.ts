@@ -79,8 +79,6 @@ export class ListComponent {
   myGroup!: FormGroup;
   itemsPerPage = 10;
 
-  
-
   constructor(private formBuilder: FormBuilder, public store: Store, public datepipe: DatePipe, public apiService: restApiService, private router: Router) {
   }
 
@@ -144,6 +142,17 @@ export class ListComponent {
       this.updateSupportTickets(response.tasks_count_by_status);
       this.fetchTickets(1, this.itemsPerPage);
     });
+
+  }
+
+  fetchTickets(page: number, page_size: number) {
+    this.apiService.getProjectTasks(this.project.project_id, { page: page, page_size: page_size }).subscribe(
+      (response: any) => {
+        this.originalTasks = response.content;
+        this.tasks = response.content;
+        this.tasksMeta = response.meta;
+      }
+    );
   }
 
   updateSupportTickets(tasksCountByStatus: any): void {
@@ -167,16 +176,6 @@ export class ListComponent {
       }
       return ticket;
     });
-  }
-
-  fetchTickets(page: number, page_size: number) {
-    this.apiService.getProjectTasks(this.project.project_id, { page: page, page_size: page_size }).subscribe(
-      (response: any) => {
-        this.originalTasks = response.content;
-        this.tasks = response.content;
-        this.tasksMeta = response.meta;
-      }
-    );
   }
 
   viewTaskDetails(taskId: string) {
