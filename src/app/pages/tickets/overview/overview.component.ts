@@ -36,43 +36,50 @@ export class OverviewComponent implements OnInit {
     private http: HttpClient
   ) {}
 
-  ngOnInit(): void {
+ngOnInit(): void {
     this.route.params.subscribe((params) => {
       this.taskId = params['taskId'];
+      console.log('Task ID:', this.taskId); // Logging the task ID
       this.apiService.getTaskById(this.taskId).subscribe((task) => {
         this.task = task;
         this.selectedStatus = task.state;
+        console.log('Task details:', task); // Logging the task details
         this.loadComments(this.taskId);
       });
     });
   }
-
+  
   loadComments(taskId: string) {
     this.apiService.getComments(taskId).subscribe((comments) => {
       this.comments = comments;
+      console.log('Comments:', comments); // Logging the comments
       this.comments.forEach((comment) => {
         if (comment.file_id) {
           this.apiService.getFileInfo(comment.file_id).subscribe((fileInfo) => {
             comment.fileInfo = fileInfo;
+            console.log('File info for comment:', fileInfo); // Logging file info for each comment
           });
         }
       });
     });
   }
-
+  
   handleFileInput(event: Event) {
     const element = event.target as HTMLInputElement;
     let files: FileList | null = element.files;
-
+    console.log('Files selected:', files); // Logging the selected files
+  
     if (files && files.length > 0) {
+      console.log('Uploading file:', files[0].name); // Logging the name of the file being uploaded
       this.uploadFile(files[0]); // Upload only the first file
     }
   }
-
+  
   uploadFile(file: File): void {
     const formData = new FormData();
     formData.append('file', file, file.name);
-
+    console.log('FormData prepared for upload:', formData); // Logging the FormData content
+  
     this.apiService.postFile(formData).subscribe({
       next: (response) => {
         console.log('File uploaded successfully:', response);
@@ -84,6 +91,7 @@ export class OverviewComponent implements OnInit {
       },
     });
   }
+  
 
   postComment(taskId: string, commentText: string) {
     const commentData: any = {

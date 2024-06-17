@@ -60,26 +60,37 @@ export class AuthenticationService {
     );
   }
 
-  handleAuthentication(authResponse: AuthResponse, refreshToken?: string) {
+  handleAuthentication(authResponse: AuthResponse, refreshToken?: string): Observable<void> {
     const accessToken = authResponse.access_token;
     localStorage.setItem('access_token', accessToken);
     if (refreshToken) {
-      localStorage.setItem('refresh_token', refreshToken);
+        localStorage.setItem('refresh_token', refreshToken);
     }
     const decodedToken: any = jwtDecode(accessToken);
+    
+    // Check if the account_type matches the required type
+    const requiredAccountType = 'student'; // Set the required account type
+    if (decodedToken.account_type !== requiredAccountType) {
+        const errorMessage = 'Unauthorized account type';
+        this.store.dispatch(loginFailure({ error: errorMessage }));
+        return throwError(errorMessage); // Prevent login
+    }
+
     const user: User = {
-      uuid: decodedToken.sub,  // Store the UUID from the token
-      username: decodedToken.username,
-      email: decodedToken.email,
-      access_token: accessToken,
-      token_type: authResponse.token_type,
+        uuid: decodedToken.sub,  // Store the UUID from the token
+        username: decodedToken.username,
+        email: decodedToken.email,
+        access_token: accessToken,
+        token_type: authResponse.token_type,
+        account_type: decodedToken.account_type, // Optionally store account type in user model if needed
     };
     this.currentUserSubject.next(user);
     localStorage.setItem('currentUser', JSON.stringify(user));
     this.store.dispatch(loginSuccess({ authResponse }));
     this.isUserLoggedIn = true;
     this.scheduleTokenRefresh(refreshConfig);
-  }
+    return of(); // Return an observable of void for successful authentication
+}
   
 getCurrentUserUUID(): string {
   const currentUserJson = localStorage.getItem('currentUser');

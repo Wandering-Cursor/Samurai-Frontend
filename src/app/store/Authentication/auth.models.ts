@@ -4,4 +4,5 @@ export interface User {
   email: string;
   access_token: string;
   token_type: string;
+  account_type: string;
 }
