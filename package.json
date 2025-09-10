@@ -74,17 +74,17 @@
     "ngx-spinner": "^16.0.2",
     "ngx-toastr": "^18.0.0",
     "ngx-ui-switch": "^15.0.0",
-    "prismjs": "^1.29.0",
+    "prismjs": "^1.30.0",
     "quill": "^2.0.2",
     "rxjs": "~7.8.1",
     "simplebar-angular": "3.2.4",
     "slick-carousel": "^1.8.1",
-    "sweetalert2": "^11.11.0",
+    "sweetalert2": "^11.22.4",
     "tslib": "^2.6.2",
     "zone.js": "0.14.2"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^17.0.3",
+    "@angular-devkit/build-angular": "^20.2.2",
     "@angular/cli": "~17.0.3",
     "@angular/compiler-cli": "^17.0.4",
     "@types/jasmine": "~5.1.4",
@@ -99,7 +99,7 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "typescript": "5.2.2",
-    "webpack": "5.89.0"
+    "webpack": "5.101.3"
   },
   "overrides": {
     "autoprefixer": "10.4.16"
